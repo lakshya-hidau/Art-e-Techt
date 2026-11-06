@@ -9,7 +9,7 @@ import { useNotifications } from '../context/NotificationContext';
 const Toast = ({ message, type, onDone }) => {
     useEffect(() => { const t = setTimeout(onDone, 3000); return () => clearTimeout(t); }, []);
     return (
-        <div className={`fixed bottom-8 right-8 z-[100] px-6 py-4 rounded-2xl shadow-2xl text-white text-sm font-bold flex items-center gap-3 animate-in fade-in slide-in-from-bottom-5 ${type === 'error' ? 'bg-red-600' : 'bg-green-600'}`}>
+        <div className={`fixed bottom-8 right-8 z-[100] px-6 py-4 rounded-2xl shadow-2xl text-primary-text text-sm font-bold flex items-center gap-3 animate-in fade-in slide-in-from-bottom-5 ${type === 'error' ? 'bg-primary-hover' : 'bg-success'}`}>
             <span className="material-symbols-outlined">{type === 'error' ? 'error' : 'check_circle'}</span>
             {message}
         </div>
@@ -28,14 +28,14 @@ const TalentPortfolio = () => {
     const [bioText, setBioText] = useState('');
     const [savingBio, setSavingBio] = useState(false);
     const [editingAttrs, setEditingAttrs] = useState(false);
-    const [attrs, setAttrs] = useState({ 
-        height: '', 
-        eyeColor: '', 
-        skinTone: '', 
-        hairColor: '', 
-        build: '', 
-        waist: '', 
-        chest: '' 
+    const [attrs, setAttrs] = useState({
+        height: '',
+        eyeColor: '',
+        skinTone: '',
+        hairColor: '',
+        build: '',
+        waist: '',
+        chest: ''
     });
     const [savingAttrs, setSavingAttrs] = useState(false);
     const [uploadingMedia, setUploadingMedia] = useState(false);
@@ -60,7 +60,7 @@ const TalentPortfolio = () => {
                 } else {
                     profileRes = await getMyProfile();
                 }
-                
+
                 const p = profileRes.data;
                 setProfile(p);
                 setBioText(p.bio || '');
@@ -159,8 +159,8 @@ const TalentPortfolio = () => {
         }
     };
 
-    const menuItems = viewerProfile?.user?.role === 'admin' ? ADMIN_MENU : 
-                        viewerProfile?.user?.role === 'director' ? DIRECTOR_MENU : 
+    const menuItems = viewerProfile?.user?.role === 'admin' ? ADMIN_MENU :
+                        viewerProfile?.user?.role === 'director' ? DIRECTOR_MENU :
                         TALENT_MENU;
 
     const navUserData = {
@@ -188,7 +188,7 @@ const TalentPortfolio = () => {
             <div className="flex items-center justify-center py-20 min-h-[60vh]">
                 <div className="flex flex-col items-center gap-4">
                     <span className="material-symbols-outlined animate-spin text-primary text-5xl">sync</span>
-                    <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">Developing Portfolio...</p>
+                    <p className="text-text-secondary font-bold uppercase tracking-widest text-xs">Developing Portfolio...</p>
                 </div>
             </div>
         </DashboardLayout>
@@ -199,65 +199,65 @@ const TalentPortfolio = () => {
         : profile?.profilePicture;
 
     return (
-        <DashboardLayout 
-            menuItems={menuItems} 
+        <DashboardLayout
+            menuItems={menuItems}
             userData={navUserData}
             verificationStatus={profile?.user?.verificationStatus || authUser?.verificationStatus || 'none'}
-            headerTitle={isOwnProfile ? "Portfolio Control" : "Talent Profile"} 
+            headerTitle={isOwnProfile ? "Portfolio Control" : "Talent Profile"}
             headerSubtitle={isOwnProfile ? "Manage your public StarCast identity." : `Reviewing ${profile?.fullName}'s professional background.`}
         >
             <style>
                 {`
                     .cinematic-gradient {
-                        background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(200, 200, 200, 0.1) 60%, rgba(255, 255, 255, 1) 100%);
+                        background: linear-gradient(180deg, color-mix(in srgb, var(--color-text-primary) 0%, transparent) 0%, color-mix(in srgb, var(--color-text-secondary) 10%, transparent) 60%, color-mix(in srgb, var(--color-text-primary) 100%, transparent) 100%);
                     }
                     .dark .cinematic-gradient {
-                        background: linear-gradient(180deg, rgba(10,10,10,0) 0%, rgba(34, 16, 18, 0.4) 60%, rgba(34, 16, 18, 1) 100%);
+                        background: linear-gradient(180deg, color-mix(in srgb, var(--color-void) 0%, transparent) 0%, color-mix(in srgb, var(--color-primary) 40%, transparent) 60%, color-mix(in srgb, var(--color-primary) 100%, transparent) 100%);
                     }
                     .glass-card {
-                        background: rgba(255, 255, 255, 0.6);
+                        background: color-mix(in srgb, var(--color-text-primary) 60%, transparent);
                         backdrop-filter: blur(12px);
-                        border: 1px solid rgba(0, 0, 0, 0.05);
+                        border: 1px solid color-mix(in srgb, var(--color-void) 5%, transparent);
                     }
                     .dark .glass-card {
-                        background: rgba(42, 26, 20, 0.4);
+                        background: color-mix(in srgb, var(--color-primary) 40%, transparent);
                         backdrop-filter: blur(12px);
-                        border: 1px solid rgba(238, 43, 59, 0.1);
+                        border: 1px solid color-mix(in srgb, var(--color-primary) 10%, transparent);
                     }
                     .custom-scrollbar::-webkit-scrollbar { width: 4px; }
                     .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-                    .custom-scrollbar::-webkit-scrollbar-thumb { background: #ee2b3b; border-radius: 10px; }
+                    .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--color-primary); border-radius: 10px; }
                 `}
             </style>
 
             {toast && <Toast message={toast.message} type={toast.type} onDone={() => setToast(null)} />}
 
-            <div className="pb-24 text-slate-900 dark:text-zinc-100 font-sans">
+            <div className="pb-24 text-text-primary dark:text-text-primary font-sans">
                 {/* Hero Section */}
-                <section className="relative h-[400px] md:h-[500px] lg:h-[614px] min-h-[300px] w-full overflow-hidden rounded-2xl md:rounded-3xl mb-8 md:mb-12 border border-slate-200 dark:border-zinc-800">
+                <section className="relative h-[400px] md:h-[500px] lg:h-[614px] min-h-[300px] w-full overflow-hidden rounded-2xl md:rounded-3xl mb-8 md:mb-12 border border-border dark:border-border-subtle">
                     <div className="absolute inset-0">
                         <img alt={profile?.fullName || "Hero"} className="w-full h-full object-cover object-top" src={avatarUrl} />
-                        <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-zinc-950 via-white/40 dark:via-zinc-950/40 to-transparent"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-text-secondary via-white/40 dark:via-text-secondary/40 to-transparent"></div>
                     </div>
                     <div className="absolute bottom-0 left-0 w-full p-4 md:p-8 lg:p-12">
                         <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-6">
                             <div>
-                                <span className="inline-block px-2 md:px-3 py-1 bg-red-600 text-white text-[9px] md:text-[10px] font-black tracking-widest uppercase mb-2 md:mb-4 rounded-sm">
+                                <span className="inline-block px-2 md:px-3 py-1 bg-primary-hover text-primary-text text-[9px] md:text-[10px] font-black tracking-widest uppercase mb-2 md:mb-4 rounded-sm">
                                     Artist ID: {(profileUserId ? profileUserId.substring(0, 6) : '000000')}
                                 </span>
-                                <h1 className="text-3xl md:text-5xl lg:text-7xl font-black tracking-tighter text-white mb-2">{profile?.fullName}</h1>
-                                <p className="text-red-500 font-medium text-base md:text-lg flex items-center gap-2">
+                                <h1 className="text-3xl md:text-5xl lg:text-7xl font-black tracking-tighter text-primary-text mb-2">{profile?.fullName}</h1>
+                                <p className="text-error font-medium text-base md:text-lg flex items-center gap-2">
                                     <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>location_on</span>
                                     {profile?.location || 'Location Not Set'}
                                 </p>
                             </div>
                             {isOwnProfile && (
                             <div className="flex flex-col sm:flex-row gap-2 md:gap-3">
-                                <button className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 px-4 md:px-6 py-2 md:py-3 rounded-lg font-bold transition-all text-sm">
+                                <button className="flex items-center justify-center gap-2 bg-surface/10 hover:bg-surface/20 backdrop-blur-md text-primary-text border border-subtle/20 px-4 md:px-6 py-2 md:py-3 rounded-lg font-bold transition-all text-sm">
                                     <span className="material-symbols-outlined text-sm z-0">edit</span>
                                     Edit Profile
                                 </button>
-                                <button className="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 md:px-6 py-2 md:py-3 rounded-lg font-bold shadow-lg shadow-red-600/20 transition-all text-sm">
+                                <button className="flex items-center justify-center gap-2 bg-primary-hover hover:bg-primary-hover text-primary-text px-4 md:px-6 py-2 md:py-3 rounded-lg font-bold shadow-lg shadow-primary/20 transition-all text-sm">
                                     <span className="material-symbols-outlined text-sm">share</span>
                                     Share
                                 </button>
@@ -270,16 +270,16 @@ const TalentPortfolio = () => {
                 <div className="max-w-5xl mx-auto px-3 md:px-4 lg:px-8 py-8 md:py-12 space-y-12 md:space-y-16">
                     {/* Quick Actions + Stats */}
                     <section className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-                        <div className="bg-white dark:bg-zinc-900 p-4 md:p-6 rounded-xl border border-slate-200 dark:border-zinc-800 flex flex-col justify-between shadow-sm">
-                            <span className="text-slate-500 dark:text-zinc-500 text-xs font-bold uppercase tracking-widest">Category</span>
-                            <p className="text-xl md:text-2xl font-bold mt-2 text-slate-900 dark:text-zinc-100">{profile?.talentCategory || 'Actor'}</p>
+                        <div className="bg-surface dark:bg-void p-4 md:p-6 rounded-xl border border-border dark:border-border-subtle flex flex-col justify-between shadow-sm">
+                            <span className="text-text-secondary dark:text-text-secondary text-xs font-bold uppercase tracking-widest">Category</span>
+                            <p className="text-xl md:text-2xl font-bold mt-2 text-text-primary dark:text-text-primary">{profile?.talentCategory || 'Actor'}</p>
                         </div>
-                        <div className="bg-white dark:bg-zinc-900 p-4 md:p-6 rounded-xl border border-slate-200 dark:border-zinc-800 flex flex-col justify-between shadow-sm">
-                            <span className="text-slate-500 dark:text-zinc-500 text-xs font-bold uppercase tracking-widest">Experience</span>
-                            <p className="text-xl md:text-2xl font-bold mt-2 text-slate-900 dark:text-zinc-100">{profile?.skills?.length || 0} Skills</p>
+                        <div className="bg-surface dark:bg-void p-4 md:p-6 rounded-xl border border-border dark:border-border-subtle flex flex-col justify-between shadow-sm">
+                            <span className="text-text-secondary dark:text-text-secondary text-xs font-bold uppercase tracking-widest">Experience</span>
+                            <p className="text-xl md:text-2xl font-bold mt-2 text-text-primary dark:text-text-primary">{profile?.skills?.length || 0} Skills</p>
                         </div>
-                        <div className="bg-white dark:bg-zinc-900 p-4 md:p-6 rounded-xl border border-slate-200 dark:border-zinc-800 flex flex-col gap-3 shadow-sm">
-                            <span className="text-slate-500 dark:text-zinc-500 text-xs font-bold uppercase tracking-widest">Quick Actions</span>
+                        <div className="bg-surface dark:bg-void p-4 md:p-6 rounded-xl border border-border dark:border-border-subtle flex flex-col gap-3 shadow-sm">
+                            <span className="text-text-secondary dark:text-text-secondary text-xs font-bold uppercase tracking-widest">Quick Actions</span>
                             <div className="flex flex-wrap gap-2">
                                 {isOwnProfile && (
                                     <button onClick={() => setEditingBio(true)} className="px-2 md:px-3 py-1 md:py-2 text-xs font-bold rounded-lg bg-primary/10 text-primary hover:bg-primary/15 transition-all flex items-center gap-1">
@@ -287,18 +287,18 @@ const TalentPortfolio = () => {
                                     </button>
                                 )}
                                 {isOwnProfile && (
-                                    <label className="px-2 md:px-3 py-1 md:py-2 text-xs font-bold rounded-lg bg-slate-100 dark:bg-zinc-800 text-slate-700 dark:text-zinc-200 border border-slate-200 dark:border-zinc-700 cursor-pointer hover:border-primary/40 transition-all flex items-center gap-1">
+                                    <label className="px-2 md:px-3 py-1 md:py-2 text-xs font-bold rounded-lg bg-surface-lowest dark:bg-container text-text-muted dark:text-text-primary border border-border dark:border-border-subtle cursor-pointer hover:border-primary/40 transition-all flex items-center gap-1">
                                         <span className="material-symbols-outlined text-sm">photo_camera</span> Photo
                                         <input type="file" accept="image/*" className="hidden" onChange={handleMediaUpload} disabled={uploadingMedia} />
                                     </label>
                                 )}
                                 {isOwnProfile && (
-                                    <label className="px-2 md:px-3 py-1 md:py-2 text-xs font-bold rounded-lg bg-slate-100 dark:bg-zinc-800 text-slate-700 dark:text-zinc-200 border border-slate-200 dark:border-zinc-700 cursor-pointer hover:border-primary/40 transition-all flex items-center gap-1">
+                                    <label className="px-2 md:px-3 py-1 md:py-2 text-xs font-bold rounded-lg bg-surface-lowest dark:bg-container text-text-muted dark:text-text-primary border border-border dark:border-border-subtle cursor-pointer hover:border-primary/40 transition-all flex items-center gap-1">
                                         <span className="material-symbols-outlined text-sm">movie</span> Video
                                         <input type="file" accept="video/*" className="hidden" onChange={handleMediaUpload} disabled={uploadingMedia} />
                                     </label>
                                 )}
-                                <button onClick={handleCopyLink} className="px-2 md:px-3 py-1 md:py-2 text-xs font-bold rounded-lg bg-slate-100 dark:bg-zinc-800 text-slate-700 dark:text-zinc-200 border border-slate-200 dark:border-zinc-700 hover:border-primary/40 transition-all flex items-center gap-1">
+                                <button onClick={handleCopyLink} className="px-2 md:px-3 py-1 md:py-2 text-xs font-bold rounded-lg bg-surface-lowest dark:bg-container text-text-muted dark:text-text-primary border border-border dark:border-border-subtle hover:border-primary/40 transition-all flex items-center gap-1">
                                     <span className="material-symbols-outlined text-sm">share</span> Share
                                 </button>
                             </div>
@@ -309,9 +309,9 @@ const TalentPortfolio = () => {
                     <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
                         <div className="lg:col-span-7 space-y-4 md:space-y-6">
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                                <h3 className="text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Professional Biography</h3>
+                                <h3 className="text-xl md:text-2xl font-bold tracking-tight text-text-primary dark:text-primary-text">Professional Biography</h3>
                                 {isOwnProfile && !editingBio && (
-                                <button onClick={() => setEditingBio(true)} className="text-primary hover:text-red-400 text-sm font-bold flex items-center gap-1 self-start sm:self-center">
+                                <button onClick={() => setEditingBio(true)} className="text-primary hover:text-error text-sm font-bold flex items-center gap-1 self-start sm:self-center">
                                     <span className="material-symbols-outlined text-sm">edit</span> Edit Bio
                                 </button>
                                 )}
@@ -322,41 +322,41 @@ const TalentPortfolio = () => {
                                         rows={6}
                                         value={bioText}
                                         onChange={e => setBioText(e.target.value)}
-                                        className="w-full bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl px-4 md:px-6 py-4 md:py-5 text-slate-700 dark:text-zinc-300 font-medium outline-none focus:border-red-500/50 transition-all shadow-inner resize-none leading-relaxed"
+                                        className="w-full bg-surface dark:bg-void border border-border dark:border-border-subtle rounded-xl px-4 md:px-6 py-4 md:py-5 text-text-muted dark:text-text-primary font-medium outline-none focus:border-error/50 transition-all shadow-inner resize-none leading-relaxed"
                                         placeholder="Express your artistic journey..."
                                     />
                                     <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
-                                        <button 
-                                            onClick={handleSaveBio} 
+                                        <button
+                                            onClick={handleSaveBio}
                                             disabled={savingBio}
-                                            className="px-4 md:px-6 py-2 md:py-3 bg-red-600 text-white rounded-lg font-bold text-sm tracking-wide hover:bg-red-700 transition-all disabled:opacity-50"
+                                            className="px-4 md:px-6 py-2 md:py-3 bg-primary-hover text-primary-text rounded-lg font-bold text-sm tracking-wide hover:bg-primary-hover transition-all disabled:opacity-50"
                                         >
                                             {savingBio ? 'Saving...' : 'Save Biography'}
                                         </button>
-                                        <button 
+                                        <button
                                             onClick={() => setEditingBio(false)}
-                                            className="px-4 md:px-6 py-2 md:py-3 bg-zinc-800 border border-zinc-700 text-zinc-400 rounded-lg font-bold text-sm tracking-wide hover:bg-zinc-700 transition-all"
+                                            className="px-4 md:px-6 py-2 md:py-3 bg-container border border-border-subtle text-text-secondary rounded-lg font-bold text-sm tracking-wide hover:bg-container transition-all"
                                         >
                                             Cancel
                                         </button>
                                     </div>
                                 </div>
                             ) : (
-                                <div className="text-zinc-400 leading-relaxed space-y-4">
-                                    {bioText ? bioText.split('\n').map((para, i) => <p key={i} className="text-slate-600 dark:text-zinc-400">{para}</p>) : <p className="text-slate-500 dark:text-zinc-500 italic">No history recorded yet in the archives.</p>}
+                                <div className="text-text-secondary leading-relaxed space-y-4">
+                                    {bioText ? bioText.split('\n').map((para, i) => <p key={i} className="text-text-muted dark:text-text-secondary">{para}</p>) : <p className="text-text-secondary dark:text-text-secondary italic">No history recorded yet in the archives.</p>}
                                 </div>
                             )}
                         </div>
 
                         <div className="lg:col-span-5 space-y-4 md:space-y-6">
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                                <h3 className="text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Physical Attributes</h3>
+                                <h3 className="text-xl md:text-2xl font-bold tracking-tight text-text-primary dark:text-primary-text">Physical Attributes</h3>
                                 {isOwnProfile && !editingAttrs && (
-                                <button onClick={() => setEditingAttrs(true)} className="text-primary hover:text-red-400 text-sm font-bold self-start sm:self-center">Manage</button>
+                                <button onClick={() => setEditingAttrs(true)} className="text-primary hover:text-error text-sm font-bold self-start sm:self-center">Manage</button>
                                 )}
                             </div>
                             {editingAttrs ? (
-                                <div className="bg-zinc-900/50 p-4 md:p-6 rounded-lg border border-zinc-800 space-y-4">
+                                <div className="bg-void/50 p-4 md:p-6 rounded-lg border border-border-subtle space-y-4">
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         {[
                                             { key: 'height', label: 'Height' },
@@ -365,27 +365,27 @@ const TalentPortfolio = () => {
                                             { key: 'build', label: 'Build' },
                                         ].map(({ key, label }) => (
                                             <div key={key}>
-                                                <label className="text-zinc-500 text-[10px] font-bold uppercase block mb-1">{label}</label>
-                                                <input 
-                                                    type="text" 
-                                                    value={attrs[key]} 
+                                                <label className="text-text-secondary text-[10px] font-bold uppercase block mb-1">{label}</label>
+                                                <input
+                                                    type="text"
+                                                    value={attrs[key]}
                                                     onChange={e => setAttrs(p => ({ ...p, [key]: e.target.value }))}
-                                                    className="w-full bg-zinc-950 border border-zinc-800 rounded-md px-3 py-2 text-sm font-semibold text-white outline-none focus:border-red-500/50 transition-all"
+                                                    className="w-full bg-void border border-border-subtle rounded-md px-3 py-2 text-sm font-semibold text-primary-text outline-none focus:border-error/50 transition-all"
                                                 />
                                             </div>
                                         ))}
                                     </div>
                                     <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                                        <button 
-                                            onClick={handleSaveAttrs} 
+                                        <button
+                                            onClick={handleSaveAttrs}
                                             disabled={savingAttrs}
-                                            className="flex-1 py-2 md:py-3 bg-red-600 text-white rounded-md font-bold text-xs uppercase tracking-wider hover:bg-red-700 transition-all shadow-lg shadow-red-600/20"
+                                            className="flex-1 py-2 md:py-3 bg-primary-hover text-primary-text rounded-md font-bold text-xs uppercase tracking-wider hover:bg-primary-hover transition-all shadow-lg shadow-primary/20"
                                         >
                                             {savingAttrs ? 'Saving...' : 'Confirm'}
                                         </button>
-                                        <button 
+                                        <button
                                             onClick={() => setEditingAttrs(false)}
-                                            className="flex-1 py-2 md:py-3 bg-zinc-800 border border-zinc-700 text-zinc-400 rounded-md font-bold text-xs uppercase tracking-wider"
+                                            className="flex-1 py-2 md:py-3 bg-container border border-border-subtle text-text-secondary rounded-md font-bold text-xs uppercase tracking-wider"
                                         >
                                             Abort
                                         </button>
@@ -399,9 +399,9 @@ const TalentPortfolio = () => {
                                         { label: 'Hair', value: profile?.physicalAttributes?.hairColor || attrs.hairColor || '-' },
                                         { label: 'Build', value: profile?.physicalAttributes?.build || attrs.build || '-' }
                                     ].map(({ label, value }) => (
-                                        <div key={label} className="bg-white dark:bg-zinc-900/50 p-3 md:p-4 rounded-lg border border-slate-200 dark:border-zinc-800 shadow-sm">
-                                            <span className="text-slate-500 dark:text-zinc-500 text-[10px] font-bold uppercase block mb-1">{label}</span>
-                                            <span className="text-base md:text-lg font-semibold text-slate-900 dark:text-zinc-100">{value}</span>
+                                        <div key={label} className="bg-surface dark:bg-void/50 p-3 md:p-4 rounded-lg border border-border dark:border-border-subtle shadow-sm">
+                                            <span className="text-text-secondary dark:text-text-secondary text-[10px] font-bold uppercase block mb-1">{label}</span>
+                                            <span className="text-base md:text-lg font-semibold text-text-primary dark:text-text-primary">{value}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -412,14 +412,14 @@ const TalentPortfolio = () => {
                     {/* Media Gallery */}
                     <section className="space-y-6 md:space-y-8">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 flex-wrap">
-                            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Media Gallery</h3>
-                            <div className="flex items-center gap-1 md:gap-2 text-xs font-bold text-slate-500 dark:text-zinc-400 flex-wrap">
-                                <button onClick={() => setMediaFilter('all')} className={`px-2 md:px-3 py-1 rounded-full border transition-colors ${mediaFilter === 'all' ? 'border-primary text-primary' : 'border-transparent hover:border-slate-200 dark:hover:border-zinc-700'}`}>All</button>
-                                <button onClick={() => setMediaFilter('image')} className={`px-2 md:px-3 py-1 rounded-full border transition-colors ${mediaFilter === 'image' ? 'border-primary text-primary' : 'border-transparent hover:border-slate-200 dark:hover:border-zinc-700'}`}>Photos</button>
-                                <button onClick={() => setMediaFilter('video')} className={`px-2 md:px-3 py-1 rounded-full border transition-colors ${mediaFilter === 'video' ? 'border-primary text-primary' : 'border-transparent hover:border-slate-200 dark:hover:border-zinc-700'}`}>Videos</button>
+                            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-text-primary dark:text-primary-text">Media Gallery</h3>
+                            <div className="flex items-center gap-1 md:gap-2 text-xs font-bold text-text-secondary dark:text-text-secondary flex-wrap">
+                                <button onClick={() => setMediaFilter('all')} className={`px-2 md:px-3 py-1 rounded-full border transition-colors ${mediaFilter === 'all' ? 'border-primary text-primary' : 'border-transparent hover:border-border dark:hover:border-border-subtle'}`}>All</button>
+                                <button onClick={() => setMediaFilter('image')} className={`px-2 md:px-3 py-1 rounded-full border transition-colors ${mediaFilter === 'image' ? 'border-primary text-primary' : 'border-transparent hover:border-border dark:hover:border-border-subtle'}`}>Photos</button>
+                                <button onClick={() => setMediaFilter('video')} className={`px-2 md:px-3 py-1 rounded-full border transition-colors ${mediaFilter === 'video' ? 'border-primary text-primary' : 'border-transparent hover:border-border dark:hover:border-border-subtle'}`}>Videos</button>
                             </div>
                             {isOwnProfile && (
-                                <label className={`bg-slate-100 dark:bg-zinc-800 hover:bg-slate-200 dark:hover:bg-zinc-700 text-slate-700 dark:text-white px-3 md:px-4 py-2 rounded font-bold text-sm flex items-center gap-2 transition-all cursor-pointer border border-slate-200 dark:border-zinc-700 ${uploadingMedia ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                                <label className={`bg-surface-lowest dark:bg-container hover:bg-surface dark:hover:bg-container text-text-muted dark:text-primary-text px-3 md:px-4 py-2 rounded font-bold text-sm flex items-center gap-2 transition-all cursor-pointer border border-border dark:border-border-subtle ${uploadingMedia ? 'opacity-50 cursor-not-allowed' : ''}`}>
                                     <span className="material-symbols-outlined text-sm">upload</span> {uploadingMedia ? 'Uploading...' : 'Upload Media'}
                                     <input type="file" accept="image/*,video/*" className="hidden" onChange={handleMediaUpload} disabled={uploadingMedia}/>
                                 </label>
@@ -429,22 +429,22 @@ const TalentPortfolio = () => {
                             {(profile?.portfolio || [])
                                 .filter(item => mediaFilter === 'all' || item.type === mediaFilter)
                                 .map((item, idx) => (
-                                <div key={idx} className={`group relative rounded-lg overflow-hidden border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-sm ${idx % 3 === 2 ? 'md:col-span-2 aspect-video' : 'aspect-[3/4]'}`}>
-                                    <img 
-                                        alt={`Media ${idx + 1}`} 
-                                        className={`w-full h-full object-cover transition-all duration-500 ${idx % 3 === 2 ? 'brightness-75 dark:brightness-50 group-hover:brightness-100 dark:group-hover:brightness-75' : 'grayscale group-hover:grayscale-0'}`} 
-                                        src={item.url || item} 
+                                <div key={idx} className={`group relative rounded-lg overflow-hidden border border-border dark:border-border-subtle bg-surface dark:bg-void shadow-sm ${idx % 3 === 2 ? 'md:col-span-2 aspect-video' : 'aspect-[3/4]'}`}>
+                                    <img
+                                        alt={`Media ${idx + 1}`}
+                                        className={`w-full h-full object-cover transition-all duration-500 ${idx % 3 === 2 ? 'brightness-75 dark:brightness-50 group-hover:brightness-100 dark:group-hover:brightness-75' : 'grayscale group-hover:grayscale-0'}`}
+                                        src={item.url || item}
                                     />
                                     {idx % 3 === 2 ? (
                                         <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 md:p-6">
-                                            <div className="w-12 h-12 md:w-16 md:h-16 bg-red-600 rounded-full flex items-center justify-center mb-2 md:mb-4 group-hover:scale-110 transition-transform">
-                                                <span className="material-symbols-outlined text-white text-2xl md:text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
+                                            <div className="w-12 h-12 md:w-16 md:h-16 bg-primary-hover rounded-full flex items-center justify-center mb-2 md:mb-4 group-hover:scale-110 transition-transform">
+                                                <span className="material-symbols-outlined text-primary-text text-2xl md:text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
                                             </div>
-                                            <span className="text-white font-bold text-sm md:text-lg">Showreel</span>
+                                            <span className="text-primary-text font-bold text-sm md:text-lg">Showreel</span>
                                         </div>
                                     ) : (
-                                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                                            <span className="material-symbols-outlined text-white text-2xl md:text-3xl">fullscreen</span>
+                                        <div className="absolute inset-0 bg-void/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                                            <span className="material-symbols-outlined text-primary-text text-2xl md:text-3xl">fullscreen</span>
                                         </div>
                                     )}
                                 </div>
@@ -455,13 +455,13 @@ const TalentPortfolio = () => {
                     {/* CV & Downloads */}
                     <section className="space-y-3 md:space-y-4">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 flex-wrap">
-                            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">CV / Resume</h3>
+                            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-text-primary dark:text-primary-text">CV / Resume</h3>
                             {profile?.cvUrl && (
                                 <div className="flex flex-col sm:flex-row gap-2">
-                                    <a href={profile.cvUrl} target="_blank" rel="noreferrer" className="px-3 md:px-4 py-2 text-sm font-bold bg-primary text-white rounded-lg flex items-center justify-center gap-2 hover:bg-primary/90 transition-all">
+                                    <a href={profile.cvUrl} target="_blank" rel="noreferrer" className="px-3 md:px-4 py-2 text-sm font-bold bg-primary text-primary-text rounded-lg flex items-center justify-center gap-2 hover:bg-primary/90 transition-all">
                                         <span className="material-symbols-outlined text-sm">download</span> Download
                                     </a>
-                                    <button onClick={handleCopyLink} className="px-3 md:px-4 py-2 text-sm font-bold bg-slate-100 dark:bg-zinc-800 text-slate-700 dark:text-white rounded-lg flex items-center justify-center gap-2 border border-slate-200 dark:border-zinc-700 hover:border-primary/40 transition-all">
+                                    <button onClick={handleCopyLink} className="px-3 md:px-4 py-2 text-sm font-bold bg-surface-lowest dark:bg-container text-text-muted dark:text-primary-text rounded-lg flex items-center justify-center gap-2 border border-border dark:border-border-subtle hover:border-primary/40 transition-all">
                                         <span className="material-symbols-outlined text-sm">share</span> Share
                                     </button>
                                 </div>
@@ -474,36 +474,36 @@ const TalentPortfolio = () => {
                                 value={cvUrl}
                                 onChange={e => setCvUrl(e.target.value)}
                                 placeholder="Paste CV / Drive link (PDF preferred)"
-                                className="w-full bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-lg px-3 md:px-4 py-2 md:py-3 text-sm text-slate-800 dark:text-zinc-100 outline-none focus:border-primary/40"
+                                className="w-full bg-surface dark:bg-void border border-border dark:border-border-subtle rounded-lg px-3 md:px-4 py-2 md:py-3 text-sm text-text-primary dark:text-text-primary outline-none focus:border-gold/40"
                             />
                             <button
                                 onClick={handleSaveCv}
                                 disabled={savingCv}
-                                className="px-3 md:px-4 py-2 md:py-3 bg-primary text-white font-bold rounded-lg text-sm hover:bg-primary/90 transition-all disabled:opacity-60 whitespace-nowrap"
+                                className="px-3 md:px-4 py-2 md:py-3 bg-primary text-primary-text font-bold rounded-lg text-sm hover:bg-primary/90 transition-all disabled:opacity-60 whitespace-nowrap"
                             >
                                 {savingCv ? 'Saving...' : 'Save CV link'}
                             </button>
                         </div>
                         )}
                         {!profile?.cvUrl && !isOwnProfile && (
-                            <p className="text-sm text-slate-500 dark:text-zinc-400">No CV uploaded yet.</p>
+                            <p className="text-sm text-text-secondary dark:text-text-secondary">No CV uploaded yet.</p>
                         )}
                     </section>
 
                     {/* Credits Table */}
                     <section className="space-y-6 md:space-y-8">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Filmography</h3>
+                            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-text-primary dark:text-primary-text">Filmography</h3>
                             {isOwnProfile && (
                             <button className="bg-primary/5 hover:bg-primary/10 text-primary px-3 md:px-4 py-2 rounded font-bold text-sm flex items-center justify-center gap-2 border border-primary/20 transition-all self-start sm:self-center">
                                 <span className="material-symbols-outlined text-sm">add</span> Add New Credit
                             </button>
                             )}
                         </div>
-                        <div className="overflow-x-auto border border-slate-200 dark:border-zinc-800 rounded-xl bg-white dark:bg-zinc-900/30 backdrop-blur-sm shadow-sm">
+                        <div className="overflow-x-auto border border-border dark:border-border-subtle rounded-xl bg-surface dark:bg-void/30 backdrop-blur-sm shadow-sm">
                             <table className="w-full text-left text-sm md:text-base">
                                 <thead>
-                                    <tr className="bg-slate-50 dark:bg-zinc-900/80 text-slate-500 dark:text-zinc-500 text-[10px] md:text-xs font-bold uppercase tracking-widest border-b border-slate-200 dark:border-zinc-800">
+                                    <tr className="bg-surface-lowest dark:bg-void/80 text-text-secondary dark:text-text-secondary text-[10px] md:text-xs font-bold uppercase tracking-widest border-b border-border dark:border-border-subtle">
                                         <th className="px-3 md:px-6 py-3 md:py-4">Project Title</th>
                                         <th className="px-3 md:px-6 py-3 md:py-4">Role</th>
                                         <th className="px-3 md:px-6 py-3 md:py-4">Year</th>
@@ -511,24 +511,24 @@ const TalentPortfolio = () => {
                                         <th className="px-3 md:px-6 py-3 md:py-4 text-right">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-slate-100 dark:divide-zinc-800">
+                                <tbody className="divide-y divide-border dark:divide-border-subtle">
                                     {filmCredits.length > 0 ? filmCredits.map((credit, idx) => (
-                                    <tr key={credit.id || idx} className="group hover:bg-slate-50 dark:hover:bg-zinc-800/50 transition-colors">
-                                        <td className="px-3 md:px-6 py-3 md:py-5 font-bold text-slate-900 dark:text-zinc-100 text-sm md:text-base">{credit.title}</td>
-                                        <td className="px-3 md:px-6 py-3 md:py-5 text-slate-500 dark:text-zinc-400 text-sm md:text-base">{credit.role}</td>
-                                        <td className="px-3 md:px-6 py-3 md:py-5 text-slate-500 dark:text-zinc-400 text-sm md:text-base">{credit.year}</td>
+                                    <tr key={credit.id || idx} className="group hover:bg-surface-lowest dark:hover:bg-container/50 transition-colors">
+                                        <td className="px-3 md:px-6 py-3 md:py-5 font-bold text-text-primary dark:text-text-primary text-sm md:text-base">{credit.title}</td>
+                                        <td className="px-3 md:px-6 py-3 md:py-5 text-text-secondary dark:text-text-secondary text-sm md:text-base">{credit.role}</td>
+                                        <td className="px-3 md:px-6 py-3 md:py-5 text-text-secondary dark:text-text-secondary text-sm md:text-base">{credit.year}</td>
                                         <td className="px-3 md:px-6 py-3 md:py-5">
-                                            <span className="px-2 py-1 bg-green-500/10 text-green-500 text-[10px] font-bold rounded">Completed</span>
+                                            <span className="px-2 py-1 bg-success/10 text-success text-[10px] font-bold rounded">Completed</span>
                                         </td>
                                         <td className="px-3 md:px-6 py-3 md:py-5 text-right">
-                                            <button className="text-zinc-500 hover:text-white transition-colors">
+                                            <button className="text-text-secondary hover:text-primary-text transition-colors">
                                                 <span className="material-symbols-outlined text-sm">more_vert</span>
                                             </button>
                                         </td>
                                     </tr>
                                     )) : (
                                     <tr>
-                                        <td colSpan="5" className="px-3 md:px-6 py-6 md:py-8 text-center text-zinc-500 font-medium">No performance records added yet.</td>
+                                        <td colSpan="5" className="px-3 md:px-6 py-6 md:py-8 text-center text-text-secondary font-medium">No performance records added yet.</td>
                                     </tr>
                                     )}
                                 </tbody>

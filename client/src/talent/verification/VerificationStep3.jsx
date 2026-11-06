@@ -45,7 +45,7 @@ const VerificationStep3 = ({ formData, updateFormData, onFinish, onSave, isSavin
                     startRecording(stream);
                 }
             }, 1000);
-        } catch (err) {
+        } catch {
             setCameraError('Camera access denied. Please allow camera permission and try again.');
             setRecordingState('idle');
         }
@@ -107,7 +107,7 @@ const VerificationStep3 = ({ formData, updateFormData, onFinish, onSave, isSavin
                 <div className="flex justify-between items-end">
                     <div>
                         <p className="text-primary text-sm font-bold uppercase tracking-wider">Step 3 of 3</p>
-                        <p className="text-2xl font-bold mt-1 dark:text-white">Record Video Selfie</p>
+                        <p className="text-2xl font-bold mt-1 dark:text-primary-text">Record Video Selfie</p>
                     </div>
                     <p className="text-primary text-sm font-bold">100%</p>
                 </div>
@@ -117,13 +117,13 @@ const VerificationStep3 = ({ formData, updateFormData, onFinish, onSave, isSavin
             </div>
 
             <div className="mb-6 text-center">
-                <p className="text-slate-600 dark:text-slate-400 text-base leading-relaxed">
+                <p className="text-text-muted dark:text-text-secondary text-base leading-relaxed">
                     Look straight into the camera and turn your head slowly from left to right.
                 </p>
             </div>
 
             {/* Camera Viewfinder */}
-            <div className="relative w-full aspect-[3/4] rounded-xl bg-slate-200 dark:bg-slate-800/50 overflow-hidden border-2 border-primary/10 flex items-center justify-center mb-8 shadow-2xl">
+            <div className="relative w-full aspect-[3/4] rounded-xl bg-surface dark:bg-container/50 overflow-hidden border-2 border-primary/10 flex items-center justify-center mb-8 shadow-2xl">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-0"></div>
 
                 {/* Live Camera Feed */}
@@ -157,9 +157,9 @@ const VerificationStep3 = ({ formData, updateFormData, onFinish, onSave, isSavin
 
                 {/* Recording indicator */}
                 {recordingState === 'recording' && (
-                    <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 bg-black/70 rounded-full border border-white/10 z-20">
-                        <div className="size-2 bg-red-500 rounded-full animate-pulse"></div>
-                        <span className="text-white text-xs font-mono font-bold tracking-widest">
+                    <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 bg-void/70 rounded-full border border-subtle/10 z-20">
+                        <div className="size-2 bg-primary rounded-full animate-pulse"></div>
+                        <span className="text-primary-text text-xs font-mono font-bold tracking-widest">
                             {(RECORD_DURATION - elapsed).toString().padStart(2, '0')}s
                         </span>
                     </div>
@@ -167,7 +167,7 @@ const VerificationStep3 = ({ formData, updateFormData, onFinish, onSave, isSavin
 
                 {/* Recording progress bar */}
                 {recordingState === 'recording' && (
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20 z-20">
+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-surface/20 z-20">
                         <div
                             className="h-full bg-primary transition-all duration-1000 ease-linear"
                             style={{ width: `${progressPct}%` }}
@@ -178,7 +178,7 @@ const VerificationStep3 = ({ formData, updateFormData, onFinish, onSave, isSavin
                 {/* Countdown overlay */}
                 {recordingState === 'countdown' && (
                     <div className="absolute inset-0 flex items-center justify-center z-20">
-                        <div className="text-white text-9xl font-extrabold drop-shadow-2xl animate-bounce" key={countdown}>
+                        <div className="text-primary-text text-9xl font-extrabold drop-shadow-2xl animate-bounce" key={countdown}>
                             {countdown || ''}
                         </div>
                     </div>
@@ -189,25 +189,25 @@ const VerificationStep3 = ({ formData, updateFormData, onFinish, onSave, isSavin
                     <div className="z-20 flex flex-col items-center gap-4">
                         <button
                             onClick={startCountdown}
-                            className="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/40 hover:scale-105 active:scale-95 transition-transform"
+                            className="w-16 h-16 rounded-full bg-primary text-primary-text flex items-center justify-center shadow-lg shadow-primary/40 hover:scale-105 active:scale-95 transition-transform"
                         >
                             <span className="material-symbols-outlined text-3xl">videocam</span>
                         </button>
-                        <span className="text-white text-sm font-medium drop-shadow-md">Start Recording</span>
+                        <span className="text-primary-text text-sm font-medium drop-shadow-md">Start Recording</span>
                     </div>
                 )}
 
                 {/* Done overlay badge */}
                 {recordingState === 'done' && (
-                    <div className="absolute top-4 left-4 z-20 flex items-center gap-2 px-3 py-1.5 bg-green-500/90 rounded-full">
-                        <span className="material-symbols-outlined !text-sm text-white">check_circle</span>
-                        <span className="text-white text-xs font-bold">Recording Complete {estimatedSizeMb ? `• ${estimatedSizeMb} MB` : ''}</span>
+                    <div className="absolute top-4 left-4 z-20 flex items-center gap-2 px-3 py-1.5 bg-success/90 rounded-full">
+                        <span className="material-symbols-outlined !text-sm text-primary-text">check_circle</span>
+                        <span className="text-primary-text text-xs font-bold">Recording Complete {estimatedSizeMb ? `• ${estimatedSizeMb} MB` : ''}</span>
                     </div>
                 )}
 
                 {/* Camera quality tags */}
                 {(recordingState === 'idle' || recordingState === 'recording') && (
-                    <div className="absolute bottom-4 left-0 w-full px-6 flex justify-between items-center text-white/80 text-xs italic z-10">
+                    <div className="absolute bottom-4 left-0 w-full px-6 flex justify-between items-center text-primary-text/80 text-xs italic z-10">
                         <span>Front Camera Active</span>
                         <span>HD Quality</span>
                     </div>
@@ -216,7 +216,7 @@ const VerificationStep3 = ({ formData, updateFormData, onFinish, onSave, isSavin
 
             {/* Camera error */}
             {cameraError && (
-                <div className="mb-6 flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-red-600 dark:text-red-400 text-sm">
+                <div className="mb-6 flex items-center gap-3 p-4 bg-primary/10 border border-error/30 rounded-xl text-error dark:text-error text-sm">
                     <span className="material-symbols-outlined">error</span>
                     {cameraError}
                 </div>
@@ -224,7 +224,7 @@ const VerificationStep3 = ({ formData, updateFormData, onFinish, onSave, isSavin
 
             {/* Guidelines */}
             <div className="grid grid-cols-1 gap-4 mb-8">
-                <h3 className="text-sm font-bold uppercase text-slate-500 dark:text-slate-400 tracking-widest">Guidelines for success</h3>
+                <h3 className="text-sm font-bold uppercase text-text-secondary dark:text-text-secondary tracking-widest">Guidelines for success</h3>
                 <div className="flex flex-col gap-3">
                     {[
                         { icon: 'light_mode', text: 'Ensure good natural lighting' },
@@ -233,7 +233,7 @@ const VerificationStep3 = ({ formData, updateFormData, onFinish, onSave, isSavin
                     ].map(({ icon, text }) => (
                         <div key={icon} className="flex items-center gap-3 p-3 rounded-lg bg-primary/5 border border-primary/10">
                             <span className="material-symbols-outlined text-primary text-xl">{icon}</span>
-                            <span className="text-sm dark:text-slate-300">{text}</span>
+                            <span className="text-sm dark:text-text-primary">{text}</span>
                         </div>
                     ))}
                 </div>
@@ -244,7 +244,7 @@ const VerificationStep3 = ({ formData, updateFormData, onFinish, onSave, isSavin
                 {recordingState === 'done' && (
                     <button
                         onClick={retake}
-                        className="w-full py-3 bg-transparent border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-center gap-2"
+                        className="w-full py-3 bg-transparent border border-border dark:border-border-subtle text-text-muted dark:text-text-primary font-bold rounded-xl hover:bg-surface-lowest dark:hover:bg-container transition-colors flex items-center justify-center gap-2"
                     >
                         <span className="material-symbols-outlined">replay</span>
                         Retake Video
@@ -253,10 +253,10 @@ const VerificationStep3 = ({ formData, updateFormData, onFinish, onSave, isSavin
                 <button
                     onClick={onFinish}
                     disabled={!formData.videoRecorded}
-                    className={`w-full py-4 text-white font-bold rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all ${
+                    className={`w-full py-4 text-primary-text font-bold rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all ${
                         formData.videoRecorded
                             ? 'bg-primary hover:bg-primary/90 shadow-primary/20 active:scale-95'
-                            : 'bg-slate-300 dark:bg-slate-700 cursor-not-allowed opacity-60'
+                            : 'bg-surface-low dark:bg-container cursor-not-allowed opacity-60'
                     }`}
                     title={!formData.videoRecorded ? 'Please record your video selfie first' : ''}
                 >
@@ -276,7 +276,7 @@ const VerificationStep3 = ({ formData, updateFormData, onFinish, onSave, isSavin
                     ) : 'Save Progress'}
                 </button>
                 {!formData.videoRecorded && recordingState === 'idle' && (
-                    <p className="text-center text-xs text-amber-500">
+                    <p className="text-center text-xs text-warning">
                         Record your video selfie to complete verification.
                     </p>
                 )}

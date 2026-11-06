@@ -8,6 +8,7 @@ let io;
 export const init = (httpServer) => {
     const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',').map((origin) => origin.trim()).filter(Boolean) || [
         'http://localhost:5173',
+        'https://art-e-techt-95db8.web.app',
         'https://talentconnect-6e347.web.app',
     ];
 

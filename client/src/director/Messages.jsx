@@ -128,22 +128,22 @@ const Messages = () => {
             headerSubtitle="Connect and communicate with talent and casting teams."
             searchPlaceholder="Search talent, conversations..."
         >
-            <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen">
+            <div className="bg-background-light dark:bg-background-dark text-text-primary dark:text-text-primary font-display min-h-screen">
                 {loading ? (
                     <div className="flex flex-col items-center justify-center h-[60vh]">
                         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-primary mb-4"></div>
-                        <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Loading Messages...</p>
+                        <p className="text-text-secondary font-bold uppercase tracking-widest text-[10px]">Loading Messages...</p>
                     </div>
                 ) : (
                     <div className="p-8 flex-1 flex flex-col min-h-[calc(100vh-250px)]">
-                        <div className="flex flex-1 bg-white dark:bg-card-dark rounded-3xl border border-slate-200 dark:border-white/5 overflow-hidden shadow-2xl min-h-0">
+                        <div className="flex flex-1 bg-surface dark:bg-card-dark rounded-3xl border border-border dark:border-subtle/5 overflow-hidden shadow-2xl min-h-0">
                             {/* Conversations List */}
-                            <aside className="w-80 flex-shrink-0 border-r border-slate-200 dark:border-white/5 flex flex-col bg-white dark:bg-card-dark">
-                                <div className="p-6 border-b border-slate-100 dark:border-white/5">
+                            <aside className="w-80 flex-shrink-0 border-r border-border dark:border-subtle/5 flex flex-col bg-surface dark:bg-card-dark">
+                                <div className="p-6 border-b border-border dark:border-subtle/5">
                                     <div className="relative group">
-                                        <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm group-focus-within:text-primary transition-colors">search</span>
+                                        <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary text-sm group-focus-within:text-primary transition-colors">search</span>
                                         <input
-                                            className="w-full bg-slate-100 dark:bg-white/5 border-none rounded-xl pl-10 pr-4 py-2.5 text-xs font-bold focus:ring-2 focus:ring-primary/20 placeholder:text-slate-500 text-slate-700 dark:text-white outline-none transition-all"
+                                            className="w-full bg-surface-lowest dark:bg-surface/5 border-none rounded-xl pl-10 pr-4 py-2.5 text-xs font-bold focus:ring-2 focus:ring-gold/20 placeholder:text-text-secondary text-text-muted dark:text-primary-text outline-none transition-all"
                                             placeholder="Search conversations..."
                                             type="text"
                                         />
@@ -153,23 +153,23 @@ const Messages = () => {
                                 <div className="flex-1 overflow-y-auto custom-scrollbar">
                                     <div className="p-2 space-y-1">
                                         {conversations.length === 0 ? (
-                                            <p className="text-center text-xs text-slate-500 mt-4">No conversations yet.</p>
+                                            <p className="text-center text-xs text-text-secondary mt-4">No conversations yet.</p>
                                         ) : (
                                             conversations.map((conv) => (
                                                 <div
                                                     key={conv.otherUser._id}
                                                     onClick={() => handleSelectUser(conv.otherUser)}
-                                                    className={`flex items-center gap-4 p-4 rounded-2xl cursor-pointer transition-all border ${selectedUser?._id === conv.otherUser._id ? 'bg-primary/5 dark:bg-primary/10 border-primary/10' : 'hover:bg-slate-50 dark:hover:bg-white/5 border-transparent'}`}
+                                                    className={`flex items-center gap-4 p-4 rounded-2xl cursor-pointer transition-all border ${selectedUser?._id === conv.otherUser._id ? 'bg-primary/5 dark:bg-primary/10 border-primary/10' : 'hover:bg-surface-lowest dark:hover:bg-surface/5 border-transparent'}`}
                                                 >
                                                     <div className="relative shrink-0">
                                                         <div className="size-12 rounded-full bg-cover bg-center border-2 border-primary/20 shadow-lg" style={{ backgroundImage: `url('https://ui-avatars.com/api/?name=${conv.otherUser.email}')` }}></div>
                                                     </div>
                                                     <div className="flex-1 min-w-0">
                                                         <div className="flex justify-between items-baseline mb-1">
-                                                            <h3 className="text-sm font-black truncate dark:text-white uppercase tracking-tight">{conv.otherUser.email.split('@')[0]}</h3>
-                                                            <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{new Date(conv.lastMessage.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                                            <h3 className="text-sm font-black truncate dark:text-primary-text uppercase tracking-tight">{conv.otherUser.email.split('@')[0]}</h3>
+                                                            <span className="text-[10px] text-text-secondary font-bold uppercase tracking-widest">{new Date(conv.lastMessage.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                                                         </div>
-                                                        <p className="text-xs text-slate-500 dark:text-slate-400 truncate font-bold italic">{conv.lastMessage.content}</p>
+                                                        <p className="text-xs text-text-secondary dark:text-text-secondary truncate font-bold italic">{conv.lastMessage.content}</p>
                                                     </div>
                                                 </div>
                                             ))
@@ -179,19 +179,19 @@ const Messages = () => {
                             </aside>
 
                             {/* Main Chat Area */}
-                            <div className="flex-1 flex flex-col bg-slate-50/50 dark:bg-background-dark/30">
+                            <div className="flex-1 flex flex-col bg-surface-lowest/50 dark:bg-background-dark/30">
                                 {selectedUser ? (
                                     <>
-                                        <header className="h-20 flex items-center justify-between px-8 border-b border-slate-200 dark:border-white/5 bg-white/80 dark:bg-card-dark/80 backdrop-blur-md">
+                                        <header className="h-20 flex items-center justify-between px-8 border-b border-border dark:border-subtle/5 bg-surface/80 dark:bg-card-dark/80 backdrop-blur-md">
                                             <div className="flex items-center gap-4">
                                                 <div className="size-12 rounded-full bg-cover bg-center border-2 border-primary/20 shadow-sm" style={{ backgroundImage: `url('https://ui-avatars.com/api/?name=${selectedUser.email}')` }}></div>
                                                 <div>
                                                     <div className="flex items-center gap-2">
-                                                        <h2 className="text-lg font-black dark:text-white uppercase tracking-tight">{selectedUser.email.split('@')[0]}</h2>
+                                                        <h2 className="text-lg font-black dark:text-primary-text uppercase tracking-tight">{selectedUser.email.split('@')[0]}</h2>
                                                         <span className="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-black rounded-full uppercase tracking-widest border border-primary/20">Active Chat</span>
                                                     </div>
-                                                    <p className="text-[10px] text-green-500 flex items-center gap-1.5 font-black uppercase tracking-widest mt-0.5">
-                                                        <span className="size-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.5)]"></span> Online
+                                                    <p className="text-[10px] text-success flex items-center gap-1.5 font-black uppercase tracking-widest mt-0.5">
+                                                        <span className="size-2 bg-success rounded-full animate-pulse shadow-[0_0_8px_color-mix(in srgb, var(--color-success) 50%, transparent)]"></span> Online
                                                     </p>
                                                 </div>
                                             </div>
@@ -201,28 +201,28 @@ const Messages = () => {
                                             {messages.map((msg, idx) => (
                                                 <div key={idx} className={`flex items-end gap-3 max-w-[75%] ${msg.sender === profile?._id ? 'ml-auto flex-row-reverse' : ''}`}>
                                                     <div className="space-y-1">
-                                                        <div className={`${msg.sender === profile?._id ? 'bg-primary text-white p-5 rounded-3xl rounded-br-none shadow-xl shadow-primary/20' : 'bg-white dark:bg-card-dark text-slate-800 dark:text-slate-200 p-5 rounded-3xl rounded-bl-none shadow-sm border border-slate-100 dark:border-white/5'}`}>
+                                                        <div className={`${msg.sender === profile?._id ? 'bg-primary text-primary-text p-5 rounded-3xl rounded-br-none shadow-xl shadow-primary/20' : 'bg-surface dark:bg-card-dark text-text-primary dark:text-text-primary p-5 rounded-3xl rounded-bl-none shadow-sm border border-border dark:border-subtle/5'}`}>
                                                             <p className="text-sm font-medium leading-relaxed">{msg.content}</p>
                                                         </div>
-                                                        <span className={`text-[10px] text-slate-400 font-bold uppercase tracking-widest ${msg.sender === profile?._id ? 'text-right block mr-2' : 'ml-2'}`}>{new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                                        <span className={`text-[10px] text-text-secondary font-bold uppercase tracking-widest ${msg.sender === profile?._id ? 'text-right block mr-2' : 'ml-2'}`}>{new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                                                     </div>
                                                 </div>
                                             ))}
                                             <div ref={messagesEndRef} />
                                         </div>
 
-                                        <form onSubmit={handleSendMessage} className="p-8 bg-white dark:bg-card-dark border-t border-slate-200 dark:border-white/5 shadow-[0_-4px_20px_rgba(0,0,0,0.02)]">
+                                        <form onSubmit={handleSendMessage} className="p-8 bg-surface dark:bg-card-dark border-t border-border dark:border-subtle/5 shadow-[0_-4px_20px_color-mix(in srgb, var(--color-void) 2%, transparent)]">
                                             <div className="max-w-4xl mx-auto flex items-center gap-4">
                                                 <div className="flex-1 relative">
                                                     <input
                                                         value={newMessage}
                                                         onChange={(e) => setNewMessage(e.target.value)}
-                                                        className="w-full bg-slate-100 dark:bg-white/5 border-none rounded-2xl px-6 py-4 text-sm font-bold focus:ring-2 focus:ring-primary/30 placeholder:text-slate-500 outline-none transition-all shadow-inner"
+                                                        className="w-full bg-surface-lowest dark:bg-surface/5 border-none rounded-2xl px-6 py-4 text-sm font-bold focus:ring-2 focus:ring-gold/30 placeholder:text-text-secondary outline-none transition-all shadow-inner"
                                                         placeholder="Type a message..."
                                                         type="text"
                                                     />
                                                 </div>
-                                                <button type="submit" className="size-14 rounded-2xl bg-primary text-white flex items-center justify-center shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all group">
+                                                <button type="submit" className="size-14 rounded-2xl bg-primary text-primary-text flex items-center justify-center shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all group">
                                                     <span className="material-symbols-outlined text-3xl transition-transform group-hover:rotate-12">send</span>
                                                 </button>
                                             </div>
@@ -230,7 +230,7 @@ const Messages = () => {
                                     </>
                                 ) : (
                                     <div className="flex-1 flex items-center justify-center">
-                                        <p className="text-slate-500 uppercase tracking-widest font-black text-xs">Select a conversation to start chatting</p>
+                                        <p className="text-text-secondary uppercase tracking-widest font-black text-xs">Select a conversation to start chatting</p>
                                     </div>
                                 )}
                             </div>
@@ -238,8 +238,8 @@ const Messages = () => {
                     </div>
                 )}
             </div>
-            <footer className="py-8 px-8 border-t border-slate-200 dark:border-border-dark text-center">
-                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">© 2026 TalentConnect • Where Global Talent Meets Opportunity</p>
+            <footer className="py-8 px-8 border-t border-border dark:border-border-dark text-center">
+                <p className="text-[10px] text-text-secondary font-bold uppercase tracking-widest">© 2026 Art-e-Techt • Where Global Talent Meets Opportunity</p>
             </footer>
         </DashboardLayout>
     );

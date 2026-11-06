@@ -1,72 +1,134 @@
+@import './styles/tokens.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  * {
+    border-radius: 0px !important;
+    --tw-ring-color: rgb(var(--color-secondary-rgb) / 0.5);
+    --tw-ring-offset-color: var(--color-void);
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+    background-color: var(--color-void);
+  }
+
   body {
-    @apply bg-[#f8f6f6] dark:bg-[#221012] text-[#1a1a1a] dark:text-[#f8f6f6];
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--color-void);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-text-primary) !important;
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+
+  nav,
+  button,
+  input,
+  select,
+  textarea {
+    font-family: var(--font-body);
+  }
+
+  button {
+    font-family: var(--font-button);
+    font-weight: 600;
+  }
+
+  input,
+  select,
+  textarea {
+    background-color: var(--color-surface);
+    border-color: var(--color-border);
+    color: var(--color-text-primary);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
+  }
+
+  :disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.55;
   }
 }
 
-.font-display {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+.font-syne {
+  font-family: 'Syne', sans-serif;
+}
+
+.font-mono-grotesk {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.font-editorial {
+  font-family: var(--font-accent);
 }
 
 .gold-text-gradient {
-  background: linear-gradient(to right, #ee2b3b, #ff4d5a, #ee2b3b);
+  background: linear-gradient(to right, var(--color-secondary), var(--color-text-primary), var(--color-tertiary));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Custom scrollbar */
+.primary-text-gradient {
+  background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom 0px brutalist scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: var(--color-void);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ee2b3b;
-  border-radius: 4px;
+  background: var(--color-border);
+  border-radius: 0px !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #ff4d5a;
+  background: var(--color-secondary);
 }
 
-/* new utilities */
-.cinematic-gradient {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(248, 246, 246, 0.9) 80%, rgba(248, 246, 246, 1) 100%);
-}
-
-.dark .cinematic-gradient {
-  background: linear-gradient(180deg, rgba(34, 16, 18, 0) 0%, rgba(34, 16, 18, 0.9) 80%, rgba(34, 16, 18, 1) 100%);
-}
-
+/* Utility cards */
 .glass-card {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
 }
 
-.dark .glass-card {
-  background: rgba(42, 26, 20, 0.4);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(238, 43, 59, 0.2);
+.glass-card-elevated {
+  background: var(--color-container);
+  border: 1px solid var(--color-border);
 }
 
 .sidebar-active {
-  background: #ee2b3b;
-  color: #ffffff;
-}
-
-.glass-effect {
-  background: rgba(238, 43, 59, 0.1);
-  backdrop-filter: blur(8px);
+  background: var(--color-primary);
+  color: var(--color-text-primary);
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -79,8 +141,7 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(238, 43, 59, 0.3);
-  border-radius: 10px;
+  background: var(--color-border);
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -92,94 +153,30 @@
   scrollbar-width: none;
 }
 
-.admin-theme {
-  color: inherit;
-}
-
-.dark .admin-theme .text-slate-900,
-.dark .admin-theme .text-slate-800,
-.dark .admin-theme .text-slate-700 {
-  color: #f8f6f6;
-}
-
-.dark .admin-theme .text-slate-600 {
-  color: #e5e7eb;
-}
-
-.dark .admin-theme .text-slate-400,
-.dark .admin-theme .text-slate-300 {
-  color: #cbd5f5;
-}
-
-.dark .admin-theme .text-slate-500 {
-  color: #d1d5db;
-}
-
-.dark .admin-theme .bg-white,
-.dark .admin-theme .bg-slate-50 {
-  background-color: #121212;
-}
-
-.dark .admin-theme .bg-slate-100 {
-  background-color: #1b1b1b;
-}
-
-.dark .admin-theme .border-slate-200,
-.dark .admin-theme .border-slate-100,
-.dark .admin-theme .border-slate-300 {
-  border-color: rgba(255, 255, 255, 0.12);
-}
-
-.dark .admin-theme .bg-primary {
-  background-color: #ee2b3b;
-}
-
-/* ================================================================
-   MOBILE BOTTOM NAVIGATION
-   ================================================================ */
+/* Mobile navigation */
 .mobile-bottom-nav {
-  background: rgba(10, 10, 10, 0.95);
+  background: color-mix(in srgb, var(--color-void) 97%, transparent);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--color-border);
   padding-bottom: env(safe-area-inset-bottom, 0px);
   height: calc(64px + env(safe-area-inset-bottom, 0px));
 }
 
-.dark .mobile-bottom-nav {
-  background: rgba(10, 10, 10, 0.97);
-  border-top: 1px solid rgba(238, 43, 59, 0.15);
-}
-
-/* Light mode bottom nav */
-html:not(.dark) .mobile-bottom-nav {
-  background: rgba(248, 246, 246, 0.97);
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-html:not(.dark) .mobile-nav-inactive {
-  color: #94a3b8;
-}
-
 .mobile-nav-active {
-  color: #ee2b3b;
-}
-.mobile-nav-inactive {
-  color: #4b5563;
+  color: var(--color-secondary);
 }
 
-/* ================================================================
-   MOBILE CONTENT PADDING (avoid bottom nav overlap)
-   ================================================================ */
+.mobile-nav-inactive {
+  color: var(--color-text-secondary);
+}
+
 @media (max-width: 1023px) {
   .mobile-content-pad {
     padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)) !important;
   }
 }
 
-/* ================================================================
-   MOBILE HEADER — clean app-style top bar
-   ================================================================ */
 .mobile-header {
   height: 60px;
 }
@@ -188,61 +185,26 @@ html:not(.dark) .mobile-nav-inactive {
   .mobile-header-logo-text {
     font-size: 1.1rem;
   }
-}
-
-/* ================================================================
-   MOBILE CARD STYLES
-   ================================================================ */
-@media (max-width: 1023px) {
   .mobile-card {
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 0px !important;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
   }
-
-  .dark .mobile-card {
-    background: #1a1a1a;
-  }
-
-  /* Tighter spacing on mobile */
   .mobile-tight {
     padding: 14px 16px;
   }
-
-  /* Hero welcome card */
   .mobile-hero-card {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2a1018 100%);
-    border: 1px solid rgba(238, 43, 59, 0.2);
-    border-radius: 20px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-primary);
     padding: 20px;
   }
-
-  /* Stat card */
   .mobile-stat-card {
-    background: #1a1a1a;
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 16px;
+    background: var(--color-container);
+    border: 1px solid var(--color-border);
     padding: 16px;
   }
 }
 
-/* ================================================================
-   MOBILE SCROLLBAR — hide on mobile for cleaner UX
-   ================================================================ */
-@media (max-width: 1023px) {
-  .overflow-y-auto::-webkit-scrollbar,
-  .custom-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .overflow-y-auto,
-  .custom-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-}
-
-/* ================================================================
-   MOBILE TYPOGRAPHY OVERRIDES
-   ================================================================ */
 @media (max-width: 639px) {
   .mobile-display-text {
     font-size: clamp(1.5rem, 6vw, 2rem);
@@ -254,9 +216,6 @@ html:not(.dark) .mobile-nav-inactive {
   }
 }
 
-/* ================================================================
-   MOBILE INPUT FOCUS — prevent zoom on iOS
-   ================================================================ */
 @media (max-width: 1023px) {
   input[type="text"],
   input[type="email"],
@@ -268,9 +227,6 @@ html:not(.dark) .mobile-nav-inactive {
   }
 }
 
-/* ================================================================
-   PULSE DOT ANIMATION
-   ================================================================ */
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.5; transform: scale(0.85); }
@@ -279,37 +235,12 @@ html:not(.dark) .mobile-nav-inactive {
   animation: pulse-dot 2s ease-in-out infinite;
 }
 
-/* ================================================================
-   BOTTOM NAV ACTIVE INDICATOR
-   ================================================================ */
-@keyframes nav-pop {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-.mobile-nav-active .material-symbols-outlined {
-  animation: nav-pop 0.2s ease-out forwards;
-}
-
-/* ================================================================
-   MOBILE MORE DRAWER — slide up animation
-   ================================================================ */
 @keyframes drawer-slide-up {
   from { transform: translateY(100%); opacity: 0; }
   to   { transform: translateY(0);    opacity: 1; }
 }
 
-.lg\:hidden .relative.z-10[class*="bg-white"],
-.lg\:hidden .relative.z-10[class*="dark\:bg-\["] {
-  animation: drawer-slide-up 0.28s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+.drawer-item-active {
+  background: var(--color-primary);
+  color: var(--color-text-primary);
 }
-
-/* Drawer item hover */
-@media (max-width: 1023px) {
-  .drawer-item-active {
-    background: #ee2b3b;
-    color: #fff;
-    box-shadow: 0 8px 24px rgba(238,43,59,0.25);
-  }
-}
-
-

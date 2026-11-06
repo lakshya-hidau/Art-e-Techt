@@ -8,7 +8,7 @@ import { changePassword } from '../services/authService';
 const Toast = ({ message, type, onDone }) => {
     useEffect(() => { const t = setTimeout(onDone, 3000); return () => clearTimeout(t); }, [onDone]);
     return (
-        <div className={`fixed bottom-8 right-8 z-50 px-6 py-4 rounded-2xl shadow-2xl text-white text-sm font-bold flex items-center gap-3 ${type === 'error' ? 'bg-red-600' : 'bg-green-600'}`}>
+        <div className={`fixed bottom-8 right-8 z-50 px-6 py-4 rounded-2xl shadow-2xl text-primary-text text-sm font-bold flex items-center gap-3 ${type === 'error' ? 'bg-primary-hover' : 'bg-success'}`}>
             <span className="material-symbols-outlined">{type === 'error' ? 'error' : 'check_circle'}</span>
             {message}
         </div>
@@ -17,8 +17,8 @@ const Toast = ({ message, type, onDone }) => {
 
 const Toggle = ({ checked, onChange }) => (
     <button onClick={() => onChange(!checked)} type="button"
-        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${checked ? 'bg-primary' : 'bg-slate-200 dark:bg-zinc-700'}`}>
-        <span className={`inline-block h-5 w-5 transform rounded-full bg-white shadow-lg transition-transform ${checked ? 'translate-x-6' : 'translate-x-1'}`}/>
+        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 ${checked ? 'bg-primary' : 'bg-surface dark:bg-container'}`}>
+        <span className={`inline-block h-5 w-5 transform rounded-full bg-surface shadow-lg transition-transform ${checked ? 'translate-x-6' : 'translate-x-1'}`}/>
     </button>
 );
 
@@ -72,7 +72,7 @@ const ArtistSettings = () => {
             }
         };
         fetchProfile();
-        
+
         // Listen for real-time verification updates
         window.addEventListener('userStateChange', fetchProfile);
         return () => window.removeEventListener('userStateChange', fetchProfile);
@@ -214,11 +214,11 @@ const ArtistSettings = () => {
 
             {/* Password Change Modal */}
             {showPasswordModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4" onClick={() => setShowPasswordModal(false)}>
-                    <div className="bg-white dark:bg-zinc-900 rounded-3xl p-8 w-full max-w-md shadow-2xl border border-slate-200 dark:border-zinc-700" onClick={e => e.stopPropagation()}>
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-void/60 backdrop-blur-sm p-4" onClick={() => setShowPasswordModal(false)}>
+                    <div className="bg-surface dark:bg-void rounded-3xl p-8 w-full max-w-md shadow-2xl border border-border dark:border-border-subtle" onClick={e => e.stopPropagation()}>
                         <div className="flex items-center justify-between mb-6">
-                            <h3 className="text-xl font-black dark:text-white uppercase italic tracking-tighter">Change Password</h3>
-                            <button onClick={() => setShowPasswordModal(false)} className="text-slate-400 hover:text-red-500 transition-colors">
+                            <h3 className="text-xl font-black dark:text-primary-text uppercase italic tracking-tighter">Change Password</h3>
+                            <button onClick={() => setShowPasswordModal(false)} className="text-text-secondary hover:text-error transition-colors">
                                 <span className="material-symbols-outlined">close</span>
                             </button>
                         </div>
@@ -229,15 +229,15 @@ const ArtistSettings = () => {
                                 { label: 'Confirm New Password', key: 'confirmPassword', placeholder: 'Re-enter new password' },
                             ].map(({ label, key, placeholder }) => (
                                 <div key={key}>
-                                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 block mb-2">{label}</label>
+                                    <label className="text-[10px] font-black uppercase tracking-widest text-text-secondary block mb-2">{label}</label>
                                     <input type="password" value={pwForm[key]} onChange={e => setPwForm(p => ({ ...p, [key]: e.target.value }))}
                                         placeholder={placeholder}
-                                        className="w-full bg-slate-100 dark:bg-zinc-800 rounded-xl px-4 py-3 text-sm font-medium dark:text-white outline-none focus:ring-2 focus:ring-primary/50 transition-all"/>
+                                        className="w-full bg-surface-lowest dark:bg-container rounded-xl px-4 py-3 text-sm font-medium dark:text-primary-text outline-none focus:ring-2 focus:ring-gold/50 transition-all"/>
                                 </div>
                             ))}
-                            {pwError && <p className="text-red-500 text-xs font-bold">{pwError}</p>}
+                            {pwError && <p className="text-error text-xs font-bold">{pwError}</p>}
                             <button type="submit" disabled={pwLoading}
-                                className="w-full py-3.5 bg-primary text-white font-black rounded-xl uppercase tracking-widest text-xs hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2 disabled:opacity-70">
+                                className="w-full py-3.5 bg-primary text-primary-text font-black rounded-xl uppercase tracking-widest text-xs hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2 disabled:opacity-70">
                                 {pwLoading ? <><span className="material-symbols-outlined text-sm animate-spin">sync</span> Saving...</> : 'Update Password'}
                             </button>
                         </form>
@@ -247,27 +247,27 @@ const ArtistSettings = () => {
 
             {/* Delete Account Modal */}
             {showDeleteModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4" onClick={() => setShowDeleteModal(false)}>
-                    <div className="bg-white dark:bg-zinc-900 rounded-3xl p-8 w-full max-w-md shadow-2xl border border-red-200 dark:border-red-500/30" onClick={e => e.stopPropagation()}>
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-void/60 backdrop-blur-sm p-4" onClick={() => setShowDeleteModal(false)}>
+                    <div className="bg-surface dark:bg-void rounded-3xl p-8 w-full max-w-md shadow-2xl border border-error dark:border-error/30" onClick={e => e.stopPropagation()}>
                         <div className="text-center mb-6">
-                            <div className="size-16 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <span className="material-symbols-outlined text-red-500 text-3xl">warning</span>
+                            <div className="size-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span className="material-symbols-outlined text-error text-3xl">warning</span>
                             </div>
-                            <h3 className="text-xl font-black text-red-600 uppercase italic tracking-tighter">Delete Account</h3>
-                            <p className="text-slate-500 text-sm mt-2">This action is permanent and cannot be undone. All your profile data, applications, and history will be deleted.</p>
+                            <h3 className="text-xl font-black text-error uppercase italic tracking-tighter">Delete Account</h3>
+                            <p className="text-text-secondary text-sm mt-2">This action is permanent and cannot be undone. All your profile data, applications, and history will be deleted.</p>
                         </div>
                         <div className="mb-6">
-                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 block mb-2">Type DELETE to confirm</label>
+                            <label className="text-[10px] font-black uppercase tracking-widest text-text-secondary block mb-2">Type DELETE to confirm</label>
                             <input value={deleteConfirmText} onChange={e => setDeleteConfirmText(e.target.value)}
                                 placeholder="DELETE"
-                                className="w-full bg-slate-100 dark:bg-zinc-800 rounded-xl px-4 py-3 text-sm font-bold dark:text-white outline-none focus:ring-2 focus:ring-red-500/50 transition-all"/>
+                                className="w-full bg-surface-lowest dark:bg-container rounded-xl px-4 py-3 text-sm font-bold dark:text-primary-text outline-none focus:ring-2 focus:ring-error/50 transition-all"/>
                         </div>
                         <div className="flex gap-3">
                             <button onClick={() => setShowDeleteModal(false)}
-                                className="flex-1 py-3 bg-slate-100 dark:bg-zinc-800 text-slate-600 dark:text-slate-300 rounded-xl font-bold text-xs uppercase tracking-widest transition-all">Cancel</button>
+                                className="flex-1 py-3 bg-surface-lowest dark:bg-container text-text-muted dark:text-text-primary rounded-xl font-bold text-xs uppercase tracking-widest transition-all">Cancel</button>
                             <button
                                 disabled={deleteConfirmText !== 'DELETE'}
-                                className="flex-1 py-3 bg-red-500 text-white rounded-xl font-bold text-xs uppercase tracking-widest transition-all hover:bg-red-600 disabled:opacity-40 disabled:cursor-not-allowed">
+                                className="flex-1 py-3 bg-primary text-primary-text rounded-xl font-bold text-xs uppercase tracking-widest transition-all hover:bg-primary-hover disabled:opacity-40 disabled:cursor-not-allowed">
                                 Delete Forever
                             </button>
                         </div>
@@ -280,33 +280,33 @@ const ArtistSettings = () => {
                 <section>
                     <div className="flex items-center gap-2 mb-6 text-primary">
                         <span className="material-symbols-outlined">photo_camera</span>
-                        <h2 className="text-lg font-bold dark:text-white uppercase italic tracking-tighter">Profile Photo & Portfolio</h2>
+                        <h2 className="text-lg font-bold dark:text-primary-text uppercase italic tracking-tighter">Profile Photo & Portfolio</h2>
                     </div>
-                    <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 shadow-sm p-6 mb-8">
+                    <div className="bg-surface dark:bg-void rounded-2xl border border-border dark:border-border-subtle shadow-sm p-6 mb-8">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-4">
-                                <p className="text-sm text-slate-500 dark:text-slate-400">Current Profile Picture</p>
-                                <img src={profile?.profilePicture || 'https://ui-avatars.com/api/?name=No+Photo'} alt="Profile" className="w-36 h-36 rounded-full object-cover border border-slate-200 dark:border-zinc-700" />
+                                <p className="text-sm text-text-secondary dark:text-text-secondary">Current Profile Picture</p>
+                                <img src={profile?.profilePicture || 'https://ui-avatars.com/api/?name=No+Photo'} alt="Profile" className="w-36 h-36 rounded-full object-cover border border-border dark:border-border-subtle" />
                                 <label className="block text-sm font-bold uppercase tracking-widest mt-2">Update Profile Picture</label>
                                 <input type="file" accept="image/*" onChange={handleProfilePictureUpload} disabled={uploadingProfilePic} />
-                                {uploadingProfilePic && <p className="text-xs text-slate-500">Uploading...</p>}
+                                {uploadingProfilePic && <p className="text-xs text-text-secondary">Uploading...</p>}
                             </div>
                             <div className="space-y-4">
-                                <p className="text-sm text-slate-500 dark:text-slate-400">Add to Portfolio</p>
+                                <p className="text-sm text-text-secondary dark:text-text-secondary">Add to Portfolio</p>
                                 <input type="file" accept="image/*,video/*" onChange={(e) => setPortfolioFile(e.target.files[0])} />
-                                <input value={portfolioTitle} onChange={(e) => setPortfolioTitle(e.target.value)} placeholder="Title" className="w-full p-2 border border-slate-200 dark:border-zinc-700 rounded" />
-                                <textarea value={portfolioDescription} onChange={(e) => setPortfolioDescription(e.target.value)} placeholder="Description" className="w-full p-2 border border-slate-200 dark:border-zinc-700 rounded" rows={3} />
-                                <button onClick={handlePortfolioUpload} disabled={uploadingPortfolio} className="px-4 py-2 bg-primary text-white rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-primary/90 transition-all">
+                                <input value={portfolioTitle} onChange={(e) => setPortfolioTitle(e.target.value)} placeholder="Title" className="w-full p-2 border border-border dark:border-border-subtle rounded" />
+                                <textarea value={portfolioDescription} onChange={(e) => setPortfolioDescription(e.target.value)} placeholder="Description" className="w-full p-2 border border-border dark:border-border-subtle rounded" rows={3} />
+                                <button onClick={handlePortfolioUpload} disabled={uploadingPortfolio} className="px-4 py-2 bg-primary text-primary-text rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-primary/90 transition-all">
                                     {uploadingPortfolio ? 'Uploading...' : 'Upload to Portfolio'}
                                 </button>
                             </div>
                         </div>
                         {profile?.portfolio?.length > 0 && (
                             <div className="mt-6">
-                                <h3 className="text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-widest">Portfolio Items</h3>
+                                <h3 className="text-sm font-bold text-text-muted dark:text-text-primary uppercase tracking-widest">Portfolio Items</h3>
                                 <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-3">
                                     {profile.portfolio.map((item, index) => (
-                                        <div key={index} className="rounded-xl overflow-hidden border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800">
+                                        <div key={index} className="rounded-xl overflow-hidden border border-border dark:border-border-subtle bg-surface-lowest dark:bg-container">
                                             {item.type === 'video' ? (
                                                 <video src={item.url} controls className="w-full h-20 object-cover" />
                                             ) : (
@@ -324,9 +324,9 @@ const ArtistSettings = () => {
                 <section>
                     <div className="flex items-center gap-2 mb-6 text-primary">
                         <span className="material-symbols-outlined">visibility</span>
-                        <h2 className="text-lg font-bold dark:text-white uppercase italic tracking-tighter">Profile Visibility & Privacy</h2>
+                        <h2 className="text-lg font-bold dark:text-primary-text uppercase italic tracking-tighter">Profile Visibility & Privacy</h2>
                     </div>
-                    <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 divide-y divide-slate-100 dark:divide-zinc-800 shadow-sm overflow-hidden">
+                    <div className="bg-surface dark:bg-void rounded-2xl border border-border dark:border-border-subtle divide-y divide-border dark:divide-border-subtle shadow-sm overflow-hidden">
                         {[
                             { key: 'profileSearchable', label: 'Profile Searchable', desc: 'Allow casting directors and studios to find your profile in searches.' },
                             { key: 'showContactDetails', label: 'Show Contact Details', desc: 'Only verified studios and production houses can see your mobile and email.' },
@@ -335,15 +335,15 @@ const ArtistSettings = () => {
                         ].map(({ key, label, desc }) => (
                             <div key={key} className="p-4 md:p-5 flex items-center justify-between gap-4">
                                 <div className="flex flex-col gap-1 min-w-0 flex-1">
-                                    <p className="font-bold text-slate-800 dark:text-white">{label}</p>
-                                    <p className="text-sm text-slate-500 dark:text-slate-400">{desc}</p>
+                                    <p className="font-bold text-text-primary dark:text-primary-text">{label}</p>
+                                    <p className="text-sm text-text-secondary dark:text-text-secondary">{desc}</p>
                                 </div>
                                 <Toggle checked={privacy[key]} onChange={val => setPrivacy(p => ({ ...p, [key]: val }))} />
                             </div>
                         ))}
                     </div>
                     <button onClick={handleSavePrivacy} disabled={savingPrivacy}
-                        className="mt-4 px-6 py-3 bg-primary text-white font-black rounded-xl text-xs uppercase tracking-widest shadow-lg shadow-primary/20 hover:brightness-110 transition-all flex items-center gap-2 disabled:opacity-70">
+                        className="mt-4 px-6 py-3 bg-primary text-primary-text font-black rounded-xl text-xs uppercase tracking-widest shadow-lg shadow-primary/20 hover:brightness-110 transition-all flex items-center gap-2 disabled:opacity-70">
                         {savingPrivacy ? <><span className="material-symbols-outlined text-sm animate-spin">sync</span> Saving...</> : <><span className="material-symbols-outlined text-sm">save</span> Save Preferences</>}
                     </button>
                 </section>
@@ -352,37 +352,37 @@ const ArtistSettings = () => {
                 <section>
                     <div className="flex items-center gap-2 mb-6 text-primary">
                         <span className="material-symbols-outlined">security</span>
-                        <h2 className="text-lg font-bold dark:text-white uppercase italic tracking-tighter">Account Security</h2>
+                        <h2 className="text-lg font-bold dark:text-primary-text uppercase italic tracking-tighter">Account Security</h2>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <button onClick={() => setShowPasswordModal(true)}
-                            className="flex items-center justify-between p-4 md:p-5 bg-white dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 hover:border-primary/50 transition-all group shadow-sm">
+                            className="flex items-center justify-between p-4 md:p-5 bg-surface dark:bg-void rounded-2xl border border-border dark:border-border-subtle hover:border-primary/50 transition-all group shadow-sm">
                             <div className="flex items-center gap-4">
-                                <div className="size-10 rounded-xl bg-slate-100 dark:bg-zinc-800 flex items-center justify-center text-slate-500 group-hover:text-primary transition-colors">
+                                <div className="size-10 rounded-xl bg-surface-lowest dark:bg-container flex items-center justify-center text-text-secondary group-hover:text-primary transition-colors">
                                     <span className="material-symbols-outlined text-xl">lock_reset</span>
                                 </div>
                                 <div className="text-left min-w-0 flex-1">
-                                    <p className="font-bold text-slate-800 dark:text-white">Change Password</p>
-                                    <p className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest">Keep your account secure</p>
+                                    <p className="font-bold text-text-primary dark:text-primary-text">Change Password</p>
+                                    <p className="text-[10px] text-text-secondary dark:text-text-secondary font-bold uppercase tracking-widest">Keep your account secure</p>
                                 </div>
                             </div>
-                            <span className="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">chevron_right</span>
+                            <span className="material-symbols-outlined text-text-secondary group-hover:text-primary transition-colors">chevron_right</span>
                         </button>
-                        <div className="flex items-center justify-between p-4 md:p-5 bg-white dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 hover:border-primary/50 transition-all group shadow-sm">
+                        <div className="flex items-center justify-between p-4 md:p-5 bg-surface dark:bg-void rounded-2xl border border-border dark:border-border-subtle hover:border-primary/50 transition-all group shadow-sm">
                             <div className="flex items-center gap-4">
-                                <div className="size-10 rounded-xl bg-slate-100 dark:bg-zinc-800 flex items-center justify-center text-slate-500 group-hover:text-primary transition-colors">
+                                <div className="size-10 rounded-xl bg-surface-lowest dark:bg-container flex items-center justify-center text-text-secondary group-hover:text-primary transition-colors">
                                     <span className="material-symbols-outlined text-xl">verified_user</span>
                                 </div>
                                 <div className="text-left min-w-0 flex-1">
-                                    <p className="font-bold text-slate-800 dark:text-white">Two-Factor Auth</p>
-                                    <p className={`text-[10px] font-bold uppercase tracking-widest ${security.twoFactorEnabled ? 'text-emerald-500' : 'text-slate-500 dark:text-slate-400'}`}>
+                                    <p className="font-bold text-text-primary dark:text-primary-text">Two-Factor Auth</p>
+                                    <p className={`text-[10px] font-bold uppercase tracking-widest ${security.twoFactorEnabled ? 'text-success' : 'text-text-secondary dark:text-text-secondary'}`}>
                                         {security.twoFactorEnabled ? 'Enabled' : 'Disabled'}
                                     </p>
                                 </div>
                             </div>
                             <label className="relative inline-flex items-center cursor-pointer flex-shrink-0">
                                 <input type="checkbox" className="sr-only peer" checked={security.twoFactorEnabled} onChange={handleToggle2FA} disabled={isToggling2FA} />
-                                <div className="w-11 h-6 bg-slate-200 dark:bg-zinc-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                <div className="w-11 h-6 bg-surface dark:bg-container peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-subtle after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface after:border-border after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
                             </label>
                         </div>
                     </div>
@@ -392,24 +392,24 @@ const ArtistSettings = () => {
                 <section>
                     <div className="flex items-center gap-2 mb-6 text-primary">
                         <span className="material-symbols-outlined">stars</span>
-                        <h2 className="text-lg font-bold dark:text-white uppercase italic tracking-tighter">Subscription</h2>
+                        <h2 className="text-lg font-bold dark:text-primary-text uppercase italic tracking-tighter">Subscription</h2>
                     </div>
                     <div className="bg-gradient-to-br from-primary/10 to-transparent dark:from-primary/20 rounded-2xl border border-primary/20 p-6 md:p-8 relative overflow-hidden shadow-sm">
                         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
                             <div className="space-y-2">
                                 <div className="flex items-center gap-2">
-                                    <span className="bg-primary text-white text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-widest">Active</span>
-                                    <h3 className="text-xl md:text-2xl font-black italic text-slate-800 dark:text-white tracking-tighter">PRO ARTIST PLAN</h3>
+                                    <span className="bg-primary text-primary-text text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-widest">Active</span>
+                                    <h3 className="text-xl md:text-2xl font-black italic text-text-primary dark:text-primary-text tracking-tighter">PRO ARTIST PLAN</h3>
                                 </div>
-                                <p className="text-slate-500 dark:text-slate-400 text-sm max-w-md font-medium">
+                                <p className="text-text-secondary dark:text-text-secondary text-sm max-w-md font-medium">
                                     Priority search listing, unlimited applications. Next billing: Oct 24, 2025.
                                 </p>
                             </div>
                             <div className="flex flex-col sm:flex-row gap-3">
-                                <button className="bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-slate-600 dark:text-slate-300 px-4 md:px-6 py-2.5 rounded-xl text-xs font-bold hover:bg-slate-50 dark:hover:bg-zinc-700 transition-colors uppercase tracking-widest shadow-sm">
+                                <button className="bg-surface dark:bg-container border border-border dark:border-border-subtle text-text-muted dark:text-text-primary px-4 md:px-6 py-2.5 rounded-xl text-xs font-bold hover:bg-surface-lowest dark:hover:bg-container transition-colors uppercase tracking-widest shadow-sm">
                                     Invoices
                                 </button>
-                                <button className="bg-primary text-white px-4 md:px-6 py-2.5 rounded-xl text-xs font-bold shadow-lg shadow-primary/20 hover:brightness-110 transition-all uppercase tracking-widest">
+                                <button className="bg-primary text-primary-text px-4 md:px-6 py-2.5 rounded-xl text-xs font-bold shadow-lg shadow-primary/20 hover:brightness-110 transition-all uppercase tracking-widest">
                                     Manage
                                 </button>
                             </div>
@@ -420,17 +420,17 @@ const ArtistSettings = () => {
                 <section>
                     <div className="flex items-center gap-2 mb-6 text-primary">
                         <span className="material-symbols-outlined">download</span>
-                        <h2 className="text-lg font-bold dark:text-white uppercase italic tracking-tighter">Privacy & Data Export</h2>
+                        <h2 className="text-lg font-bold dark:text-primary-text uppercase italic tracking-tighter">Privacy & Data Export</h2>
                     </div>
-                    <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 shadow-sm p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div className="bg-surface dark:bg-void rounded-2xl border border-border dark:border-border-subtle shadow-sm p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div>
-                            <p className="font-bold text-slate-800 dark:text-white">Download My Data</p>
-                            <p className="text-sm text-slate-500 dark:text-slate-400">Get a JSON export of your account, profile, applications, messages, and notifications.</p>
+                            <p className="font-bold text-text-primary dark:text-primary-text">Download My Data</p>
+                            <p className="text-sm text-text-secondary dark:text-text-secondary">Get a JSON export of your account, profile, applications, messages, and notifications.</p>
                         </div>
                         <button
                             onClick={handleExportData}
                             disabled={exportingData}
-                            className="px-6 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black rounded-xl text-xs uppercase tracking-widest hover:opacity-90 transition-all disabled:opacity-70"
+                            className="px-6 py-3 bg-void dark:bg-surface text-primary-text dark:text-text-primary font-black rounded-xl text-xs uppercase tracking-widest hover:opacity-90 transition-all disabled:opacity-70"
                         >
                             {exportingData ? 'Preparing Export...' : 'Download My Data'}
                         </button>
@@ -438,14 +438,14 @@ const ArtistSettings = () => {
                 </section>
 
                 {/* Danger Zone */}
-                <section className="pt-8 border-t border-slate-100 dark:border-zinc-800">
-                    <div className="bg-red-50 dark:bg-red-500/5 border border-red-100 dark:border-red-500/20 rounded-2xl p-4 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <section className="pt-8 border-t border-border dark:border-border-subtle">
+                    <div className="bg-error dark:bg-primary/5 border border-error dark:border-error/20 rounded-2xl p-4 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
                         <div className="space-y-1">
-                            <h3 className="font-bold text-red-600 dark:text-red-400">Delete Account</h3>
-                            <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Permanently delete your profile and all application history. This action cannot be undone.</p>
+                            <h3 className="font-bold text-error dark:text-error">Delete Account</h3>
+                            <p className="text-sm text-text-secondary dark:text-text-secondary font-medium">Permanently delete your profile and all application history. This action cannot be undone.</p>
                         </div>
                         <button onClick={() => setShowDeleteModal(true)}
-                            className="text-red-600 dark:text-red-400 text-xs font-bold border border-red-200 dark:border-red-500/30 px-4 md:px-6 py-2.5 rounded-xl hover:bg-red-600 hover:text-white transition-all uppercase tracking-widest shadow-sm whitespace-nowrap">
+                            className="text-error dark:text-error text-xs font-bold border border-error dark:border-error/30 px-4 md:px-6 py-2.5 rounded-xl hover:bg-primary-hover hover:text-primary-text transition-all uppercase tracking-widest shadow-sm whitespace-nowrap">
                             Delete Account
                         </button>
                     </div>

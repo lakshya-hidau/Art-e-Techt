@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useNotifications } from '../../context/NotificationContext';
+import ArtLogo from '../common/ArtLogo';
 
 // Pick the 4 most important pinned tabs for each role
 const getPinnedTabs = (menuItems) => {
@@ -55,25 +56,25 @@ const MobileBottomNav = ({ menuItems }) => {
                     onClick={(e) => { if (e.target === e.currentTarget) setDrawerOpen(false); }}
                 >
                     {/* Backdrop */}
-                    <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setDrawerOpen(false)} />
+                    <div className="absolute inset-0 bg-void/60 backdrop-blur-sm" onClick={() => setDrawerOpen(false)} />
 
                     {/* Drawer panel */}
-                    <div className="relative z-10 bg-white dark:bg-[#111] rounded-t-3xl shadow-2xl max-h-[80vh] overflow-y-auto"
+                    <div className="relative z-10 bg-surface dark:bg-void rounded-t-3xl shadow-2xl max-h-[80vh] overflow-y-auto"
                         style={{ paddingBottom: 'calc(80px + env(safe-area-inset-bottom, 0px))' }}>
 
                         {/* Handle bar */}
                         <div className="flex justify-center pt-3 pb-2">
-                            <div className="w-10 h-1 bg-slate-300 dark:bg-white/20 rounded-full" />
+                            <div className="w-10 h-1 bg-surface-low dark:bg-surface/20 rounded-full" />
                         </div>
 
                         {/* Header with logo */}
-                        <div className="flex items-center gap-3 px-5 pt-2 pb-4 border-b border-slate-100 dark:border-white/5">
+                        <div className="flex items-center gap-3 px-5 pt-2 pb-4 border-b border-border dark:border-subtle/5">
                             <div className="size-9 bg-primary/10 rounded-xl flex items-center justify-center">
-                                <img src="/TC Logo.png" alt="Logo" className="h-6 w-auto" />
+                                <ArtLogo className="h-9 w-auto" showWordmark={false} />
                             </div>
                             <div>
-                                <h2 className="text-sm font-black tracking-tighter text-slate-900 dark:text-white uppercase italic">
-                                    TALENT<span className="text-primary">CONNECT</span>
+                                <h2 className="text-sm font-black tracking-tighter text-text-primary dark:text-primary-text uppercase italic">
+                                    Art-e-Techt
                                 </h2>
                                 <p className="text-[9px] uppercase tracking-[0.25em] text-primary font-black leading-none mt-0.5">All Sections</p>
                             </div>
@@ -100,8 +101,8 @@ const MobileBottomNav = ({ menuItems }) => {
                                         onClick={() => setDrawerOpen(false)}
                                         className={`flex items-center gap-3.5 px-4 py-3.5 rounded-2xl transition-all duration-200 relative
                                             ${active
-                                                ? 'bg-primary text-white shadow-lg shadow-primary/20'
-                                                : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5'
+                                                ? 'bg-primary text-primary-text shadow-lg shadow-primary/20'
+                                                : 'text-text-muted dark:text-text-primary hover:bg-surface-lowest dark:hover:bg-surface/5'
                                             }`}
                                     >
                                         {active && (
@@ -117,7 +118,7 @@ const MobileBottomNav = ({ menuItems }) => {
                                             {item.label}
                                         </span>
                                         {item.badge && (
-                                            <span className="ml-auto relative z-10 px-2 py-0.5 bg-primary text-white text-[9px] font-black rounded-full">
+                                            <span className="ml-auto relative z-10 px-2 py-0.5 bg-primary text-primary-text text-[9px] font-black rounded-full">
                                                 {item.badge}
                                             </span>
                                         )}
@@ -154,7 +155,7 @@ const MobileBottomNav = ({ menuItems }) => {
                                         {item.icon}
                                     </span>
                                     {showBadge && (
-                                        <span className="absolute -top-1 -right-1.5 size-4 bg-primary text-white text-[8px] font-black rounded-full flex items-center justify-center">
+                                        <span className="absolute -top-1 -right-1.5 size-4 bg-primary text-primary-text text-[8px] font-black rounded-full flex items-center justify-center">
                                             {unreadCount > 9 ? '9+' : unreadCount}
                                         </span>
                                     )}

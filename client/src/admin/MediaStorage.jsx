@@ -8,7 +8,7 @@ const MediaStorage = () => {
     const [stats, setStats] = useState(null);
     const [assets, setAssets] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [filter, setFilter] = useState('auto'); // auto | image | video
+    const filter = 'auto';
     const [viewMode, setViewMode] = useState('grid');
     const [selectedAsset, setSelectedAsset] = useState(null);
 
@@ -53,8 +53,8 @@ const MediaStorage = () => {
     const userData = {
         name: adminProfile?.fullName || 'Admin',
         roleTitle: 'Super Admin',
-        avatar: adminProfile?.profilePicture && adminProfile.profilePicture !== 'no-photo.jpg' 
-            ? adminProfile.profilePicture 
+        avatar: adminProfile?.profilePicture && adminProfile.profilePicture !== 'no-photo.jpg'
+            ? adminProfile.profilePicture
             : `https://ui-avatars.com/api/?name=${adminProfile?.fullName || 'Admin'}&background=ee2b3b&color=fff`
     };
 
@@ -67,12 +67,12 @@ const MediaStorage = () => {
     };
 
     if (loading && assets.length === 0) return (
-        <div className="flex flex-col items-center justify-center h-screen bg-background-dark text-white">
+        <div className="flex flex-col items-center justify-center h-screen bg-background-dark text-primary-text">
             <div className="size-20 relative mb-8">
                 <div className="absolute inset-0 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
                 <span className="material-symbols-outlined absolute inset-0 m-auto size-fit text-primary text-3xl animate-pulse">cloud_queue</span>
             </div>
-            <p className="text-slate-400 font-black uppercase tracking-[0.4em] text-[10px] animate-pulse">Accessing Cloud Shards...</p>
+            <p className="text-text-secondary font-black uppercase tracking-[0.4em] text-[10px] animate-pulse">Accessing Cloud Shards...</p>
         </div>
     );
 
@@ -85,10 +85,10 @@ const MediaStorage = () => {
             headerSubtitle="Centralized cloud asset management and propagation"
             headerActions={
                 <div className="flex gap-4">
-                    <button onClick={fetchData} className="size-12 rounded-2xl bg-slate-100 dark:bg-card-dark/5 text-slate-500 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-white/10 transition-all">
+                    <button onClick={fetchData} className="size-12 rounded-2xl bg-surface-lowest dark:bg-card-dark/5 text-text-secondary flex items-center justify-center hover:bg-surface dark:hover:bg-surface/10 transition-all">
                         <span className="material-symbols-outlined">refresh</span>
                     </button>
-                    <button className="px-8 py-3 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-2xl shadow-xl shadow-primary/20 hover:scale-105 transition-all active:scale-95 leading-none">
+                    <button className="px-8 py-3 bg-primary text-primary-text text-[10px] font-black uppercase tracking-widest rounded-2xl shadow-xl shadow-primary/20 hover:scale-105 transition-all active:scale-95 leading-none">
                         Force Cleanup
                     </button>
                 </div>
@@ -96,12 +96,12 @@ const MediaStorage = () => {
         >
             <div className="max-w-7xl mx-auto py-8 lg:px-4 space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-700 pb-32">
                 {/* Control Bar */}
-                <div className="flex flex-wrap items-center justify-between gap-6 bg-white dark:bg-card-dark p-6 rounded-[2.5rem] border border-slate-200 dark:border-border-dark shadow-sm">
-<div className="flex bg-slate-100 dark:bg-card-dark/5 p-1.5 rounded-2xl">
-                            <button onClick={() => setViewMode('grid')} className={`size-10 flex items-center justify-center rounded-xl transition-all ${viewMode === 'grid' ? 'bg-white dark:bg-card-dark/10 text-primary shadow-sm' : 'text-slate-400 hover:text-slate-600 dark:text-slate-400'}`}>
+                <div className="flex flex-wrap items-center justify-between gap-6 bg-surface dark:bg-card-dark p-6 rounded-[2.5rem] border border-border dark:border-border-dark shadow-sm">
+<div className="flex bg-surface-lowest dark:bg-card-dark/5 p-1.5 rounded-2xl">
+                            <button onClick={() => setViewMode('grid')} className={`size-10 flex items-center justify-center rounded-xl transition-all ${viewMode === 'grid' ? 'bg-surface dark:bg-card-dark/10 text-primary shadow-sm' : 'text-text-secondary hover:text-text-muted dark:text-text-secondary'}`}>
                                 <span className="material-symbols-outlined">grid_view</span>
                             </button>
-                            <button onClick={() => setViewMode('list')} className={`size-10 flex items-center justify-center rounded-xl transition-all ${viewMode === 'list' ? 'bg-white dark:bg-card-dark/10 text-primary shadow-sm' : 'text-slate-400 hover:text-slate-600 dark:text-slate-400'}`}>
+                            <button onClick={() => setViewMode('list')} className={`size-10 flex items-center justify-center rounded-xl transition-all ${viewMode === 'list' ? 'bg-surface dark:bg-card-dark/10 text-primary shadow-sm' : 'text-text-secondary hover:text-text-muted dark:text-text-secondary'}`}>
                                 <span className="material-symbols-outlined">list</span>
                             </button>
                         </div>
@@ -109,27 +109,27 @@ const MediaStorage = () => {
 
                 {/* Asset Explorer */}
                 {assets.length === 0 ? (
-                    <div className="h-[400px] flex flex-col items-center justify-center bg-slate-50 dark:bg-card-dark rounded-[3rem] border-2 border-dashed border-slate-200 dark:border-white/5 space-y-6">
-                        <div className="size-20 rounded-full bg-slate-100 dark:bg-card-dark/5 flex items-center justify-center text-slate-300">
+                    <div className="h-[400px] flex flex-col items-center justify-center bg-surface-lowest dark:bg-card-dark rounded-[3rem] border-2 border-dashed border-border dark:border-subtle/5 space-y-6">
+                        <div className="size-20 rounded-full bg-surface-lowest dark:bg-card-dark/5 flex items-center justify-center text-text-primary">
                              <span className="material-symbols-outlined text-4xl">folder_off</span>
                         </div>
-                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Shard directory is currently null.</p>
+                        <p className="text-[10px] font-black text-text-secondary uppercase tracking-[0.3em]">Shard directory is currently null.</p>
                     </div>
                 ) : (
-                    <div className={viewMode === 'grid' 
-                        ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" 
+                    <div className={viewMode === 'grid'
+                        ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
                         : "flex flex-col gap-4"
                     }>
                         {assets.map((asset) => (
-                            <div 
-                                key={asset.public_id} 
-                                className={`bg-white dark:bg-card-dark border group hover:border-primary/50 transition-all cursor-pointer ${viewMode === 'grid' 
-                                    ? 'rounded-[2.5rem] p-4 flex flex-col border-slate-200 dark:border-white/5' 
-                                    : 'rounded-2xl p-4 flex items-center border-slate-200 dark:border-white/5 gap-6'
+                            <div
+                                key={asset.public_id}
+                                className={`bg-surface dark:bg-card-dark border group hover:border-primary/50 transition-all cursor-pointer ${viewMode === 'grid'
+                                    ? 'rounded-[2.5rem] p-4 flex flex-col border-border dark:border-subtle/5'
+                                    : 'rounded-2xl p-4 flex items-center border-border dark:border-subtle/5 gap-6'
                                 }`}
                                 onClick={() => setSelectedAsset(asset)}
                             >
-                                <div className={`${viewMode === 'grid' ? 'aspect-video w-full' : 'size-20'} rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 relative group-hover:shadow-2xl transition-all ring-1 ring-slate-100 dark:ring-white/5`}>
+                                <div className={`${viewMode === 'grid' ? 'aspect-video w-full' : 'size-20'} rounded-2xl overflow-hidden bg-surface-lowest dark:bg-container relative group-hover:shadow-2xl transition-all ring-1 ring-gold dark:ring-gold/5`}>
                                     {asset.resource_type === 'video' ? (
                                         <div className="w-full h-full flex items-center justify-center relative">
                                             <span className="material-symbols-outlined text-4xl text-primary/30 group-hover:scale-110 transition-transform">play_circle</span>
@@ -138,25 +138,25 @@ const MediaStorage = () => {
                                     ) : (
                                         <img src={asset.secure_url} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="" />
                                     )}
-                                    <div className="absolute top-2 right-2 px-3 py-1 bg-black/40 backdrop-blur-xl rounded-lg text-[8px] font-black text-white uppercase tracking-widest border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <div className="absolute top-2 right-2 px-3 py-1 bg-void/40 backdrop-blur-xl rounded-lg text-[8px] font-black text-primary-text uppercase tracking-widest border border-subtle/10 opacity-0 group-hover:opacity-100 transition-opacity">
                                         {asset.format.toUpperCase()}
                                     </div>
                                 </div>
 
                                 <div className={`flex-1 ${viewMode === 'grid' ? 'mt-6' : ''}`}>
-                                    <h4 className="text-xs font-black dark:text-white uppercase tracking-tight truncate mb-1">{asset.public_id.split('/').pop()}</h4>
+                                    <h4 className="text-xs font-black dark:text-primary-text uppercase tracking-tight truncate mb-1">{asset.public_id.split('/').pop()}</h4>
                                     <div className="flex items-center justify-between">
-                                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{formatSize(asset.bytes)}</p>
+                                        <p className="text-[9px] font-black text-text-secondary uppercase tracking-widest">{formatSize(asset.bytes)}</p>
                                         <p className="text-[9px] font-black text-primary/60 uppercase tracking-widest">{new Date(asset.created_at).toLocaleDateString()}</p>
                                     </div>
                                 </div>
 
                                 {viewMode === 'list' && (
                                     <div className="flex items-center gap-4">
-                                        <a href={asset.secure_url} target="_blank" rel="noreferrer" className="size-10 rounded-xl bg-slate-50 dark:bg-card-dark/5 flex items-center justify-center text-slate-400 hover:text-primary transition-colors">
+                                        <a href={asset.secure_url} target="_blank" rel="noreferrer" className="size-10 rounded-xl bg-surface-lowest dark:bg-card-dark/5 flex items-center justify-center text-text-secondary hover:text-primary transition-colors">
                                             <span className="material-symbols-outlined text-xl">open_in_new</span>
                                         </a>
-                                        <button className="size-10 rounded-xl bg-slate-50 dark:bg-card-dark/5 flex items-center justify-center text-slate-400 hover:text-rose-500 transition-colors">
+                                        <button className="size-10 rounded-xl bg-surface-lowest dark:bg-card-dark/5 flex items-center justify-center text-text-secondary hover:text-error transition-colors">
                                             <span className="material-symbols-outlined text-xl">delete</span>
                                         </button>
                                     </div>
@@ -168,22 +168,22 @@ const MediaStorage = () => {
 
                 {/* Shard Telemetry */}
                 <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                     <div className="bg-slate-900 border border-white/5 rounded-[3rem] p-10 relative overflow-hidden group">
+                     <div className="bg-void border border-subtle/5 rounded-[3rem] p-10 relative overflow-hidden group">
                         <div className="absolute top-0 right-0 size-32 bg-primary/10 rounded-full blur-[40px] -mr-16 -mt-16"></div>
-                        <h5 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mb-4">Cache Integrity</h5>
+                        <h5 className="text-[10px] font-black text-text-secondary uppercase tracking-[0.3em] mb-4">Cache Integrity</h5>
                         <div className="flex items-end gap-3 mb-6">
-                            <span className="text-4xl font-black text-white tracking-tighter">94.2%</span>
-                            <span className="text-[9px] font-black text-emerald-500 uppercase tracking-widest bg-emerald-500/10 px-2 py-0.5 rounded-lg mb-1">+1.2%</span>
+                            <span className="text-4xl font-black text-primary-text tracking-tighter">94.2%</span>
+                            <span className="text-[9px] font-black text-success uppercase tracking-widest bg-success/10 px-2 py-0.5 rounded-lg mb-1">+1.2%</span>
                         </div>
-                        <div className="w-full h-1.5 bg-white dark:bg-card-dark/5 rounded-full overflow-hidden">
-                            <div className="h-full bg-primary shadow-[0_0_15px_rgba(238,43,59,0.5)] w-[94.2%]"></div>
+                        <div className="w-full h-1.5 bg-surface dark:bg-card-dark/5 rounded-full overflow-hidden">
+                            <div className="h-full bg-primary shadow-[0_0_15px_color-mix(in srgb, var(--color-primary) 50%, transparent)] w-[94.2%]"></div>
                         </div>
                      </div>
-                     <div className="bg-white dark:bg-card-dark border border-slate-200 dark:border-white/5 rounded-[3rem] p-10 group">
-                        <h5 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-4">Matrix Bandwidth</h5>
+                     <div className="bg-surface dark:bg-card-dark border border-border dark:border-subtle/5 rounded-[3rem] p-10 group">
+                        <h5 className="text-[10px] font-black text-text-secondary uppercase tracking-[0.3em] mb-4">Matrix Bandwidth</h5>
                         <div className="flex items-end gap-3">
-                            <span className="text-4xl font-black dark:text-white tracking-tighter">1.2TB</span>
-                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">THIS_MONTH</span>
+                            <span className="text-4xl font-black dark:text-primary-text tracking-tighter">1.2TB</span>
+                            <span className="text-[10px] font-bold text-text-secondary uppercase tracking-widest mb-1">THIS_MONTH</span>
                         </div>
                         <div className="mt-6 flex gap-1 h-8 items-end">
                             {[40, 60, 45, 90, 65, 40, 75, 50, 85, 30].map((h, i) => (
@@ -191,19 +191,19 @@ const MediaStorage = () => {
                             ))}
                         </div>
                      </div>
-                     <div className="bg-white dark:bg-card-dark border border-slate-200 dark:border-white/5 rounded-[3rem] p-10 flex flex-col justify-center gap-6">
+                     <div className="bg-surface dark:bg-card-dark border border-border dark:border-subtle/5 rounded-[3rem] p-10 flex flex-col justify-center gap-6">
                         <div className="flex items-center gap-6">
-                            <div className="size-14 rounded-[1.5rem] bg-blue-500/10 text-blue-500 flex items-center justify-center">
+                            <div className="size-14 rounded-[1.5rem] bg-gold/10 text-gold flex items-center justify-center">
                                 <span className="material-symbols-outlined text-3xl">hub</span>
                             </div>
                             <div>
-                                <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Active Edge Nodes</p>
-                                <p className="text-2xl font-black dark:text-white tracking-tighter">14 ACTIVE</p>
+                                <p className="text-[9px] font-black text-text-secondary uppercase tracking-widest">Active Edge Nodes</p>
+                                <p className="text-2xl font-black dark:text-primary-text tracking-tighter">14 ACTIVE</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-3">
-                            <div className="size-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                            <p className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest">PROPAGATION_OPTIMAL</p>
+                            <div className="size-2 rounded-full bg-success animate-pulse"></div>
+                            <p className="text-[10px] font-bold text-success uppercase tracking-widest">PROPAGATION_OPTIMAL</p>
                         </div>
                      </div>
                 </section>
@@ -211,22 +211,22 @@ const MediaStorage = () => {
 
             {/* Modal Detail */}
             {selectedAsset && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-900/40 backdrop-blur-xl animate-in fade-in duration-300">
-                    <div className="bg-white dark:bg-card-dark w-full max-w-4xl rounded-[4rem] overflow-hidden shadow-2xl border border-white/10 flex flex-col lg:flex-row max-h-[90vh]">
-                        <div className="flex-1 bg-black flex items-center justify-center min-h-[300px]">
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-void/40 backdrop-blur-xl animate-in fade-in duration-300">
+                    <div className="bg-surface dark:bg-card-dark w-full max-w-4xl rounded-[4rem] overflow-hidden shadow-2xl border border-subtle/10 flex flex-col lg:flex-row max-h-[90vh]">
+                        <div className="flex-1 bg-void flex items-center justify-center min-h-[300px]">
                             {selectedAsset.resource_type === 'video' ? (
                                 <video controls className="w-full h-full max-h-[60vh] object-contain" src={selectedAsset.secure_url} />
                             ) : (
                                 <img src={selectedAsset.secure_url} className="w-full h-full object-contain" alt="" />
                             )}
                         </div>
-                        <div className="w-full lg:w-96 p-12 bg-slate-50 dark:bg-card-dark border-l border-white/5 space-y-10 overflow-y-auto">
+                        <div className="w-full lg:w-96 p-12 bg-surface-lowest dark:bg-card-dark border-l border-subtle/5 space-y-10 overflow-y-auto">
                             <div className="flex justify-between items-start">
                                 <div>
-                                    <h4 className="text-2xl font-black dark:text-white uppercase tracking-tighter leading-none mb-2">Asset Details</h4>
+                                    <h4 className="text-2xl font-black dark:text-primary-text uppercase tracking-tighter leading-none mb-2">Asset Details</h4>
                                     <span className="px-3 py-1 bg-primary/10 text-primary text-[8px] font-black rounded-lg uppercase tracking-widest border border-primary/20">PUBLIC_NODE</span>
                                 </div>
-                                <button onClick={() => setSelectedAsset(null)} className="size-10 rounded-full hover:bg-slate-200 dark:hover:bg-white dark:bg-card-dark/5 flex items-center justify-center text-slate-400 transition-all">
+                                <button onClick={() => setSelectedAsset(null)} className="size-10 rounded-full hover:bg-surface dark:hover:bg-surface dark:bg-card-dark/5 flex items-center justify-center text-text-secondary transition-all">
                                     <span className="material-symbols-outlined">close</span>
                                 </button>
                             </div>
@@ -239,25 +239,25 @@ const MediaStorage = () => {
                                     { label: 'Temporal Signature', val: new Date(selectedAsset.created_at).toLocaleString() },
                                     { label: 'Access Protocol', val: 'SECURE_HTTPS' }
                                 ].map((item, idx) => (
-                                    <div key={idx} className="pb-4 border-b border-slate-200 dark:border-white/5">
-                                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">{item.label}</p>
-                                        <p className="text-xs font-black dark:text-white uppercase tracking-tight break-all">{item.val}</p>
+                                    <div key={idx} className="pb-4 border-b border-border dark:border-subtle/5">
+                                        <p className="text-[9px] font-black text-text-secondary uppercase tracking-widest mb-1">{item.label}</p>
+                                        <p className="text-xs font-black dark:text-primary-text uppercase tracking-tight break-all">{item.val}</p>
                                     </div>
                                 ))}
                             </div>
 
                             <div className="pt-6 space-y-4">
-                                <a 
-                                    href={selectedAsset.secure_url} 
-                                    download 
-                                    target="_blank" 
+                                <a
+                                    href={selectedAsset.secure_url}
+                                    download
+                                    target="_blank"
                                     rel="noreferrer"
-                                    className="w-full py-5 bg-primary text-white text-[10px] font-black rounded-3xl uppercase tracking-widest flex items-center justify-center gap-4 hover:shadow-2xl hover:shadow-primary/30 transition-all active:scale-95 shadow-xl shadow-primary/20"
+                                    className="w-full py-5 bg-primary text-primary-text text-[10px] font-black rounded-3xl uppercase tracking-widest flex items-center justify-center gap-4 hover:shadow-2xl hover:shadow-primary/30 transition-all active:scale-95 shadow-xl shadow-primary/20"
                                 >
                                     <span className="material-symbols-outlined text-lg">download</span>
                                     Propagate Locally
                                 </a>
-                                <button className="w-full py-4 bg-white dark:bg-card-dark/5 border border-white/10 text-slate-500 dark:text-slate-400 text-[10px] font-black rounded-2xl uppercase tracking-widest hover:bg-rose-600 hover:text-white hover:border-rose-600 transition-all">
+                                <button className="w-full py-4 bg-surface dark:bg-card-dark/5 border border-subtle/10 text-text-secondary dark:text-text-secondary text-[10px] font-black rounded-2xl uppercase tracking-widest hover:bg-primary-hover hover:text-primary-text hover:border-error transition-all">
                                     Purge Resource
                                 </button>
                             </div>
@@ -265,7 +265,7 @@ const MediaStorage = () => {
                     </div>
                 </div>
             )}
-            
+
             <style dangerouslySetInnerHTML={{ __html: `
                 .scrollbar-hide::-webkit-scrollbar { display: none; }
                 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }

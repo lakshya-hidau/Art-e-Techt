@@ -171,8 +171,8 @@ export const exportMyData = async () => {
   const blob = new Blob([response.data], { type: 'application/json' });
   const url = window.URL.createObjectURL(blob);
   const contentDisposition = response.headers['content-disposition'] || '';
-  const matchedName = contentDisposition.match(/filename=\"?([^"]+)\"?/i);
-  const filename = matchedName?.[1] || `my-talentconnect-data-${new Date().toISOString().split('T')[0]}.json`;
+  const matchedName = contentDisposition.match(/filename="?([^"]+)"?/i);
+  const filename = matchedName?.[1] || `my-art-e-techt-data-${new Date().toISOString().split('T')[0]}.json`;
   const link = document.createElement('a');
 
   link.href = url;

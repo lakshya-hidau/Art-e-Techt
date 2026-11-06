@@ -112,7 +112,7 @@ const sendVerificationEmailForUser = async ({ userId, email }) => {
     const html = `
         <div style="font-family: Arial, sans-serif; line-height:1.6;">
             <h2>Confirm your email</h2>
-            <p>Thanks for signing up for TalentConnect. Please verify your email to activate your account.</p>
+            <p>Thanks for signing up for Art-e-Techt. Please verify your email to activate your account.</p>
             <p><a href="${verifyLink}" style="background:#111827;color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none;">Verify Email</a></p>
             <p>Or copy this link into your browser: <br/>${verifyLink}</p>
             <p>This link expires in 24 hours.</p>
@@ -121,7 +121,7 @@ const sendVerificationEmailForUser = async ({ userId, email }) => {
 
     await sendEmail({
         to: email,
-        subject: 'Verify your TalentConnect email',
+        subject: 'Verify your Art-e-Techt email',
         html,
     });
 
@@ -142,7 +142,7 @@ const sendResetPasswordEmail = async ({ userId, email }) => {
     const html = `
         <div style="font-family: Arial, sans-serif; line-height:1.6;">
             <h2>Reset your password</h2>
-            <p>We received a request to reset your TalentConnect password.</p>
+            <p>We received a request to reset your Art-e-Techt password.</p>
             <p><a href="${resetLink}" style="background:#111827;color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none;">Reset Password</a></p>
             <p>Or copy this link into your browser: <br/>${resetLink}</p>
             <p>This link expires in 1 hour. If you didn’t request this, you can safely ignore this email.</p>
@@ -151,7 +151,7 @@ const sendResetPasswordEmail = async ({ userId, email }) => {
 
     await sendEmail({
         to: email,
-        subject: 'Reset your TalentConnect password',
+        subject: 'Reset your Art-e-Techt password',
         html,
     });
 
@@ -200,8 +200,8 @@ const ensureUserAndProfile = async ({
             location,
             mobile,
             talentCategory: (role === 'talent' || !['director', 'admin'].includes(role)) ? (talentCategory || 'Actor') : null,
-            companyName: role === 'director' ? (companyName || '') : null,
-            industryType: role === 'director' ? (industryType || '') : null,
+            companyName: (role === 'director' || role === 'producer') ? (companyName || '') : null,
+            industryType: (role === 'director' || role === 'producer') ? (industryType || '') : null,
             profilePicture: profilePicture || 'no-photo.jpg',
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
@@ -314,7 +314,7 @@ export const register = async (req, res) => {
             subscriptionStatus: 'inactive',
         };
 
-        if (role === 'director') {
+        if (role === 'director' || role === 'producer') {
             const trialEndsAt = new Date();
             trialEndsAt.setDate(trialEndsAt.getDate() + 30);
             userDoc.trialEndsAt = trialEndsAt.toISOString();
@@ -329,8 +329,8 @@ export const register = async (req, res) => {
             location: location || '',
             mobile: mobile || '',
             talentCategory: (role === 'talent' || !['director', 'admin'].includes(role)) ? (talentCategory || 'Actor') : null,
-            companyName: role === 'director' ? (companyName || '') : null,
-            industryType: role === 'director' ? (industryType || '') : null,
+            companyName: (role === 'director' || role === 'producer') ? (companyName || '') : null,
+            industryType: (role === 'director' || role === 'producer') ? (industryType || '') : null,
             profilePicture: 'no-photo.jpg',
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),

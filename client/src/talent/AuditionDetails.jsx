@@ -9,7 +9,7 @@ import { getProject } from '../services/projectService';
 const Toast = ({ message, type, onDone }) => {
     useEffect(() => { const t = setTimeout(onDone, 3000); return () => clearTimeout(t); }, []);
     return (
-        <div className={`fixed bottom-8 right-8 z-50 px-6 py-4 rounded-2xl shadow-2xl text-white text-sm font-bold flex items-center gap-3 ${type === 'error' ? 'bg-red-600' : 'bg-green-600'}`}>
+        <div className={`fixed bottom-8 right-8 z-50 px-6 py-4 rounded-2xl shadow-2xl text-primary-text text-sm font-bold flex items-center gap-3 ${type === 'error' ? 'bg-primary-hover' : 'bg-success'}`}>
             <span className="material-symbols-outlined">{type === 'error' ? 'error' : 'check_circle'}</span>
             {message}
         </div>
@@ -95,20 +95,20 @@ const AuditionDetails = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"/>
                     <div className="absolute bottom-0 left-0 p-4 md:p-8 w-full flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6">
                         <div className="min-w-0">
-                            <span className="inline-block px-2 md:px-3 py-1 rounded-full bg-primary text-white text-[9px] md:text-[10px] font-bold uppercase tracking-widest mb-2 md:mb-3">
+                            <span className="inline-block px-2 md:px-3 py-1 rounded-full bg-primary text-primary-text text-[9px] md:text-[10px] font-bold uppercase tracking-widest mb-2 md:mb-3">
                                 {category} • Period Drama
                             </span>
-                            <h1 className="text-white text-2xl md:text-4xl font-black mb-1 md:mb-2 uppercase italic tracking-tighter line-clamp-2">{title}</h1>
-                            <p className="text-slate-300 text-base md:text-lg font-medium">Directed by {director}</p>
+                            <h1 className="text-primary-text text-2xl md:text-4xl font-black mb-1 md:mb-2 uppercase italic tracking-tighter line-clamp-2">{title}</h1>
+                            <p className="text-text-primary text-base md:text-lg font-medium">Directed by {director}</p>
                         </div>
                         <div className="shrink-0">
                             {confirmed ? (
-                                <div className="flex items-center justify-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-green-500 text-white rounded-lg md:rounded-xl font-bold text-xs md:text-sm shadow-xl whitespace-nowrap">
+                                <div className="flex items-center justify-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-success text-primary-text rounded-lg md:rounded-xl font-bold text-xs md:text-sm shadow-xl whitespace-nowrap">
                                     <span className="material-symbols-outlined text-sm md:text-base">check_circle</span> <span className="hidden sm:inline">Attendance Confirmed</span><span className="sm:hidden">Confirmed</span>
                                 </div>
                             ) : (
                                 <button onClick={handleConfirmAttendance} disabled={confirming}
-                                    className="px-3 md:px-6 py-2 md:py-3 bg-primary hover:bg-primary/90 text-white rounded-lg md:rounded-xl font-bold transition-all shadow-xl shadow-primary/20 text-xs uppercase tracking-widest flex items-center justify-center gap-1 md:gap-2 disabled:opacity-70 whitespace-nowrap">
+                                    className="px-3 md:px-6 py-2 md:py-3 bg-primary hover:bg-primary/90 text-primary-text rounded-lg md:rounded-xl font-bold transition-all shadow-xl shadow-primary/20 text-xs uppercase tracking-widest flex items-center justify-center gap-1 md:gap-2 disabled:opacity-70 whitespace-nowrap">
                                     {confirming ? <><span className="material-symbols-outlined text-sm animate-spin">sync</span> <span className="hidden sm:inline">Confirming...</span></> : <span><span className="hidden sm:inline">Confirm</span> <span className="sm:hidden">Confirm</span> Attendance</span>}
                                 </button>
                             )}
@@ -119,30 +119,30 @@ const AuditionDetails = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
                     <div className="lg:col-span-2 space-y-6 md:space-y-8">
                         {/* Character Brief */}
-                        <section className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-4 md:p-8 shadow-sm">
-                            <h3 className="text-xl md:text-2xl font-black italic tracking-tighter dark:text-white flex items-center gap-2 mb-4 md:mb-6 uppercase">
+                        <section className="bg-surface dark:bg-void border border-border dark:border-border-subtle rounded-2xl p-4 md:p-8 shadow-sm">
+                            <h3 className="text-xl md:text-2xl font-black italic tracking-tighter dark:text-primary-text flex items-center gap-2 mb-4 md:mb-6 uppercase">
                                 <span className="material-symbols-outlined text-primary">person_search</span>
                                 Character Brief
                             </h3>
-                            <div className="space-y-3 md:space-y-4 text-slate-500 dark:text-slate-400 leading-relaxed font-medium text-sm md:text-base">
+                            <div className="space-y-3 md:space-y-4 text-text-secondary dark:text-text-secondary leading-relaxed font-medium text-sm md:text-base">
                                 <p>{project?.description || 'Vikram (28–35) is the eldest prince of the Surya Dynasty. A complex warrior balancing duty with a secret disdain for war. Brooding, intelligent, and calm with authority.'}</p>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 pt-4 md:pt-6 border-t border-slate-100 dark:border-zinc-800">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 pt-4 md:pt-6 border-t border-border dark:border-border-subtle">
                                     <div>
                                         <p className="text-[9px] md:text-[10px] text-primary font-bold uppercase tracking-widest mb-1">Look</p>
-                                        <p className="text-xs md:text-sm font-bold dark:text-slate-200">Rugged, regal, sharp features</p>
+                                        <p className="text-xs md:text-sm font-bold dark:text-text-primary">Rugged, regal, sharp features</p>
                                     </div>
                                     <div>
                                         <p className="text-[9px] md:text-[10px] text-primary font-bold uppercase tracking-widest mb-1">Tone</p>
-                                        <p className="text-xs md:text-sm font-bold dark:text-slate-200">Low-register, intense, articulate</p>
+                                        <p className="text-xs md:text-sm font-bold dark:text-text-primary">Low-register, intense, articulate</p>
                                     </div>
                                 </div>
                             </div>
                         </section>
 
                         {/* Script Fragment */}
-                        <section className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-4 md:p-8 shadow-sm">
+                        <section className="bg-surface dark:bg-void border border-border dark:border-border-subtle rounded-2xl p-4 md:p-8 shadow-sm">
                             <div className="flex items-start md:items-center justify-between gap-2 md:gap-0 mb-4 md:mb-6 flex-wrap">
-                                <h3 className="text-xl md:text-2xl font-black italic tracking-tighter dark:text-white flex items-center gap-2 uppercase">
+                                <h3 className="text-xl md:text-2xl font-black italic tracking-tighter dark:text-primary-text flex items-center gap-2 uppercase">
                                     <span className="material-symbols-outlined text-primary">description</span>
                                     Script Fragment
                                 </h3>
@@ -151,11 +151,11 @@ const AuditionDetails = () => {
                                     <span className="material-symbols-outlined text-base md:text-lg">download</span> <span className="hidden sm:inline">Download</span>
                                 </button>
                             </div>
-                            <div className="bg-slate-50 dark:bg-zinc-800/50 rounded-xl md:rounded-2xl p-4 md:p-6 border border-slate-100 dark:border-zinc-800 font-mono text-xs md:text-sm text-slate-600 dark:text-slate-400">
+                            <div className="bg-surface-lowest dark:bg-container/50 rounded-xl md:rounded-2xl p-4 md:p-6 border border-border dark:border-border-subtle font-mono text-xs md:text-sm text-text-muted dark:text-text-secondary">
                                 <div className="space-y-4 md:space-y-6">
                                     <div className="text-center italic opacity-60 uppercase tracking-widest text-[8px] md:text-[10px]">[EXT. PALACE BALCONY - NIGHT]</div>
                                     <div>
-                                        <span className="block text-slate-800 dark:text-white font-bold mb-1 uppercase tracking-widest text-center text-xs md:text-sm">VIKRAM</span>
+                                        <span className="block text-text-primary dark:text-primary-text font-bold mb-1 uppercase tracking-widest text-center text-xs md:text-sm">VIKRAM</span>
                                         <p className="text-center italic text-[10px] md:text-xs">(quietly, staring into the dark)</p>
                                         <p className="mt-2 text-center text-xs md:text-sm">
                                             "The stars don't witness our victories, General. They only witness the blood we spill to claim them."
@@ -168,8 +168,8 @@ const AuditionDetails = () => {
 
                     {/* Sidebar: Logistics */}
                     <div className="space-y-4 md:space-y-6">
-                        <section className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-4 md:p-6 shadow-sm">
-                            <h4 className="text-base md:text-lg font-black italic tracking-tighter dark:text-white mb-4 md:mb-6 uppercase">Logistics</h4>
+                        <section className="bg-surface dark:bg-void border border-border dark:border-border-subtle rounded-2xl p-4 md:p-6 shadow-sm">
+                            <h4 className="text-base md:text-lg font-black italic tracking-tighter dark:text-primary-text mb-4 md:mb-6 uppercase">Logistics</h4>
                             <div className="space-y-4 md:space-y-6">
                                 {[
                                     { icon: 'event', label: 'Date', value: deadline },
@@ -182,8 +182,8 @@ const AuditionDetails = () => {
                                             <span className="material-symbols-outlined text-base md:text-lg">{icon}</span>
                                         </div>
                                         <div className="min-w-0 flex-1">
-                                            <p className="text-[9px] md:text-[10px] text-slate-400 dark:text-slate-500 uppercase font-bold tracking-widest">{label}</p>
-                                            <p className="text-xs md:text-sm font-bold dark:text-slate-200 truncate">{value}</p>
+                                            <p className="text-[9px] md:text-[10px] text-text-secondary dark:text-text-secondary uppercase font-bold tracking-widest">{label}</p>
+                                            <p className="text-xs md:text-sm font-bold dark:text-text-primary truncate">{value}</p>
                                         </div>
                                     </div>
                                 ))}
@@ -191,7 +191,7 @@ const AuditionDetails = () => {
                         </section>
 
                         <button onClick={() => navigate(-1)}
-                            className="w-full py-2 md:py-3 bg-slate-100 dark:bg-zinc-800 text-slate-600 dark:text-slate-300 rounded-lg md:rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-slate-200 dark:hover:bg-zinc-700 transition-all">
+                            className="w-full py-2 md:py-3 bg-surface-lowest dark:bg-container text-text-muted dark:text-text-primary rounded-lg md:rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-surface dark:hover:bg-container transition-all">
                             <span className="material-symbols-outlined text-sm">arrow_back</span> <span className="hidden sm:inline">Go Back</span><span className="sm:hidden">Back</span>
                         </button>
                     </div>

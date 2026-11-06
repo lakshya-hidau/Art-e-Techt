@@ -42,10 +42,10 @@ const wrapEmail = ({ title, body, ctaLabel, ctaLink, footer }) => `
           <td style="padding:28px 32px;border-bottom:1px solid #241720;">
             <div style="display:flex;align-items:center;gap:12px;">
               <div style="width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#ee2b3b,#7c0a16);display:flex;align-items:center;justify-content:center;">
-                <span style="font-size:18px;font-weight:900;color:#fff;font-family:'Segoe UI',Arial;">TC</span>
+                <span style="font-size:18px;font-weight:900;color:#fff;font-family:'Segoe UI',Arial;">AT</span>
               </div>
               <div>
-                <div style="font-size:14px;letter-spacing:0.12em;font-weight:800;color:#f5f5f5; text-transform:uppercase;">TALENTCONNECT</div>
+                <div style="font-size:14px;letter-spacing:0.12em;font-weight:800;color:#f5f5f5; text-transform:uppercase;">ART-E-TECHT</div>
                 <div style="font-size:11px;letter-spacing:0.24em;color:#ee2b3b;font-weight:700; text-transform:uppercase;">India • Artist</div>
               </div>
             </div>
@@ -70,7 +70,7 @@ const wrapEmail = ({ title, body, ctaLabel, ctaLink, footer }) => `
         </tr>
       </table>
       <div style="margin-top:12px;color:#6b5a63;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;">
-        © TalentConnect • Secure access communications
+        © Art-e-techt • Secure access communications
       </div>
     </td>
   </tr>
@@ -79,9 +79,9 @@ const wrapEmail = ({ title, body, ctaLabel, ctaLink, footer }) => `
 
 export const buildVerificationEmail = (verifyLink) =>
     wrapEmail({
-        title: 'Verify your email to activate TalentConnect',
+        title: 'Verify your email to activate Art-e-techt',
         body: `
-            <p>Thanks for joining TalentConnect! Confirm your email to unlock audition invites, project applications, and messaging.</p>
+            <p>Thanks for joining Art-e-techt! Confirm your email to unlock audition invites, project applications, and messaging.</p>
             <p style="margin-top:12px;">If the button doesn’t work, copy this link into your browser:<br/><span style="color:#ee2b3b;">${verifyLink}</span></p>
         `,
         ctaLabel: 'Verify Email',
@@ -91,7 +91,7 @@ export const buildVerificationEmail = (verifyLink) =>
 
 export const buildResetPasswordEmail = (resetLink) =>
     wrapEmail({
-        title: 'Reset your TalentConnect password',
+        title: 'Reset your Art-e-techt password',
         body: `
             <p>We received a request to reset your password.</p>
             <p>Click below to set a new one. If you didn’t make this request, you can safely ignore this email.</p>

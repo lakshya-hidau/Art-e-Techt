@@ -6,9 +6,24 @@ const ConfettiParticle = ({ style }) => (
     <div className="absolute top-0 pointer-events-none" style={style} />
 );
 
+const CONFETTI_COLORS = ['var(--color-gold)', 'var(--color-secondary)', 'var(--color-gold)', 'var(--color-success)', 'var(--color-gold)', 'var(--color-primary)'];
+const CONFETTI_PIECES = Array.from({ length: 60 }, (_, i) => ({
+    id: i,
+    left: `${(i * 37) % 100}%`,
+    width: `${4 + (i % 8)}px`,
+    height: `${4 + ((i * 3) % 8)}px`,
+    background: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+    borderRadius: i % 2 ? '50%' : '2px',
+    animationDuration: `${1.5 + (i % 4) * 0.5}s`,
+    animationDelay: `${(i % 5) * 0.2}s`,
+    animationTimingFunction: 'ease-in',
+    animationFillMode: 'forwards',
+    animation: `confetti-fall ${1.5 + (i % 4) * 0.5}s ease-in ${(i % 5) * 0.2}s forwards`,
+    transform: `rotate(${(i * 47) % 360}deg)`,
+}));
+
 const VerificationSuccess = ({ onDashboard }) => {
     const navigate = useNavigate();
-    const [confetti, setConfetti] = useState([]);
     const [visible, setVisible] = useState(false);
     const [isDashboardLoading, setIsDashboardLoading] = useState(false);
     const [isProfileLoading, setIsProfileLoading] = useState(false);
@@ -17,23 +32,6 @@ const VerificationSuccess = ({ onDashboard }) => {
         // Mount animation
         requestAnimationFrame(() => setVisible(true));
 
-        // Generate confetti particles
-        const colors = ['#ff6b35', '#ffd700', '#7c3aed', '#10b981', '#3b82f6', '#f43f5e'];
-        const pieces = Array.from({ length: 60 }, (_, i) => ({
-            id: i,
-            left: `${Math.random() * 100}%`,
-            width: `${Math.random() * 8 + 4}px`,
-            height: `${Math.random() * 8 + 4}px`,
-            background: colors[Math.floor(Math.random() * colors.length)],
-            borderRadius: Math.random() > 0.5 ? '50%' : '2px',
-            animationDuration: `${Math.random() * 2 + 1.5}s`,
-            animationDelay: `${Math.random() * 1}s`,
-            animationTimingFunction: 'ease-in',
-            animationFillMode: 'forwards',
-            animation: `confetti-fall ${Math.random() * 2 + 1.5}s ease-in ${Math.random() * 1}s forwards`,
-            transform: `rotate(${Math.random() * 360}deg)`,
-        }));
-        setConfetti(pieces);
     }, []);
 
     const handleDashboard = async () => {
@@ -58,7 +56,7 @@ const VerificationSuccess = ({ onDashboard }) => {
                         100% { transform: translateY(100vh) rotate(720deg); opacity: 0.3; }
                     }
                 `}</style>
-                {confetti.map(p => (
+                {CONFETTI_PIECES.map(p => (
                     <ConfettiParticle key={p.id} style={p} />
                 ))}
             </div>
@@ -73,8 +71,8 @@ const VerificationSuccess = ({ onDashboard }) => {
                     <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full scale-150 opacity-50"></div>
                     <div className="relative w-48 h-48 lg:w-56 lg:h-56 flex items-center justify-center">
                         <div className="absolute inset-0 border-2 border-primary/30 rounded-full animate-pulse"></div>
-                        <div className="bg-gradient-to-br from-primary to-[#ff8c52] rounded-full p-8 shadow-2xl shadow-primary/40 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                            <span className="material-symbols-outlined text-white text-[80px] lg:text-[100px] font-bold">verified</span>
+                        <div className="bg-gradient-to-br from-primary to-gold rounded-full p-8 shadow-2xl shadow-primary/40 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                            <span className="material-symbols-outlined text-primary-text text-[80px] lg:text-[100px] font-bold">verified</span>
                         </div>
                     </div>
                 </div>
@@ -84,10 +82,10 @@ const VerificationSuccess = ({ onDashboard }) => {
                     <span className="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary text-sm font-bold tracking-widest uppercase">
                         Verified Artist
                     </span>
-                    <h1 className="text-slate-900 dark:text-white text-4xl lg:text-6xl font-extrabold tracking-tight">
+                    <h1 className="text-text-primary dark:text-primary-text text-4xl lg:text-6xl font-extrabold tracking-tight">
                         You're Verified!
                     </h1>
-                    <p className="text-slate-600 dark:text-slate-300 text-lg lg:text-xl leading-relaxed max-w-lg mx-auto">
+                    <p className="text-text-muted dark:text-text-primary text-lg lg:text-xl leading-relaxed max-w-lg mx-auto">
                         Your profile is now live with the{' '}
                         <span className="text-primary font-semibold">Verified badge</span>, giving you higher search priority and instant trust with top production houses.
                     </p>
@@ -125,8 +123,8 @@ const VerificationSuccess = ({ onDashboard }) => {
                                 <span className="material-symbols-outlined">{icon}</span>
                             </div>
                             <div>
-                                <h4 className="font-bold text-slate-900 dark:text-white">{title}</h4>
-                                <p className="text-sm text-slate-500 dark:text-slate-400">{desc}</p>
+                                <h4 className="font-bold text-text-primary dark:text-primary-text">{title}</h4>
+                                <p className="text-sm text-text-secondary dark:text-text-secondary">{desc}</p>
                             </div>
                         </div>
                     ))}
@@ -137,7 +135,7 @@ const VerificationSuccess = ({ onDashboard }) => {
                     <button
                         onClick={handleDashboard}
                         disabled={isDashboardLoading}
-                        className="flex-1 sm:flex-none sm:min-w-[200px] h-14 bg-primary hover:bg-primary/90 text-white rounded-xl font-bold text-lg transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2 active:scale-95 disabled:opacity-70"
+                        className="flex-1 sm:flex-none sm:min-w-[200px] h-14 bg-primary hover:bg-primary/90 text-primary-text rounded-xl font-bold text-lg transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2 active:scale-95 disabled:opacity-70"
                     >
                         {isDashboardLoading ? (
                             <span className="material-symbols-outlined animate-spin">progress_activity</span>
@@ -151,7 +149,7 @@ const VerificationSuccess = ({ onDashboard }) => {
                     <button
                         onClick={handleViewProfile}
                         disabled={isProfileLoading}
-                        className="flex-1 sm:flex-none sm:min-w-[200px] h-14 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-900 dark:text-white rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-2 active:scale-95 disabled:opacity-70"
+                        className="flex-1 sm:flex-none sm:min-w-[200px] h-14 bg-surface dark:bg-container hover:bg-surface-low dark:hover:bg-container text-text-primary dark:text-primary-text rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-2 active:scale-95 disabled:opacity-70"
                     >
                         {isProfileLoading ? (
                             <span className="material-symbols-outlined animate-spin">progress_activity</span>

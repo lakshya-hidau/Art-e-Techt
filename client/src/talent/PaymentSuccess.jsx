@@ -1,20 +1,21 @@
 import React, { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-// Lightweight CSS confetti  
+const COLORS = ['var(--color-primary)', 'var(--color-gold)', 'var(--color-warning)', 'var(--color-success)', 'var(--color-gold)', 'var(--color-warning)'];
+const CONFETTI_PIECES = Array.from({ length: 60 }, (_, i) => ({
+    id: i,
+    color: COLORS[i % COLORS.length],
+    left: (i * 37) % 100,
+    delay: (i % 6) * 0.25,
+    duration: 2 + (i % 5) * 0.4,
+    rotation: (i * 47) % 360,
+}));
+
+// Lightweight CSS confetti
 const Confetti = () => {
-    const COLORS = ['#e11d48', '#2563eb', '#f59e0b', '#10b981', '#8b5cf6', '#f97316'];
-    const pieces = Array.from({ length: 60 }, (_, i) => ({
-        id: i,
-        color: COLORS[i % COLORS.length],
-        left: Math.random() * 100,
-        delay: Math.random() * 1.5,
-        duration: 2 + Math.random() * 2,
-        rotation: Math.random() * 360,
-    }));
     return (
         <div className="fixed inset-0 pointer-events-none overflow-hidden z-50">
-            {pieces.map(p => (
+            {CONFETTI_PIECES.map(p => (
                 <div key={p.id}
                     style={{
                         position: 'absolute',
@@ -66,48 +67,48 @@ const PaymentSuccess = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-slate-950 to-slate-900 flex flex-col items-center justify-start py-12 px-4 overflow-hidden">
+        <div className="min-h-screen bg-gradient-to-b from-text-secondary to-text-secondary flex flex-col items-center justify-start py-12 px-4 overflow-hidden">
             <Confetti />
             <div ref={cardRef} className="w-full max-w-2xl">
                 {/* Success Card */}
-                <div className="bg-white dark:bg-zinc-900 rounded-[2rem] shadow-2xl border border-slate-200 dark:border-zinc-800 overflow-hidden">
+                <div className="bg-surface dark:bg-void rounded-[2rem] shadow-2xl border border-border dark:border-border-subtle overflow-hidden">
                     {/* Header */}
                     <div className="bg-gradient-to-br from-primary to-primary/70 p-10 text-center relative overflow-hidden">
                         <div className="absolute inset-0 opacity-10"
                             style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, white 1px, transparent 1px)', backgroundSize: '20px 20px' }}/>
                         <div className="relative z-10">
-                            <div className="size-24 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-6 shadow-2xl animate-bounce">
-                                <span className="material-symbols-outlined text-white text-5xl">check_circle</span>
+                            <div className="size-24 rounded-full bg-surface/20 flex items-center justify-center mx-auto mb-6 shadow-2xl animate-bounce">
+                                <span className="material-symbols-outlined text-primary-text text-5xl">check_circle</span>
                             </div>
-                            <h1 className="text-4xl font-black text-white uppercase italic tracking-tighter mb-2">Payment Successful!</h1>
-                            <p className="text-white/80 font-bold text-lg">{order.plan} Plan is now active</p>
-                            <div className="mt-4 inline-block bg-white/10 rounded-xl px-4 py-2 text-white/70 text-[10px] font-black uppercase tracking-widest">
+                            <h1 className="text-4xl font-black text-primary-text uppercase italic tracking-tighter mb-2">Payment Successful!</h1>
+                            <p className="text-primary-text/80 font-bold text-lg">{order.plan} Plan is now active</p>
+                            <div className="mt-4 inline-block bg-surface/10 rounded-xl px-4 py-2 text-primary-text/70 text-[10px] font-black uppercase tracking-widest">
                                 Order ID: {order.orderId}
                             </div>
                         </div>
                     </div>
 
                     {/* Order Details */}
-                    <div className="p-8 border-b border-slate-100 dark:border-zinc-800">
+                    <div className="p-8 border-b border-border dark:border-border-subtle">
                         <div className="grid grid-cols-3 gap-4 text-center">
                             <div>
-                                <p className="text-[10px] text-slate-500 uppercase font-black tracking-widest mb-1">Plan</p>
-                                <p className="font-black dark:text-white italic uppercase tracking-tight">{order.plan}</p>
+                                <p className="text-[10px] text-text-secondary uppercase font-black tracking-widest mb-1">Plan</p>
+                                <p className="font-black dark:text-primary-text italic uppercase tracking-tight">{order.plan}</p>
                             </div>
                             <div>
-                                <p className="text-[10px] text-slate-500 uppercase font-black tracking-widest mb-1">Amount Paid</p>
+                                <p className="text-[10px] text-text-secondary uppercase font-black tracking-widest mb-1">Amount Paid</p>
                                 <p className="font-black text-primary italic text-xl">₹{order.price?.toLocaleString()}</p>
                             </div>
                             <div>
-                                <p className="text-[10px] text-slate-500 uppercase font-black tracking-widest mb-1">Billing</p>
-                                <p className="font-black dark:text-white italic uppercase tracking-tight">{order.billing === 'annual' ? 'Annual' : 'Monthly'}</p>
+                                <p className="text-[10px] text-text-secondary uppercase font-black tracking-widest mb-1">Billing</p>
+                                <p className="font-black dark:text-primary-text italic uppercase tracking-tight">{order.billing === 'annual' ? 'Annual' : 'Monthly'}</p>
                             </div>
                         </div>
                     </div>
 
                     {/* Plan Benefits */}
                     <div className="p-8 space-y-4">
-                        <h3 className="text-sm font-black uppercase tracking-widest text-slate-500 mb-4">Your Pro Benefits are Active</h3>
+                        <h3 className="text-sm font-black uppercase tracking-widest text-text-secondary mb-4">Your Pro Benefits are Active</h3>
                         <div className="grid grid-cols-2 gap-4">
                             {PLAN_BENEFITS.map(({ icon, label, desc }) => (
                                 <div key={label} className="flex items-start gap-3 p-4 bg-primary/5 border border-primary/10 rounded-2xl">
@@ -115,8 +116,8 @@ const PaymentSuccess = () => {
                                         <span className="material-symbols-outlined text-primary text-lg">{icon}</span>
                                     </div>
                                     <div>
-                                        <p className="text-xs font-black dark:text-white uppercase tracking-tight">{label}</p>
-                                        <p className="text-[10px] text-slate-500 font-bold italic mt-0.5">{desc}</p>
+                                        <p className="text-xs font-black dark:text-primary-text uppercase tracking-tight">{label}</p>
+                                        <p className="text-[10px] text-text-secondary font-bold italic mt-0.5">{desc}</p>
                                     </div>
                                 </div>
                             ))}
@@ -126,16 +127,16 @@ const PaymentSuccess = () => {
                     {/* Actions */}
                     <div className="p-8 pt-0 flex flex-col sm:flex-row gap-4">
                         <Link to="/talent/dashboard"
-                            className="flex-1 py-4 bg-primary text-white rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-2 shadow-xl shadow-primary/20 hover:bg-primary/90 transition-all hover:scale-[1.02] active:scale-95">
+                            className="flex-1 py-4 bg-primary text-primary-text rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-2 shadow-xl shadow-primary/20 hover:bg-primary/90 transition-all hover:scale-[1.02] active:scale-95">
                             <span className="material-symbols-outlined text-sm">dashboard</span> Go to Dashboard
                         </Link>
                         <button onClick={handleViewReceipt}
-                            className="flex-1 py-4 bg-slate-100 dark:bg-zinc-800 text-slate-700 dark:text-slate-200 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-2 hover:bg-slate-200 dark:hover:bg-zinc-700 transition-all">
+                            className="flex-1 py-4 bg-surface-lowest dark:bg-container text-text-muted dark:text-text-primary rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-2 hover:bg-surface dark:hover:bg-container transition-all">
                             <span className="material-symbols-outlined text-sm">receipt_long</span> View Receipt
                         </button>
                     </div>
                 </div>
-                <p className="text-center text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-6">
+                <p className="text-center text-text-secondary text-[10px] font-bold uppercase tracking-widest mt-6">
                     A confirmation email has been sent to your registered address.
                 </p>
             </div>

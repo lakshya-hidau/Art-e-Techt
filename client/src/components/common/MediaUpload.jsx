@@ -4,7 +4,6 @@ import { validateFileForUpload } from '../../utils/fileValidation';
 
 const MediaUpload = ({ type, onUploadSuccess, title = '', description = '' }) => {
     const [uploading, setUploading] = useState(false);
-    const [progress, setProgress] = useState(0);
     const [error, setError] = useState(null);
 
     const handleFileChange = async (e) => {
@@ -47,8 +46,8 @@ const MediaUpload = ({ type, onUploadSuccess, title = '', description = '' }) =>
                 htmlFor={`file-upload-${type}`}
                 className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold cursor-pointer transition-all ${
                     uploading 
-                    ? 'bg-slate-100 text-slate-400 cursor-not-allowed' 
-                    : 'bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/20'
+                    ? 'bg-surface-lowest text-text-secondary cursor-not-allowed'
+                    : 'bg-primary text-primary-text hover:bg-primary/90 shadow-lg shadow-primary/20'
                 }`}
             >
                 {uploading ? (
@@ -63,7 +62,7 @@ const MediaUpload = ({ type, onUploadSuccess, title = '', description = '' }) =>
                     </>
                 )}
             </label>
-            {error && <p className="text-red-500 text-[10px] mt-1 font-bold">{error}</p>}
+            {error && <p className="text-error text-[10px] mt-1 font-bold">{error}</p>}
         </div>
     );
 };

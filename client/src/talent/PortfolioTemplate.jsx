@@ -52,10 +52,10 @@ const PortfolioTemplate = ({ profile }) => {
   };
 
   return (
-    <div className="bg-background-light dark:bg-background-dark text-slate-100 min-h-screen">
+    <div className="bg-background-light dark:bg-background-dark text-text-primary min-h-screen">
       <main className="pt-4">
         {/* Hero */}
-        <section className="relative h-[70vh] w-full overflow-hidden bg-black">
+        <section className="relative h-[70vh] w-full overflow-hidden bg-void">
           <div className="absolute inset-0">
             <img
               alt="Main Portrait"
@@ -71,7 +71,7 @@ const PortfolioTemplate = ({ profile }) => {
                   <span className="inline-block px-3 py-1 bg-primary/20 border border-primary text-primary text-xs font-black tracking-[0.2em] uppercase rounded mb-3">
                     Leading Talent
                   </span>
-                  <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-white mb-2 uppercase">{data.name}</h2>
+                  <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-primary-text mb-2 uppercase">{data.name}</h2>
                   <p className="text-lg md:text-2xl text-primary font-medium tracking-wide">{data.tagline}</p>
                 </div>
                 <div className="flex flex-wrap gap-3">
@@ -80,9 +80,9 @@ const PortfolioTemplate = ({ profile }) => {
                     { label: 'Eyes', value: data.physical.eyes },
                     { label: 'Skin', value: data.physical.skin },
                   ].map((item) => (
-                    <div key={item.label} className="bg-black/40 border border-white/10 px-6 py-3 rounded-xl text-center min-w-[110px]">
-                      <p className="text-[10px] text-slate-300 uppercase tracking-widest mb-1">{item.label}</p>
-                      <p className="text-xl font-bold text-white tracking-tight">{item.value}</p>
+                    <div key={item.label} className="bg-void/40 border border-subtle/10 px-6 py-3 rounded-xl text-center min-w-[110px]">
+                      <p className="text-[10px] text-text-primary uppercase tracking-widest mb-1">{item.label}</p>
+                      <p className="text-xl font-bold text-primary-text tracking-tight">{item.value}</p>
                     </div>
                   ))}
                 </div>
@@ -98,28 +98,28 @@ const PortfolioTemplate = ({ profile }) => {
               <h3 className="text-sm font-black tracking-[0.3em] uppercase text-primary mb-4 flex items-center gap-2">
                 <span className="w-8 h-[2px] bg-primary"></span> Professional Biography
               </h3>
-              <p className="text-xl leading-relaxed text-slate-200 font-light italic mb-6">"{data.bioQuote}"</p>
-              <div className="space-y-5 text-slate-300 leading-relaxed text-base">
+              <p className="text-xl leading-relaxed text-text-primary font-light italic mb-6">"{data.bioQuote}"</p>
+              <div className="space-y-5 text-text-primary leading-relaxed text-base">
                 {data.bioParas.map((para, idx) => (
                   <p key={idx}>{para}</p>
                 ))}
               </div>
             </div>
             <div className="lg:col-span-5 space-y-6">
-              <div className="bg-[#1a1a1a] p-6 rounded-2xl border border-white/5">
+              <div className="bg-void p-6 rounded-2xl border border-subtle/5">
                 <h4 className="text-lg font-bold mb-4 flex items-center gap-2">
                   <span className="material-icons text-primary">analytics</span> Physical Attributes
                 </h4>
                 <div className="grid grid-cols-2 gap-y-4 gap-x-3 text-sm">
                   {['hair', 'build', 'waist', 'chest'].map((k) => (
                     <div key={k}>
-                      <p className="text-[11px] text-slate-500 uppercase tracking-widest mb-1">{k}</p>
+                      <p className="text-[11px] text-text-secondary uppercase tracking-widest mb-1">{k}</p>
                       <p className="font-bold capitalize">{data.physical[k]}</p>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="bg-[#1a1a1a] p-6 rounded-2xl border border-white/5" id="skills">
+              <div className="bg-void p-6 rounded-2xl border border-subtle/5" id="skills">
                 <h4 className="text-lg font-bold mb-4 flex items-center gap-2">
                   <span className="material-icons text-primary">military_tech</span> Core Skills
                 </h4>
@@ -136,7 +136,7 @@ const PortfolioTemplate = ({ profile }) => {
         </section>
 
         {/* Gallery */}
-        <section className="py-16 bg-[#1a1a1a]" id="gallery">
+        <section className="py-16 bg-void" id="gallery">
           <div className="max-w-6xl mx-auto px-6">
             <div className="flex justify-between items-end mb-8">
               <div>
@@ -163,23 +163,23 @@ const PortfolioTemplate = ({ profile }) => {
             <h3 className="text-sm font-black tracking-[0.3em] uppercase text-primary mb-6 flex items-center gap-2">
               <span className="w-8 h-[2px] bg-primary"></span> Performance Credits
             </h3>
-            <div className="overflow-hidden bg-[#1a1a1a] rounded-2xl border border-white/5">
+            <div className="overflow-hidden bg-void rounded-2xl border border-subtle/5">
               <table className="w-full text-left">
-                <thead className="border-b border-white/10">
+                <thead className="border-b border-subtle/10">
                   <tr>
-                    <th className="py-4 px-4 text-[11px] font-black uppercase tracking-widest text-slate-500">Project Title</th>
-                    <th className="py-4 px-4 text-[11px] font-black uppercase tracking-widest text-slate-500">Role</th>
-                    <th className="py-4 px-4 text-[11px] font-black uppercase tracking-widest text-slate-500">Production / Director</th>
-                    <th className="py-4 px-4 text-[11px] font-black uppercase tracking-widest text-slate-500 text-right">Year</th>
+                    <th className="py-4 px-4 text-[11px] font-black uppercase tracking-widest text-text-secondary">Project Title</th>
+                    <th className="py-4 px-4 text-[11px] font-black uppercase tracking-widest text-text-secondary">Role</th>
+                    <th className="py-4 px-4 text-[11px] font-black uppercase tracking-widest text-text-secondary">Production / Director</th>
+                    <th className="py-4 px-4 text-[11px] font-black uppercase tracking-widest text-text-secondary text-right">Year</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5">
                   {data.credits.map((c, idx) => (
-                    <tr key={idx} className="group hover:bg-white/5 transition-colors">
+                    <tr key={idx} className="group hover:bg-surface/5 transition-colors">
                       <td className="py-4 px-4 font-bold group-hover:text-primary transition-colors">{c.title}</td>
-                      <td className="py-4 px-4 text-slate-300">{c.role}</td>
-                      <td className="py-4 px-4 text-slate-400 font-medium">{c.prod}</td>
-                      <td className="py-4 px-4 text-slate-500 text-right">{c.year}</td>
+                      <td className="py-4 px-4 text-text-primary">{c.role}</td>
+                      <td className="py-4 px-4 text-text-secondary font-medium">{c.prod}</td>
+                      <td className="py-4 px-4 text-text-secondary text-right">{c.year}</td>
                     </tr>
                   ))}
                 </tbody>

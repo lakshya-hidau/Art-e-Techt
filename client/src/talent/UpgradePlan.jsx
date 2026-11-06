@@ -119,23 +119,23 @@ const UpgradePlan = () => {
                     <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-xs font-black uppercase tracking-widest border border-primary/20 mb-2">
                         <span className="material-symbols-outlined text-sm">star</span> Choose Your Plan
                     </div>
-                    <h2 className="text-4xl font-black dark:text-white uppercase italic tracking-tighter">
+                    <h2 className="text-4xl font-black dark:text-primary-text uppercase italic tracking-tighter">
                         Invest in Your <span className="text-primary">Career</span>
                     </h2>
-                    <p className="text-slate-500 font-medium max-w-xl mx-auto">
-                        Join thousands of artists who've landed their dream roles with TalentConnect Pro access.
+                    <p className="text-text-secondary font-medium max-w-xl mx-auto">
+                        Join thousands of artists who've landed their dream roles with Art-e-Techt premium access.
                     </p>
 
                     {/* Billing Toggle */}
                     <div className="flex items-center justify-center gap-4 mt-6">
-                        <span className={`text-sm font-black uppercase tracking-widest transition-colors ${!isAnnual ? 'text-slate-900 dark:text-white' : 'text-slate-400'}`}>Monthly</span>
+                        <span className={`text-sm font-black uppercase tracking-widest transition-colors ${!isAnnual ? 'text-text-primary dark:text-primary-text' : 'text-text-secondary'}`}>Monthly</span>
                         <button
                             onClick={() => setIsAnnual(!isAnnual)}
-                            className={`relative w-14 h-7 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50 ${isAnnual ? 'bg-primary' : 'bg-slate-200 dark:bg-zinc-700'}`}>
-                            <span className={`absolute top-0.5 w-6 h-6 bg-white rounded-full shadow-lg transition-transform ${isAnnual ? 'translate-x-7.5 left-0.5' : 'translate-x-0.5 left-0'}`}/>
+                            className={`relative w-14 h-7 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-gold/50 ${isAnnual ? 'bg-primary' : 'bg-surface dark:bg-container'}`}>
+                            <span className={`absolute top-0.5 w-6 h-6 bg-surface rounded-full shadow-lg transition-transform ${isAnnual ? 'translate-x-7.5 left-0.5' : 'translate-x-0.5 left-0'}`}/>
                         </button>
-                        <span className={`text-sm font-black uppercase tracking-widest transition-colors ${isAnnual ? 'text-primary' : 'text-slate-400'}`}>
-                            Annual <span className="text-green-500 text-[10px] bg-green-500/10 px-2 py-0.5 rounded-full font-black border border-green-500/20">Save 20%</span>
+                        <span className={`text-sm font-black uppercase tracking-widest transition-colors ${isAnnual ? 'text-primary' : 'text-text-secondary'}`}>
+                            Annual <span className="text-success text-[10px] bg-success/10 px-2 py-0.5 rounded-full font-black border border-success/20">Save 20%</span>
                         </span>
                     </div>
                 </div>
@@ -152,44 +152,44 @@ const UpgradePlan = () => {
                             <div key={plan.key}
                                 className={`relative rounded-[2rem] overflow-hidden flex flex-col transition-all duration-300 ${
                                     plan.recommended
-                                        ? 'bg-primary text-white shadow-2xl shadow-primary/30 scale-105'
-                                        : 'bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:border-primary/30'
+                                        ? 'bg-primary text-primary-text shadow-2xl shadow-primary/30 scale-105'
+                                        : 'bg-surface dark:bg-void border border-border dark:border-border-subtle shadow-sm hover:shadow-xl hover:border-primary/30'
                                 }`}>
                                 {plan.recommended && (
-                                    <div className="bg-white/10 text-white text-[10px] font-black py-3 text-center uppercase tracking-[0.3em] flex items-center justify-center gap-2">
+                                    <div className="bg-surface/10 text-primary-text text-[10px] font-black py-3 text-center uppercase tracking-[0.3em] flex items-center justify-center gap-2">
                                         <span className="material-symbols-outlined text-xs">star</span> Recommended
                                     </div>
                                 )}
                                 {isCurrent && !plan.recommended && (
-                                    <div className="bg-green-500/10 text-green-500 text-[10px] font-black py-3 text-center uppercase tracking-[0.3em]">
+                                    <div className="bg-success/10 text-success text-[10px] font-black py-3 text-center uppercase tracking-[0.3em]">
                                         ✓ Your Current Plan
                                     </div>
                                 )}
 
                                 <div className="p-8 flex flex-col flex-1">
                                     <div className="flex items-center gap-3 mb-6">
-                                        <div className={`size-12 rounded-2xl flex items-center justify-center ${plan.recommended ? 'bg-white/20' : 'bg-primary/10'}`}>
-                                            <span className={`material-symbols-outlined text-2xl ${plan.recommended ? 'text-white' : 'text-primary'}`}>{plan.icon}</span>
+                                        <div className={`size-12 rounded-2xl flex items-center justify-center ${plan.recommended ? 'bg-surface/20' : 'bg-primary/10'}`}>
+                                            <span className={`material-symbols-outlined text-2xl ${plan.recommended ? 'text-primary-text' : 'text-primary'}`}>{plan.icon}</span>
                                         </div>
                                         <div>
-                                            <h3 className={`font-black text-lg uppercase italic tracking-tighter ${plan.recommended ? 'text-white' : 'dark:text-white'}`}>{plan.name}</h3>
-                                            <p className={`text-[10px] font-bold ${plan.recommended ? 'text-white/70' : 'text-slate-500'}`}>{plan.tagline}</p>
+                                            <h3 className={`font-black text-lg uppercase italic tracking-tighter ${plan.recommended ? 'text-primary-text' : 'dark:text-primary-text'}`}>{plan.name}</h3>
+                                            <p className={`text-[10px] font-bold ${plan.recommended ? 'text-primary-text/70' : 'text-text-secondary'}`}>{plan.tagline}</p>
                                         </div>
                                     </div>
 
                                     <div className="mb-8">
                                         <div className="flex items-end gap-2">
-                                            <span className={`text-5xl font-black italic tracking-tighter ${plan.recommended ? 'text-white' : 'dark:text-white'}`}>
+                                            <span className={`text-5xl font-black italic tracking-tighter ${plan.recommended ? 'text-primary-text' : 'dark:text-primary-text'}`}>
                                                 {price === 0 ? 'Free' : `₹${price.toLocaleString()}`}
                                             </span>
                                             {price > 0 && (
-                                                <span className={`text-sm font-bold mb-2 ${plan.recommended ? 'text-white/70' : 'text-slate-500'}`}>/mo</span>
+                                                <span className={`text-sm font-bold mb-2 ${plan.recommended ? 'text-primary-text/70' : 'text-text-secondary'}`}>/mo</span>
                                             )}
                                         </div>
                                         {isAnnual && price > 0 && (
                                             <div className="flex items-center gap-2 mt-1">
-                                                <s className={`text-sm font-bold ${plan.recommended ? 'text-white/50' : 'text-slate-400'}`}>₹{originalPrice}/mo</s>
-                                                <span className="text-green-400 text-[10px] font-black bg-green-400/10 px-2 py-0.5 rounded-full">Save 20%</span>
+                                                <s className={`text-sm font-bold ${plan.recommended ? 'text-primary-text/50' : 'text-text-secondary'}`}>₹{originalPrice}/mo</s>
+                                                <span className="text-success text-[10px] font-black bg-success/10 px-2 py-0.5 rounded-full">Save 20%</span>
                                             </div>
                                         )}
                                     </div>
@@ -199,13 +199,13 @@ const UpgradePlan = () => {
                                             <div key={text} className="flex items-center gap-3">
                                                 <span className={`material-symbols-outlined text-lg ${
                                                     included
-                                                        ? plan.recommended ? 'text-white' : 'text-primary'
-                                                        : plan.recommended ? 'text-white/30' : 'text-slate-300'
+                                                        ? plan.recommended ? 'text-primary-text' : 'text-primary'
+                                                        : plan.recommended ? 'text-primary-text/30' : 'text-text-primary'
                                                 }`}>{included ? 'check_circle' : 'cancel'}</span>
                                                 <span className={`text-xs font-bold ${
                                                     included
-                                                        ? plan.recommended ? 'text-white' : 'dark:text-slate-200'
-                                                        : plan.recommended ? 'text-white/40 line-through' : 'text-slate-400 line-through'
+                                                        ? plan.recommended ? 'text-primary-text' : 'dark:text-text-primary'
+                                                        : plan.recommended ? 'text-primary-text/40 line-through' : 'text-text-secondary line-through'
                                                 }`}>{text}</span>
                                             </div>
                                         ))}
@@ -216,10 +216,10 @@ const UpgradePlan = () => {
                                         disabled={plan.key === 'basic' || isCurrent || isUpgrading}
                                         className={`w-full py-4 rounded-2xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${
                                             plan.recommended
-                                                ? 'bg-white text-primary hover:bg-white/90 shadow-xl hover:scale-[1.02] active:scale-95'
+                                                ? 'bg-surface text-primary hover:bg-surface/90 shadow-xl hover:scale-[1.02] active:scale-95'
                                                 : isCurrent
-                                                    ? 'bg-green-500/10 text-green-500 border border-green-500/20 cursor-default'
-                                                    : 'bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95'
+                                                    ? 'bg-success/10 text-success border border-success/20 cursor-default'
+                                                    : 'bg-primary text-primary-text hover:bg-primary/90 shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95'
                                         } disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100`}
                                     >
                                         {isUpgrading ? (
@@ -238,8 +238,8 @@ const UpgradePlan = () => {
 
                 {/* Feature Comparison Note */}
                 <div className="text-center">
-                    <p className="text-slate-500 text-sm font-medium">All plans include a 7-day free trial. Cancel anytime.</p>
-                    <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mt-1">No hidden fees. Prices exclusive of GST.</p>
+                    <p className="text-text-secondary text-sm font-medium">All plans include a 7-day free trial. Cancel anytime.</p>
+                    <p className="text-text-secondary text-xs font-bold uppercase tracking-widest mt-1">No hidden fees. Prices exclusive of GST.</p>
                 </div>
             </div>
         </DashboardLayout>

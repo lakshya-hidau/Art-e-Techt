@@ -64,34 +64,34 @@ const VerificationStep1 = ({ formData, updateFormData, onNext, onSave, isSaving 
                     </div>
                     <p className="text-primary text-2xl font-bold">33%</p>
                 </div>
-                <div className="h-3 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                <div className="h-3 w-full bg-surface dark:bg-container rounded-full overflow-hidden">
                     <div className="h-full bg-primary rounded-full transition-all duration-700 ease-out" style={{ width: '33%' }}></div>
                 </div>
-                <p className="text-slate-600 dark:text-slate-400 text-sm flex items-center gap-2">
+                <p className="text-text-muted dark:text-text-secondary text-sm flex items-center gap-2">
                     <span className="material-symbols-outlined text-sm text-primary">verified_user</span>
                     Identity &amp; Document Upload
                 </p>
             </div>
 
             {/* Main Content Card */}
-            <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-primary/10 rounded-3xl p-8 shadow-2xl">
+            <div className="bg-surface dark:bg-void/50 border border-border dark:border-primary/10 rounded-3xl p-8 shadow-2xl">
                 <div className="mb-8">
                     <h1 className="text-3xl font-bold mb-2">Verify Your Identity</h1>
-                    <p className="text-slate-600 dark:text-slate-400">To maintain a safe community for artists and scouts, please provide a valid government-issued ID.</p>
+                    <p className="text-text-muted dark:text-text-secondary">To maintain a safe community for artists and scouts, please provide a valid government-issued ID.</p>
                 </div>
 
                 {/* ID Selection Tabs — Dynamic */}
                 <div className="mb-8">
-                    <label className="block text-sm font-medium mb-3 text-slate-500 uppercase tracking-tighter">Select ID Type</label>
-                    <div className="flex p-1.5 bg-slate-100 dark:bg-background-dark rounded-xl border border-slate-200 dark:border-slate-800">
+                    <label className="block text-sm font-medium mb-3 text-text-secondary uppercase tracking-tighter">Select ID Type</label>
+                    <div className="flex p-1.5 bg-surface-lowest dark:bg-background-dark rounded-xl border border-border dark:border-border-subtle">
                         {idTypes.map(({ value, label }) => (
                             <button
                                 key={value}
                                 onClick={() => updateFormData({ idType: value })}
                                 className={`flex-1 py-2 px-4 rounded-lg font-semibold transition-all duration-200 ${
                                     formData.idType === value
-                                        ? 'bg-primary text-white shadow-md shadow-primary/20'
-                                        : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
+                                        ? 'bg-primary text-primary-text shadow-md shadow-primary/20'
+                                        : 'text-text-secondary hover:text-text-muted dark:hover:text-text-primary'
                                 }`}
                             >
                                 {label}
@@ -123,19 +123,19 @@ const VerificationStep1 = ({ formData, updateFormData, onNext, onSave, isSaving 
                         <div className={`w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mb-6 transition-transform duration-200 ${isDragging ? 'scale-110' : 'group-hover:scale-105'}`}>
                             <span className="material-symbols-outlined text-4xl text-primary">cloud_upload</span>
                         </div>
-                        <h4 className="text-xl font-bold mb-2 text-slate-800 dark:text-white">
+                        <h4 className="text-xl font-bold mb-2 text-text-primary dark:text-primary-text">
                             {isDragging ? 'Drop it here!' : 'Upload or Drag & Drop'}
                         </h4>
-                        <p className="text-slate-500 text-center max-w-xs mb-6">Support JPEG, PNG or PDF formats. Max file size 5MB.</p>
+                        <p className="text-text-secondary text-center max-w-xs mb-6">Support JPEG, PNG or PDF formats. Max file size 5MB.</p>
                         <button
                             type="button"
-                            className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-lg shadow-primary/20 active:scale-95"
+                            className="bg-primary hover:bg-primary/90 text-primary-text px-8 py-3 rounded-xl font-bold transition-all shadow-lg shadow-primary/20 active:scale-95"
                             onClick={e => { e.stopPropagation(); fileInputRef.current?.click(); }}
                         >
                             Select File
                         </button>
                         {uploadError && (
-                            <p className="mt-4 text-sm text-red-500 flex items-center gap-1">
+                            <p className="mt-4 text-sm text-error flex items-center gap-1">
                                 <span className="material-symbols-outlined !text-sm">error</span>
                                 {uploadError}
                             </p>
@@ -147,7 +147,7 @@ const VerificationStep1 = ({ formData, updateFormData, onNext, onSave, isSaving 
                         <div className="absolute top-3 right-3">
                             <button
                                 onClick={removeFile}
-                                className="p-1.5 rounded-full bg-red-500/90 hover:bg-red-600 text-white transition-colors"
+                                className="p-1.5 rounded-full bg-primary/90 hover:bg-primary-hover text-primary-text transition-colors"
                                 title="Remove file"
                             >
                                 <span className="material-symbols-outlined !text-lg">close</span>
@@ -156,13 +156,13 @@ const VerificationStep1 = ({ formData, updateFormData, onNext, onSave, isSaving 
                         {previewUrl === 'pdf' ? (
                             <div className="flex flex-col items-center gap-3 py-6">
                                 <span className="material-symbols-outlined text-6xl text-primary">picture_as_pdf</span>
-                                <p className="font-bold text-slate-800 dark:text-white">{formData.idFile?.name}</p>
-                                <p className="text-sm text-slate-500">PDF Document • {(formData.idFile?.size / 1024).toFixed(0)} KB</p>
+                                <p className="font-bold text-text-primary dark:text-primary-text">{formData.idFile?.name}</p>
+                                <p className="text-sm text-text-secondary">PDF Document • {(formData.idFile?.size / 1024).toFixed(0)} KB</p>
                             </div>
                         ) : (
                             <img src={previewUrl} alt="ID Preview" className="max-h-64 rounded-xl object-contain shadow-md" />
                         )}
-                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30 text-green-600 dark:text-green-400 text-sm font-semibold">
+                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-success/10 border border-success/30 text-success dark:text-success text-sm font-semibold">
                             <span className="material-symbols-outlined !text-sm">check_circle</span>
                             File uploaded successfully
                         </div>
@@ -173,23 +173,23 @@ const VerificationStep1 = ({ formData, updateFormData, onNext, onSave, isSaving 
                 <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-4">
                         <h5 className="font-bold flex items-center gap-2">
-                            <span className="material-symbols-outlined text-green-500">task_alt</span>
+                            <span className="material-symbols-outlined text-success">task_alt</span>
                             Guidelines for success
                         </h5>
-                        <ul className="space-y-3 text-sm text-slate-500 dark:text-slate-400">
+                        <ul className="space-y-3 text-sm text-text-secondary dark:text-text-secondary">
                             <li className="flex gap-2"><span className="material-symbols-outlined text-xs mt-1">check_circle</span> Ensure all 4 corners of the document are visible.</li>
                             <li className="flex gap-2"><span className="material-symbols-outlined text-xs mt-1">check_circle</span> Data must be clearly readable without glare.</li>
                             <li className="flex gap-2"><span className="material-symbols-outlined text-xs mt-1">check_circle</span> Document must be valid and not expired.</li>
                         </ul>
                     </div>
-                    <div className="bg-slate-50 dark:bg-background-dark/40 rounded-2xl p-4 flex items-center gap-4 border border-slate-200 dark:border-slate-800">
-                        <div className="w-24 h-16 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center relative overflow-hidden">
+                    <div className="bg-surface-lowest dark:bg-background-dark/40 rounded-2xl p-4 flex items-center gap-4 border border-border dark:border-border-subtle">
+                        <div className="w-24 h-16 bg-surface dark:bg-container rounded-lg flex items-center justify-center relative overflow-hidden">
                             <div className="absolute inset-0 opacity-20 bg-gradient-to-tr from-primary to-transparent"></div>
-                            <span className="material-symbols-outlined text-slate-400">image</span>
+                            <span className="material-symbols-outlined text-text-secondary">image</span>
                         </div>
                         <div>
                             <p className="text-xs font-bold uppercase text-primary">Pro Tip</p>
-                            <p className="text-xs text-slate-500">Place your ID on a dark, flat surface for better contrast.</p>
+                            <p className="text-xs text-text-secondary">Place your ID on a dark, flat surface for better contrast.</p>
                         </div>
                     </div>
                 </div>
@@ -200,7 +200,7 @@ const VerificationStep1 = ({ formData, updateFormData, onNext, onSave, isSaving 
                 <button
                     onClick={onSave}
                     disabled={isSaving}
-                    className="px-8 py-4 rounded-xl border border-slate-300 dark:border-slate-700 font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors disabled:opacity-60 flex items-center gap-2"
+                    className="px-8 py-4 rounded-xl border border-border dark:border-border-subtle font-bold hover:bg-surface-lowest dark:hover:bg-container transition-colors disabled:opacity-60 flex items-center gap-2"
                 >
                     {isSaving ? (
                         <>
@@ -214,10 +214,10 @@ const VerificationStep1 = ({ formData, updateFormData, onNext, onSave, isSaving 
                 <button
                     onClick={onNext}
                     disabled={!canContinue}
-                    className={`px-12 py-4 rounded-xl text-white font-bold transition-all flex items-center gap-2 shadow-xl shadow-primary/30 ${
+                    className={`px-12 py-4 rounded-xl text-primary-text font-bold transition-all flex items-center gap-2 shadow-xl shadow-primary/30 ${
                         canContinue
                             ? 'bg-primary hover:bg-primary/90 active:scale-95'
-                            : 'bg-slate-300 dark:bg-slate-700 cursor-not-allowed opacity-60'
+                            : 'bg-surface-low dark:bg-container cursor-not-allowed opacity-60'
                     }`}
                     title={!canContinue ? 'Please upload your ID document first' : ''}
                 >
@@ -226,7 +226,7 @@ const VerificationStep1 = ({ formData, updateFormData, onNext, onSave, isSaving 
                 </button>
             </div>
             {!canContinue && (
-                <p className="text-center text-sm text-amber-500 flex items-center justify-center gap-1 -mt-4">
+                <p className="text-center text-sm text-warning flex items-center justify-center gap-1 -mt-4">
                     <span className="material-symbols-outlined !text-sm">info</span>
                     Upload your ID document to continue.
                 </p>

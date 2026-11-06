@@ -1,11 +1,8 @@
-import React from 'react'
+import React from 'react';
+import ProducerDashboard from './ProducerDashboard';
 
 const Requests = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  return <ProducerDashboard />;
+};
 
-export default Requests
+export default Requests;

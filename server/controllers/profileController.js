@@ -379,7 +379,7 @@ export const exportMyData = async (req, res) => {
         const exportData = {
             exportedAt: new Date().toISOString(),
             requestedBy: userId,
-            note: 'This is all personal data TalentConnect currently holds about you, provided for GDPR and DPDP compliance.',
+            note: 'This is all personal data Art-e-Techt currently holds about you, provided for GDPR and DPDP compliance.',
             account: userDoc.exists ? {
                 email: userDoc.data().email,
                 role: userDoc.data().role,
@@ -431,7 +431,7 @@ export const exportMyData = async (req, res) => {
         };
 
         res.setHeader('Content-Type', 'application/json');
-        res.setHeader('Content-Disposition', `attachment; filename="my-talentconnect-data-${new Date().toISOString().split('T')[0]}.json"`);
+        res.setHeader('Content-Disposition', `attachment; filename="my-art-e-techt-data-${new Date().toISOString().split('T')[0]}.json"`);
         res.status(200).json(exportData);
         console.info('[GDPR] Data exported for user:', userId);
     } catch (err) {

@@ -22,19 +22,20 @@ const router = express.Router();
 router.get('/', getProjects);
 // Must be before /:id to avoid being treated as a param
 router.get('/my-applications', protect, authorize('talent'), getMyApplications);
-router.get('/my-applications/director', protect, authorize('director', 'admin'), enforceDirectorBilling, getDirectorApplications);
-router.get('/my-projects', protect, authorize('director', 'admin'), enforceDirectorBilling, getMyProjects);
+router.get('/my-applications/director', protect, authorize('director', 'producer', 'admin'), enforceDirectorBilling, getDirectorApplications);
+router.get('/my-projects', protect, authorize('director', 'producer', 'admin'), enforceDirectorBilling, getMyProjects);
 router.get('/:id', getProject);
 
 // Director only routes
-router.post('/', protect, authorize('director', 'admin'), enforceDirectorBilling, validate(createProjectSchema), createProject);
-router.put('/:id', protect, authorize('director', 'admin'), enforceDirectorBilling, validate(updateProjectSchema), updateProject);
-router.get('/:id/applications', protect, authorize('director', 'admin'), enforceDirectorBilling, getProjectApplications);
-router.put('/applications/:appId/status', protect, authorize('director', 'admin'), enforceDirectorBilling, validate(updateApplicationStatusSchema), updateApplicationStatus);
-router.put('/applications/:appId/schedule-audition', protect, authorize('director', 'admin'), enforceDirectorBilling, validate(scheduleAuditionSchema), scheduleAudition);
+router.post('/', protect, authorize('director', 'producer', 'admin'), enforceDirectorBilling, validate(createProjectSchema), createProject);
+router.put('/:id', protect, authorize('director', 'producer', 'admin'), enforceDirectorBilling, validate(updateProjectSchema), updateProject);
+router.get('/:id/applications', protect, authorize('director', 'producer', 'admin'), enforceDirectorBilling, getProjectApplications);
+router.put('/applications/:appId/status', protect, authorize('director', 'producer', 'admin'), enforceDirectorBilling, validate(updateApplicationStatusSchema), updateApplicationStatus);
+router.put('/applications/:appId/schedule-audition', protect, authorize('director', 'producer', 'admin'), enforceDirectorBilling, validate(scheduleAuditionSchema), scheduleAudition);
 
 // Talent only routes
 router.post('/:id/apply', protect, authorize('talent'), applyToProject);
 router.put('/applications/:appId/submit-video', protect, authorize('talent'), validate(submitVideoSchema), submitAuditionVideo);
 
 export default router;
+

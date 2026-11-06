@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { clearAuthSession, getStoredToken, persistAuthSession } from '../utils/authStorage';
+import { clearAuthSession, getStoredToken } from '../utils/authStorage';
 import tokenManager from '../utils/tokenManager.js';
 
 const API_URL = import.meta.env.VITE_API_URL || '/api';

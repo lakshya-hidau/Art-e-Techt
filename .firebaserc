@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "talentconnect-6e347"
+  },
+  "targets": {
+    "talentconnect-6e347": {
+      "hosting": {
+        "art-e-techt-95db8": [
+          "art-e-techt-95db8"
+        ]
+      }
+    }
   }
 }

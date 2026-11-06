@@ -13,7 +13,7 @@ const StripeProvider = ({ children }) => {
     const options = {
         fonts: [
             {
-                cssSrc: 'https://fonts.googleapis.com/css?family=Inter:400,500,600,700',
+                cssSrc: 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap',
             },
         ],
     };

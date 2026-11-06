@@ -51,7 +51,7 @@ export const registerSchema = z.object({
   password: z.string()
     .min(8, 'Password must be at least 8 characters')
     .max(100, 'Password must be less than 100 characters'),
-  role: z.enum(['talent', 'director'], {
+  role: z.enum(['talent', 'director', 'producer'], {
     errorMap: () => ({ message: 'Please select a valid role (talent or director)' })
   }),
   fullName: z.string()
@@ -74,7 +74,7 @@ export const updateProfileSchema = z
     location: z.string().max(100).optional(),
     mobile: z.string().max(20).optional(),
     skills: z.array(z.string()).optional(),
-    experienceYears: z.number().min(0).max(60).optional(),
+    experienceYears: z.coerce.number().min(0).max(60).optional(),
     talentCategory: z.enum(TALENT_CATEGORIES).optional(),
     physicalMetrics: z.object({
       height: z.string().optional(),
@@ -161,9 +161,10 @@ export const adminLoginSchema = z.object({
 }).strict();
 
 export const updateUserRoleSchema = z.object({
-  role: z.enum(['talent', 'director', 'admin']),
+  role: z.enum(['talent', 'director', 'producer', 'admin']),
 }).strict();
 
 export const updateProjectStatusSchema = z.object({
   status: z.enum(['open', 'closed', 'draft']),
 }).strict();
+

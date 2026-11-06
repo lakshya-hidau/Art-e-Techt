@@ -1,0 +1,62 @@
+:root {
+  --color-void: #08090B;
+  --color-background: #121315;
+  --color-surface: var(--color-background);
+  --color-surface-lowest: #0D0E10;
+  --color-surface-low: #1B1C1E;
+  --color-container: #1F2022;
+  --color-surface-high: #292A2C;
+  --color-surface-highest: #343537;
+  --color-primary: #B82E43;
+  --color-primary-hover: #9F2438;
+  --color-secondary: #D6B45C;
+  --color-secondary-hover: #E6C369;
+  --color-tertiary: #B99A55;
+  --color-text-primary: #F4F0E8;
+  --color-text-secondary: #A5A5A5;
+  --color-text-muted: #77797D;
+  --color-border: #2A2C32;
+  --color-border-subtle: #38393B;
+  --color-success: #4CAF7A;
+  --color-warning: var(--color-secondary-hover);
+  --color-error: #FFB4AB;
+
+  --color-void-rgb: 8 9 11;
+  --color-background-rgb: 18 19 21;
+  --color-surface-rgb: var(--color-background-rgb);
+  --color-surface-lowest-rgb: 13 14 16;
+  --color-surface-low-rgb: 27 28 30;
+  --color-container-rgb: 31 32 34;
+  --color-surface-high-rgb: 41 42 44;
+  --color-surface-highest-rgb: 52 53 55;
+  --color-primary-rgb: 184 46 67;
+  --color-primary-hover-rgb: 159 36 56;
+  --color-secondary-rgb: 214 180 92;
+  --color-secondary-hover-rgb: 230 195 105;
+  --color-tertiary-rgb: 185 154 85;
+  --color-text-primary-rgb: 244 240 232;
+  --color-text-secondary-rgb: 165 165 165;
+  --color-text-muted-rgb: 119 121 125;
+  --color-border-rgb: 42 44 50;
+  --color-border-subtle-rgb: 56 57 59;
+  --color-success-rgb: 76 175 122;
+  --color-warning-rgb: var(--color-secondary-hover-rgb);
+  --color-error-rgb: 255 180 171;
+
+  --color-on-surface: var(--color-text-primary);
+  --color-on-surface-variant: var(--color-text-secondary);
+  --color-outline: var(--color-border);
+  --color-outline-variant: var(--color-border-subtle);
+  --color-primary-container: var(--color-primary);
+  --color-on-primary: var(--color-text-primary);
+  --color-on-primary-container: var(--color-text-primary);
+  --color-secondary-gold: var(--color-secondary);
+
+  --font-heading: 'Syne', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+  --font-navigation: 'Space Grotesk', sans-serif;
+  --font-button: 'Space Grotesk', sans-serif;
+  --font-accent: 'Space Grotesk', sans-serif;
+
+  --radius-none: 0px;
+}

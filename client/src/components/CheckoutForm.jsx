@@ -56,17 +56,17 @@ const CheckoutForm = ({ planType, onSuccess, onError }) => {
     const cardStyle = {
         style: {
             base: {
-                color: '#ffffff',
-                fontFamily: 'Inter, sans-serif',
+                color: 'var(--color-text-primary)',
+                fontFamily: 'Space Grotesk, sans-serif',
                 fontSmoothing: 'antialiased',
                 fontSize: '16px',
                 '::placeholder': {
-                    color: '#9ca3af',
+                    color: 'var(--color-text-secondary)',
                 },
             },
             invalid: {
-                color: '#ef4444',
-                iconColor: '#ef4444',
+                color: 'var(--color-error)',
+                iconColor: 'var(--color-error)',
             },
         },
     };
@@ -74,10 +74,10 @@ const CheckoutForm = ({ planType, onSuccess, onError }) => {
     return (
         <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-300">
+                <label className="text-xs font-bold uppercase tracking-wider text-text-primary">
                     Card Details
                 </label>
-                <div className="bg-surface-dark border border-border-dark rounded-lg p-3 focus-within:ring-2 focus-within:ring-primary focus-within:border-primary">
+                <div className="bg-surface-dark border border-border-dark rounded-lg p-3 focus-within:ring-2 focus-within:ring-gold focus-within:border-gold">
                     <CardElement options={cardStyle} />
                 </div>
             </div>
@@ -85,8 +85,8 @@ const CheckoutForm = ({ planType, onSuccess, onError }) => {
             {message && (
                 <div className={`text-sm p-3 rounded-lg ${
                     message.includes('successful')
-                        ? 'bg-green-500/10 text-green-400 border border-green-500/20'
-                        : 'bg-red-500/10 text-red-400 border border-red-500/20'
+                        ? 'bg-success/10 text-success border border-success/20'
+                        : 'bg-error/10 text-error border border-error/20'
                 }`}>
                     {message}
                 </div>
@@ -95,11 +95,11 @@ const CheckoutForm = ({ planType, onSuccess, onError }) => {
             <button
                 type="submit"
                 disabled={!stripe || isProcessing}
-                className="w-full bg-primary hover:bg-primary/90 disabled:bg-slate-600 disabled:cursor-not-allowed text-white font-bold py-4 rounded-lg flex items-center justify-center gap-2 transition-all transform active:scale-[0.98]"
+                className="w-full bg-primary hover:bg-primary/90 disabled:bg-high-surface disabled:cursor-not-allowed text-primary-text font-bold py-4 rounded-lg flex items-center justify-center gap-2 transition-all transform active:scale-[0.98]"
             >
                 {isProcessing ? (
                     <>
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-subtle"></div>
                         Processing...
                     </>
                 ) : (

@@ -1,4 +1,4 @@
-# TalentConnect Data Architecture
+# Art-e-Techt Data Architecture
 
 ## Primary Source of Truth
 - **Firestore** (via Firebase Admin SDK in `server/lib/firebaseAdmin.js`) is the primary database.

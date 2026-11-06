@@ -72,6 +72,8 @@ const parseAllowedOrigins = () => {
   const origins = new Set([
     'http://localhost:5173',
     'http://localhost:3000',
+    'https://art-e-techt-95db8.web.app',
+    'https://talentconnect-6e347.web.app',
   ])
   // Add from FRONTEND_URL env var
   if (process.env.FRONTEND_URL) {
@@ -126,6 +128,7 @@ app.use(helmet({
                 "ws:",
                 "wss:",
                 "http://localhost:5173",
+                "https://art-e-techt-95db8.web.app",
                 "https://talentconnect-6e347.web.app",
                 "https://talentconnect-6e347.firebaseapp.com",
                 "https://talentconnect-api.onrender.com"
@@ -279,7 +282,7 @@ app.get('/health', async (req, res) => {
 
 // Basic route
 app.get('/', (req, res) => {
-    res.json({ message: 'TALENTCONNECT API is running...' });
+    res.json({ message: 'Art-e-Techt API is running.' })
 });
 
 app.use(notFound);

@@ -23,7 +23,7 @@ const ProjectDetails = () => {
     const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
 
     // Determine user role from URL path
-    const userRole = location.pathname.startsWith('/director') ? 'director' : 
+    const userRole = location.pathname.startsWith('/director') ? 'director' :
                     location.pathname.startsWith('/admin') ? 'admin' : 'talent';
 
     useEffect(() => {
@@ -31,10 +31,10 @@ const ProjectDetails = () => {
             try {
                 const profileRes = await getMyProfile();
                 setProfile(profileRes.data);
-                
+
                 const projectRes = await getProject(id);
                 setProject(projectRes.data);
-                
+
                 // Initialize edit form with current project data
                 setEditForm({
                     title: projectRes.data.title || '',
@@ -104,7 +104,7 @@ const ProjectDetails = () => {
 
     const adminHeader = {
         name: profile?.fullName || 'Admin',
-        roleTitle: 'Administrator • TalentConnect',
+        roleTitle: 'Administrator • Art-e-Techt',
         avatar: profile?.profilePicture === 'no-photo.jpg'
             ? 'https://ui-avatars.com/api/?name=' + (profile?.fullName || 'Admin')
             : (profile?.profilePicture || "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80")
@@ -122,13 +122,11 @@ const ProjectDetails = () => {
         avatar: directorData.profile?.profilePicture || ('https://ui-avatars.com/api/?name=' + (directorData.email || 'Director')),
         profileId: directorData.profileId || directorData.profile?.id || directorData.id || directorData._id || null
     };
-    const directorProfileId = directorData.id || directorData._id;
-
     if (loading) {
         return (
             <DashboardLayout
                 menuItems={menuItems}
-                userRole={userRole === 'director' ? "India • Director" : userRole === 'admin' ? "Admin • TalentConnect" : "India • Talent"}
+                userRole={userRole === 'director' ? "India • Director" : userRole === 'admin' ? "Admin • Art-e-Techt" : "India • Talent"}
                 userData={headerUserData}
                 headerTitle="Project Details"
                 headerSubtitle="Loading details..."
@@ -136,7 +134,7 @@ const ProjectDetails = () => {
             >
                 <div className="flex flex-col items-center justify-center h-[60vh] bg-background-light dark:bg-background-dark min-h-screen">
                     <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-primary mb-4"></div>
-                    <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Loading Project Details...</p>
+                    <p className="text-text-secondary font-bold uppercase tracking-widest text-[10px]">Loading Project Details...</p>
                 </div>
             </DashboardLayout>
         );
@@ -146,16 +144,16 @@ const ProjectDetails = () => {
         return (
             <DashboardLayout
                 menuItems={menuItems}
-                userRole={userRole === 'director' ? "India • Director" : userRole === 'admin' ? "Admin • TalentConnect" : "India • Talent"}
+                userRole={userRole === 'director' ? "India • Director" : userRole === 'admin' ? "Admin • Art-e-Techt" : "India • Talent"}
                 userData={headerUserData}
                 headerTitle="Project Details"
                 headerSubtitle="Project Not Found"
             >
                 <div className="flex flex-col items-center justify-center p-12 text-center h-[60vh] bg-background-light dark:bg-background-dark min-h-screen">
-                    <span className="material-symbols-outlined text-6xl text-slate-300 mb-4">error_outline</span>
+                    <span className="material-symbols-outlined text-6xl text-text-primary mb-4">error_outline</span>
                     <h2 className="text-2xl font-bold mb-2">Project not found</h2>
-                    <p className="text-slate-500 mb-6">The project you're looking for doesn't exist or you don't have access to it.</p>
-                    <Link to="/director/my-projects" className="px-6 py-3 bg-primary text-white rounded-xl font-bold shadow-lg hover:brightness-110">Go Back</Link>
+                    <p className="text-text-secondary mb-6">The project you're looking for doesn't exist or you don't have access to it.</p>
+                    <Link to="/director/my-projects" className="px-6 py-3 bg-primary text-primary-text rounded-xl font-bold shadow-lg hover:brightness-110">Go Back</Link>
                 </div>
             </DashboardLayout>
         );
@@ -228,7 +226,7 @@ const ProjectDetails = () => {
         try {
             await updateApplicationStatus(applicationId, newStatus);
             // Update the local applications state
-            setApplications(prev => prev.map(app => 
+            setApplications(prev => prev.map(app =>
                 app.id === applicationId ? { ...app, status: newStatus } : app
             ));
             alert(`Application ${newStatus} successfully!`);
@@ -269,10 +267,10 @@ const ProjectDetails = () => {
     return (
         <DashboardLayout
             menuItems={menuItems}
-            userRole={userRole === 'director' ? "India • Director" : userRole === 'admin' ? "Admin • TalentConnect" : "Talent • India"}
+            userRole={userRole === 'director' ? "India • Director" : userRole === 'admin' ? "Admin • Art-e-Techt" : "Talent • India"}
             userData={headerUserData}
             headerTitle="Project Details"
-            headerSubtitle={userRole === 'director' 
+            headerSubtitle={userRole === 'director'
                 ? `${project.title} • Manage roles, requirements, and applications.`
                 : userRole === 'admin'
                 ? `${project.title} • Admin oversight and management.`
@@ -280,14 +278,14 @@ const ProjectDetails = () => {
             }
             searchPlaceholder={userRole === 'director' || userRole === 'admin' ? "Search roles or talent..." : "Search projects..."}
         >
-            <div className="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased min-h-screen">
+            <div className="font-display bg-background-light dark:bg-background-dark text-text-primary dark:text-text-primary antialiased min-h-screen">
                 <div className="p-8">
-                    <section className="relative rounded-3xl overflow-hidden mb-12 shadow-2xl border border-slate-200 dark:border-white/5 group">
+                    <section className="relative rounded-3xl overflow-hidden mb-12 shadow-2xl border border-border dark:border-subtle/5 group">
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10"></div>
                         {isEditing ? (
                             <div className="relative">
                                 <img className="w-full h-[350px] object-cover" src={editForm.projectImage || "https://images.unsplash.com/photo-1485090916755-2bc2fdf84c62?auto=format&fit=crop&q=80"} alt="Project Banner" />
-                                <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-20">
+                                <div className="absolute inset-0 bg-void/50 flex items-center justify-center z-20">
                                     <div className="text-center">
                                         <input
                                             type="file"
@@ -297,12 +295,12 @@ const ProjectDetails = () => {
                                             id="project-image-upload"
                                         />
                                         <label htmlFor="project-image-upload" className="cursor-pointer">
-                                            <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 hover:bg-white/30 transition-colors">
-                                                <span className="material-symbols-outlined text-white text-2xl">photo_camera</span>
+                                            <div className="w-16 h-16 bg-surface/20 rounded-full flex items-center justify-center mx-auto mb-4 hover:bg-surface/30 transition-colors">
+                                                <span className="material-symbols-outlined text-primary-text text-2xl">photo_camera</span>
                                             </div>
-                                            <p className="text-white font-bold">Change Project Image</p>
+                                            <p className="text-primary-text font-bold">Change Project Image</p>
                                         </label>
-                                        {imageError && <p className="mt-3 text-xs text-red-200 font-semibold">{imageError}</p>}
+                                        {imageError && <p className="mt-3 text-xs text-error font-semibold">{imageError}</p>}
                                     </div>
                                 </div>
                             </div>
@@ -318,29 +316,29 @@ const ProjectDetails = () => {
                                                 type="text"
                                                 value={editForm.title}
                                                 onChange={(e) => handleFormChange('title', e.target.value)}
-                                                className="text-4xl md:text-6xl font-black text-white bg-transparent border-b-2 border-white/50 focus:border-white outline-none w-full"
+                                                className="text-4xl md:text-6xl font-black text-primary-text bg-transparent border-b-2 border-subtle/50 focus:border-subtle outline-none w-full"
                                                 placeholder="Project Title"
                                             />
-                                            <div className="flex flex-wrap gap-4 text-slate-300 text-sm font-bold flex items-center uppercase tracking-widest">
+                                            <div className="flex flex-wrap gap-4 text-text-primary text-sm font-bold flex items-center uppercase tracking-widest">
                                                 <input
                                                     type="date"
                                                     value={editForm.deadline}
                                                     onChange={(e) => handleFormChange('deadline', e.target.value)}
-                                                    className="bg-transparent border-b border-white/50 text-white text-sm font-bold uppercase tracking-widest focus:border-white outline-none"
+                                                    className="bg-transparent border-b border-subtle/50 text-primary-text text-sm font-bold uppercase tracking-widest focus:border-subtle outline-none"
                                                 />
                                                 <input
                                                     type="text"
                                                     value={editForm.location}
                                                     onChange={(e) => handleFormChange('location', e.target.value)}
-                                                    className="bg-transparent border-b border-white/50 text-white text-sm font-bold uppercase tracking-widest focus:border-white outline-none"
+                                                    className="bg-transparent border-b border-subtle/50 text-primary-text text-sm font-bold uppercase tracking-widest focus:border-subtle outline-none"
                                                     placeholder="Location"
                                                 />
                                             </div>
                                         </div>
                                     ) : (
                                         <>
-                                            <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-4 uppercase">{project.title}</h1>
-                                            <p className="text-slate-300 text-sm font-bold flex items-center gap-6 uppercase tracking-widest">
+                                            <h1 className="text-4xl md:text-6xl font-black text-primary-text tracking-tighter mb-4 uppercase">{project.title}</h1>
+                                            <p className="text-text-primary text-sm font-bold flex items-center gap-6 uppercase tracking-widest">
                                                 <span className="flex items-center gap-2"><span className="material-symbols-outlined text-primary">calendar_today</span> Deadline: {project.deadline ? new Date(project.deadline).toLocaleDateString() : 'Not set'}</span>
                                                 <span className="flex items-center gap-2"><span className="material-symbols-outlined text-primary">location_on</span> {project.location || 'TBD'}</span>
                                             </p>
@@ -354,25 +352,25 @@ const ProjectDetails = () => {
                                                 <button
                                                     onClick={handleSave}
                                                     disabled={saving}
-                                                    className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-8 py-3.5 rounded-xl font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-green-600/20 hover:scale-105 active:scale-95 disabled:opacity-50"
+                                                    className="flex items-center gap-2 bg-success hover:bg-success text-primary-text px-8 py-3.5 rounded-xl font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-success/20 hover:scale-105 active:scale-95 disabled:opacity-50"
                                                 >
                                                     {saving ? 'Saving...' : 'Save Changes'}
                                                 </button>
                                                 <button
                                                     onClick={handleEditToggle}
-                                                    className="flex items-center justify-center p-3.5 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 rounded-xl transition-all hover:scale-105 active:scale-95"
+                                                    className="flex items-center justify-center p-3.5 bg-surface/10 hover:bg-surface/20 backdrop-blur-md text-primary-text border border-subtle/20 rounded-xl transition-all hover:scale-105 active:scale-95"
                                                 >
                                                     <span className="material-symbols-outlined">close</span>
                                                 </button>
                                             </>
                                         ) : (
                                             <>
-                                                <button className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-8 py-3.5 rounded-xl font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-primary/20 hover:scale-105 active:scale-95">
+                                                <button className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-text px-8 py-3.5 rounded-xl font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-primary/20 hover:scale-105 active:scale-95">
                                                     <span className="material-symbols-outlined text-sm">person_add</span> Post New Role
                                                 </button>
                                                 <button
                                                     onClick={handleEditToggle}
-                                                    className="flex items-center justify-center p-3.5 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 rounded-xl transition-all hover:scale-105 active:scale-95"
+                                                    className="flex items-center justify-center p-3.5 bg-surface/10 hover:bg-surface/20 backdrop-blur-md text-primary-text border border-subtle/20 rounded-xl transition-all hover:scale-105 active:scale-95"
                                                 >
                                                     <span className="material-symbols-outlined">edit</span>
                                                 </button>
@@ -382,7 +380,7 @@ const ProjectDetails = () => {
                                         <button
                                             onClick={handleApplyToProject}
                                             disabled={applying || hasApplied || project?.status !== 'open'}
-                                            className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-8 py-3.5 rounded-xl font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                                            className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-text px-8 py-3.5 rounded-xl font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                                         >
                                             <span className="material-symbols-outlined text-sm">
                                                 {hasApplied ? 'check_circle' : 'send'}
@@ -391,7 +389,7 @@ const ProjectDetails = () => {
                                         </button>
                                     ) : (
                                         // Admin view - no action buttons
-                                        <div className="text-white/80 text-sm font-bold">
+                                        <div className="text-primary-text/80 text-sm font-bold">
                                             Admin View
                                         </div>
                                     )}
@@ -407,26 +405,26 @@ const ProjectDetails = () => {
                                 <h3 className="text-xl font-black mb-6 flex items-center gap-3">
                                     <span className="w-1.5 h-6 bg-primary rounded-full"></span> Project Vision
                                 </h3>
-                                <div className="bg-white dark:bg-card-dark rounded-3xl p-8 border border-slate-200 dark:border-white/5 shadow-sm">
+                                <div className="bg-surface dark:bg-card-dark rounded-3xl p-8 border border-border dark:border-subtle/5 shadow-sm">
                                     {userRole === 'director' && isEditing ? (
                                         <div className="space-y-6">
                                             <div>
-                                                <label className="block text-sm font-bold text-slate-600 dark:text-slate-400 uppercase tracking-widest mb-2">Project Description</label>
+                                                <label className="block text-sm font-bold text-text-muted dark:text-text-secondary uppercase tracking-widest mb-2">Project Description</label>
                                                 <textarea
                                                     value={editForm.description}
                                                     onChange={(e) => handleFormChange('description', e.target.value)}
-                                                    className="w-full p-4 border border-slate-200 dark:border-white/5 rounded-xl bg-slate-50 dark:bg-white/5 text-slate-900 dark:text-white focus:border-primary outline-none resize-none"
+                                                    className="w-full p-4 border border-border dark:border-subtle/5 rounded-xl bg-surface-lowest dark:bg-surface/5 text-text-primary dark:text-primary-text focus:border-gold outline-none resize-none"
                                                     rows={6}
                                                     placeholder="Describe your project vision, story, and requirements..."
                                                 />
                                             </div>
                                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                                 <div>
-                                                    <label className="block text-sm font-bold text-slate-600 dark:text-slate-400 uppercase tracking-widest mb-2">Category</label>
+                                                    <label className="block text-sm font-bold text-text-muted dark:text-text-secondary uppercase tracking-widest mb-2">Category</label>
                                                     <select
                                                         value={editForm.category}
                                                         onChange={(e) => handleFormChange('category', e.target.value)}
-                                                        className="w-full p-3 border border-slate-200 dark:border-white/5 rounded-xl bg-slate-50 dark:bg-white/5 text-slate-900 dark:text-white focus:border-primary outline-none"
+                                                        className="w-full p-3 border border-border dark:border-subtle/5 rounded-xl bg-surface-lowest dark:bg-surface/5 text-text-primary dark:text-primary-text focus:border-gold outline-none"
                                                     >
                                                         <option value="Film">Film</option>
                                                         <option value="Advertisement">Advertisement</option>
@@ -438,21 +436,21 @@ const ProjectDetails = () => {
                                                     </select>
                                                 </div>
                                                 <div>
-                                                    <label className="block text-sm font-bold text-slate-600 dark:text-slate-400 uppercase tracking-widest mb-2">Budget</label>
+                                                    <label className="block text-sm font-bold text-text-muted dark:text-text-secondary uppercase tracking-widest mb-2">Budget</label>
                                                     <input
                                                         type="text"
                                                         value={editForm.budget}
                                                         onChange={(e) => handleFormChange('budget', e.target.value)}
-                                                        className="w-full p-3 border border-slate-200 dark:border-white/5 rounded-xl bg-slate-50 dark:bg-white/5 text-slate-900 dark:text-white focus:border-primary outline-none"
+                                                        className="w-full p-3 border border-border dark:border-subtle/5 rounded-xl bg-surface-lowest dark:bg-surface/5 text-text-primary dark:text-primary-text focus:border-gold outline-none"
                                                         placeholder="Negotiable"
                                                     />
                                                 </div>
                                                 <div>
-                                                    <label className="block text-sm font-bold text-slate-600 dark:text-slate-400 uppercase tracking-widest mb-2">Status</label>
+                                                    <label className="block text-sm font-bold text-text-muted dark:text-text-secondary uppercase tracking-widest mb-2">Status</label>
                                                     <select
                                                         value={editForm.status}
                                                         onChange={(e) => handleFormChange('status', e.target.value)}
-                                                        className="w-full p-3 border border-slate-200 dark:border-white/5 rounded-xl bg-slate-50 dark:bg-white/5 text-slate-900 dark:text-white focus:border-primary outline-none"
+                                                        className="w-full p-3 border border-border dark:border-subtle/5 rounded-xl bg-surface-lowest dark:bg-surface/5 text-text-primary dark:text-primary-text focus:border-gold outline-none"
                                                     >
                                                         <option value="open">Open</option>
                                                         <option value="closed">Closed</option>
@@ -463,20 +461,20 @@ const ProjectDetails = () => {
                                         </div>
                                     ) : (
                                         <>
-                                            <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-lg font-medium mb-8 whitespace-pre-line">
+                                            <p className="text-text-muted dark:text-text-primary leading-relaxed text-lg font-medium mb-8 whitespace-pre-line">
                                                 {project.description}
                                             </p>
-                                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-8 border-t border-slate-100 dark:border-white/5">
+                                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-8 border-t border-border dark:border-subtle/5">
                                                 <div>
-                                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Production House</p>
+                                                    <p className="text-[10px] font-black text-text-secondary uppercase tracking-widest mb-2">Production House</p>
                                                     <p className="font-bold text-primary">{profile?.companyName || "Director's Studio"}</p>
                                                 </div>
                                                 <div>
-                                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Category</p>
+                                                    <p className="text-[10px] font-black text-text-secondary uppercase tracking-widest mb-2">Category</p>
                                                     <p className="font-bold">{project.category}</p>
                                                 </div>
                                                 <div>
-                                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Budget Status</p>
+                                                    <p className="text-[10px] font-black text-text-secondary uppercase tracking-widest mb-2">Budget Status</p>
                                                     <p className="font-bold">{project.budget}</p>
                                                 </div>
                                             </div>
@@ -496,37 +494,37 @@ const ProjectDetails = () => {
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         {roles.length > 0 ? roles.map((role, i) => (
-                                            <div key={i} className="bg-white dark:bg-card-dark rounded-3xl p-6 border border-slate-200 dark:border-white/5 hover:border-primary/40 transition-all group flex flex-col justify-between shadow-sm">
+                                            <div key={i} className="bg-surface dark:bg-card-dark rounded-3xl p-6 border border-border dark:border-subtle/5 hover:border-primary/40 transition-all group flex flex-col justify-between shadow-sm">
                                                 <div className="flex justify-between items-start mb-6">
                                                     <div>
                                                         <h4 className="font-bold text-lg mb-1 group-hover:text-primary transition-colors">{role.title}</h4>
-                                                        <p className="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-tight">{role.gender || 'Any Gender'} • {role.skills?.slice(0, 2).join(', ') || 'Various Skills'}</p>
+                                                        <p className="text-text-secondary dark:text-text-secondary text-xs font-bold uppercase tracking-tight">{role.gender || 'Any Gender'} • {role.skills?.slice(0, 2).join(', ') || 'Various Skills'}</p>
                                                     </div>
                                                     {role.title.toLowerCase().includes('lead') && <span className="bg-primary/10 text-primary text-[9px] font-black px-2.5 py-1 rounded-full border border-primary/20">LEAD</span>}
                                                 </div>
                                                 <div className="space-y-3 mb-8">
                                                     <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest">
-                                                        <span className="text-slate-400">Age Range</span>
+                                                        <span className="text-text-secondary">Age Range</span>
                                                         <span>{role.ageRange?.min || 'Any'} - {role.ageRange?.max || 'Any'} years</span>
                                                     </div>
                                                     <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest">
-                                                        <span className="text-slate-400">Description</span>
+                                                        <span className="text-text-secondary">Description</span>
                                                         <span className="truncate max-w-[120px]">{role.description}</span>
                                                     </div>
                                                 </div>
-                                                <div className="flex items-center justify-between pt-5 border-t border-slate-100 dark:border-white/5">
+                                                <div className="flex items-center justify-between pt-5 border-t border-border dark:border-subtle/5">
                                                     <div className="flex items-center gap-2">
                                                         <div className="flex items-center">
-                                                            <span className="material-symbols-outlined text-slate-400 text-lg mr-1">group</span>
+                                                            <span className="material-symbols-outlined text-text-secondary text-lg mr-1">group</span>
                                                             <span className="font-black text-sm">{applications.length || 0}</span>
                                                         </div>
-                                                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Applicants</span>
+                                                        <span className="text-[10px] font-bold text-text-secondary uppercase tracking-widest">Applicants</span>
                                                     </div>
                                                     <button className="text-[10px] font-black uppercase tracking-[0.2em] text-primary group-hover:translate-x-1 transition-transform flex items-center gap-1">Manage <span className="material-symbols-outlined text-sm">arrow_forward</span></button>
                                                 </div>
                                             </div>
                                         )) : (
-                                            <div className="col-span-2 text-center p-8 border border-dashed border-slate-200 dark:border-white/10 rounded-2xl text-slate-500">
+                                            <div className="col-span-2 text-center p-8 border border-dashed border-border dark:border-subtle/10 rounded-2xl text-text-secondary">
                                                 No explicit roles defined.
                                             </div>
                                         )}
@@ -543,53 +541,53 @@ const ProjectDetails = () => {
                                         </h3>
                                         <Link to={`/director/shortlists`} className="text-primary text-[10px] font-black uppercase tracking-widest hover:underline">View All Applications</Link>
                                     </div>
-                                    <div className="bg-white dark:bg-card-dark rounded-3xl p-6 border border-slate-200 dark:border-white/5 shadow-sm">
+                                    <div className="bg-surface dark:bg-card-dark rounded-3xl p-6 border border-border dark:border-subtle/5 shadow-sm">
                                         <div className="space-y-4">
                                             {applications.length > 0 ? applications.map((app, i) => (
-                                                <div key={i} className="flex items-center justify-between p-4 border border-slate-100 dark:border-white/5 rounded-2xl hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+                                                <div key={i} className="flex items-center justify-between p-4 border border-border dark:border-subtle/5 rounded-2xl hover:bg-surface-lowest dark:hover:bg-surface/5 transition-colors">
                                                     <div className="flex items-center gap-4">
-                                                        <div className="w-12 h-12 bg-slate-100 dark:bg-white/10 rounded-full flex items-center justify-center">
-                                                            <span className="material-symbols-outlined text-slate-400">person</span>
+                                                        <div className="w-12 h-12 bg-surface-lowest dark:bg-surface/10 rounded-full flex items-center justify-center">
+                                                            <span className="material-symbols-outlined text-text-secondary">person</span>
                                                         </div>
                                                         <div>
                                                             <h4 className="font-bold text-sm">{app.talent?.profile?.fullName || app.talent?.email || 'Unknown Talent'}</h4>
-                                                            <p className="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-tight">
+                                                            <p className="text-text-secondary dark:text-text-secondary text-xs font-bold uppercase tracking-tight">
                                                                 Applied {app.createdAt ? new Date(app.createdAt).toLocaleDateString() : 'Recently'}
                                                             </p>
                                                         </div>
                                                     </div>
                                                     <div className="flex items-center gap-3">
                                                         <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${
-                                                            app.status === 'pending' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400' :
-                                                            app.status === 'shortlisted' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400' :
-                                                            app.status === 'selected' ? 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400' :
-                                                            'bg-red-100 text-red-700 dark:bg-red-900/20 dark:text-red-400'
+                                                            app.status === 'pending' ? 'bg-warning/10 text-warning dark:bg-warning/20 dark:text-warning' :
+                                                            app.status === 'shortlisted' ? 'bg-gold/10 text-gold dark:bg-gold/20 dark:text-gold' :
+                                                            app.status === 'selected' ? 'bg-success/10 text-success dark:bg-success/20 dark:text-success' :
+                                                            'bg-error text-error dark:bg-primary-hover/20 dark:text-error'
                                                         }`}>
                                                             {app.status || 'applied'}
                                                         </span>
                                                         <div className="flex gap-2">
                                                             {app.status !== 'selected' && (
-                                                                <button 
+                                                                <button
                                                                     onClick={() => handleApplicationStatusUpdate(app.id, 'selected')}
                                                                     disabled={updatingStatus === app.id}
-                                                                    className="px-3 py-1 bg-green-100 hover:bg-green-200 text-green-700 text-[9px] font-black uppercase tracking-widest rounded-full border border-green-200 hover:border-green-300 transition-colors disabled:opacity-50"
+                                                                    className="px-3 py-1 bg-success/10 hover:bg-success/10 text-success text-[9px] font-black uppercase tracking-widest rounded-full border border-success hover:border-success transition-colors disabled:opacity-50"
                                                                 >
                                                                     {updatingStatus === app.id ? '...' : 'Accept'}
                                                                 </button>
                                                             )}
                                                             {app.status !== 'rejected' && app.status !== 'selected' && (
-                                                                <button 
+                                                                <button
                                                                     onClick={() => handleApplicationStatusUpdate(app.id, 'rejected')}
                                                                     disabled={updatingStatus === app.id}
-                                                                    className="px-3 py-1 bg-red-100 hover:bg-red-200 text-red-700 text-[9px] font-black uppercase tracking-widest rounded-full border border-red-200 hover:border-red-300 transition-colors disabled:opacity-50"
+                                                                    className="px-3 py-1 bg-error hover:bg-error text-error text-[9px] font-black uppercase tracking-widest rounded-full border border-error hover:border-error transition-colors disabled:opacity-50"
                                                                 >
                                                                     {updatingStatus === app.id ? '...' : 'Reject'}
                                                                 </button>
                                                             )}
                                                             {app.status === 'selected' && (
-                                                                <Link 
+                                                                <Link
                                                                     to={`/director/messages/${app.talent.id}`}
-                                                                    className="px-3 py-1 bg-primary hover:bg-primary/90 text-white text-[9px] font-black uppercase tracking-widest rounded-full transition-colors"
+                                                                    className="px-3 py-1 bg-primary hover:bg-primary/90 text-primary-text text-[9px] font-black uppercase tracking-widest rounded-full transition-colors"
                                                                 >
                                                                     Message
                                                                 </Link>
@@ -598,7 +596,7 @@ const ProjectDetails = () => {
                                                     </div>
                                                 </div>
                                             )) : (
-                                                <div className="text-center p-8 border border-dashed border-slate-200 dark:border-white/10 rounded-2xl text-slate-500">
+                                                <div className="text-center p-8 border border-dashed border-border dark:border-subtle/10 rounded-2xl text-text-secondary">
                                                     No applications yet.
                                                 </div>
                                             )}
@@ -617,14 +615,14 @@ const ProjectDetails = () => {
                                         <h3 className="text-xl font-black mb-6 flex items-center gap-3">
                                             <span className="w-1.5 h-6 bg-primary rounded-full"></span> Project Tracking
                                         </h3>
-                                        <div className="bg-white dark:bg-card-dark rounded-3xl p-8 border border-slate-200 dark:border-white/5 shadow-sm space-y-8">
+                                        <div className="bg-surface dark:bg-card-dark rounded-3xl p-8 border border-border dark:border-subtle/5 shadow-sm space-y-8">
                                             <div className="space-y-3">
                                                 <div className="flex justify-between items-center">
                                                     <span className="text-xs font-bold uppercase tracking-widest">Total Applications</span>
-                                                    <span className="text-[10px] font-black text-slate-500">{applications.length} RECEIVED</span>
+                                                    <span className="text-[10px] font-black text-text-secondary">{applications.length} RECEIVED</span>
                                                 </div>
-                                                <div className="w-full bg-slate-100 dark:bg-white/5 h-2 rounded-full overflow-hidden">
-                                                    <div className="bg-slate-400 h-full transition-all duration-1000" style={{ width: `${Math.min(applications.length * 2, 100)}%` }}></div>
+                                                <div className="w-full bg-surface-lowest dark:bg-surface/5 h-2 rounded-full overflow-hidden">
+                                                    <div className="bg-surface-low h-full transition-all duration-1000" style={{ width: `${Math.min(applications.length * 2, 100)}%` }}></div>
                                                 </div>
                                             </div>
                                             <div className="space-y-3">
@@ -632,18 +630,18 @@ const ProjectDetails = () => {
                                                     <span className="text-xs font-bold uppercase tracking-widest">Shortlisted</span>
                                                     <span className="text-[10px] font-black text-primary">{stats.shortlisted} OUT OF {applications.length || 1}</span>
                                                 </div>
-                                                <div className="w-full bg-slate-100 dark:bg-white/5 h-2 rounded-full overflow-hidden">
+                                                <div className="w-full bg-surface-lowest dark:bg-surface/5 h-2 rounded-full overflow-hidden">
                                                     <div className="bg-primary h-full transition-all duration-1000" style={{ width: applications.length ? `${(stats.shortlisted / applications.length) * 100}%` : '0%' }}></div>
                                                 </div>
                                             </div>
                                             <div className="space-y-3">
                                                 <div className="flex justify-between items-center">
                                                     <span className="text-xs font-bold uppercase tracking-widest">Lead Roles</span>
-                                                    <span className="text-[10px] font-black text-slate-500">{stats.leads} SPECIFIED</span>
+                                                    <span className="text-[10px] font-black text-text-secondary">{stats.leads} SPECIFIED</span>
                                                 </div>
                                             </div>
-                                            
-                                            <Link to={`/director/shortlists`} className="block w-full py-3.5 mt-8 text-center bg-slate-50 dark:bg-white/5 hover:bg-primary hover:text-white border border-slate-200 dark:border-white/5 hover:border-primary text-primary font-black rounded-xl text-[10px] uppercase tracking-[0.2em] transition-all">
+
+                                            <Link to={`/director/shortlists`} className="block w-full py-3.5 mt-8 text-center bg-surface-lowest dark:bg-surface/5 hover:bg-primary hover:text-primary-text border border-border dark:border-subtle/5 hover:border-primary text-primary font-black rounded-xl text-[10px] uppercase tracking-[0.2em] transition-all">
                                                 Manage Applicants
                                             </Link>
                                         </div>
@@ -654,14 +652,14 @@ const ProjectDetails = () => {
                                         <h3 className="text-xl font-black mb-6 flex items-center gap-3">
                                             <span className="w-1.5 h-6 bg-primary rounded-full"></span> Production Team
                                         </h3>
-                                        <div className="bg-white dark:bg-card-dark rounded-3xl p-6 border border-slate-200 dark:border-white/5 shadow-sm space-y-4">
-                                            <div className="flex items-center gap-4 p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-white/5 transition-colors cursor-pointer group">
-                                                <div className="size-10 rounded-xl bg-slate-200 overflow-hidden border border-slate-200 dark:border-white/5">
+                                        <div className="bg-surface dark:bg-card-dark rounded-3xl p-6 border border-border dark:border-subtle/5 shadow-sm space-y-4">
+                                            <div className="flex items-center gap-4 p-2 rounded-xl hover:bg-surface-lowest dark:hover:bg-surface/5 transition-colors cursor-pointer group">
+                                                <div className="size-10 rounded-xl bg-surface overflow-hidden border border-border dark:border-subtle/5">
                                                     <img className="w-full h-full object-cover" src={headerUserData.avatar} alt={headerUserData.name} />
                                                 </div>
                                                 <div className="flex-1">
                                                     <p className="font-bold text-sm leading-none mb-1">{headerUserData.name}</p>
-                                                    <p className="text-[10px] text-slate-500 font-bold uppercase tracking-tight">Lead Director</p>
+                                                    <p className="text-[10px] text-text-secondary font-bold uppercase tracking-tight">Lead Director</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -674,33 +672,33 @@ const ProjectDetails = () => {
                                         <h3 className="text-xl font-black mb-6 flex items-center gap-3">
                                             <span className="w-1.5 h-6 bg-primary rounded-full"></span> Project Requirements
                                         </h3>
-                                        <div className="bg-white dark:bg-card-dark rounded-3xl p-8 border border-slate-200 dark:border-white/5 shadow-sm space-y-6">
+                                        <div className="bg-surface dark:bg-card-dark rounded-3xl p-8 border border-border dark:border-subtle/5 shadow-sm space-y-6">
                                             <div className="space-y-4">
                                                 <div className="flex justify-between items-center">
                                                     <span className="text-xs font-bold uppercase tracking-widest">Project Status</span>
-                                                    <span className={`text-[10px] font-black px-2 py-1 rounded-full ${project?.status === 'open' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'}`}>
+                                                    <span className={`text-[10px] font-black px-2 py-1 rounded-full ${project?.status === 'open' ? 'bg-success/10 text-success dark:bg-success dark:text-success' : 'bg-error text-error dark:bg-primary-hover dark:text-error'}`}>
                                                         {project?.status?.toUpperCase()}
                                                     </span>
                                                 </div>
                                                 <div className="flex justify-between items-center">
                                                     <span className="text-xs font-bold uppercase tracking-widest">Deadline</span>
-                                                    <span className="text-[10px] font-black text-slate-500">
+                                                    <span className="text-[10px] font-black text-text-secondary">
                                                         {project?.deadline ? new Date(project.deadline).toLocaleDateString() : 'Not specified'}
                                                     </span>
                                                 </div>
                                                 <div className="flex justify-between items-center">
                                                     <span className="text-xs font-bold uppercase tracking-widest">Location</span>
-                                                    <span className="text-[10px] font-black text-slate-500">{project?.location || 'Not specified'}</span>
+                                                    <span className="text-[10px] font-black text-text-secondary">{project?.location || 'Not specified'}</span>
                                                 </div>
                                                 <div className="flex justify-between items-center">
                                                     <span className="text-xs font-bold uppercase tracking-widest">Budget</span>
                                                     <span className="text-[10px] font-black text-primary">{project?.budget || 'Negotiable'}</span>
                                                 </div>
                                             </div>
-                                            
+
                                             {hasApplied && (
-                                                <div className="pt-6 border-t border-slate-100 dark:border-white/5">
-                                                    <div className="flex items-center gap-2 text-green-600 dark:text-green-400">
+                                                <div className="pt-6 border-t border-border dark:border-subtle/5">
+                                                    <div className="flex items-center gap-2 text-success dark:text-success">
                                                         <span className="material-symbols-outlined text-sm">check_circle</span>
                                                         <span className="text-sm font-bold">You have applied to this project</span>
                                                     </div>
@@ -713,21 +711,21 @@ const ProjectDetails = () => {
                                         <h3 className="text-xl font-black mb-6 flex items-center gap-3">
                                             <span className="w-1.5 h-6 bg-primary rounded-full"></span> Director Info
                                         </h3>
-                                        <div className="bg-white dark:bg-card-dark rounded-3xl p-6 border border-slate-200 dark:border-white/5 shadow-sm">
+                                        <div className="bg-surface dark:bg-card-dark rounded-3xl p-6 border border-border dark:border-subtle/5 shadow-sm">
                                             <div className="flex items-center gap-4">
-                                                <div className="size-12 rounded-xl bg-slate-200 overflow-hidden border border-slate-200 dark:border-white/5">
+                                                <div className="size-12 rounded-xl bg-surface overflow-hidden border border-border dark:border-subtle/5">
                                                     <img className="w-full h-full object-cover" src={directorCard.avatar} alt={directorCard.name} />
                                                 </div>
                                                 <div className="flex-1">
                                                     <p className="font-bold text-base leading-none mb-1">{directorCard.name}</p>
-                                                    <p className="text-sm text-slate-500 font-medium">{directorCard.roleTitle}</p>
+                                                    <p className="text-sm text-text-secondary font-medium">{directorCard.roleTitle}</p>
                                                 </div>
                                             </div>
                                             {directorCard.profileId && (
                                                 <div className="mt-4">
                                                     <Link
                                                         to={`/director/${directorCard.profileId}`}
-                                                        className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-primary text-white text-[10px] font-black uppercase tracking-widest hover:bg-primary/90 transition-colors"
+                                                        className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-primary text-primary-text text-[10px] font-black uppercase tracking-widest hover:bg-primary/90 transition-colors"
                                                     >
                                                         View Director Profile
                                                         <span className="material-symbols-outlined text-sm">arrow_outward</span>
@@ -742,14 +740,12 @@ const ProjectDetails = () => {
                     </div>
                 </div>
             </div>
-            <footer className="py-8 px-8 border-t border-slate-200 dark:border-border-dark text-center">
-                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">© 2026 TalentConnect • Where Global Talent Meets Opportunity</p>
+            <footer className="py-8 px-8 border-t border-border dark:border-border-dark text-center">
+                <p className="text-[10px] text-text-secondary font-bold uppercase tracking-widest">© 2026 Art-e-Techt • Where Global Talent Meets Opportunity</p>
             </footer>
         </DashboardLayout>
     );
 };
 
 export default ProjectDetails;
-
-
 

@@ -29,6 +29,8 @@ export const NotificationProvider = ({ children }) => {
 
   useEffect(() => {
     if (!isAuthenticated || !user) {
+      // Clear notification state when the authentication session ends.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setNotifications([]);
       setUnreadCount(0);
       if (socket.connected) {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useNotifications } from '../../context/NotificationContext';
+import ArtLogo from '../common/ArtLogo';
 
 const Sidebar = ({
     menuItems,
@@ -16,8 +17,8 @@ const Sidebar = ({
     const effectiveStatus = verificationStatus || authUser?.verificationStatus || 'none';
     const isVerified = effectiveStatus === 'verified';
 
-    const gradientBg = 'linear-gradient(180deg, #2c050b 0%, #19030a 55%, #080105 100%)';
-    const baseClasses = `border-r border-[#23040a] flex flex-col shadow-[0_20px_60px_rgba(0,0,0,0.45)] transition-transform duration-300 text-white`;
+    const gradientBg = 'linear-gradient(180deg, var(--color-void) 0%, var(--color-void) 55%, var(--color-void) 100%)';
+    const baseClasses = `border-r border-void flex flex-col shadow-[0_20px_60px_color-mix(in srgb, var(--color-void) 45%, transparent)] transition-transform duration-300 text-primary-text`;
     const desktopClasses = `${baseClasses} h-screen sticky top-0 flex-shrink-0 ${className}`;
     const mobileClasses = `${baseClasses} fixed inset-y-0 left-0 z-50 w-72 max-w-full ${isOpen ? 'translate-x-0' : '-translate-x-full'} ${className}`;
     const paddingClasses = isMobile ? 'px-6 pt-6 pb-4' : 'px-6 pt-8 pb-4';
@@ -37,20 +38,18 @@ const Sidebar = ({
             style={{ background: gradientBg }}
         >
             <div className={`${paddingClasses} flex items-center justify-between gap-4`}>
-                <div className="flex items-center gap-4 cursor-pointer">
-                    <div className="size-10 bg-[#1f050b] border border-white/20 rounded-xl flex items-center justify-center shadow-[0_12px_25px_rgba(0,0,0,0.5)]">
-                        <img src="/TC Logo.png" alt="Logo" className="h-7 w-auto" />
-                    </div>
+                <div className="flex items-center gap-3 cursor-pointer">
+                    <ArtLogo showWordmark={false} />
                     <div>
-                        <p className="text-xs font-black uppercase tracking-[0.4em] text-white/80 leading-tight">TALENTCONNECT</p>
-                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[#ffa3a3] mt-1">{userRole || 'INDIA • MEMBER'}</p>
+                        <p className="text-xs font-black uppercase tracking-[0.25em] text-primary-text/90 leading-tight">ART-E-TECHT</p>
+                        <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold mt-0.5">{userRole || 'MEMBER'}</p>
                     </div>
                 </div>
                 {isMobile && (
                     <button
                         type="button"
                         onClick={onClose}
-                        className="rounded-lg bg-white/90 text-[#200102] p-2 shadow-lg shadow-slate-900/40 hover:bg-white/100 transition"
+                        className="rounded-lg bg-surface/90 text-void p-2 shadow-lg shadow-border/40 hover:bg-surface/100 transition"
                         aria-label="Close navigation"
                     >
                         <span className="material-symbols-outlined text-lg">close</span>
@@ -63,7 +62,7 @@ const Sidebar = ({
                     if (item.type === 'section') {
                         return (
                             <div key={`section-${index}`} className="pt-3 pb-2 px-4">
-                                <p className="text-[10px] font-black uppercase tracking-[0.5em] text-white/60">
+                                <p className="text-[10px] font-black uppercase tracking-[0.5em] text-primary-text/60">
                                     {item.label}
                                 </p>
                             </div>
@@ -79,7 +78,7 @@ const Sidebar = ({
                             <div
                                 key={`locked-${index}`}
                                 title="Verification required to access this section"
-                                className="flex items-center gap-3.5 px-5 py-3.5 rounded-2xl relative overflow-hidden cursor-not-allowed opacity-40 select-none text-white/70 font-black uppercase tracking-[0.4em] text-[11px]"
+                                className="flex items-center gap-3.5 px-5 py-3.5 rounded-2xl relative overflow-hidden cursor-not-allowed opacity-40 select-none text-primary-text/70 font-black uppercase tracking-[0.4em] text-[11px]"
                             >
                                 <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
                                 <span className="flex-1">{item.label}</span>
@@ -95,8 +94,8 @@ const Sidebar = ({
                             onClick={handleLinkClick}
                             className={`flex items-center gap-3.5 px-5 py-3.5 rounded-2xl transition-all duration-300 relative overflow-hidden uppercase tracking-[0.4em] text-[11px] ${
                                 isActive
-                                    ? 'bg-[#ee2b3b] text-white shadow-[0_20px_50px_rgba(238,43,59,0.35)]'
-                                    : 'text-white/70 hover:text-white hover:bg-white/10'
+                                    ? 'bg-primary text-primary-text shadow-[0_20px_50px_color-mix(in srgb, var(--color-primary) 35%, transparent)]'
+                                    : 'text-primary-text/70 hover:text-primary-text hover:bg-surface/10'
                             }`}
                         >
                             {isActive && (

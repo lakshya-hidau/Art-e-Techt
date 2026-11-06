@@ -88,7 +88,7 @@ export const authorize = (...roles) => {
 // Enforce director free-trial / subscription window
 export const enforceDirectorBilling = (req, res, next) => {
     const user = req.user;
-    if (!user || (user.role !== 'director' && user.role !== 'admin')) return next();
+    if (!user || (user.role !== 'director' && user.role !== 'producer' && user.role !== 'admin')) return next();
     if (user.role === 'admin') return next();
 
     const hasActivePlan = user.subscriptionStatus === 'active' || user.plan === 'studio_pro';
@@ -103,3 +103,4 @@ export const enforceDirectorBilling = (req, res, next) => {
         trialEnd,
     });
 };
+

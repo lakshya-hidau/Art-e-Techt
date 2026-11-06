@@ -80,8 +80,8 @@ const LinkedInCallback = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background-light dark:bg-background-dark">
-      <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-6 py-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-lg">
-        <p className="text-slate-700 dark:text-slate-200 font-semibold">{message}</p>
+      <div className="bg-surface/80 dark:bg-void/80 backdrop-blur-md px-6 py-8 rounded-xl border border-border dark:border-border-subtle shadow-lg">
+        <p className="text-text-muted dark:text-text-primary font-semibold">{message}</p>
       </div>
     </div>
   );

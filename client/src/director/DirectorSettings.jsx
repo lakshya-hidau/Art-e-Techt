@@ -11,7 +11,7 @@ const Toast = ({ message, type, onDone }) => {
         return () => clearTimeout(id);
     }, [onDone]);
     return (
-        <div className={`fixed bottom-6 right-6 z-50 px-5 py-3 rounded-2xl text-white text-sm font-bold shadow-2xl ${type === 'error' ? 'bg-red-600' : 'bg-green-600'}`}>
+        <div className={`fixed bottom-6 right-6 z-50 px-5 py-3 rounded-2xl text-primary-text text-sm font-bold shadow-2xl ${type === 'error' ? 'bg-primary-hover' : 'bg-success'}`}>
             {message}
         </div>
     );
@@ -163,11 +163,11 @@ const DirectorSettings = () => {
             headerSubtitle="Manage your studio profile, privacy, and notifications."
             searchPlaceholder="Search settings..."
         >
-            <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen">
+            <div className="bg-background-light dark:bg-background-dark text-text-primary dark:text-text-primary font-display min-h-screen">
                 {loading ? (
                     <div className="flex flex-col items-center justify-center h-[60vh]">
                         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-primary mb-4"></div>
-                        <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Loading Settings...</p>
+                        <p className="text-text-secondary font-bold uppercase tracking-widest text-[10px]">Loading Settings...</p>
                     </div>
                 ) : (
                     <div className="max-w-4xl mx-auto py-8 space-y-12 pb-24">
@@ -179,25 +179,25 @@ const DirectorSettings = () => {
                                 <span className="material-symbols-outlined text-lg md:text-xl">visibility</span>
                                 <h2 className="text-base md:text-lg font-bold">Project Visibility & Privacy</h2>
                             </div>
-                            <div className="bg-white dark:bg-card-dark rounded-xl border border-slate-200 dark:border-white/5 divide-y divide-slate-100 dark:divide-white/5 shadow-sm">
+                            <div className="bg-surface dark:bg-card-dark rounded-xl border border-border dark:border-subtle/5 divide-y divide-border dark:divide-white/5 shadow-sm">
                                 <div className="p-4 md:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                     <div className="flex flex-col gap-1 min-w-0 flex-1">
-                                        <p className="font-bold text-slate-900 dark:text-white">Public Project Listings</p>
-                                        <p className="text-sm text-slate-500 dark:text-slate-400">Allow artists to find your projects in global searches.</p>
+                                        <p className="font-bold text-text-primary dark:text-primary-text">Public Project Listings</p>
+                                        <p className="text-sm text-text-secondary dark:text-text-secondary">Allow artists to find your projects in global searches.</p>
                                     </div>
                                     <label className="relative inline-flex items-center cursor-pointer flex-shrink-0">
                                         <input defaultChecked className="sr-only peer" type="checkbox" />
-                                        <div className="w-11 h-6 bg-slate-200 dark:bg-background-dark peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                        <div className="w-11 h-6 bg-surface dark:bg-background-dark peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-subtle after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface after:border-border after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
                                     </label>
                                 </div>
                                 <div className="p-4 md:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                     <div className="flex flex-col gap-1 min-w-0 flex-1">
-                                        <p className="font-bold text-slate-900 dark:text-white">Show Studio Details</p>
-                                        <p className="text-sm text-slate-500 dark:text-slate-400">Only verified artists can see your studio's official contact information.</p>
+                                        <p className="font-bold text-text-primary dark:text-primary-text">Show Studio Details</p>
+                                        <p className="text-sm text-text-secondary dark:text-text-secondary">Only verified artists can see your studio's official contact information.</p>
                                     </div>
                                     <label className="relative inline-flex items-center cursor-pointer flex-shrink-0">
                                         <input defaultChecked className="sr-only peer" type="checkbox" />
-                                        <div className="w-11 h-6 bg-slate-200 dark:bg-background-dark peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                        <div className="w-11 h-6 bg-surface dark:bg-background-dark peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-subtle after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface after:border-border after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
                                     </label>
                                 </div>
                             </div>
@@ -210,23 +210,23 @@ const DirectorSettings = () => {
                                 <h2 className="text-lg font-bold">Profile Photo & Portfolio</h2>
                             </div>
 
-                            <div className="bg-white dark:bg-card-dark rounded-xl border border-slate-200 dark:border-white/5 p-6 space-y-4">
+                            <div className="bg-surface dark:bg-card-dark rounded-xl border border-border dark:border-subtle/5 p-6 space-y-4">
                                 <div className="flex flex-col md:flex-row gap-4">
                                     <div className="flex-1">
                                         <p className="text-sm font-bold">Current Profile Picture</p>
                                         <img src={profile?.profilePicture || 'https://ui-avatars.com/api/?name=No+Photo'}
-                                            alt="Profile" className="w-32 h-32 rounded-full object-cover border border-slate-300 dark:border-zinc-700 mt-2" />
+                                            alt="Profile" className="w-32 h-32 rounded-full object-cover border border-border dark:border-border-subtle mt-2" />
                                         <input type="file" accept="image/*" onChange={handleProfilePictureUpload} className="mt-3" />
-                                        {uploadingProfilePic && <p className="text-xs text-slate-500">Uploading profile picture...</p>}
+                                        {uploadingProfilePic && <p className="text-xs text-text-secondary">Uploading profile picture...</p>}
                                     </div>
 
                                     <div className="flex-1">
                                         <p className="text-sm font-bold">Add Portfolio Item</p>
                                         <input type="file" accept="image/*,video/*" onChange={(e) => setPortfolioFile(e.target.files[0])} className="mt-2" />
-                                        <input type="text" placeholder="Title" value={portfolioTitle} onChange={(e) => setPortfolioTitle(e.target.value)} className="mt-2 w-full p-2 rounded border border-slate-300 dark:border-zinc-700" />
-                                        <textarea placeholder="Description" value={portfolioDescription} onChange={(e) => setPortfolioDescription(e.target.value)} className="mt-2 w-full p-2 rounded border border-slate-300 dark:border-zinc-700" rows={3} />
+                                        <input type="text" placeholder="Title" value={portfolioTitle} onChange={(e) => setPortfolioTitle(e.target.value)} className="mt-2 w-full p-2 rounded border border-border dark:border-border-subtle" />
+                                        <textarea placeholder="Description" value={portfolioDescription} onChange={(e) => setPortfolioDescription(e.target.value)} className="mt-2 w-full p-2 rounded border border-border dark:border-border-subtle" rows={3} />
                                         <button onClick={handlePortfolioUpload} disabled={uploadingPortfolio}
-                                            className="mt-3 px-4 py-2 bg-primary text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-primary/90 transition">
+                                            className="mt-3 px-4 py-2 bg-primary text-primary-text rounded-xl text-xs font-black uppercase tracking-widest hover:bg-primary/90 transition">
                                             {uploadingPortfolio ? 'Uploading...' : 'Upload Portfolio Item'}
                                         </button>
                                     </div>
@@ -235,7 +235,7 @@ const DirectorSettings = () => {
                                 {profile?.portfolio?.length > 0 && (
                                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                                         {profile.portfolio.map((item, index) => (
-                                            <div key={index} className="border border-slate-200 dark:border-zinc-700 rounded-lg overflow-hidden">
+                                            <div key={index} className="border border-border dark:border-border-subtle rounded-lg overflow-hidden">
                                                 {item.type === 'video' ? (
                                                     <video src={item.url} controls className="w-full h-24 object-cover" />
                                                 ) : (
@@ -257,34 +257,34 @@ const DirectorSettings = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                                 <button
                                     onClick={() => setShowPasswordModal(true)}
-                                    className="flex items-center justify-between p-4 md:p-5 bg-white dark:bg-card-dark rounded-xl border border-slate-200 dark:border-white/5 hover:border-primary/50 transition-colors group shadow-sm">
+                                    className="flex items-center justify-between p-4 md:p-5 bg-surface dark:bg-card-dark rounded-xl border border-border dark:border-subtle/5 hover:border-primary/50 transition-colors group shadow-sm">
                                     <div className="flex items-center gap-3 md:gap-4 min-w-0 flex-1">
-                                        <div className="size-8 md:size-10 rounded-lg bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors flex-shrink-0">
+                                        <div className="size-8 md:size-10 rounded-lg bg-surface-lowest dark:bg-surface/5 flex items-center justify-center text-text-secondary dark:text-text-secondary group-hover:text-primary transition-colors flex-shrink-0">
                                             <span className="material-symbols-outlined text-lg md:text-xl">lock_reset</span>
                                         </div>
                                         <div className="text-left min-w-0 flex-1">
-                                            <p className="font-bold text-slate-900 dark:text-white truncate">Change Password</p>
-                                            <p className="text-xs text-slate-500 dark:text-slate-400">Update your login password</p>
+                                            <p className="font-bold text-text-primary dark:text-primary-text truncate">Change Password</p>
+                                            <p className="text-xs text-text-secondary dark:text-text-secondary">Update your login password</p>
                                         </div>
                                     </div>
-                                    <span className="material-symbols-outlined text-slate-400 flex-shrink-0">chevron_right</span>
+                                    <span className="material-symbols-outlined text-text-secondary flex-shrink-0">chevron_right</span>
                                 </button>
 
-                                <div className="flex items-center justify-between p-4 md:p-5 bg-white dark:bg-card-dark rounded-xl border border-slate-200 dark:border-white/5 hover:border-primary/50 transition-colors shadow-sm">
+                                <div className="flex items-center justify-between p-4 md:p-5 bg-surface dark:bg-card-dark rounded-xl border border-border dark:border-subtle/5 hover:border-primary/50 transition-colors shadow-sm">
                                     <div className="flex items-center gap-3 md:gap-4 min-w-0 flex-1">
-                                    <div className="size-8 md:size-10 rounded-lg bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-500 dark:text-slate-400">
+                                    <div className="size-8 md:size-10 rounded-lg bg-surface-lowest dark:bg-surface/5 flex items-center justify-center text-text-secondary dark:text-text-secondary">
                                             <span className="material-symbols-outlined text-lg md:text-xl">verified_user</span>
                                         </div>
                                         <div className="text-left min-w-0 flex-1">
-                                            <p className="font-bold text-slate-900 dark:text-white truncate">Two-Factor Auth</p>
-                                            <p className={`text-xs font-medium ${security.twoFactorEnabled ? 'text-emerald-500' : 'text-slate-500 dark:text-slate-400'}`}>
+                                            <p className="font-bold text-text-primary dark:text-primary-text truncate">Two-Factor Auth</p>
+                                            <p className={`text-xs font-medium ${security.twoFactorEnabled ? 'text-success' : 'text-text-secondary dark:text-text-secondary'}`}>
                                                 {security.twoFactorEnabled ? 'Enabled' : 'Disabled'}
                                             </p>
                                         </div>
                                     </div>
                                     <label className="relative inline-flex items-center cursor-pointer flex-shrink-0">
                                         <input type="checkbox" className="sr-only peer" checked={security.twoFactorEnabled} onChange={handleToggle2FA} disabled={isToggling2FA} />
-                                        <div className="w-11 h-6 bg-slate-200 dark:bg-background-dark peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                        <div className="w-11 h-6 bg-surface dark:bg-background-dark peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-subtle after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface after:border-border after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
                                     </label>
                                 </div>
                             </div>
@@ -292,11 +292,11 @@ const DirectorSettings = () => {
 
                         {/* Password Change Modal */}
                         {showPasswordModal && (
-                            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4" onClick={() => setShowPasswordModal(false)}>
-                                <div className="bg-white dark:bg-zinc-900 rounded-3xl p-8 w-full max-w-md shadow-2xl border border-slate-200 dark:border-zinc-700" onClick={e => e.stopPropagation()}>
+                            <div className="fixed inset-0 z-50 flex items-center justify-center bg-void/60 backdrop-blur-sm p-4" onClick={() => setShowPasswordModal(false)}>
+                                <div className="bg-surface dark:bg-void rounded-3xl p-8 w-full max-w-md shadow-2xl border border-border dark:border-border-subtle" onClick={e => e.stopPropagation()}>
                                     <div className="flex items-center justify-between mb-6">
-                                        <h3 className="text-xl font-black dark:text-white uppercase italic tracking-tighter">Change Password</h3>
-                                        <button onClick={() => setShowPasswordModal(false)} className="text-slate-400 hover:text-red-500 transition-colors">
+                                        <h3 className="text-xl font-black dark:text-primary-text uppercase italic tracking-tighter">Change Password</h3>
+                                        <button onClick={() => setShowPasswordModal(false)} className="text-text-secondary hover:text-error transition-colors">
                                             <span className="material-symbols-outlined">close</span>
                                         </button>
                                     </div>
@@ -307,15 +307,15 @@ const DirectorSettings = () => {
                                             { label: 'Confirm New Password', key: 'confirmPassword', placeholder: 'Re-enter new password' },
                                         ].map(({ label, key, placeholder }) => (
                                             <div key={key}>
-                                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 block mb-2">{label}</label>
+                                                <label className="text-[10px] font-black uppercase tracking-widest text-text-secondary block mb-2">{label}</label>
                                                 <input type="password" value={pwForm[key]} onChange={e => setPwForm(p => ({ ...p, [key]: e.target.value }))}
                                                     placeholder={placeholder}
-                                                    className="w-full bg-slate-100 dark:bg-zinc-800 rounded-xl px-4 py-3 text-sm font-medium dark:text-white outline-none focus:ring-2 focus:ring-primary/50 transition-all"/>
+                                                    className="w-full bg-surface-lowest dark:bg-container rounded-xl px-4 py-3 text-sm font-medium dark:text-primary-text outline-none focus:ring-2 focus:ring-gold/50 transition-all"/>
                                             </div>
                                         ))}
-                                        {pwError && <p className="text-red-500 text-xs font-bold">{pwError}</p>}
+                                        {pwError && <p className="text-error text-xs font-bold">{pwError}</p>}
                                         <button type="submit" disabled={pwLoading}
-                                            className="w-full py-3.5 bg-primary text-white font-black rounded-xl uppercase tracking-widest text-xs hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2 disabled:opacity-70">
+                                            className="w-full py-3.5 bg-primary text-primary-text font-black rounded-xl uppercase tracking-widest text-xs hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2 disabled:opacity-70">
                                             {pwLoading ? <><span className="material-symbols-outlined text-sm animate-spin">sync</span> Saving...</> : 'Update Password'}
                                         </button>
                                     </form>
@@ -330,41 +330,41 @@ const DirectorSettings = () => {
                                 <h2 className="text-base md:text-lg font-bold">Notification Preferences</h2>
                             </div>
                             {/* Desktop Table View */}
-                            <div className="hidden md:block bg-white dark:bg-card-dark rounded-xl border border-slate-200 dark:border-white/5 overflow-hidden shadow-sm">
+                            <div className="hidden md:block bg-surface dark:bg-card-dark rounded-xl border border-border dark:border-subtle/5 overflow-hidden shadow-sm">
                                 <table className="w-full text-left text-sm">
-                                    <thead className="bg-slate-50 dark:bg-background-dark border-b border-slate-200 dark:border-white/5">
+                                    <thead className="bg-surface-lowest dark:bg-background-dark border-b border-border dark:border-subtle/5">
                                         <tr>
-                                            <th className="p-4 md:p-5 font-bold uppercase tracking-wider text-xs text-slate-900 dark:text-white">Category</th>
-                                            <th className="p-4 md:p-5 font-bold uppercase tracking-wider text-xs text-center text-slate-900 dark:text-white">Email</th>
-                                            <th className="p-4 md:p-5 font-bold uppercase tracking-wider text-xs text-center text-slate-900 dark:text-white">App Push</th>
+                                            <th className="p-4 md:p-5 font-bold uppercase tracking-wider text-xs text-text-primary dark:text-primary-text">Category</th>
+                                            <th className="p-4 md:p-5 font-bold uppercase tracking-wider text-xs text-center text-text-primary dark:text-primary-text">Email</th>
+                                            <th className="p-4 md:p-5 font-bold uppercase tracking-wider text-xs text-center text-text-primary dark:text-primary-text">App Push</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="divide-y divide-slate-100 dark:divide-white/5 text-slate-600 dark:text-slate-300">
+                                    <tbody className="divide-y divide-border dark:divide-white/5 text-text-muted dark:text-text-primary">
                                         <tr>
-                                            <td className="p-4 md:p-5 font-medium text-slate-900 dark:text-white">New Artist Applications</td>
+                                            <td className="p-4 md:p-5 font-medium text-text-primary dark:text-primary-text">New Artist Applications</td>
                                             <td className="p-4 md:p-5 text-center">
-                                                <input defaultChecked className="w-5 h-5 rounded border-slate-300 dark:border-white/10 text-primary focus:ring-primary bg-transparent" type="checkbox" />
+                                                <input defaultChecked className="w-5 h-5 rounded border-border dark:border-subtle/10 text-primary focus:ring-gold bg-transparent" type="checkbox" />
                                             </td>
                                             <td className="p-4 md:p-5 text-center">
-                                                <input defaultChecked className="w-5 h-5 rounded border-slate-300 dark:border-white/10 text-primary focus:ring-primary bg-transparent" type="checkbox" />
+                                                <input defaultChecked className="w-5 h-5 rounded border-border dark:border-subtle/10 text-primary focus:ring-gold bg-transparent" type="checkbox" />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td className="p-4 md:p-5 font-medium text-slate-900 dark:text-white">Audition Confirmations</td>
+                                            <td className="p-4 md:p-5 font-medium text-text-primary dark:text-primary-text">Audition Confirmations</td>
                                             <td className="p-4 md:p-5 text-center">
-                                                <input defaultChecked className="w-5 h-5 rounded border-slate-300 dark:border-white/10 text-primary focus:ring-primary bg-transparent" type="checkbox" />
+                                                <input defaultChecked className="w-5 h-5 rounded border-border dark:border-subtle/10 text-primary focus:ring-gold bg-transparent" type="checkbox" />
                                             </td>
                                             <td className="p-4 md:p-5 text-center">
-                                                <input defaultChecked className="w-5 h-5 rounded border-slate-300 dark:border-white/10 text-primary focus:ring-primary bg-transparent" type="checkbox" />
+                                                <input defaultChecked className="w-5 h-5 rounded border-border dark:border-subtle/10 text-primary focus:ring-gold bg-transparent" type="checkbox" />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td className="p-4 md:p-5 font-medium text-slate-900 dark:text-white">Direct Messages</td>
+                                            <td className="p-4 md:p-5 font-medium text-text-primary dark:text-primary-text">Direct Messages</td>
                                             <td className="p-4 md:p-5 text-center">
-                                                <input defaultChecked className="w-5 h-5 rounded border-slate-300 dark:border-white/10 text-primary focus:ring-primary bg-transparent" type="checkbox" />
+                                                <input defaultChecked className="w-5 h-5 rounded border-border dark:border-subtle/10 text-primary focus:ring-gold bg-transparent" type="checkbox" />
                                             </td>
                                             <td className="p-4 md:p-5 text-center">
-                                                <input className="w-5 h-5 rounded border-slate-300 dark:border-white/10 text-primary focus:ring-primary bg-transparent" type="checkbox" />
+                                                <input className="w-5 h-5 rounded border-border dark:border-subtle/10 text-primary focus:ring-gold bg-transparent" type="checkbox" />
                                             </td>
                                         </tr>
                                     </tbody>
@@ -372,43 +372,43 @@ const DirectorSettings = () => {
                             </div>
                             {/* Mobile Card View */}
                             <div className="md:hidden space-y-3">
-                                <div className="bg-white dark:bg-card-dark rounded-xl border border-slate-200 dark:border-white/5 p-4 shadow-sm">
+                                <div className="bg-surface dark:bg-card-dark rounded-xl border border-border dark:border-subtle/5 p-4 shadow-sm">
                                     <div className="flex items-center justify-between mb-3">
-                                        <h4 className="font-bold text-slate-900 dark:text-white">New Artist Applications</h4>
+                                        <h4 className="font-bold text-text-primary dark:text-primary-text">New Artist Applications</h4>
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <span className="text-sm text-slate-500 dark:text-slate-400">Email</span>
-                                        <input defaultChecked className="w-5 h-5 rounded border-slate-300 dark:border-white/10 text-primary focus:ring-primary bg-transparent" type="checkbox" />
+                                        <span className="text-sm text-text-secondary dark:text-text-secondary">Email</span>
+                                        <input defaultChecked className="w-5 h-5 rounded border-border dark:border-subtle/10 text-primary focus:ring-gold bg-transparent" type="checkbox" />
                                     </div>
                                     <div className="flex items-center justify-between mt-2">
-                                        <span className="text-sm text-slate-500 dark:text-slate-400">App Push</span>
-                                        <input defaultChecked className="w-5 h-5 rounded border-slate-300 dark:border-white/10 text-primary focus:ring-primary bg-transparent" type="checkbox" />
+                                        <span className="text-sm text-text-secondary dark:text-text-secondary">App Push</span>
+                                        <input defaultChecked className="w-5 h-5 rounded border-border dark:border-subtle/10 text-primary focus:ring-gold bg-transparent" type="checkbox" />
                                     </div>
                                 </div>
-                                <div className="bg-white dark:bg-card-dark rounded-xl border border-slate-200 dark:border-white/5 p-4 shadow-sm">
+                                <div className="bg-surface dark:bg-card-dark rounded-xl border border-border dark:border-subtle/5 p-4 shadow-sm">
                                     <div className="flex items-center justify-between mb-3">
-                                        <h4 className="font-bold text-slate-900 dark:text-white">Audition Confirmations</h4>
+                                        <h4 className="font-bold text-text-primary dark:text-primary-text">Audition Confirmations</h4>
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <span className="text-sm text-slate-500 dark:text-slate-400">Email</span>
-                                        <input defaultChecked className="w-5 h-5 rounded border-slate-300 dark:border-white/10 text-primary focus:ring-primary bg-transparent" type="checkbox" />
+                                        <span className="text-sm text-text-secondary dark:text-text-secondary">Email</span>
+                                        <input defaultChecked className="w-5 h-5 rounded border-border dark:border-subtle/10 text-primary focus:ring-gold bg-transparent" type="checkbox" />
                                     </div>
                                     <div className="flex items-center justify-between mt-2">
-                                        <span className="text-sm text-slate-500 dark:text-slate-400">App Push</span>
-                                        <input defaultChecked className="w-5 h-5 rounded border-slate-300 dark:border-white/10 text-primary focus:ring-primary bg-transparent" type="checkbox" />
+                                        <span className="text-sm text-text-secondary dark:text-text-secondary">App Push</span>
+                                        <input defaultChecked className="w-5 h-5 rounded border-border dark:border-subtle/10 text-primary focus:ring-gold bg-transparent" type="checkbox" />
                                     </div>
                                 </div>
-                                <div className="bg-white dark:bg-card-dark rounded-xl border border-slate-200 dark:border-white/5 p-4 shadow-sm">
+                                <div className="bg-surface dark:bg-card-dark rounded-xl border border-border dark:border-subtle/5 p-4 shadow-sm">
                                     <div className="flex items-center justify-between mb-3">
-                                        <h4 className="font-bold text-slate-900 dark:text-white">Direct Messages</h4>
+                                        <h4 className="font-bold text-text-primary dark:text-primary-text">Direct Messages</h4>
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <span className="text-sm text-slate-500 dark:text-slate-400">Email</span>
-                                        <input defaultChecked className="w-5 h-5 rounded border-slate-300 dark:border-white/10 text-primary focus:ring-primary bg-transparent" type="checkbox" />
+                                        <span className="text-sm text-text-secondary dark:text-text-secondary">Email</span>
+                                        <input defaultChecked className="w-5 h-5 rounded border-border dark:border-subtle/10 text-primary focus:ring-gold bg-transparent" type="checkbox" />
                                     </div>
                                     <div className="flex items-center justify-between mt-2">
-                                        <span className="text-sm text-slate-500 dark:text-slate-400">App Push</span>
-                                        <input className="w-5 h-5 rounded border-slate-300 dark:border-white/10 text-primary focus:ring-primary bg-transparent" type="checkbox" />
+                                        <span className="text-sm text-text-secondary dark:text-text-secondary">App Push</span>
+                                        <input className="w-5 h-5 rounded border-border dark:border-subtle/10 text-primary focus:ring-gold bg-transparent" type="checkbox" />
                                     </div>
                                 </div>
                             </div>
@@ -420,18 +420,18 @@ const DirectorSettings = () => {
                                 <span className="material-symbols-outlined text-lg md:text-xl">stars</span>
                                 <h2 className="text-base md:text-lg font-bold">Studio Subscription</h2>
                             </div>
-                            <div className="bg-gradient-to-r from-slate-900 to-black border border-primary/30 rounded-xl p-4 md:p-6 relative overflow-hidden shadow-lg">
+                            <div className="bg-gradient-to-r from-text-secondary to-black border border-primary/30 rounded-xl p-4 md:p-6 relative overflow-hidden shadow-lg">
                                 <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-4 md:gap-6">
                                     <div className="space-y-2 min-w-0 flex-1">
                                         <div className="flex items-center gap-2">
-                                            <span className="bg-primary text-white text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-widest">Active</span>
-                                            <h3 className="text-lg md:text-2xl font-black italic text-white">STUDIO PREMIUM</h3>
+                                            <span className="bg-primary text-primary-text text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-widest">Active</span>
+                                            <h3 className="text-lg md:text-2xl font-black italic text-primary-text">STUDIO PREMIUM</h3>
                                         </div>
-                                        <p className="text-slate-400 text-sm max-w-md">Your plan includes advanced talent filters, unlimited projects, and featured studio badges. Next billing: Nov 12, 2026.</p>
+                                        <p className="text-text-secondary text-sm max-w-md">Your plan includes advanced talent filters, unlimited projects, and featured studio badges. Next billing: Nov 12, 2026.</p>
                                     </div>
                                     <div className="flex flex-col sm:flex-row gap-2 md:gap-3">
-                                        <button className="bg-white/5 border border-white/10 text-white px-4 md:px-5 py-2 md:py-2.5 rounded-lg text-sm font-bold hover:bg-white/10 transition-colors">View Invoices</button>
-                                        <button className="bg-primary text-white px-4 md:px-5 py-2 md:py-2.5 rounded-lg text-sm font-bold shadow-xl shadow-primary/20 hover:brightness-110 transition-all">Manage Subscription</button>
+                                        <button className="bg-surface/5 border border-subtle/10 text-primary-text px-4 md:px-5 py-2 md:py-2.5 rounded-lg text-sm font-bold hover:bg-surface/10 transition-colors">View Invoices</button>
+                                        <button className="bg-primary text-primary-text px-4 md:px-5 py-2 md:py-2.5 rounded-lg text-sm font-bold shadow-xl shadow-primary/20 hover:brightness-110 transition-all">Manage Subscription</button>
                                     </div>
                                 </div>
                                 {/* Decorative background element */}
@@ -446,15 +446,15 @@ const DirectorSettings = () => {
                                 <span className="material-symbols-outlined text-lg md:text-xl">download</span>
                                 <h2 className="text-base md:text-lg font-bold">Privacy & Data Export</h2>
                             </div>
-                            <div className="bg-white dark:bg-card-dark rounded-xl border border-slate-200 dark:border-white/5 p-4 md:p-6 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                            <div className="bg-surface dark:bg-card-dark rounded-xl border border-border dark:border-subtle/5 p-4 md:p-6 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                                 <div className="space-y-1 min-w-0 flex-1">
-                                    <h3 className="font-bold text-slate-900 dark:text-white">Download My Data</h3>
-                                    <p className="text-sm text-slate-500 dark:text-slate-400">Export your account, profile, messages, notifications, and application data as JSON.</p>
+                                    <h3 className="font-bold text-text-primary dark:text-primary-text">Download My Data</h3>
+                                    <p className="text-sm text-text-secondary dark:text-text-secondary">Export your account, profile, messages, notifications, and application data as JSON.</p>
                                 </div>
                                 <button
                                     onClick={handleExportData}
                                     disabled={exportingData}
-                                    className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 md:px-5 py-2 md:py-2.5 rounded-lg text-sm font-bold hover:opacity-90 transition-all disabled:opacity-70 flex-shrink-0"
+                                    className="bg-void dark:bg-surface text-primary-text dark:text-text-primary px-4 md:px-5 py-2 md:py-2.5 rounded-lg text-sm font-bold hover:opacity-90 transition-all disabled:opacity-70 flex-shrink-0"
                                 >
                                     {exportingData ? 'Preparing Export...' : 'Download My Data'}
                                 </button>
@@ -462,14 +462,14 @@ const DirectorSettings = () => {
                         </section>
 
                         {/* Danger Zone / Delete Account */}
-                        <section className="pt-6 md:pt-8 border-t border-slate-200 dark:border-white/5">
-                            <div className="bg-rose-500/5 border border-rose-500/20 rounded-xl p-4 md:p-6 shadow-sm">
+                        <section className="pt-6 md:pt-8 border-t border-border dark:border-subtle/5">
+                            <div className="bg-primary/5 border border-error/20 rounded-xl p-4 md:p-6 shadow-sm">
                                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 md:gap-6">
                                     <div className="space-y-1 min-w-0 flex-1">
-                                        <h3 className="font-bold text-rose-500 text-base md:text-lg">Deactivate or Delete Studio Account</h3>
-                                        <p className="text-sm text-slate-500 dark:text-slate-400">Permanently delete your studio profile and all project history. This action cannot be undone.</p>
+                                        <h3 className="font-bold text-error text-base md:text-lg">Deactivate or Delete Studio Account</h3>
+                                        <p className="text-sm text-text-secondary dark:text-text-secondary">Permanently delete your studio profile and all project history. This action cannot be undone.</p>
                                     </div>
-                                    <button className="text-rose-500 text-sm font-bold border border-rose-500/30 px-4 md:px-5 py-2 md:py-2.5 rounded-lg hover:bg-rose-500 hover:text-white transition-all flex-shrink-0">
+                                    <button className="text-error text-sm font-bold border border-error/30 px-4 md:px-5 py-2 md:py-2.5 rounded-lg hover:bg-primary hover:text-primary-text transition-all flex-shrink-0">
                                         Delete Account
                                     </button>
                                 </div>
@@ -478,8 +478,8 @@ const DirectorSettings = () => {
                     </div>
                 )}
             </div>
-            <footer className="mt-auto py-6 px-8 border-t border-slate-200 dark:border-border-dark text-center">
-                <p className="text-xs text-slate-400 font-medium">© 2026 TalentConnect Entertainment. All rights reserved. Casting Partner: Cinematic Solutions.</p>
+            <footer className="mt-auto py-6 px-8 border-t border-border dark:border-border-dark text-center">
+                <p className="text-xs text-text-secondary font-medium">© 2026 Art-e-Techt. All rights reserved. Casting Partner: Cinematic Solutions.</p>
             </footer>
         </DashboardLayout>
     );

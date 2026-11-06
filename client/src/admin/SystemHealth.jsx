@@ -25,7 +25,7 @@ const SystemHealth = () => {
             }
         };
         fetchData();
-        
+
         // Simulate live metric updates
         const interval = setInterval(() => {
             setLastSync(new Date().toLocaleString());
@@ -51,8 +51,8 @@ const SystemHealth = () => {
     const userData = {
         name: adminProfile?.fullName || 'Admin',
         roleTitle: 'Super Admin',
-        avatar: adminProfile?.profilePicture && adminProfile.profilePicture !== 'no-photo.jpg' 
-            ? adminProfile.profilePicture 
+        avatar: adminProfile?.profilePicture && adminProfile.profilePicture !== 'no-photo.jpg'
+            ? adminProfile.profilePicture
             : `https://ui-avatars.com/api/?name=${adminProfile?.fullName || 'Admin'}&background=ee2b3b&color=fff`
     };
 
@@ -88,7 +88,7 @@ const SystemHealth = () => {
                 <div className="absolute inset-0 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
                 <span className="material-symbols-outlined absolute inset-0 m-auto size-fit text-primary text-3xl animate-pulse">vital_signs</span>
             </div>
-            <p className="mt-8 text-slate-400 font-black uppercase tracking-[0.4em] text-[10px] animate-pulse">Syncing Infrastructure Mesh...</p>
+            <p className="mt-8 text-text-secondary font-black uppercase tracking-[0.4em] text-[10px] animate-pulse">Syncing Infrastructure Mesh...</p>
         </div>
     );
 
@@ -98,16 +98,16 @@ const SystemHealth = () => {
             userRole="Ops Console"
             userData={userData}
             headerTitle="Mesh Diagnostics"
-            headerSubtitle="Real-time telemetry for TalentConnect infrastructure"
+            headerSubtitle="Real-time telemetry for Art-e-Techt infrastructure"
             headerActions={
                 <div className="flex gap-4">
-                    <button className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-slate-100 dark:bg-card-dark/5 text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest hover:bg-slate-200 dark:hover:bg-white/10 transition-all">
+                    <button className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-surface-lowest dark:bg-card-dark/5 text-text-secondary dark:text-text-secondary text-[10px] font-black uppercase tracking-widest hover:bg-surface dark:hover:bg-surface/10 transition-all">
                         <span className="material-symbols-outlined text-sm">terminal</span>
                         Live Console
                     </button>
                     <button
                         onClick={() => setLastSync(new Date().toLocaleString())}
-                        className="flex items-center gap-2 px-8 py-3 rounded-2xl bg-primary text-white text-[10px] font-black uppercase tracking-[0.2em] shadow-2xl shadow-primary/30 hover:shadow-primary/50 transition-all active:scale-95"
+                        className="flex items-center gap-2 px-8 py-3 rounded-2xl bg-primary text-primary-text text-[10px] font-black uppercase tracking-[0.2em] shadow-2xl shadow-primary/30 hover:shadow-primary/50 transition-all active:scale-95"
                     >
                         <span className="material-symbols-outlined text-sm">refresh_glow</span>
                         Refresh Shards
@@ -119,27 +119,27 @@ const SystemHealth = () => {
             <div className="max-w-7xl mx-auto py-8 lg:px-4 space-y-12 animate-in fade-in slide-in-from-bottom-6 duration-700">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {metrics.map((metric, idx) => (
-                        <div 
-                            key={idx} 
+                        <div
+                            key={idx}
                             onClick={() => metric.path && (window.location.href = metric.path)}
-                            className={`bg-white dark:bg-card-dark p-10 rounded-[2.5rem] border border-slate-200 dark:border-border-dark shadow-sm hover:shadow-2xl transition-all duration-500 group relative overflow-hidden ${metric.path ? 'cursor-pointer hover:border-primary/50' : ''}`}
+                            className={`bg-surface dark:bg-card-dark p-10 rounded-[2.5rem] border border-border dark:border-border-dark shadow-sm hover:shadow-2xl transition-all duration-500 group relative overflow-hidden ${metric.path ? 'cursor-pointer hover:border-primary/50' : ''}`}
                         >
                             <div className="flex justify-between items-start mb-8">
                                 <div className="size-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
                                     <span className="material-symbols-outlined text-2xl">{metric.icon}</span>
                                 </div>
                                 {metric.trend ? (
-                                    <span className={`text-[10px] font-black px-4 py-2 rounded-xl ${metric.trendDir === 'up' ? 'text-emerald-500 bg-emerald-500/10' : 'text-amber-500 bg-amber-500/10'}`}>
+                                    <span className={`text-[10px] font-black px-4 py-2 rounded-xl ${metric.trendDir === 'up' ? 'text-success bg-success/10' : 'text-warning bg-warning/10'}`}>
                                         {metric.trend}
                                     </span>
                                 ) : (
-                                    <span className="text-[10px] font-black text-slate-400 bg-slate-100 dark:bg-white dark:bg-card-dark/5 px-4 py-2 rounded-xl uppercase tracking-widest">
+                                    <span className="text-[10px] font-black text-text-secondary bg-surface-lowest dark:bg-surface dark:bg-card-dark/5 px-4 py-2 rounded-xl uppercase tracking-widest">
                                         {metric.status}
                                     </span>
                                 )}
                             </div>
-                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">{metric.label}</p>
-                            <p className="text-3xl font-black dark:text-white mt-4 tracking-tighter">{metric.value}</p>
+                            <p className="text-[10px] font-black text-text-secondary uppercase tracking-[0.2em]">{metric.label}</p>
+                            <p className="text-3xl font-black dark:text-primary-text mt-4 tracking-tighter">{metric.value}</p>
                             {metric.path && (
                                 <div className="absolute bottom-4 right-8 opacity-0 group-hover:opacity-100 transition-opacity">
                                     <span className="material-symbols-outlined text-primary text-sm">arrow_forward</span>
@@ -150,13 +150,13 @@ const SystemHealth = () => {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                    <div className="lg:col-span-2 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-[3rem] p-12 shadow-sm relative overflow-hidden group">
+                    <div className="lg:col-span-2 bg-surface dark:bg-card-dark border border-border dark:border-border-dark rounded-[3rem] p-12 shadow-sm relative overflow-hidden group">
                         <div className="flex items-center justify-between mb-16 relative z-10">
                             <div>
-                                <h3 className="text-2xl font-black dark:text-white uppercase tracking-tight">Cluster Propagation</h3>
-                                <p className="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-[0.2em]">Live resource allocation across distributed nodes</p>
+                                <h3 className="text-2xl font-black dark:text-primary-text uppercase tracking-tight">Cluster Propagation</h3>
+                                <p className="text-[10px] font-bold text-text-secondary mt-2 uppercase tracking-[0.2em]">Live resource allocation across distributed nodes</p>
                             </div>
-                            <div className="px-6 py-3 bg-slate-50 dark:bg-white dark:bg-card-dark/5 rounded-2xl text-[10px] font-black dark:text-white uppercase tracking-widest border border-slate-100 dark:border-white/5">
+                            <div className="px-6 py-3 bg-surface-lowest dark:bg-surface dark:bg-card-dark/5 rounded-2xl text-[10px] font-black dark:text-primary-text uppercase tracking-widest border border-border dark:border-subtle/5">
                                 Last Sync: {lastSync.split(',')[1]}
                             </div>
                         </div>
@@ -165,10 +165,10 @@ const SystemHealth = () => {
                             {[40, 55, 45, 70, 60, 85, 40, 30, 50, 75, 45, 65, 55, 40, 60].map((val, i) => (
                                 <div key={i} className="flex-1 bg-primary/5 rounded-full relative group/bar h-full">
                                     <div
-                                        className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/60 to-primary/20 rounded-full group-hover/bar:from-primary group-hover/bar:to-primary/40 transition-all duration-700 shadow-[0_0_20px_rgba(238,43,59,0.1)] group-hover/bar:shadow-[0_0_40px_rgba(238,43,59,0.3)]"
+                                        className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/60 to-primary/20 rounded-full group-hover/bar:from-primary group-hover/bar:to-primary/40 transition-all duration-700 shadow-[0_0_20px_color-mix(in srgb, var(--color-primary) 10%, transparent)] group-hover/bar:shadow-[0_0_40px_color-mix(in srgb, var(--color-primary) 30%, transparent)]"
                                         style={{ height: `${val}%` }}
                                     >
-                                        <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-black px-3 py-1.5 rounded-xl opacity-0 group-hover/bar:opacity-100 transition-all pointer-events-none whitespace-nowrap">
+                                        <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-void text-primary-text text-[10px] font-black px-3 py-1.5 rounded-xl opacity-0 group-hover/bar:opacity-100 transition-all pointer-events-none whitespace-nowrap">
                                             Zone {i+1}: {val}%
                                         </div>
                                     </div>
@@ -176,30 +176,30 @@ const SystemHealth = () => {
                             ))}
                         </div>
 
-                        <div className="flex justify-between text-[10px] text-slate-400 font-black uppercase tracking-[0.4em] px-4 relative z-10 border-t border-slate-50 dark:border-white/5 pt-8">
+                        <div className="flex justify-between text-[10px] text-text-secondary font-black uppercase tracking-[0.4em] px-4 relative z-10 border-t border-border dark:border-subtle/5 pt-8">
                             {['Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon'].map(t => <span key={t}>{t} Cascade</span>)}
                         </div>
                     </div>
 
-                    <div className="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-[3rem] p-12 shadow-sm group">
-                        <h3 className="text-2xl font-black dark:text-white uppercase tracking-tight mb-12">Zone Integrity</h3>
+                    <div className="bg-surface dark:bg-card-dark border border-border dark:border-border-dark rounded-[3rem] p-12 shadow-sm group">
+                        <h3 className="text-2xl font-black dark:text-primary-text uppercase tracking-tight mb-12">Zone Integrity</h3>
                         <div className="space-y-12">
-                            <div className="relative w-full aspect-square bg-slate-50 dark:bg-black/20 rounded-[3rem] overflow-hidden flex items-center justify-center border border-slate-100 dark:border-white/5">
+                            <div className="relative w-full aspect-square bg-surface-lowest dark:bg-void/20 rounded-[3rem] overflow-hidden flex items-center justify-center border border-border dark:border-subtle/5">
                                 <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary via-transparent to-transparent group-hover:opacity-30 transition-all duration-1000"></div>
                                 <div className="z-10 text-center px-6">
                                     <span className="material-symbols-outlined text-6xl text-primary animate-pulse">radar</span>
-                                    <p className="text-[11px] font-black text-slate-400 mt-6 uppercase tracking-[0.3em] group-hover:text-primary transition-colors">Mesh Scanning...</p>
+                                    <p className="text-[11px] font-black text-text-secondary mt-6 uppercase tracking-[0.3em] group-hover:text-primary transition-colors">Mesh Scanning...</p>
                                 </div>
-                                <div className="absolute top-1/4 left-1/3 size-4 bg-emerald-500 rounded-full animate-ping shadow-[0_0_20px_rgba(16,185,129,0.5)]"></div>
-                                <div className="absolute top-1/2 left-2/3 size-4 bg-emerald-500 rounded-full animate-ping delay-700 shadow-[0_0_20px_rgba(16,185,129,0.5)]"></div>
-                                <div className="absolute bottom-1/3 left-1/4 size-4 bg-amber-500 rounded-full animate-ping delay-300 shadow-[0_0_20px_rgba(245,158,11,0.5)]"></div>
+                                <div className="absolute top-1/4 left-1/3 size-4 bg-success rounded-full animate-ping shadow-[0_0_20px_color-mix(in srgb, var(--color-success) 50%, transparent)]"></div>
+                                <div className="absolute top-1/2 left-2/3 size-4 bg-success rounded-full animate-ping delay-700 shadow-[0_0_20px_color-mix(in srgb, var(--color-success) 50%, transparent)]"></div>
+                                <div className="absolute bottom-1/3 left-1/4 size-4 bg-warning rounded-full animate-ping delay-300 shadow-[0_0_20px_color-mix(in srgb, var(--color-primary) 50%, transparent)]"></div>
                             </div>
 
                             <div className="space-y-8">
                                 {regions.map((region, idx) => (
                                     <div key={idx} className="flex items-center justify-between group/item">
-                                        <span className="text-xs font-black text-slate-500 group-hover/item:text-slate-900 dark:text-white dark:group-hover/item:text-white uppercase tracking-widest transition-colors">{region.name}</span>
-                                        <div className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-3 ${region.color === 'emerald' ? 'text-emerald-500 bg-emerald-500/10' : 'text-amber-500 bg-amber-500/10'}`}>
+                                        <span className="text-xs font-black text-text-secondary group-hover/item:text-text-primary dark:text-primary-text dark:group-hover/item:text-primary-text uppercase tracking-widest transition-colors">{region.name}</span>
+                                        <div className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-3 ${region.color === 'emerald' ? 'text-success bg-success/10' : 'text-warning bg-warning/10'}`}>
                                             <div className={`size-2 rounded-full bg-current ${region.status.includes('Elevated') ? 'animate-pulse' : ''}`}></div>
                                             {region.status}
                                         </div>
@@ -211,21 +211,21 @@ const SystemHealth = () => {
                 </div>
 
                 <div className="space-y-12">
-                    <h3 className="text-3xl font-black dark:text-white uppercase tracking-tight">Service Mesh Topology</h3>
+                    <h3 className="text-3xl font-black dark:text-primary-text uppercase tracking-tight">Service Mesh Topology</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
                         {services.map((service, idx) => (
-                            <div key={idx} className="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-[2.5rem] p-10 hover:border-primary/50 transition-all duration-500 group relative overflow-hidden shadow-sm hover:shadow-2xl">
+                            <div key={idx} className="bg-surface dark:bg-card-dark border border-border dark:border-border-dark rounded-[2.5rem] p-10 hover:border-primary/50 transition-all duration-500 group relative overflow-hidden shadow-sm hover:shadow-2xl">
                                 <div className="flex items-center justify-between mb-10">
-                                    <span className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 group-hover:text-primary transition-colors">{service.name}</span>
-                                    <div className={`size-3 rounded-full ${service.status === 'Healthy' || service.status === 'Optimal' ? 'bg-emerald-500 border-4 border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.4)]' : 'bg-amber-500 animate-pulse border-4 border-amber-500/20 shadow-[0_0_15px_rgba(245,158,11,0.4)]'}`}></div>
+                                    <span className="text-[11px] font-black uppercase tracking-[0.2em] text-text-secondary group-hover:text-primary transition-colors">{service.name}</span>
+                                    <div className={`size-3 rounded-full ${service.status === 'Healthy' || service.status === 'Optimal' ? 'bg-success border-4 border-success/20 shadow-[0_0_15px_color-mix(in srgb, var(--color-success) 40%, transparent)]' : 'bg-warning animate-pulse border-4 border-warning/20 shadow-[0_0_15px_color-mix(in srgb, var(--color-primary) 40%, transparent)]'}`}></div>
                                 </div>
                                 <div className="flex items-baseline gap-3">
-                                    <span className="text-4xl font-black dark:text-white tracking-tighter">{service.availability}</span>
-                                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{service.subtext || service.status}</span>
+                                    <span className="text-4xl font-black dark:text-primary-text tracking-tighter">{service.availability}</span>
+                                    <span className="text-[10px] font-bold text-text-secondary uppercase tracking-widest">{service.subtext || service.status}</span>
                                 </div>
-                                <div className="mt-10 pt-8 border-t border-slate-50 dark:border-white/5 flex justify-between items-center opacity-60 group-hover:opacity-100 transition-opacity">
-                                    <span className="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">{service.version}</span>
-                                    <span className="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">{service.shard}</span>
+                                <div className="mt-10 pt-8 border-t border-border dark:border-subtle/5 flex justify-between items-center opacity-60 group-hover:opacity-100 transition-opacity">
+                                    <span className="text-[10px] text-text-secondary font-black uppercase tracking-[0.2em]">{service.version}</span>
+                                    <span className="text-[10px] text-text-secondary font-black uppercase tracking-[0.2em]">{service.shard}</span>
                                 </div>
                                 <div className="absolute top-0 right-0 size-24 bg-primary/5 rounded-full blur-2xl -mr-12 -mt-12 group-hover:size-32 transition-all"></div>
                             </div>
@@ -233,21 +233,21 @@ const SystemHealth = () => {
                     </div>
                 </div>
 
-                <div className="bg-slate-900 rounded-[3rem] overflow-hidden border border-white/5 shadow-2xl relative">
+                <div className="bg-void rounded-[3rem] overflow-hidden border border-subtle/5 shadow-2xl relative">
                     <div className="absolute top-0 right-0 size-64 bg-primary/5 rounded-full blur-[100px] -mr-32 -mt-32"></div>
-                    <div className="px-12 py-10 border-b border-white/5 flex items-center justify-between bg-white dark:bg-card-dark/[0.01] relative z-10">
+                    <div className="px-12 py-10 border-b border-subtle/5 flex items-center justify-between bg-surface dark:bg-card-dark/[0.01] relative z-10">
                         <div>
-                            <h3 className="text-2xl font-black text-white uppercase tracking-tight">Active Incident Log</h3>
-                            <p className="text-[10px] font-bold text-slate-500 mt-2 uppercase tracking-[0.3em]">Hardware & Software integrity reporting cluster</p>
+                            <h3 className="text-2xl font-black text-primary-text uppercase tracking-tight">Active Incident Log</h3>
+                            <p className="text-[10px] font-bold text-text-secondary mt-2 uppercase tracking-[0.3em]">Hardware & Software integrity reporting cluster</p>
                         </div>
-                        <button className="text-primary text-[10px] font-black uppercase tracking-[0.3em] border border-primary/20 bg-primary/5 px-8 py-4 rounded-2xl hover:bg-primary hover:text-white transition-all">
+                        <button className="text-primary text-[10px] font-black uppercase tracking-[0.3em] border border-primary/20 bg-primary/5 px-8 py-4 rounded-2xl hover:bg-primary hover:text-primary-text transition-all">
                             Dump History
                         </button>
                     </div>
                     <div className="overflow-x-auto relative z-10">
                         <table className="w-full text-left">
                             <thead>
-                                <tr className="bg-white dark:bg-card-dark/5 text-slate-400 text-[10px] font-black uppercase tracking-[0.4em]">
+                                <tr className="bg-surface dark:bg-card-dark/5 text-text-secondary text-[10px] font-black uppercase tracking-[0.4em]">
                                     <th className="px-12 py-8">Timestamp</th>
                                     <th className="px-12 py-8">Node Path</th>
                                     <th className="px-12 py-8">Event Detail</th>
@@ -257,20 +257,20 @@ const SystemHealth = () => {
                             </thead>
                             <tbody className="divide-y divide-white/5">
                                 {incidents.map((incident, idx) => (
-                                    <tr key={idx} className="hover:bg-white dark:bg-card-dark/[0.02] transition-colors group">
-                                        <td className="px-12 py-8 text-[11px] font-black text-slate-500 tracking-widest">{incident.time}</td>
-                                        <td className="px-12 py-8 text-sm font-black text-white uppercase tracking-tight">{incident.component}</td>
-                                        <td className="px-12 py-8 text-[11px] font-bold text-slate-400 uppercase tracking-widest leading-loose max-w-sm">{incident.event}</td>
+                                    <tr key={idx} className="hover:bg-surface dark:bg-card-dark/[0.02] transition-colors group">
+                                        <td className="px-12 py-8 text-[11px] font-black text-text-secondary tracking-widest">{incident.time}</td>
+                                        <td className="px-12 py-8 text-sm font-black text-primary-text uppercase tracking-tight">{incident.component}</td>
+                                        <td className="px-12 py-8 text-[11px] font-bold text-text-secondary uppercase tracking-widest leading-loose max-w-sm">{incident.event}</td>
                                         <td className="px-12 py-8">
                                             <span className={`px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest border ${incident.severity === 'CRITICAL' ? 'bg-primary/10 text-primary border-primary/20 animate-pulse' :
-                                                incident.severity === 'WARNING' ? 'bg-amber-500/10 text-amber-500 border-amber-500/20' :
-                                                    'bg-blue-500/10 text-blue-500 border-blue-500/20'
+                                                incident.severity === 'WARNING' ? 'bg-warning/10 text-warning border-warning/20' :
+                                                    'bg-gold/10 text-gold border-gold/20'
                                                 }`}>
                                                 {incident.severity}
                                             </span>
                                         </td>
                                         <td className="px-12 py-8 text-right">
-                                            <button className="bg-white dark:bg-card-dark/5 text-slate-400 hover:text-white text-[9px] font-black uppercase tracking-[0.3em] px-6 py-3 rounded-xl hover:bg-primary transition-all group-hover:translate-x-[-8px]">
+                                            <button className="bg-surface dark:bg-card-dark/5 text-text-secondary hover:text-primary-text text-[9px] font-black uppercase tracking-[0.3em] px-6 py-3 rounded-xl hover:bg-primary transition-all group-hover:translate-x-[-8px]">
                                                 Inspect Node
                                             </button>
                                         </td>
@@ -281,9 +281,9 @@ const SystemHealth = () => {
                     </div>
                 </div>
 
-                <footer className="pt-24 pb-12 text-center border-t border-slate-100 dark:border-white/5 space-y-4">
-                    <p className="text-[11px] font-black text-slate-400 uppercase tracking-[0.5em]">TalentConnect Operations Control • Core Integrity: SECURE</p>
-                    <p className="text-[10px] font-bold text-slate-400/40 uppercase tracking-widest">Global Shard: ap-south-1a-mumbai • Node Cluster: V4-OMEGA</p>
+                <footer className="pt-24 pb-12 text-center border-t border-border dark:border-subtle/5 space-y-4">
+                    <p className="text-[11px] font-black text-text-secondary uppercase tracking-[0.5em]">Art-e-Techt Operations Control • Core Integrity: SECURE</p>
+                    <p className="text-[10px] font-bold text-text-secondary/40 uppercase tracking-widest">Global Shard: ap-south-1a-mumbai • Node Cluster: V4-OMEGA</p>
                 </footer>
             </div>
         </DashboardLayout>

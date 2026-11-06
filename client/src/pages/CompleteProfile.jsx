@@ -136,15 +136,15 @@ const CompleteProfile = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
+      <div className="min-h-screen flex items-center justify-center bg-background-light dark:bg-background-dark text-text-primary dark:text-text-primary">
         <p className="text-lg font-semibold">Loading your profile...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 flex items-center justify-center px-4">
-      <div className="w-full max-w-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl p-8 md:p-10">
+    <div className="min-h-screen bg-background-light dark:bg-background-dark text-text-primary dark:text-text-primary flex items-center justify-center px-4">
+      <div className="w-full max-w-3xl bg-surface dark:bg-void border border-border dark:border-border-subtle rounded-2xl shadow-xl p-8 md:p-10">
         <div className="flex items-start md:items-center justify-between gap-4 flex-col md:flex-row">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-2">
@@ -154,19 +154,19 @@ const CompleteProfile = () => {
               We saved what Google/LinkedIn shared. Finish the essentials.
             </h1>
             {missing.length > 0 && (
-              <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+              <p className="mt-2 text-sm text-text-secondary dark:text-text-secondary">
                 Missing: {missing.join(', ')}. These help casting teams trust your profile.
               </p>
             )}
           </div>
           {profilePicture && (
-            <div className="flex items-center gap-3 bg-slate-100 dark:bg-slate-800/60 px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700">
+            <div className="flex items-center gap-3 bg-surface-lowest dark:bg-container/60 px-4 py-2 rounded-xl border border-border dark:border-border-subtle">
               <img
                 src={profilePicture}
                 alt="Profile"
                 className="h-12 w-12 rounded-full object-cover border border-primary/30"
               />
-              <span className="text-xs font-semibold text-slate-500 dark:text-slate-300">
+              <span className="text-xs font-semibold text-text-secondary dark:text-text-primary">
                 Pulled from your social account
               </span>
             </div>
@@ -175,38 +175,38 @@ const CompleteProfile = () => {
 
         <form className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-5" onSubmit={handleSubmit}>
           <div className="md:col-span-2 space-y-2">
-            <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Full Name</label>
+            <label className="text-sm font-semibold text-text-muted dark:text-text-primary">Full Name</label>
             <input
               name="fullName"
               value={formData.fullName}
               onChange={handleChange}
               required
-              className="w-full bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+              className="w-full bg-surface-lowest dark:bg-container/60 border border-border dark:border-border-subtle rounded-xl px-4 py-3 focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
               placeholder="Your full name"
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Mobile Number</label>
+            <label className="text-sm font-semibold text-text-muted dark:text-text-primary">Mobile Number</label>
             <input
               name="mobile"
               value={formData.mobile}
               onChange={handleChange}
               required
-              className="w-full bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+              className="w-full bg-surface-lowest dark:bg-container/60 border border-border dark:border-border-subtle rounded-xl px-4 py-3 focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
               placeholder="+91 98765 43210"
               type="tel"
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Location</label>
+            <label className="text-sm font-semibold text-text-muted dark:text-text-primary">Location</label>
             <input
               name="location"
               value={formData.location}
               onChange={handleChange}
               required
-              className="w-full bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+              className="w-full bg-surface-lowest dark:bg-container/60 border border-border dark:border-border-subtle rounded-xl px-4 py-3 focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
               placeholder="City, Country"
             />
           </div>
@@ -214,24 +214,24 @@ const CompleteProfile = () => {
           {role === 'director' ? (
             <>
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Production House / Studio</label>
+                <label className="text-sm font-semibold text-text-muted dark:text-text-primary">Production House / Studio</label>
                 <input
                   name="companyName"
                   value={formData.companyName}
                   onChange={handleChange}
                   required
-                  className="w-full bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+                  className="w-full bg-surface-lowest dark:bg-container/60 border border-border dark:border-border-subtle rounded-xl px-4 py-3 focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
                   placeholder="e.g. Dharma Productions"
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Industry Focus</label>
+                <label className="text-sm font-semibold text-text-muted dark:text-text-primary">Industry Focus</label>
                 <select
                   name="industryType"
                   value={formData.industryType}
                   onChange={handleChange}
                   required
-                  className="w-full bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+                  className="w-full bg-surface-lowest dark:bg-container/60 border border-border dark:border-border-subtle rounded-xl px-4 py-3 focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
                 >
                   <option value="">Select industry</option>
                   {industryTypes.map((type) => (
@@ -244,13 +244,13 @@ const CompleteProfile = () => {
             </>
           ) : (
             <div className="space-y-2 md:col-span-2">
-              <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Talent Category</label>
+              <label className="text-sm font-semibold text-text-muted dark:text-text-primary">Talent Category</label>
               <select
                 name="talentCategory"
                 value={formData.talentCategory}
                 onChange={handleChange}
                 required
-                className="w-full bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+                className="w-full bg-surface-lowest dark:bg-container/60 border border-border dark:border-border-subtle rounded-xl px-4 py-3 focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
               >
                 <option value="">Select category</option>
                 {talentCategories.map((c) => (
@@ -259,14 +259,14 @@ const CompleteProfile = () => {
                   </option>
                 ))}
               </select>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
+              <p className="text-xs text-text-secondary dark:text-text-secondary">
                 Choose the category you audition for most. You can fine-tune skills later.
               </p>
             </div>
           )}
 
           {error && (
-            <div className="md:col-span-2 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/40 text-red-700 dark:text-red-200 px-4 py-3 rounded-xl text-sm">
+            <div className="md:col-span-2 bg-error dark:bg-primary/10 border border-error dark:border-error/40 text-error dark:text-error px-4 py-3 rounded-xl text-sm">
               {error}
             </div>
           )}
@@ -275,13 +275,13 @@ const CompleteProfile = () => {
             <button
               type="submit"
               disabled={saving}
-              className={`px-6 py-3 rounded-xl font-bold text-white bg-primary hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 ${
+              className={`px-6 py-3 rounded-xl font-bold text-primary-text bg-primary hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 ${
                 saving ? 'opacity-70 cursor-not-allowed' : ''
               }`}
             >
               {saving ? 'Saving...' : 'Save & Continue'}
             </button>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-text-secondary dark:text-text-secondary">
               We only ask once. You can edit these any time from Settings.
             </p>
           </div>

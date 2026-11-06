@@ -88,8 +88,8 @@ const WorkshopPortalSection = ({ variant = 'home' }) => {
     <section
       className={`py-16 ${
         ['home', 'talent', 'director'].includes(variant)
-          ? 'bg-[rgb(34_16_18)]'
-          : 'bg-zinc-900/40'
+          ? 'bg-surface'
+          : 'bg-void/40'
       } dark:bg-background-dark`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -98,19 +98,19 @@ const WorkshopPortalSection = ({ variant = 'home' }) => {
             <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-2">
               Workshops & Masterclasses
             </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-primary-text tracking-tight">
               Master the Craft {variant === 'director' && 'with Your Team'}
             </h2>
-            <p className="text-zinc-400 mt-3 max-w-2xl text-sm md:text-base">{subtitle}</p>
+            <p className="text-text-secondary mt-3 max-w-2xl text-sm md:text-base">{subtitle}</p>
           </div>
           <div className="flex gap-3">
             <Link
               to="/workshops"
-              className="px-5 py-3 rounded-lg bg-primary text-white text-sm font-bold hover:bg-primary/90 transition"
+              className="px-5 py-3 rounded-lg bg-primary text-primary-text text-sm font-bold hover:bg-primary/90 transition"
             >
               Browse All
             </Link>
-            <button className="px-5 py-3 rounded-lg border border-zinc-700 text-white text-sm font-semibold hover:bg-white/5 transition">
+            <button className="px-5 py-3 rounded-lg border border-border-subtle text-primary-text text-sm font-semibold hover:bg-surface/5 transition">
               Save My Seat
             </button>
           </div>
@@ -120,7 +120,7 @@ const WorkshopPortalSection = ({ variant = 'home' }) => {
           {(loading ? fallbackCards : workshops).map((card, idx) => (
             <div
               key={card.id || card.title || idx}
-              className="group bg-zinc-900/60 border border-zinc-800 rounded-2xl overflow-hidden hover:border-primary/60 transition-all flex flex-col shadow-lg shadow-black/20"
+              className="group bg-void/60 border border-border-subtle rounded-2xl overflow-hidden hover:border-primary/60 transition-all flex flex-col shadow-lg shadow-black/20"
             >
               <div className="h-56 relative overflow-hidden">
                 <img
@@ -129,19 +129,19 @@ const WorkshopPortalSection = ({ variant = 'home' }) => {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-black/60 backdrop-blur text-white text-[10px] font-bold rounded-full border border-white/10 uppercase tracking-tighter">
+                  <span className="px-3 py-1 bg-void/60 backdrop-blur text-primary-text text-[10px] font-bold rounded-full border border-subtle/10 uppercase tracking-tighter">
                     {card.location}
                   </span>
                 </div>
               </div>
               <div className="p-6 flex-1 flex flex-col">
                 <div className="mb-3">
-                  <h3 className="text-lg font-bold text-white mb-1 leading-snug">{card.title}</h3>
+                  <h3 className="text-lg font-bold text-primary-text mb-1 leading-snug">{card.title}</h3>
                   <p className="text-primary text-xs font-bold uppercase tracking-wider">{card.mentor}</p>
-                  <p className="text-zinc-500 text-[11px] font-medium italic">{card.badge}</p>
+                  <p className="text-text-secondary text-[11px] font-medium italic">{card.badge}</p>
                 </div>
                 <div className="mt-auto space-y-3">
-                  <div className="flex items-center justify-between text-xs text-zinc-400">
+                  <div className="flex items-center justify-between text-xs text-text-secondary">
                     <div className="flex items-center gap-1.5">
                       <span className="material-icons text-sm">calendar_today</span>
                       <span>{card.date}</span>
@@ -151,9 +151,9 @@ const WorkshopPortalSection = ({ variant = 'home' }) => {
                       <span>{card.time}</span>
                     </div>
                   </div>
-                  <div className="flex items-center justify-between pt-4 border-t border-zinc-800">
-                    <span className="text-xl font-black text-white">{card.price}</span>
-                    <button className="px-4 py-2 bg-primary hover:bg-primary/90 text-white text-xs font-bold rounded-lg transition-all active:scale-95">
+                  <div className="flex items-center justify-between pt-4 border-t border-border-subtle">
+                    <span className="text-xl font-black text-primary-text">{card.price}</span>
+                    <button className="px-4 py-2 bg-primary hover:bg-primary/90 text-primary-text text-xs font-bold rounded-lg transition-all active:scale-95">
                       Book Now
                     </button>
                   </div>

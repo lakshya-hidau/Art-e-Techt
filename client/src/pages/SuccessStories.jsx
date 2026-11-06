@@ -1,13 +1,13 @@
 import React from 'react';
 const SuccessStories = () => {
   return (
-    <div className="bg-gray-950 text-gray-100 font-display min-h-screen">
+    <div className="bg-void text-text-primary font-display min-h-screen">
       <main className="pt-12">
         {/* Hero */}
         <section className="relative h-[520px] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <div className="absolute inset-0 bg-black/60 z-10" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(220,38,38,0.15)_0%,transparent_70%)] z-10" />
+            <div className="absolute inset-0 bg-void/60 z-10" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_color-mix(in srgb, var(--color-primary) 15%, transparent)_0%,transparent_70%)] z-10" />
             <img
               className="w-full h-full object-cover grayscale opacity-40"
               alt="Cinematic movie set with spotlights and camera"
@@ -15,10 +15,10 @@ const SuccessStories = () => {
             />
           </div>
           <div className="relative z-20 text-center px-6">
-            <span className="text-red-500 font-bold tracking-[0.2em] text-xs uppercase mb-4 block">Hall of Fame</span>
+            <span className="text-error font-bold tracking-[0.2em] text-xs uppercase mb-4 block">Hall of Fame</span>
             <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6">Success Stories</h1>
-            <p className="max-w-2xl mx-auto text-gray-400 text-lg">
-              Discover how rising stars transformed their dreams into reality through TalentConnect.
+            <p className="max-w-2xl mx-auto text-text-secondary text-lg">
+              Discover how rising stars transformed their dreams into reality through Art-e-techt.
             </p>
           </div>
         </section>
@@ -35,29 +35,29 @@ const SuccessStories = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
               <div className="absolute bottom-0 left-0 p-8 md:p-10 w-full">
                 <div className="flex items-center space-x-3 mb-4">
-                  <span className="px-3 py-1 bg-red-600 text-xs font-bold rounded-full">LEAD ROLE</span>
-                  <span className="text-gray-300 text-sm font-medium">The Last Dynasty</span>
+                  <span className="px-3 py-1 bg-primary-hover text-xs font-bold rounded-full">LEAD ROLE</span>
+                  <span className="text-text-primary text-sm font-medium">The Last Dynasty</span>
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                  "TalentConnect bridged my small-town dreams to the streaming screen."
+                  "Art-e-techt bridged my small-town dreams to the streaming screen."
                 </h2>
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-xl font-bold">Arjun Varma</p>
-                    <p className="text-gray-400 text-sm">Cast as 'Vikram' in a Netflix Original</p>
+                    <p className="text-text-secondary text-sm">Cast as 'Vikram' in a Netflix Original</p>
                   </div>
-                  <div className="bg-white/10 p-3 rounded-full backdrop-blur-md">
-                    <span className="material-icons text-white">play_arrow</span>
+                  <div className="bg-surface/10 p-3 rounded-full backdrop-blur-md">
+                    <span className="material-icons text-primary-text">play_arrow</span>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="md:col-span-4 flex flex-col gap-6">
-              <div className="bg-white/5 glass-card flex-1 rounded-xl p-8 flex flex-col justify-between border border-white/10">
+              <div className="bg-surface/5 glass-card flex-1 rounded-xl p-8 flex flex-col justify-between border border-subtle/10">
                 <div>
-                  <span className="material-icons text-red-500 mb-6 text-4xl">format_quote</span>
-                  <p className="text-lg italic text-gray-300 mb-6">
+                  <span className="material-icons text-error mb-6 text-4xl">format_quote</span>
+                  <p className="text-lg italic text-text-primary mb-6">
                     "Within two weeks of joining, I was auditioning for Urban Legends. The direct access to casting directors is a game changer."
                   </p>
                 </div>
@@ -69,7 +69,7 @@ const SuccessStories = () => {
                   />
                   <div>
                     <p className="font-bold text-sm">Sanya Iyer</p>
-                    <p className="text-gray-500 text-xs">Featured in 'Urban Legends'</p>
+                    <p className="text-text-secondary text-xs">Featured in 'Urban Legends'</p>
                   </div>
                 </div>
               </div>
@@ -80,10 +80,10 @@ const SuccessStories = () => {
                   alt="Cinematographer looking through camera"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwGF-tvTQSlCActnHRfa532JLRB5l6mV-dwFkzpE5FYgAz51TyuvUPKm6wbMO9IgOWKcFqwyMvyOScMTN1QrBBhngOm8s-3FXhisn_xLg3GDGUbUw8-q1LgRccPAoHx9usfouNiv14NJicXrd98nyfxi1t5YG5XlqGyXt5QNQkRYHbawKLbiqjHOuEhUNjvFtuS4I5OOTvt_sAhhMTSosg2Kl7CJooEMhly90GcG3zOCQprRVBpMVPIDaCjQe527pu0FZbZNofU4Ad"
                 />
-                <div className="absolute inset-0 bg-red-600/10 group-hover:bg-red-600/20 transition-colors" />
+                <div className="absolute inset-0 bg-primary-hover/10 group-hover:bg-primary-hover/20 transition-colors" />
                 <div className="relative z-10 p-8 flex flex-col h-full justify-end">
                   <h3 className="text-xl font-bold mb-2">300+ Productions</h3>
-                  <p className="text-sm text-gray-300">Across Bollywood and Indie cinema found talent here this year.</p>
+                  <p className="text-sm text-text-primary">Across Bollywood and Indie cinema found talent here this year.</p>
                 </div>
               </div>
             </div>
@@ -94,10 +94,10 @@ const SuccessStories = () => {
                 alt="Actor smiling"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhaNWMs2tc69lBlZrcSlCn1Yg6Cw3z5tzDelNBKFVbPC_GmdAZoF4ZmQENm2OivLqZ2halOe3ez8ykEfBJR6cxuwLBXjS5NsV6rcQd4g242xfcKCNVVnH3Dzt2SZ4fLgkIinh0g8ZePOoLiCF0suya-AKSroOsk6_42fsyOgv4Q1ll2Nkp3HyXRuvTKt5HZBfzjHef1ZN3KuoW9CNVsYCHU28XmNFTN3vhbOUHPdy4JSUxKSWLjUoTGXybna8X_FtBIrKz8HjB0qi1"
               />
-              <div className="absolute inset-0 bg-black/40" />
+              <div className="absolute inset-0 bg-void/40" />
               <div className="absolute bottom-0 p-6">
                 <p className="font-bold text-lg">Rohan Malhotra</p>
-                <p className="text-red-500 text-sm font-semibold">Casting: The Shadow Play</p>
+                <p className="text-error text-sm font-semibold">Casting: The Shadow Play</p>
               </div>
             </div>
 
@@ -107,20 +107,20 @@ const SuccessStories = () => {
                 alt="Stunning female portrait"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeDiDhhLpRq2hnZDAeuwZ_LFp__JDeqpOimN4NCqKE2VzIA5hdhvwe1G5T9lVsYUShwTl5b4d1V07PlDfiP_jz8xfKUhrQ0BI3Lt6omloWdd9EXXfh38rEHA5G0H0RWCjVOE5GQNvPo3PoMMcHXVFj3ERCopshBnpwVuAolckFwItfn2sNLktiz8QO9hSDngDd8PMr4HNcQbmLR8ulT8sgoNjytXehowuf_iL1VElbnOL0CC-aDdSw6eTnpnCtuCB3T_M_tis_LPw9"
               />
-              <div className="absolute inset-0 bg-black/40" />
+              <div className="absolute inset-0 bg-void/40" />
               <div className="absolute bottom-0 p-6">
                 <p className="font-bold text-lg">Meera Kapoor</p>
-                <p className="text-red-500 text-sm font-semibold">Lead: Neon Streets</p>
+                <p className="text-error text-sm font-semibold">Lead: Neon Streets</p>
               </div>
             </div>
 
-            <div className="md:col-span-4 bg-white/5 glass-card rounded-xl p-8 flex flex-col items-center justify-center text-center">
-              <div className="w-16 h-16 bg-red-600/20 rounded-full flex items-center justify-center mb-6">
-                <span className="material-icons text-red-500 text-3xl">add</span>
+            <div className="md:col-span-4 bg-surface/5 glass-card rounded-xl p-8 flex flex-col items-center justify-center text-center">
+              <div className="w-16 h-16 bg-primary-hover/20 rounded-full flex items-center justify-center mb-6">
+                <span className="material-icons text-error text-3xl">add</span>
               </div>
               <h3 className="text-xl font-bold mb-2">Be the next star</h3>
-              <p className="text-gray-400 text-sm mb-6">Your success story starts with a single profile. Join today.</p>
-              <button className="w-full py-3 bg-red-600 text-white rounded-lg font-bold text-sm tracking-wide hover:bg-red-700 transition-colors">
+              <p className="text-text-secondary text-sm mb-6">Your success story starts with a single profile. Join today.</p>
+              <button className="w-full py-3 bg-primary-hover text-primary-text rounded-lg font-bold text-sm tracking-wide hover:bg-primary-hover transition-colors">
                 Start Your Journey
               </button>
             </div>
@@ -129,19 +129,19 @@ const SuccessStories = () => {
 
         {/* CTA */}
         <section className="px-6 lg:px-12 py-20">
-          <div className="max-w-7xl mx-auto relative rounded-3xl overflow-hidden py-16 text-center bg-red-600">
+          <div className="max-w-7xl mx-auto relative rounded-3xl overflow-hidden py-16 text-center bg-primary-hover">
             <div
               className="absolute inset-0 opacity-20"
               style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}
             />
             <div className="relative z-10 px-6">
               <h2 className="text-4xl md:text-5xl font-black mb-6">Ready to be our next success story?</h2>
-              <p className="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+              <p className="text-primary-text/80 text-lg mb-8 max-w-xl mx-auto">
                 Join the premium community of artists and casting directors across India.
               </p>
               <div className="flex flex-col md:flex-row gap-4 justify-center">
-                <button className="bg-white text-red-600 px-8 py-4 rounded-xl font-bold text-lg hover:shadow-xl transition-shadow">Join as Artist</button>
-                <button className="bg-black/20 text-white backdrop-blur-md px-8 py-4 rounded-xl font-bold text-lg hover:bg-black/30 transition-all border border-white/20">
+                <button className="bg-surface text-error px-8 py-4 rounded-xl font-bold text-lg hover:shadow-xl transition-shadow">Join as Artist</button>
+                <button className="bg-void/20 text-primary-text backdrop-blur-md px-8 py-4 rounded-xl font-bold text-lg hover:bg-void/30 transition-all border border-subtle/20">
                   Hire Talent
                 </button>
               </div>

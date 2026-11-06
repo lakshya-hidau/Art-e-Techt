@@ -1,3 +1,4 @@
+import ArtLogo from '../components/common/ArtLogo';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { register, login, loginWithGoogle, autoLinkedInLogin } from '../services/authService';
@@ -60,12 +61,11 @@ const RegisterDirector = () => {
     industryType: '',
     location: '',
     password: '',
-    agreeTerms: false
+    role: formData.role || 'director', agreeTerms: false
   });
   const [loading, setLoading] = useState(false);
   const [socialLoading, setSocialLoading] = useState({ google: false, linkedin: false });
   const [error, setError] = useState('');
-  const [submitAttempts, setSubmitAttempts] = useState(0);
   const [lockUntil, setLockUntil] = useState(null);
   const navigate = useNavigate();
 
@@ -76,12 +76,12 @@ const RegisterDirector = () => {
       const required = ['fullName', 'mobile', 'location', 'companyName', 'industryType'];
       const missing = required.filter((field) => !profile?.[field]);
       if (missing.length) {
-        navigate('/onboarding/complete-profile', { state: { role: 'director', missing } });
+        navigate('/onboarding/complete-profile', { state: { role: formData.role || 'director', missing } });
       } else {
-        navigate('/dashboard/director');
+        navigate(formData.role === 'producer' ? '/dashboard/producer' : '/dashboard/director');
       }
     } catch {
-      navigate('/dashboard/director');
+      navigate(formData.role === 'producer' ? '/dashboard/producer' : '/dashboard/director');
     }
   };
 
@@ -112,7 +112,7 @@ const RegisterDirector = () => {
       const userData = {
         email: formData.email,
         password: formData.password,
-        role: 'director',
+        role: formData.role || 'director',
         fullName: formData.fullName,
         companyName: formData.productionName,
         industryType: formData.industryType,
@@ -125,9 +125,8 @@ const RegisterDirector = () => {
         authData = await login(formData.email, formData.password);
       }
       setSessionFromAuthResponse(authData);
-      setSubmitAttempts(0);
       setLockUntil(null);
-      navigate('/dashboard/director');
+      navigate(formData.role === 'producer' ? '/dashboard/producer' : '/dashboard/director');
     } catch (err) {
       console.error('Registration full error:', err);
       // Better error handling with more specific messages
@@ -185,7 +184,7 @@ const RegisterDirector = () => {
   };
 
   return (
-    <div className="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+    <div className="bg-background-light dark:bg-background-dark font-display text-text-primary dark:text-text-primary min-h-screen">
       <div className="flex flex-col lg:flex-row min-h-screen">
         {/* Left Side: Cinematic Visual */}
         <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
@@ -198,12 +197,12 @@ const RegisterDirector = () => {
           <div className="relative z-20 flex flex-col justify-end p-16 h-full">
             <div className="flex items-center gap-3 mb-8">
               <div className="p-1">
-                <img src="/TC Logo.png" alt="Logo" className="h-12 w-auto" />
+                <ArtLogo showWordmark={true} />
               </div>
-              <h1 className="text-white text-3xl font-black tracking-tighter uppercase">TALENT<span className="text-primary">CONNECT</span></h1>
+              <h1 className="text-primary-text text-3xl font-black tracking-tighter uppercase">TALENT<span className="text-primary">CONNECT</span></h1>
             </div>
-            <h2 className="text-white text-5xl font-black leading-tight mb-4">Empowering Visionary <span className="text-primary">Storytellers</span></h2>
-            <p className="text-slate-300 text-lg max-w-md">Connect with India's finest talent pool and bring your creative visions to life with our premium casting infrastructure.</p>
+            <h2 className="text-primary-text text-5xl font-black leading-tight mb-4">Empowering Visionary <span className="text-primary">Storytellers</span></h2>
+            <p className="text-text-primary text-lg max-w-md">Connect with India's finest talent pool and bring your creative visions to life with our premium casting infrastructure.</p>
           </div>
         </div>
 
@@ -212,26 +211,26 @@ const RegisterDirector = () => {
           <div className="max-w-md w-full mx-auto lg:mx-0">
             {/* Mobile Branding */}
             <div className="flex items-center gap-2 mb-8 lg:hidden">
-              <img src="/TC Logo.png" alt="Logo" className="h-8 w-auto" />
-               <h2 className="text-slate-900 dark:text-slate-100 text-xl font-bold">TALENT<span className="text-primary">CONNECT</span></h2>
+              <ArtLogo showWordmark={true} />
+               <h2 className="text-text-primary dark:text-text-primary text-xl font-bold">TALENT<span className="text-primary">CONNECT</span></h2>
             </div>
 
             <div className="mb-10">
-              <h3 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-2">Create Professional Account</h3>
-              <p className="text-slate-600 dark:text-slate-400">Join the elite circle of Indian production houses and directors.</p>
+              <h3 className="text-3xl font-bold text-text-primary dark:text-text-primary mb-2">Create Professional Account</h3>
+              <p className="text-text-muted dark:text-text-secondary">Join the elite circle of Indian production houses and directors.</p>
             </div>
 
             <form className="space-y-5" onSubmit={handleSubmit}>
               {/* Full Name */}
               <div className="space-y-1.5">
-                <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Full Name / Contact Person</label>
+                <label className="text-sm font-semibold text-text-muted dark:text-text-primary">Full Name / Contact Person</label>
                 <div className="relative">
-                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">person</span>
+                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary text-xl">person</span>
                   <input
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleChange}
-                    className="w-full pl-12 pr-4 py-3.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                    className="w-full pl-12 pr-4 py-3.5 bg-surface dark:bg-void border border-border dark:border-border-subtle rounded-xl focus:ring-2 focus:ring-gold focus:border-transparent outline-none transition-all"
                     placeholder="e.g. Karan Johar"
                     type="text"
                   />
@@ -240,14 +239,14 @@ const RegisterDirector = () => {
 
               {/* Production House Name */}
               <div className="space-y-1.5">
-                <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Production House / Studio Name</label>
+                <label className="text-sm font-semibold text-text-muted dark:text-text-primary">Production House / Studio Name</label>
                 <div className="relative">
-                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">apartment</span>
+                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary text-xl">apartment</span>
                   <input
                     name="productionName"
                     value={formData.productionName}
                     onChange={handleChange}
-                    className="w-full pl-12 pr-4 py-3.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                    className="w-full pl-12 pr-4 py-3.5 bg-surface dark:bg-void border border-border dark:border-border-subtle rounded-xl focus:ring-2 focus:ring-gold focus:border-transparent outline-none transition-all"
                     placeholder="e.g. Dharma Productions"
                     type="text"
                   />
@@ -257,14 +256,14 @@ const RegisterDirector = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Email Address */}
                 <div className="space-y-1.5">
-                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Business Email</label>
+                  <label className="text-sm font-semibold text-text-muted dark:text-text-primary">Business Email</label>
                   <div className="relative">
-                    <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">mail</span>
+                    <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary text-xl">mail</span>
                     <input
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full pl-12 pr-4 py-3.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                      className="w-full pl-12 pr-4 py-3.5 bg-surface dark:bg-void border border-border dark:border-border-subtle rounded-xl focus:ring-2 focus:ring-gold focus:border-transparent outline-none transition-all"
                       placeholder="contact@studio.com"
                       type="email"
                     />
@@ -273,14 +272,14 @@ const RegisterDirector = () => {
 
                 {/* Mobile Number */}
                 <div className="space-y-1.5">
-                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Mobile Number</label>
+                  <label className="text-sm font-semibold text-text-muted dark:text-text-primary">Mobile Number</label>
                   <div className="relative">
-                    <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">call</span>
+                    <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary text-xl">call</span>
                     <input
                       name="mobile"
                       value={formData.mobile}
                       onChange={handleChange}
-                      className="w-full pl-12 pr-4 py-3.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                      className="w-full pl-12 pr-4 py-3.5 bg-surface dark:bg-void border border-border dark:border-border-subtle rounded-xl focus:ring-2 focus:ring-gold focus:border-transparent outline-none transition-all"
                       placeholder="+91 98XXX XXXXX"
                       type="tel"
                     />
@@ -291,14 +290,14 @@ const RegisterDirector = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Industry Type */}
                 <div className="space-y-1.5">
-                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Industry Type</label>
+                  <label className="text-sm font-semibold text-text-muted dark:text-text-primary">Industry Type</label>
                   <div className="relative">
-                    <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">category</span>
+                    <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary text-xl">category</span>
                     <select
                       name="industryType"
                       value={formData.industryType}
                       onChange={handleChange}
-                      className="w-full pl-12 pr-4 py-3.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none appearance-none transition-all"
+                      className="w-full pl-12 pr-4 py-3.5 bg-surface dark:bg-void border border-border dark:border-border-subtle rounded-xl focus:ring-2 focus:ring-gold focus:border-transparent outline-none appearance-none transition-all"
                     >
                       <option value="">Select Industry</option>
                       {industryTypes.map((type) => (
@@ -310,14 +309,14 @@ const RegisterDirector = () => {
 
                 {/* Location */}
                 <div className="space-y-1.5">
-                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Primary Location</label>
+                  <label className="text-sm font-semibold text-text-muted dark:text-text-primary">Primary Location</label>
                   <div className="relative">
-                    <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">location_on</span>
+                    <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary text-xl">location_on</span>
                     <select
                       name="location"
                       value={formData.location}
                       onChange={handleChange}
-                      className="w-full pl-12 pr-4 py-3.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all appearance-none"
+                      className="w-full pl-12 pr-4 py-3.5 bg-surface dark:bg-void border border-border dark:border-border-subtle rounded-xl focus:ring-2 focus:ring-gold focus:border-transparent outline-none transition-all appearance-none"
                     >
                       <option value="">Select Primary Location</option>
                       {locations.map((loc) => (
@@ -330,14 +329,14 @@ const RegisterDirector = () => {
 
               {/* Password */}
               <div className="space-y-1.5">
-                <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Create Password</label>
+                <label className="text-sm font-semibold text-text-muted dark:text-text-primary">Create Password</label>
                 <div className="relative">
-                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">lock</span>
+                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary text-xl">lock</span>
                   <input
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
-                    className="w-full pl-12 pr-4 py-3.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                    className="w-full pl-12 pr-4 py-3.5 bg-surface dark:bg-void border border-border dark:border-border-subtle rounded-xl focus:ring-2 focus:ring-gold focus:border-transparent outline-none transition-all"
                     placeholder="Min. 8 characters"
                     type="password"
                   />
@@ -351,21 +350,21 @@ const RegisterDirector = () => {
                   type="checkbox"
                   checked={formData.agreeTerms}
                   onChange={handleChange}
-                  className="mt-1 rounded text-primary focus:ring-primary"
+                  className="mt-1 rounded text-primary focus:ring-gold"
                 />
-                <label className="text-xs text-slate-600 dark:text-slate-400 leading-tight" htmlFor="terms">
-                  By signing up, I agree to TalentConnect<a className="text-primary hover:underline" href="/terms-and-conditions">Terms of Service</a> and <a className="text-primary hover:underline" href="/privacy-policy">Privacy Policy</a>.
+                <label className="text-xs text-text-muted dark:text-text-secondary leading-tight" htmlFor="terms">
+                  By signing up, I agree to Art-e-techt<a className="text-primary hover:underline" href="/terms-and-conditions">Terms of Service</a> and <a className="text-primary hover:underline" href="/privacy-policy">Privacy Policy</a>.
                 </label>
               </div>
 
               {error && (
-                <div className="bg-red-100 dark:bg-red-500/20 border border-red-500/50 text-red-600 dark:text-red-200 p-3 rounded-xl text-sm mb-4">
+                <div className="bg-error dark:bg-primary/20 border border-error/50 text-error dark:text-error p-3 rounded-xl text-sm mb-4">
                   {error}
                 </div>
               )}
 
               <button
-                className={`w-full py-4 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl transition-all shadow-lg shadow-primary/20 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+                className={`w-full py-4 bg-primary hover:bg-primary/90 text-primary-text font-bold rounded-xl transition-all shadow-lg shadow-primary/20 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
                 type="submit"
                 disabled={loading || (lockUntil && Date.now() < lockUntil)}
               >
@@ -373,8 +372,8 @@ const RegisterDirector = () => {
               </button>
             </form>
 
-            <div className="mt-8 pt-8 border-t border-slate-200 dark:border-slate-800 text-center">
-              <p className="text-slate-600 dark:text-slate-400">
+            <div className="mt-8 pt-8 border-t border-border dark:border-border-subtle text-center">
+              <p className="text-text-muted dark:text-text-secondary">
                 Already have an account?
                 <a className="text-primary font-bold hover:underline ml-1" href="/login">Log in here</a>
               </p>
@@ -385,7 +384,7 @@ const RegisterDirector = () => {
                 type="button"
                 onClick={handleGoogle}
                 disabled={socialLoading.google}
-                className="w-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 hover:border-primary/60 hover:shadow-md transition-all"
+                className="w-full border border-border dark:border-border-subtle bg-surface dark:bg-void text-text-primary dark:text-primary-text font-semibold py-3 rounded-xl flex items-center justify-center gap-2 hover:border-primary/60 hover:shadow-md transition-all"
               >
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" className="h-5 w-5" />
                 <span>{socialLoading.google ? 'Connecting...' : 'Continue with Google'}</span>
@@ -394,7 +393,7 @@ const RegisterDirector = () => {
                 type="button"
                 onClick={handleLinkedIn}
                 disabled={socialLoading.linkedin}
-                className="w-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 hover:border-primary/60 hover:shadow-md transition-all"
+                className="w-full border border-border dark:border-border-subtle bg-surface dark:bg-void text-text-primary dark:text-primary-text font-semibold py-3 rounded-xl flex items-center justify-center gap-2 hover:border-primary/60 hover:shadow-md transition-all"
               >
                 <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" className="h-5 w-5" />
                 <span>{socialLoading.linkedin ? 'Connecting...' : 'Continue with LinkedIn'}</span>
@@ -402,10 +401,10 @@ const RegisterDirector = () => {
             </div>
 
             <div className="mt-6 flex justify-center gap-4">
-              <button className="flex items-center gap-2 text-xs font-semibold text-slate-500 hover:text-primary transition-colors">
+              <button className="flex items-center gap-2 text-xs font-semibold text-text-secondary hover:text-primary transition-colors">
                 <span className="material-symbols-outlined text-base">help</span> Support
               </button>
-              <button className="flex items-center gap-2 text-xs font-semibold text-slate-500 hover:text-primary transition-colors">
+              <button className="flex items-center gap-2 text-xs font-semibold text-text-secondary hover:text-primary transition-colors">
                 <span className="material-symbols-outlined text-base">language</span> English
               </button>
             </div>

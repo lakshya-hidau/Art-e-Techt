@@ -2,18 +2,14 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StripeProvider from '../components/StripeProvider';
 import CheckoutForm from '../components/CheckoutForm';
+import ArtLogo from '../components/common/ArtLogo';
 
 const DirectorCheckout = () => {
     const navigate = useNavigate();
     const [paymentMethod, setPaymentMethod] = useState('card');
-    const [isSavingCard, setIsSavingCard] = useState(true);
     const [paymentSuccess, setPaymentSuccess] = useState(false);
 
-    const handleBack = () => {
-        navigate(-1);
-    };
-
-    const handlePaymentSuccess = (paymentIntent) => {
+    const handlePaymentSuccess = () => {
         setPaymentSuccess(true);
         setTimeout(() => {
             navigate('/dashboard/director');
@@ -26,29 +22,28 @@ const DirectorCheckout = () => {
 
     if (paymentSuccess) {
         return (
-            <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen font-display flex items-center justify-center">
+            <div className="bg-background-light dark:bg-background-dark text-text-primary dark:text-text-primary min-h-screen font-display flex items-center justify-center">
                 <div className="text-center space-y-4">
                     <div className="text-6xl">🎉</div>
-                    <h1 className="text-2xl font-bold text-white">Payment Successful!</h1>
-                    <p className="text-slate-300">Welcome to Studio Pro! Redirecting to your dashboard...</p>
+                    <h1 className="text-2xl font-bold text-primary-text">Payment Successful!</h1>
+                    <p className="text-text-primary">Welcome to Studio Pro! Redirecting to your dashboard...</p>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen font-display">
+        <div className="bg-background-light dark:bg-background-dark text-text-primary dark:text-text-primary min-h-screen font-display">
             {/* Main Container */}
             <div className="relative flex flex-col w-full min-h-screen">
                 {/* Top Navigation */}
                 <header className="flex items-center justify-between border-b border-border-dark px-6 md:px-20 py-4 bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
                     <div className="flex items-center gap-3">
-                        <img src="/TC Logo.png" alt="TALENTCONNECT Logo" className="h-10 w-auto" />
-                        <h2 className="text-xl font-bold tracking-tight text-white">TALENT<span className="text-primary">CONNECT</span></h2>
+                        <ArtLogo className="h-10 w-auto" />
                     </div>
-                    <div className="flex items-center gap-2 text-slate-300">
+                    <div className="flex items-center gap-2 text-text-primary">
                         <span className="material-symbols-outlined text-sm">lock</span>
-                        <span className="text-xs font-semibold uppercase tracking-widest text-slate-300">Secure Checkout</span>
+                        <span className="text-xs font-semibold uppercase tracking-widest text-text-primary">Secure Checkout</span>
                     </div>
                 </header>
 
@@ -58,15 +53,15 @@ const DirectorCheckout = () => {
                         <div className="lg:col-span-7 space-y-10">
                             {/* Hero Section for Director */}
                             <section className="relative overflow-hidden rounded-xl aspect-[21/9] flex flex-col justify-end p-8 group">
-                                <div 
-                                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" 
-                                    style={{ 
-                                        backgroundImage: "linear-gradient(to top, rgba(24, 17, 18, 0.9), rgba(24, 17, 18, 0.2)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuD1F0wNw820XDT2e4wpYeTZ9tPzfso266NSJirvLH2HH03N2PQuxVtj-eex32usQzwKaOKkR9xqmoPsbdH-IhlyBhYNi1CekOBOD7_kt8F_nwBIeoRuh1gOnBhGrYcFUOJH6RfuDTjBiTWanT9VIZgQvWKo2oDOFB80RiUIACFV3tQ0o-sNriGrb2F5R3aJVdxIfcb874UaR2lNH5poqtWRGav539Rujkr8SAwHE2idxLBoM2BIxNBZqU29jkR19OLH483WY7G_kYvi')" 
+                                <div
+                                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                                    style={{
+                                        backgroundImage: "linear-gradient(to top, color-mix(in srgb, var(--color-primary) 90%, transparent), color-mix(in srgb, var(--color-primary) 20%, transparent)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuD1F0wNw820XDT2e4wpYeTZ9tPzfso266NSJirvLH2HH03N2PQuxVtj-eex32usQzwKaOKkR9xqmoPsbdH-IhlyBhYNi1CekOBOD7_kt8F_nwBIeoRuh1gOnBhGrYcFUOJH6RfuDTjBiTWanT9VIZgQvWKo2oDOFB80RiUIACFV3tQ0o-sNriGrb2F5R3aJVdxIfcb874UaR2lNH5poqtWRGav539Rujkr8SAwHE2idxLBoM2BIxNBZqU29jkR19OLH483WY7G_kYvi')"
                                     }}
                                 ></div>
                                 <div className="relative">
-                                    <h1 className="text-3xl md:text-4xl font-black mb-2 text-white">Upgrade to Studio Pro</h1>
-                                    <p className="text-slate-300 max-w-md text-sm md:text-base">The industry standard for professional production houses and casting directors across India.</p>
+                                    <h1 className="text-3xl md:text-4xl font-black mb-2 text-primary-text">Upgrade to Studio Pro</h1>
+                                    <p className="text-text-primary max-w-md text-sm md:text-base">The industry standard for professional production houses and casting directors across India.</p>
                                 </div>
                             </section>
 
@@ -86,8 +81,8 @@ const DirectorCheckout = () => {
                                         <div key={i} className="flex items-start gap-3 p-4 rounded-lg bg-surface-dark border border-border-dark">
                                             <span className="material-symbols-outlined text-primary">{benefit.icon}</span>
                                             <div>
-                                                <p className="font-bold text-white">{benefit.title}</p>
-                                                <p className="text-xs text-slate-300">{benefit.desc}</p>
+                                                <p className="font-bold text-primary-text">{benefit.title}</p>
+                                                <p className="text-xs text-text-primary">{benefit.desc}</p>
                                             </div>
                                         </div>
                                     ))}
@@ -106,10 +101,10 @@ const DirectorCheckout = () => {
                                         { id: 'upi', label: 'UPI', icon: 'account_balance_wallet' },
                                         { id: 'netbanking', label: 'Net Banking', icon: 'account_balance' }
                                     ].map((method) => (
-                                        <button 
+                                        <button
                                             key={method.id}
                                             onClick={() => setPaymentMethod(method.id)}
-                                            className={`px-6 py-3 border-b-2 font-bold flex items-center gap-2 transition-all ${paymentMethod === method.id ? 'border-primary text-primary' : 'border-transparent text-slate-300 hover:text-primary'}`}
+                                            className={`px-6 py-3 border-b-2 font-bold flex items-center gap-2 transition-all ${paymentMethod === method.id ? 'border-primary text-primary' : 'border-transparent text-text-primary hover:text-primary'}`}
                                         >
                                             <span className="material-symbols-outlined text-sm">{method.icon}</span> {method.label}
                                         </button>
@@ -130,8 +125,8 @@ const DirectorCheckout = () => {
 
                                     {paymentMethod === 'upi' && (
                                         <div className="space-y-4 animate-in fade-in duration-300">
-                                            <div className="p-6 rounded-lg bg-yellow-500/10 border border-yellow-500/20">
-                                                <p className="text-yellow-400 text-sm">
+                                            <div className="p-6 rounded-lg bg-warning/10 border border-warning/20">
+                                                <p className="text-warning text-sm">
                                                     UPI integration coming soon. Please use card payment for now.
                                                 </p>
                                             </div>
@@ -140,8 +135,8 @@ const DirectorCheckout = () => {
 
                                     {paymentMethod === 'netbanking' && (
                                         <div className="space-y-4 animate-in fade-in duration-300">
-                                            <div className="p-6 rounded-lg bg-yellow-500/10 border border-yellow-500/20">
-                                                <p className="text-yellow-400 text-sm">
+                                            <div className="p-6 rounded-lg bg-warning/10 border border-warning/20">
+                                                <p className="text-warning text-sm">
                                                     Net Banking integration coming soon. Please use card payment for now.
                                                 </p>
                                             </div>
@@ -156,33 +151,33 @@ const DirectorCheckout = () => {
                             <div className="sticky top-24 space-y-6">
                                 <div className="bg-surface-dark rounded-xl border border-border-dark overflow-hidden shadow-2xl">
                                     <div className="p-6 border-b border-border-dark">
-                                        <h3 className="text-lg font-bold text-white">Order Summary</h3>
+                                        <h3 className="text-lg font-bold text-primary-text">Order Summary</h3>
                                     </div>
                                     <div className="p-6 space-y-4">
                                         <div className="flex justify-between items-start">
                                             <div>
-                                                <p className="font-bold text-slate-100">Studio Pro Plan</p>
-                                                <p className="text-xs text-slate-300">Monthly subscription</p>
+                                                <p className="font-bold text-text-primary">Studio Pro Plan</p>
+                                                <p className="text-xs text-text-primary">Monthly subscription</p>
                                             </div>
-                                            <p className="font-bold text-white">$99.00</p>
+                                            <p className="font-bold text-primary-text">$99.00</p>
                                         </div>
                                         <div className="space-y-2 border-t border-border-dark pt-4">
-                                            <div className="flex justify-between text-sm text-slate-300">
+                                            <div className="flex justify-between text-sm text-text-primary">
                                                 <span>Subtotal</span>
                                                 <span>$99.00</span>
                                             </div>
-                                            <div className="flex justify-between text-sm text-slate-300">
+                                            <div className="flex justify-between text-sm text-text-primary">
                                                 <span>Tax</span>
                                                 <span>$0.00</span>
                                             </div>
                                         </div>
                                         <div className="flex justify-between items-center border-t border-border-dark pt-4 mt-4">
-                                            <span className="text-xl font-bold text-white">Total Amount</span>
+                                            <span className="text-xl font-bold text-primary-text">Total Amount</span>
                                             <span className="text-2xl font-black text-primary">$99.00</span>
                                         </div>
                                     </div>
                                     <div className="p-6 bg-background-dark/50">
-                                        <p className="text-[10px] text-center text-slate-400 leading-relaxed uppercase tracking-widest">
+                                        <p className="text-[10px] text-center text-text-secondary leading-relaxed uppercase tracking-widest">
                                             By proceeding with payment, you agree to our Terms of Service and Privacy Policy.
                                         </p>
                                     </div>
@@ -192,21 +187,21 @@ const DirectorCheckout = () => {
                                 <div className="flex flex-wrap items-center justify-center gap-6 py-4 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
                                     <div className="flex items-center gap-2">
                                         <span className="material-symbols-outlined text-xl text-primary">verified_user</span>
-                                        <span className="text-[10px] font-bold uppercase tracking-tighter text-slate-300">SSL Secure</span>
+                                        <span className="text-[10px] font-bold uppercase tracking-tighter text-text-primary">SSL Secure</span>
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <span className="material-symbols-outlined text-xl text-primary">gpp_good</span>
-                                        <span className="text-[10px] font-bold uppercase tracking-tighter text-slate-300">PCI-DSS Compliant</span>
+                                        <span className="text-[10px] font-bold uppercase tracking-tighter text-text-primary">PCI-DSS Compliant</span>
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <span className="material-symbols-outlined text-xl text-primary">security</span>
-                                        <span className="text-[10px] font-bold uppercase tracking-tighter text-slate-300">Encrypted</span>
+                                        <span className="text-[10px] font-bold uppercase tracking-tighter text-text-primary">Encrypted</span>
                                     </div>
                                 </div>
 
                                 {/* Contact Support */}
                                 <div className="p-6 rounded-xl border border-dashed border-border-dark text-center space-y-2">
-                                    <p className="text-xs text-slate-300">Need help with your enterprise setup?</p>
+                                    <p className="text-xs text-text-primary">Need help with your enterprise setup?</p>
                                     <a className="text-sm font-bold text-primary hover:underline" href="#">Contact Sales for Custom Pricing</a>
                                 </div>
                             </div>
@@ -215,12 +210,12 @@ const DirectorCheckout = () => {
                 </main>
 
                 {/* Simple Footer */}
-                <footer className="px-6 md:px-20 py-8 border-t border-border-dark bg-background-dark text-slate-500 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="text-xs text-slate-400">© 2026 TALENTCONNECT. All rights reserved.</p>
+                <footer className="px-6 md:px-20 py-8 border-t border-border-dark bg-background-dark text-text-secondary flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p className="text-xs text-text-secondary">© 2026 Art-e-Techt. All rights reserved.</p>
                     <div className="flex gap-6 text-xs font-semibold">
-                        <a className="hover:text-primary text-slate-400" href="/privacy-policy">Privacy</a>
-                        <a className="hover:text-primary text-slate-400" href="/terms-and-conditions">Terms</a>
-                        <a className="hover:text-primary text-slate-400" href="/help-support">Refund Policy</a>
+                        <a className="hover:text-primary text-text-secondary" href="/privacy-policy">Privacy</a>
+                        <a className="hover:text-primary text-text-secondary" href="/terms-and-conditions">Terms</a>
+                        <a className="hover:text-primary text-text-secondary" href="/help-support">Refund Policy</a>
                     </div>
                 </footer>
             </div>

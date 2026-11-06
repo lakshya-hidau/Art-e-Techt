@@ -7,6 +7,7 @@ import VerificationStep3 from './VerificationStep3';
 import VerificationStatus from './VerificationStatus';
 import VerificationSuccess from './VerificationSuccess';
 import { updateProfile, uploadMedia, submitForVerification } from '../../services/profileService';
+import ArtLogo from '../../components/common/ArtLogo';
 
 const ProfileVerification = ({ defaultValue = 0 }) => {
     const [currentStep, setCurrentStep] = useState(defaultValue);
@@ -103,13 +104,13 @@ const ProfileVerification = ({ defaultValue = 0 }) => {
                     blob = new Blob([formData.videoBlob], { type: 'video/webm' });
                 }
                 // Create a proper File object with correct MIME type
-                const videoFile = new File([blob], 'verification-video.webm', { 
+                const videoFile = new File([blob], 'verification-video.webm', {
                     type: 'video/webm',
                     lastModified: Date.now()
                 });
                 videoData.append('media', videoFile);
                 videoData.append('type', 'videoSelfie');
-                
+
                 // Add timeout and retry logic
                 const uploadWithRetry = async (retries = 2) => {
                     for (let i = 0; i < retries; i++) {
@@ -132,7 +133,7 @@ const ProfileVerification = ({ defaultValue = 0 }) => {
 
             // Mark user as submitted for verification (pending review)
             await submitForVerification();
-            
+
             goToStep(4, 'forward');
         } catch (err) {
             console.error('Finish failed:', err);
@@ -172,21 +173,21 @@ const ProfileVerification = ({ defaultValue = 0 }) => {
         : 'opacity-100 translate-x-0';
 
     return (
-        <div className="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+        <div className="bg-background-light dark:bg-background-dark font-display text-text-primary dark:text-text-primary min-h-screen">
             <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
                 <div className="layout-container flex h-full grow flex-col">
                     {/* Top Navigation Bar */}
                     <header className="flex items-center justify-between border-b border-primary/20 px-6 py-4 md:px-40 bg-background-light dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
                         <div className="flex items-center gap-4">
                             <div className="flex items-center">
-                                <img src="/TC Logo.png" alt="Logo" className="h-10 w-auto" />
+                                <ArtLogo className="h-10 w-auto" />
                             </div>
-                            <h2 className="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight uppercase italic">TALENT<span className="text-primary">CONNECT</span></h2>
+                            <h2 className="text-text-primary dark:text-primary-text text-xl font-bold leading-tight tracking-tight uppercase italic">TALENT<span className="text-primary">CONNECT</span></h2>
                         </div>
                         <div className="flex items-center gap-4">
                             {/* Save status badge */}
                             {savedAt && (
-                                <span className="hidden sm:flex items-center gap-1.5 text-xs text-green-500 font-medium animate-fade-in">
+                                <span className="hidden sm:flex items-center gap-1.5 text-xs text-success font-medium animate-fade-in">
                                     <span className="material-symbols-outlined !text-sm">cloud_done</span>
                                     Saved at {savedAt}
                                 </span>
@@ -203,7 +204,7 @@ const ProfileVerification = ({ defaultValue = 0 }) => {
                                                     ? 'w-6 bg-primary'
                                                     : s < currentStep
                                                     ? 'w-2 bg-primary/60 cursor-pointer hover:bg-primary'
-                                                    : 'w-2 bg-slate-300 dark:bg-slate-700 cursor-default'
+                                                    : 'w-2 bg-surface-low dark:bg-container cursor-default'
                                             }`}
                                             title={stepLabels[s]}
                                         />
@@ -212,7 +213,7 @@ const ProfileVerification = ({ defaultValue = 0 }) => {
                             )}
                             <button
                                 onClick={handleDashboard}
-                                className="flex items-center justify-center rounded-xl h-10 w-10 bg-slate-200 dark:bg-primary/10 text-slate-900 dark:text-primary transition-colors hover:bg-primary/20 active:scale-95"
+                                className="flex items-center justify-center rounded-xl h-10 w-10 bg-surface dark:bg-primary/10 text-text-primary dark:text-primary transition-colors hover:bg-primary/20 active:scale-95"
                             >
                                 <span className="material-symbols-outlined font-bold">close</span>
                             </button>
@@ -228,8 +229,8 @@ const ProfileVerification = ({ defaultValue = 0 }) => {
                     </main>
 
                     {/* Footer Small */}
-                    <footer className="py-10 text-center text-slate-500 text-sm">
-                        © 2026 TalentConnect. All Rights Reserved.
+                    <footer className="py-10 text-center text-text-secondary text-sm">
+                        © 2026 Art-e-Techt. All Rights Reserved.
                     </footer>
                 </div>
             </div>

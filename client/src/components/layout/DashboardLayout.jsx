@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import MobileBottomNav from './MobileBottomNav';
 import { useNavigate } from 'react-router-dom';
+import ArtLogo from '../common/ArtLogo';
 import NotificationCenter from '../common/NotificationCenter';
 import ThemeToggle from '../common/ThemeToggle';
 import { logout } from '../../services/authService';
@@ -50,15 +51,8 @@ const DashboardLayout = ({
             </div>
 
             <main className="relative flex-1 flex min-w-0 flex-col overflow-hidden">
-                <header className="sticky top-0 z-40 flex items-center justify-between border-b border-slate-200/50 bg-background-light/90 px-4 py-3 backdrop-blur-xl dark:border-white/5 dark:bg-[#0d0d0d]/95 lg:hidden">
-                    <div className="flex items-center gap-2.5">
-                        <div className="size-8 rounded-xl bg-primary/10 flex items-center justify-center">
-                            <img src="/TC Logo.png" alt="Logo" className="h-5 w-auto" />
-                        </div>
-                        <h1 className="text-base font-black uppercase italic tracking-tighter text-slate-900 dark:text-white">
-                            TALENT<span className="text-primary">CONNECT</span>
-                        </h1>
-                    </div>
+                <header className="sticky top-0 z-40 flex items-center justify-between border-b border-border/50 bg-background-light/90 px-4 py-3 backdrop-blur-xl dark:border-subtle/5 dark:bg-void/95 lg:hidden">
+                    <ArtLogo showWordmark={true} wordmarkClass="text-base" />
 
                     <div className="flex items-center gap-2">
                         <ThemeToggle />
@@ -72,14 +66,14 @@ const DashboardLayout = ({
                                     aria-label="User menu"
                                 />
                                 {showUserMenu && (
-                                    <div className="absolute right-0 z-50 mt-2 w-44 overflow-hidden rounded-2xl border border-slate-200 bg-white py-2 shadow-2xl dark:border-white/10 dark:bg-[#1a1a1a]">
-                                        <div className="border-b border-slate-100 px-4 py-2 dark:border-white/5">
-                                            <p className="truncate text-xs font-black dark:text-white">{stableUserData.name}</p>
-                                            <p className="truncate text-[10px] text-slate-400">{stableUserData.roleTitle}</p>
+                                    <div className="absolute right-0 z-50 mt-2 w-44 overflow-hidden rounded-2xl border border-border bg-surface py-2 shadow-2xl dark:border-subtle/10 dark:bg-void">
+                                        <div className="border-b border-border px-4 py-2 dark:border-subtle/5">
+                                            <p className="truncate text-xs font-black dark:text-primary-text">{stableUserData.name}</p>
+                                            <p className="truncate text-[10px] text-text-secondary">{stableUserData.roleTitle}</p>
                                         </div>
                                         <button
                                             onClick={handleLogout}
-                                            className="w-full flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-red-500 transition-colors hover:bg-red-50 dark:hover:bg-red-500/10"
+                                            className="w-full flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-error transition-colors hover:bg-error dark:hover:bg-primary/10"
                                         >
                                             <span className="material-symbols-outlined text-base">logout</span>
                                             Log Out
@@ -91,16 +85,16 @@ const DashboardLayout = ({
                     </div>
                 </header>
 
-                <header className="sticky top-0 z-[40] hidden border-b border-slate-200 bg-background-light/80 px-4 py-4 backdrop-blur-xl transition-all duration-500 dark:border-white/5 dark:bg-background-dark/80 sm:px-6 lg:block lg:px-8">
+                <header className="sticky top-0 z-[40] hidden border-b border-border bg-background-light/80 px-4 py-4 backdrop-blur-xl transition-all duration-500 dark:border-subtle/5 dark:bg-background-dark/80 sm:px-6 lg:block lg:px-8">
                     <div className="flex items-center justify-between gap-4">
                         <div>
                             {headerTitle && (
-                                <h2 className="text-xl font-black uppercase italic leading-none tracking-tighter dark:text-white sm:text-2xl">
+                                <h2 className="text-xl font-black uppercase italic leading-none tracking-tighter dark:text-primary-text sm:text-2xl">
                                     {headerTitle}
                                 </h2>
                             )}
                             {headerSubtitle && (
-                                <p className="mt-1 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-300">
+                                <p className="mt-1 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-text-secondary dark:text-text-primary">
                                     <span className="size-1 rounded-full bg-primary animate-pulse" />
                                     {headerSubtitle}
                                 </p>
@@ -116,10 +110,10 @@ const DashboardLayout = ({
                                         className="flex items-center gap-3 group cursor-pointer"
                                     >
                                         <div className="hidden text-right sm:block">
-                                            <p className="text-[11px] font-black uppercase italic leading-none tracking-tighter dark:text-white">
+                                            <p className="text-[11px] font-black uppercase italic leading-none tracking-tighter dark:text-primary-text">
                                                 {stableUserData.name}
                                             </p>
-                                            <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-300">
+                                            <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.2em] text-text-secondary dark:text-text-primary">
                                                 {headerRoleLabel}
                                             </p>
                                         </div>
@@ -129,10 +123,10 @@ const DashboardLayout = ({
                                         />
                                     </button>
                                     {showUserMenu && (
-                                        <div className="absolute right-0 z-50 mt-4 w-56 overflow-hidden rounded-2xl border border-slate-200 bg-white py-2 shadow-2xl dark:border-white/10 dark:bg-card-dark">
+                                        <div className="absolute right-0 z-50 mt-4 w-56 overflow-hidden rounded-2xl border border-border bg-surface py-2 shadow-2xl dark:border-subtle/10 dark:bg-card-dark">
                                             <button
                                                 onClick={handleLogout}
-                                                className="w-full flex items-center gap-3 px-4 py-3 text-xs font-bold text-red-500 transition-colors hover:bg-red-50 dark:hover:bg-red-500/10"
+                                                className="w-full flex items-center gap-3 px-4 py-3 text-xs font-bold text-error transition-colors hover:bg-error dark:hover:bg-primary/10"
                                             >
                                                 <span className="material-symbols-outlined text-lg">logout</span>
                                                 Log Out

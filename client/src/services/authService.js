@@ -122,7 +122,7 @@ export const refreshAuthToken = async () => {
 export const logout = async () => {
     try {
         await api.get('/auth/logout');
-    } catch (e) {
+    } catch {
         console.warn('Backend logout failed');
     } finally {
         clearAuthSession();
@@ -148,4 +148,3 @@ export const resendEmailVerification = async (email) => {
     const response = await api.post('/auth/resend-verification', { email });
     return response.data;
 };
-

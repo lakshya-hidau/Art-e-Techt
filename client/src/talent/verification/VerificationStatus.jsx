@@ -23,7 +23,7 @@ const VerificationStatus = ({ onReturn }) => {
     };
 
     return (
-        <div className="max-w-[560px] w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-primary/10 rounded-2xl p-8 lg:p-12 shadow-2xl">
+        <div className="max-w-[560px] w-full bg-surface dark:bg-surface/5 border border-border dark:border-primary/10 rounded-2xl p-8 lg:p-12 shadow-2xl">
             {/* Status Icon */}
             <div className="flex justify-center mb-8">
                 <div className="relative">
@@ -39,9 +39,9 @@ const VerificationStatus = ({ onReturn }) => {
             </div>
 
             {/* Header Text */}
-            <div className="text-center mb-10 text-slate-900 dark:text-white">
+            <div className="text-center mb-10 text-text-primary dark:text-primary-text">
                 <h1 className="text-3xl lg:text-4xl font-bold mb-4">Verification Under Review</h1>
-                <p className="text-slate-600 dark:text-slate-400 text-lg">
+                <p className="text-text-muted dark:text-text-secondary text-lg">
                     Our talent acquisition team is currently reviewing your profile to ensure authenticity and professional standards.
                 </p>
             </div>
@@ -51,14 +51,14 @@ const VerificationStatus = ({ onReturn }) => {
                 {/* Step 1: Completed */}
                 <div className="flex gap-4">
                     <div className="flex flex-col items-center">
-                        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white">
+                        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-text">
                             <span className="material-symbols-outlined text-sm font-bold">check</span>
                         </div>
                         <div className="w-0.5 h-12 bg-primary"></div>
                     </div>
                     <div className="pt-0.5">
                         <h3 className="font-bold text-primary">Submitted</h3>
-                        <p className="text-sm text-slate-500 dark:text-slate-500">Your profile details were received successfully.</p>
+                        <p className="text-sm text-text-secondary dark:text-text-secondary">Your profile details were received successfully.</p>
                     </div>
                 </div>
 
@@ -69,24 +69,24 @@ const VerificationStatus = ({ onReturn }) => {
                             <span className="absolute inset-0 rounded-full border-2 border-primary animate-ping opacity-40"></span>
                             <span className="material-symbols-outlined text-sm font-bold z-10">schedule</span>
                         </div>
-                        <div className="w-0.5 h-12 bg-slate-300 dark:bg-slate-700"></div>
+                        <div className="w-0.5 h-12 bg-surface-low dark:bg-container"></div>
                     </div>
-                    <div className="pt-0.5 text-slate-900 dark:text-white">
+                    <div className="pt-0.5 text-text-primary dark:text-primary-text">
                         <h3 className="font-bold">Reviewing</h3>
-                        <p className="text-sm text-slate-500 dark:text-slate-500">Our team is verifying your portfolio and credentials.</p>
+                        <p className="text-sm text-text-secondary dark:text-text-secondary">Our team is verifying your portfolio and credentials.</p>
                     </div>
                 </div>
 
                 {/* Step 3: Pending */}
-                <div className="flex gap-4 text-slate-400">
+                <div className="flex gap-4 text-text-secondary">
                     <div className="flex flex-col items-center">
-                        <div className="flex items-center justify-center w-8 h-8 rounded-full border-2 border-slate-300 dark:border-slate-700 bg-transparent">
+                        <div className="flex items-center justify-center w-8 h-8 rounded-full border-2 border-border dark:border-border-subtle bg-transparent">
                             <span className="material-symbols-outlined text-sm font-bold">verified</span>
                         </div>
                     </div>
                     <div className="pt-0.5">
                         <h3 className="font-bold">Verification Result</h3>
-                        <p className="text-sm text-slate-500 dark:text-slate-500">Estimated completion within 24-48 hours.</p>
+                        <p className="text-sm text-text-secondary dark:text-text-secondary">Estimated completion within 24-48 hours.</p>
                     </div>
                 </div>
             </div>
@@ -95,8 +95,8 @@ const VerificationStatus = ({ onReturn }) => {
             <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 mb-10 flex gap-4 items-start">
                 <span className="material-symbols-outlined text-primary mt-1">info</span>
                 <div>
-                    <p className="text-sm font-medium text-slate-800 dark:text-slate-200">Expected Time: 24-48 Hours</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                    <p className="text-sm font-medium text-text-primary dark:text-text-primary">Expected Time: 24-48 Hours</p>
+                    <p className="text-xs text-text-secondary dark:text-text-secondary mt-1">
                         You will receive an email and a push notification as soon as your status is updated.
                     </p>
                 </div>
@@ -107,7 +107,7 @@ const VerificationStatus = ({ onReturn }) => {
                 <button
                     onClick={handleReturn}
                     disabled={isReturning}
-                    className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2 active:scale-95 disabled:opacity-70"
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-text font-bold py-4 rounded-xl transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2 active:scale-95 disabled:opacity-70"
                 >
                     {isReturning ? (
                         <>
@@ -123,7 +123,7 @@ const VerificationStatus = ({ onReturn }) => {
                 </button>
                 <button
                     onClick={handleSupport}
-                    className="w-full bg-transparent hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400 font-medium py-3 rounded-xl transition-all text-sm underline underline-offset-4 active:scale-95"
+                    className="w-full bg-transparent hover:bg-surface-lowest dark:hover:bg-surface/5 text-text-muted dark:text-text-secondary font-medium py-3 rounded-xl transition-all text-sm underline underline-offset-4 active:scale-95"
                 >
                     Contact Support
                 </button>

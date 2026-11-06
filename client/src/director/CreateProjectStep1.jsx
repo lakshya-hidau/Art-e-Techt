@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import ArtLogo from '../components/common/ArtLogo';
 
 const CreateProjectStep1 = () => {
     const navigate = useNavigate();
@@ -36,7 +37,7 @@ const handleSubmit = (e) => {
             imageSource === 'upload' && uploadedImageData
                 ? uploadedImageData
                 : formData.projectImage;
-        
+
         if (imageSource === 'upload' && uploadedImageData) {
             try {
                 sessionStorage.setItem('projectImageData', uploadedImageData);
@@ -45,7 +46,7 @@ const handleSubmit = (e) => {
                 console.warn('Failed to store image data in sessionStorage:', e);
             }
         }
-        
+
         navigate('/director/create-project/step2', {
             state: {
                 projectData: { ...formData, projectImage },
@@ -117,19 +118,19 @@ if (!file.type?.startsWith('image/')) {
     };
 
     return (
-        <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+        <div className="bg-background-light dark:bg-background-dark text-text-primary dark:text-text-primary min-h-screen">
             <div className="relative flex min-h-screen flex-col overflow-x-hidden">
-                <header className="flex items-center justify-between border-b border-slate-200 dark:border-primary/20 px-6 py-4 lg:px-20 bg-background-light dark:bg-background-dark sticky top-0 z-50">
+                <header className="flex items-center justify-between border-b border-border dark:border-primary/20 px-6 py-4 lg:px-20 bg-background-light dark:bg-background-dark sticky top-0 z-50">
                     <div className="flex items-center gap-4">
                         <div className="flex items-center">
-                            <img src="/TC Logo.png" alt="Logo" className="h-10 w-auto" />
+                            <ArtLogo className="h-10 w-auto" />
                         </div>
                         <h2 className="text-xl font-bold tracking-tight">Create New Project</h2>
                     </div>
                     <div className="flex items-center gap-3">
                         <button
                             onClick={handleClose}
-                            className="flex items-center justify-center rounded-full p-2 bg-slate-100 dark:bg-primary/10 text-slate-900 dark:text-primary hover:bg-primary/20 transition-all shadow-sm border border-slate-200 dark:border-primary/20"
+                            className="flex items-center justify-center rounded-full p-2 bg-surface-lowest dark:bg-primary/10 text-text-primary dark:text-primary hover:bg-primary/20 transition-all shadow-sm border border-border dark:border-primary/20"
                         >
                             <span className="material-symbols-outlined">close</span>
                         </button>
@@ -141,9 +142,9 @@ if (!file.type?.startsWith('image/')) {
                         <div className="mb-10">
                             <div className="flex justify-between mb-2">
                                 <span className="text-sm font-semibold text-primary">Step 1 of 2: Project Essentials</span>
-                                <span className="text-sm text-slate-500">50% Complete</span>
+                                <span className="text-sm text-text-secondary">50% Complete</span>
                             </div>
-                            <div className="w-full h-2 bg-slate-200 dark:bg-primary/10 rounded-full overflow-hidden">
+                            <div className="w-full h-2 bg-surface dark:bg-primary/10 rounded-full overflow-hidden">
                                 <div className="h-full bg-primary" style={{ width: '50%' }}></div>
                             </div>
                         </div>
@@ -151,14 +152,14 @@ if (!file.type?.startsWith('image/')) {
                         <div className="space-y-8">
                             <div className="space-y-2">
                                 <h1 className="text-3xl font-bold">Tell us about your next masterpiece</h1>
-                                <p className="text-slate-600 dark:text-slate-400">Fill in the core details to start your scouting process on TalentConnect.</p>
+                                <p className="text-text-muted dark:text-text-secondary">Fill in the core details to start your scouting process with Art-e-Techt.</p>
                             </div>
 
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 <div className="flex flex-col gap-2">
-                                    <label className="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400" htmlFor="project-title">Project Title</label>
+                                    <label className="text-sm font-semibold uppercase tracking-wider text-text-secondary dark:text-text-secondary" htmlFor="project-title">Project Title</label>
                                     <input
-                                        className="w-full rounded-xl border border-slate-200 dark:border-primary/20 bg-white dark:bg-background-dark/50 p-4 text-base focus:border-primary focus:ring-1 focus:ring-primary dark:text-white outline-none"
+                                        className="w-full rounded-xl border border-border dark:border-primary/20 bg-surface dark:bg-background-dark/50 p-4 text-base focus:border-gold focus:ring-1 focus:ring-gold dark:text-primary-text outline-none"
                                         id="project-title"
                                         name="title"
                                         value={formData.title}
@@ -171,9 +172,9 @@ if (!file.type?.startsWith('image/')) {
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="flex flex-col gap-2">
-                                        <label className="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400" htmlFor="category">Category</label>
+                                        <label className="text-sm font-semibold uppercase tracking-wider text-text-secondary dark:text-text-secondary" htmlFor="category">Category</label>
                                         <select
-                                            className="w-full rounded-xl border border-slate-200 dark:border-primary/20 bg-white dark:bg-background-dark/50 p-4 text-base focus:border-primary focus:ring-1 focus:ring-primary dark:text-white outline-none appearance-none"
+                                            className="w-full rounded-xl border border-border dark:border-primary/20 bg-surface dark:bg-background-dark/50 p-4 text-base focus:border-gold focus:ring-1 focus:ring-gold dark:text-primary-text outline-none appearance-none"
                                             id="category"
                                             name="category"
                                             value={formData.category}
@@ -198,11 +199,11 @@ if (!file.type?.startsWith('image/')) {
                                     </div>
 
                                     <div className="flex flex-col gap-2">
-                                        <label className="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400" htmlFor="budget">Estimated Budget</label>
+                                        <label className="text-sm font-semibold uppercase tracking-wider text-text-secondary dark:text-text-secondary" htmlFor="budget">Estimated Budget</label>
                                         <div className="relative flex items-center">
-                                            <span className="absolute left-4 text-slate-400">₹</span>
+                                            <span className="absolute left-4 text-text-secondary">₹</span>
                                             <input
-                                                className="w-full rounded-xl border border-slate-200 dark:border-primary/20 bg-white dark:bg-background-dark/50 p-4 pl-8 text-base focus:border-primary focus:ring-1 focus:ring-primary dark:text-white outline-none"
+                                                className="w-full rounded-xl border border-border dark:border-primary/20 bg-surface dark:bg-background-dark/50 p-4 pl-8 text-base focus:border-gold focus:ring-1 focus:ring-gold dark:text-primary-text outline-none"
                                                 id="budget"
                                                 name="budget"
                                                 value={formData.budget}
@@ -216,9 +217,9 @@ if (!file.type?.startsWith('image/')) {
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="flex flex-col gap-2">
-                                        <label className="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400" htmlFor="location">Location</label>
+                                        <label className="text-sm font-semibold uppercase tracking-wider text-text-secondary dark:text-text-secondary" htmlFor="location">Location</label>
                                         <input
-                                            className="w-full rounded-xl border border-slate-200 dark:border-primary/20 bg-white dark:bg-background-dark/50 p-4 text-base focus:border-primary focus:ring-1 focus:ring-primary dark:text-white outline-none"
+                                            className="w-full rounded-xl border border-border dark:border-primary/20 bg-surface dark:bg-background-dark/50 p-4 text-base focus:border-gold focus:ring-1 focus:ring-gold dark:text-primary-text outline-none"
                                             id="location"
                                             name="location"
                                             required
@@ -229,9 +230,9 @@ if (!file.type?.startsWith('image/')) {
                                         />
                                     </div>
                                     <div className="flex flex-col gap-2">
-                                        <label className="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400" htmlFor="deadline">Application Deadline</label>
+                                        <label className="text-sm font-semibold uppercase tracking-wider text-text-secondary dark:text-text-secondary" htmlFor="deadline">Application Deadline</label>
                                         <input
-                                            className="w-full rounded-xl border border-slate-200 dark:border-primary/20 bg-white dark:bg-background-dark/50 p-4 text-base focus:border-primary focus:ring-1 focus:ring-primary dark:text-white outline-none"
+                                            className="w-full rounded-xl border border-border dark:border-primary/20 bg-surface dark:bg-background-dark/50 p-4 text-base focus:border-gold focus:ring-1 focus:ring-gold dark:text-primary-text outline-none"
                                             id="deadline"
                                             name="deadline"
                                             required
@@ -243,9 +244,9 @@ if (!file.type?.startsWith('image/')) {
                                 </div>
 
                             <div className="flex flex-col gap-2">
-                                <label className="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400" htmlFor="description">Project Description</label>
+                                <label className="text-sm font-semibold uppercase tracking-wider text-text-secondary dark:text-text-secondary" htmlFor="description">Project Description</label>
                                 <textarea
-                                    className="w-full rounded-xl border border-slate-200 dark:border-primary/20 bg-white dark:bg-background-dark/50 p-4 text-base focus:border-primary focus:ring-1 focus:ring-primary dark:text-white resize-none outline-none"
+                                    className="w-full rounded-xl border border-border dark:border-primary/20 bg-surface dark:bg-background-dark/50 p-4 text-base focus:border-gold focus:ring-1 focus:ring-gold dark:text-primary-text resize-none outline-none"
                                     id="description"
                                     name="description"
                                     required
@@ -257,12 +258,12 @@ if (!file.type?.startsWith('image/')) {
                             </div>
 
                             <div className="flex flex-col gap-3">
-                                <label className="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                                <label className="text-sm font-semibold uppercase tracking-wider text-text-secondary dark:text-text-secondary">
                                     Project Cover Image
                                 </label>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div className="flex flex-col gap-2">
-                                        <div className="border border-dashed border-slate-300 dark:border-primary/30 rounded-xl p-4 bg-white dark:bg-background-dark/50">
+                                        <div className="border border-dashed border-border dark:border-primary/30 rounded-xl p-4 bg-surface dark:bg-background-dark/50">
                                             <input
                                                 type="file"
                                                 accept="image/*"
@@ -274,8 +275,8 @@ if (!file.type?.startsWith('image/')) {
                                                 <span className="material-symbols-outlined text-base">upload</span>
                                                 Upload Image
                                             </label>
-                                            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-2">JPG, PNG up to 5MB. A strong visual boosts talent engagement.</p>
-                                            {imageError && <p className="text-[11px] text-red-500 font-semibold mt-1">{imageError}</p>}
+                                            <p className="text-[11px] text-text-secondary dark:text-text-secondary mt-2">JPG, PNG up to 5MB. A strong visual boosts talent engagement.</p>
+                                            {imageError && <p className="text-[11px] text-error font-semibold mt-1">{imageError}</p>}
                                         </div>
                                         <input
                                             type="url"
@@ -283,33 +284,33 @@ if (!file.type?.startsWith('image/')) {
                                             value={formData.projectImage}
                                             onChange={handleImageUrlChange}
                                             placeholder="or paste an image URL"
-                                            className="w-full rounded-xl border border-slate-200 dark:border-primary/20 bg-white dark:bg-background-dark/50 p-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary dark:text-white outline-none"
+                                            className="w-full rounded-xl border border-border dark:border-primary/20 bg-surface dark:bg-background-dark/50 p-3 text-sm focus:border-gold focus:ring-1 focus:ring-gold dark:text-primary-text outline-none"
                                         />
                                     </div>
-                                    <div className="relative rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 h-48 border border-slate-200 dark:border-primary/20">
+                                    <div className="relative rounded-xl overflow-hidden bg-surface-lowest dark:bg-container h-48 border border-border dark:border-primary/20">
                                         <img
                                             src={imagePreview || formData.projectImage || "https://images.unsplash.com/photo-1485090916755-2bc2fdf84c62?auto=format&fit=crop&q=80"}
                                             alt="Project preview"
                                             className="w-full h-full object-cover"
                                         />
                                         <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-3">
-                                            <p className="text-white text-xs font-semibold">Preview</p>
+                                            <p className="text-primary-text text-xs font-semibold">Preview</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                                <div className="flex items-center justify-between pt-6 border-t border-slate-200 dark:border-primary/10">
+                                <div className="flex items-center justify-between pt-6 border-t border-border dark:border-primary/10">
                                     <button
                                         onClick={() => navigate('/director/my-projects')}
-                                        className="flex items-center gap-2 px-6 py-3 font-semibold text-slate-500 dark:text-slate-400 hover:text-primary transition-colors"
+                                        className="flex items-center gap-2 px-6 py-3 font-semibold text-text-secondary dark:text-text-secondary hover:text-primary transition-colors"
                                         type="button"
                                     >
                                         <span className="material-symbols-outlined">arrow_back</span>
                                         Cancel
                                     </button>
                                     <button
-                                        className="flex items-center gap-2 px-10 py-4 bg-primary text-white font-bold rounded-xl hover:shadow-[0_0_20px_rgba(236,91,19,0.4)] transition-all transform hover:-translate-y-1"
+                                        className="flex items-center gap-2 px-10 py-4 bg-primary text-primary-text font-bold rounded-xl hover:shadow-[0_0_20px_color-mix(in srgb, var(--color-primary) 40%, transparent)] transition-all transform hover:-translate-y-1"
                                         type="submit"
                                     >
                                         Next: Requirements
@@ -325,7 +326,7 @@ if (!file.type?.startsWith('image/')) {
                     <div className="p-6 rounded-2xl bg-primary/5 border border-primary/20 backdrop-blur-sm">
                         <span className="material-symbols-outlined text-primary mb-2">lightbulb</span>
                         <h4 className="font-bold text-sm mb-1">Director's Tip</h4>
-                        <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                        <p className="text-xs text-text-muted dark:text-text-secondary leading-relaxed">
                             Clear project descriptions attract 40% more high-quality talent matches. Be specific about the visual tone.
                         </p>
                     </div>
@@ -338,13 +339,13 @@ if (!file.type?.startsWith('image/')) {
                         />
                         <div className="absolute bottom-4 left-4 z-20">
                             <p className="text-[10px] uppercase tracking-widest text-primary font-bold">Featured Production</p>
-                            <p className="text-white text-xs font-medium">Bollywood Nights (2026)</p>
+                            <p className="text-primary-text text-xs font-medium">Bollywood Nights (2026)</p>
                         </div>
                     </div>
                 </aside>
 
-                <footer className="py-6 px-10 text-center text-slate-400 text-xs border-t border-slate-200 dark:border-primary/10 mt-auto">
-                    &copy; 2026 TalentConnect &bull; Where Global Talent Meets Opportunity
+                <footer className="py-6 px-10 text-center text-text-secondary text-xs border-t border-border dark:border-primary/10 mt-auto">
+                    &copy; 2026 Art-e-Techt &bull; Where Global Talent Meets Opportunity
                 </footer>
             </div>
         </div>

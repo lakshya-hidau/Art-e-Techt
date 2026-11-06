@@ -1,8 +1,8 @@
 This <p align="center">
-  <img src="client/public/talentconnect_banner.png" alt="TalentConnect Banner" width="100%">
+  <img src="client/public/arte-logo.svg" alt="Art-e-Techt logo" width="180">
 </p>
 
-<h1 align="center">✨ TalentConnect ✨</h1>
+<h1 align="center">Art-e-Techt Atelier</h1>
 
 <p align="center">
   <b>The Enterprise-Grade Ecosystem Bridging Visionary Directors & Exceptional Talent.</b>
@@ -20,18 +20,18 @@ This <p align="center">
 ## 💎 The Vision
 
 > [!IMPORTANT]
-> **TalentConnect** isn't just a job board; it's a high-performance engine for the creative industry. By integrating real-time communication, secure financial layers, and AI-ready verification flows, we've built a platform where the next big production starts today.
+> **Art-e-Techt** is a creative talent marketplace connecting artists, directors, and production teams through discovery, portfolios, casting, and collaboration tools.
 
 ---
 
 ## 🚀 The Ecosystem Flow
 
-Understand how **TalentConnect** orchestrates the connection between creativity and opportunity.
+Understand how **Art-e-Techt** connects creativity and opportunity.
 
 ```mermaid
 sequenceDiagram
     participant D as 🎬 Director
-    participant S as ⚙️ TalentConnect Core
+    participant S as ⚙️ Art-e-Techt Core
     participant T as 🎨 Talent
     participant P as 💳 Stripe/Finance
 
@@ -82,10 +82,39 @@ docker-compose up -d --build
 ```
 
 ### 👨‍💻 Manual Spin-up
-1. **Core API**: `cd server && npm install && npm run dev`
-2. **Web Interface**: `cd client && npm install && npm run dev`
+1. Copy `server/.env.example` to `server/.env` and configure the required backend credentials.
+2. Start the API: `cd server && npm ci && npm run dev`
+3. Copy `client/.env.example` to `client/.env`, then start the web app: `cd client && npm ci && npm run dev`
 
-*Requires environment variables from `.env.example` in both directories.*
+Never commit `.env` files or service-account credentials.
+
+### Firebase Hosting Deployment
+
+The React application deploys to the `art-e-techt-95db8` Hosting site in Firebase project `talentconnect-6e347`. The API and Socket.IO service remain on Render; Firebase Hosting only serves the built frontend.
+
+1. Install the Firebase CLI and authenticate with an account that can administer the Firebase project: `npm install --global firebase-tools` and `firebase login`.
+2. Set these GitHub Actions repository variables for production builds:
+   `VITE_API_URL`, `VITE_SOCKET_URL`, `VITE_STRIPE_PUBLISHABLE_KEY`,
+   `VITE_FIREBASE_API_KEY`, `VITE_FIREBASE_AUTH_DOMAIN`,
+   `VITE_FIREBASE_PROJECT_ID`, `VITE_FIREBASE_STORAGE_BUCKET`,
+   `VITE_FIREBASE_MESSAGING_SENDER_ID`, `VITE_FIREBASE_APP_ID`,
+   `VITE_FIREBASE_MEASUREMENT_ID`, `VITE_LINKEDIN_CLIENT_ID`,
+   `VITE_LINKEDIN_REDIRECT_URI`, and `VITE_SENTRY_DSN`.
+   Set `VITE_LINKEDIN_REDIRECT_URI` to
+   `https://art-e-techt-95db8.web.app/auth/linkedin/callback`.
+3. Add the Firebase service-account JSON as the GitHub Actions secret `FIREBASE_SERVICE_ACCOUNT_PRODUCTION`.
+4. In Google Cloud Console, set the OAuth consent-screen app name to `Art-e-Techt` and the support email to `learncode2025engineering@gmail.com`.
+5. Build and deploy from the repository root:
+   ```bash
+   cd client
+   npm ci
+   npm run build
+   cd ..
+   firebase deploy --only hosting:art-e-techt-95db8 --project talentconnect-6e347
+   ```
+6. Verify the new site, authentication, API, Socket.IO, payments, and OAuth callback before retiring the old Hosting site. To retire it, use Firebase Console or `firebase hosting:sites:delete talentconnect-6e347 --project talentconnect-6e347` after confirming the new site is live.
+
+The deployed Render service must allow `https://art-e-techt-95db8.web.app` in `FRONTEND_URL` / `ALLOWED_ORIGINS`; add the same origin to Firebase Auth authorized domains and the LinkedIn OAuth callback configuration.
 
 ---
 
@@ -99,9 +128,9 @@ docker-compose up -d --build
 ## 👥 Meet the Architects
 **Lakshya Hidau** • **Vishal Jain** • **Shyamal Sheorey**
 
-[![GitHub](https://img.shields.io/badge/Repository-Visit_Project-black?style=for-the-badge&logo=github)](https://github.com/vjtalentconnect-lab/talentconnect)
+[![GitHub](https://img.shields.io/badge/Repository-Visit_Project-black?style=for-the-badge&logo=github)](https://github.com/lakshya-hidau/Art-e-Techt)
 
 ---
 <p align="center">
-  <i>Propelling the future of talent discovery.</i>
+  <i>Art-e-Techt Atelier — where creative ideas become extraordinary creations.</i>
 </p>

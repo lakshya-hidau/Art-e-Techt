@@ -49,10 +49,12 @@ import MediaStorage from "./admin/MediaStorage";
 import AdminSettings from './admin/AdminSettings';
 import AdminRBAC from './admin/AdminRBAC';
 import SystemHealth from './admin/SystemHealth';
+const ProducerDashboard = lazy(() => import("./producer/ProducerDashboard"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const DirectorCheckout = lazy(() => import("./pages/DirectorCheckout"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const FindTalent = lazy(() => import("./pages/FindTalent"));
+const TalentRoster = lazy(() => import("./pages/TalentRoster"));
 const FindWork = lazy(() => import("./pages/FindWork"));
 const Productions = lazy(() => import("./pages/Productions"));
 const AboutUs = lazy(() => import("./pages/AboutUs"));
@@ -63,18 +65,20 @@ const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
 const LinkedInCallback = lazy(() => import("./pages/LinkedInCallback"));
 const CompleteProfile = lazy(() => import("./pages/CompleteProfile"));
 
-
 function App() {
   return (
     <ThemeProvider>
-
-    <div className="min-h-screen font-sans bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-300">
+    <div className="min-h-screen font-sans bg-void text-primary-text">
       <NotificationProvider>
         <BrowserRouter>
           <Suspense fallback={<SkeletonLoader />}>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/community-forum" element={<CommunityForum />} />
+              <Route path="/contact-us" element={<ContactUs />} />
               <Route path="/find-talent" element={<FindTalent />} />
+              <Route path="/talent-roster" element={<TalentRoster />} />
               <Route path="/find-work" element={<FindWork />} />
               <Route path="/productions" element={<Productions />} />
               <Route path="/about-us" element={<AboutUs />} />
@@ -88,6 +92,7 @@ function App() {
               <Route path="/register/director" element={<RegisterDirector />} />
               <Route path="/auth/linkedin/callback" element={<LinkedInCallback />} />
               <Route path="/onboarding/complete-profile" element={<ProtectedRoute><CompleteProfile /></ProtectedRoute>} />
+
               {/* Talent routes */}
               <Route path="/dashboard/talent" element={<ProtectedRoute requiredRole="talent"><ArtistDashboard /></ProtectedRoute>} />
               <Route path="/talent/portfolio" element={<ProtectedRoute requiredRole="talent"><TalentPortfolio /></ProtectedRoute>} />
@@ -98,7 +103,7 @@ function App() {
               <Route path="/talent/audition/:id" element={<ProtectedRoute requiredRole="talent"><AuditionDetails /></ProtectedRoute>} />
               <Route path="/talent/analytics" element={<ProtectedRoute requiredRole="talent"><PerformanceAnalytics /></ProtectedRoute>} />
               <Route path="/talent/settings" element={<ProtectedRoute requiredRole="talent"><ArtistSettings /></ProtectedRoute>} />
-              <Route path="/talent/:id" element={<ProtectedRoute allowedRoles={['talent', 'director', 'admin']}><TalentPortfolio /></ProtectedRoute>} />
+              <Route path="/talent/:id" element={<ProtectedRoute allowedRoles={['talent', 'director', 'producer', 'admin']}><TalentPortfolio /></ProtectedRoute>} />
               <Route path="/talent/project/:id" element={<ProtectedRoute requiredRole="talent"><ProjectDetails /></ProtectedRoute>} />
               <Route path="/talent/verify" element={<ProtectedRoute requiredRole="talent"><ProfileVerification /></ProtectedRoute>} />
               <Route path="/talent/verification/status" element={<ProtectedRoute requiredRole="talent"><ProfileVerification defaultValue={4} /></ProtectedRoute>} />
@@ -111,19 +116,24 @@ function App() {
               <Route path="/dashboard/director" element={<ProtectedRoute requiredRole="director"><DirectorDashboard /></ProtectedRoute>} />
               <Route path="/director/portfolio" element={<ProtectedRoute requiredRole="director"><DirectorPortfolio /></ProtectedRoute>} />
 
-              {/* Create Project Flow */}
-              <Route path="/director/create-project/step1" element={<ProtectedRoute requiredRole="director"><CreateProjectStep1 /></ProtectedRoute>} />
-              <Route path="/director/create-project/step2" element={<ProtectedRoute requiredRole="director"><CreateProjectStep2 /></ProtectedRoute>} />
-              <Route path="/director/my-projects" element={<ProtectedRoute requiredRole="director"><MyProjects /></ProtectedRoute>} />
-              <Route path="/director/project/:id" element={<ProtectedRoute requiredRole="director"><ProjectDetails /></ProtectedRoute>} />
-              <Route path="/director/shortlists" element={<ProtectedRoute requiredRole="director"><Shortlists /></ProtectedRoute>} />
-              <Route path="/director/auditions" element={<ProtectedRoute requiredRole="director"><AuditionRequests /></ProtectedRoute>} />
-              <Route path="/director/messages/:userId?" element={<ProtectedRoute requiredRole="director"><Messages /></ProtectedRoute>} />
-              <Route path="/director/discovery" element={<ProtectedRoute requiredRole="director"><TalentDiscovery /></ProtectedRoute>} />
-              <Route path="/director/settings" element={<ProtectedRoute requiredRole="director"><DirectorSettings /></ProtectedRoute>} />
-              <Route path="/director/checkout" element={<ProtectedRoute requiredRole="director"><DirectorCheckout /></ProtectedRoute>} />
-              {/* Public director profile — viewable by talent, director, admin */}
-              <Route path="/director/:id" element={<ProtectedRoute allowedRoles={['talent','director','admin']}><PublicDirectorProfile /></ProtectedRoute>} />
+              {/* Create Project & Auditions Flow (accessible to Director & Producer) */}
+              <Route path="/director/create-project/step1" element={<ProtectedRoute allowedRoles={['director', 'producer', 'admin']}><CreateProjectStep1 /></ProtectedRoute>} />
+              <Route path="/director/create-project/step2" element={<ProtectedRoute allowedRoles={['director', 'producer', 'admin']}><CreateProjectStep2 /></ProtectedRoute>} />
+              <Route path="/director/my-projects" element={<ProtectedRoute allowedRoles={['director', 'producer', 'admin']}><MyProjects /></ProtectedRoute>} />
+              <Route path="/director/project/:id" element={<ProtectedRoute allowedRoles={['director', 'producer', 'admin']}><ProjectDetails /></ProtectedRoute>} />
+              <Route path="/director/shortlists" element={<ProtectedRoute allowedRoles={['director', 'producer', 'admin']}><Shortlists /></ProtectedRoute>} />
+              <Route path="/director/auditions" element={<ProtectedRoute allowedRoles={['director', 'producer', 'admin']}><AuditionRequests /></ProtectedRoute>} />
+              <Route path="/director/messages/:userId?" element={<ProtectedRoute allowedRoles={['director', 'producer', 'admin']}><Messages /></ProtectedRoute>} />
+              <Route path="/director/discovery" element={<ProtectedRoute allowedRoles={['director', 'producer', 'admin']}><TalentDiscovery /></ProtectedRoute>} />
+              <Route path="/director/settings" element={<ProtectedRoute allowedRoles={['director', 'producer', 'admin']}><DirectorSettings /></ProtectedRoute>} />
+              <Route path="/director/checkout" element={<ProtectedRoute allowedRoles={['director', 'producer', 'admin']}><DirectorCheckout /></ProtectedRoute>} />
+              {/* Public director profile */}
+              <Route path="/director/:id" element={<ProtectedRoute allowedRoles={['talent','director','producer','admin']}><PublicDirectorProfile /></ProtectedRoute>} />
+
+              {/* Producer / Production Organizer routes */}
+              <Route path="/dashboard/producer" element={<ProtectedRoute requiredRole="producer"><ProducerDashboard /></ProtectedRoute>} />
+              <Route path="/producer/dashboard" element={<ProtectedRoute requiredRole="producer"><ProducerDashboard /></ProtectedRoute>} />
+              <Route path="/producer/requests" element={<ProtectedRoute requiredRole="producer"><ProducerDashboard /></ProtectedRoute>} />
 
               {/* Admin routes */}
               <Route path="/admin/login" element={<AdminLogin />} />
@@ -152,7 +162,6 @@ function App() {
     </div>
     </ThemeProvider>
   );
-
 }
 
 export default App;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TopNav from '../components/TopNav';
+import Footer from '../components/Footer';
 
 const cinemaIndustries = [
   { label: 'Hollywood',         country: 'USA',            code: 'us' },
@@ -77,7 +78,7 @@ const RollingHero = () => {
       <style>{rollingStyles}</style>
 
       {/* "FROM STAGE" line */}
-      <div className="text-white">FROM STAGE</div>
+      <div className="text-primary-text">FROM STAGE</div>
 
       {/* Rolling industry name */}
       <div
@@ -100,13 +101,13 @@ const RollingHero = () => {
             height: 20,
             objectFit: 'cover',
             borderRadius: 3,
-            boxShadow: '0 1px 5px rgba(0,0,0,0.5)',
+            boxShadow: '0 1px 5px color-mix(in srgb, var(--color-void) 50%, transparent)',
           }}
         />
         <span
           style={{
             letterSpacing: '0.18em',
-            color: 'rgba(255,255,255,0.55)',
+            color: 'color-mix(in srgb, var(--color-text-primary) 55%, transparent)',
             fontWeight: 400,
             textTransform: 'uppercase',
             fontSize: '0.9rem',
@@ -121,7 +122,7 @@ const RollingHero = () => {
 
 const AboutUs = () => {
   return (
-    <div className="bg-background-dark text-zinc-100 min-h-screen">
+    <div className="bg-background-dark text-text-primary min-h-screen">
       <TopNav />
       {/* add extra top padding so content sits below sticky header */}
       <main className="pt-28">
@@ -140,11 +141,11 @@ const AboutUs = () => {
             <span className="inline-block px-3 py-1 bg-primary text-[10px] font-bold tracking-widest uppercase mb-6">
               🌍 Redefining Global Discovery
             </span>
-            <h1 className="text-6xl md:text-8xl font-black italic tracking-tighter text-white mb-4 leading-none">
+            <h1 className="text-6xl md:text-8xl font-black italic tracking-tighter text-primary-text mb-4 leading-none">
               <RollingHero />
             </h1>
-            <p className="max-w-2xl text-xl text-zinc-300 font-light leading-relaxed mt-6">
-              TalentConnect is the premier digital gateway connecting the world's vast pool of performing
+            <p className="max-w-2xl text-xl text-text-primary font-light leading-relaxed mt-6">
+              Art-e-Techt is the premier digital gateway connecting the world's vast pool of performing
               arts talent with the most ambitious productions across every film industry on the planet.
             </p>
           </div>
@@ -156,16 +157,16 @@ const AboutUs = () => {
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
                 <h2 className="text-sm font-bold tracking-[0.2em] text-primary uppercase mb-4">Our Story</h2>
-                <h3 className="text-4xl font-extrabold tracking-tight text-white mb-8">
+                <h3 className="text-4xl font-extrabold tracking-tight text-primary-text mb-8">
                   The Evolution of Global Casting
                 </h3>
-                <p className="text-zinc-400 text-lg mb-6 leading-relaxed">
+                <p className="text-text-secondary text-lg mb-6 leading-relaxed">
                   Founded at the intersection of Hollywood ambition and world cinema creativity,
-                  TalentConnect began with a simple observation: the journey from a local theater
+                  Art-e-Techt began with a simple observation: the journey from a local theater
                   stage to a global streaming screen was fraught with gatekeepers and opacity —
                   everywhere in the world.
                 </p>
-                <p className="text-zinc-400 text-lg mb-8 leading-relaxed">
+                <p className="text-text-secondary text-lg mb-8 leading-relaxed">
                   We set out to democratize access across every film industry. By blending
                   cutting-edge technology with deep industry insights, we created a platform
                   where talent is the only currency that matters — from Bollywood to Nollywood,
@@ -173,13 +174,13 @@ const AboutUs = () => {
                 </p>
                 <div className="flex items-center space-x-4">
                   <div className="h-[1px] w-12 bg-primary" />
-                  <span className="italic font-medium text-white">Since 2018, changing the global landscape.</span>
+                  <span className="italic font-medium text-primary-text">Since 2018, changing the global landscape.</span>
                 </div>
               </div>
               <div className="relative group">
                 <div className="absolute -inset-4 bg-primary/20 rounded-xl blur-2xl group-hover:bg-primary/30 transition duration-500" />
                 <img
-                  className="relative rounded-lg shadow-2xl border border-zinc-800 object-cover aspect-video w-full"
+                  className="relative rounded-lg shadow-2xl border border-border-subtle object-cover aspect-video w-full"
                   alt="Monochrome close up of a vintage movie camera"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCECuoXvzHimyqIpfkF8-Ta8op4c234jqpjISh7Zpr-W71hwf2I1Y9tvE-Eb8hi01AaOroQ1h9Fjz9ra2ka-TJh9sT95s1teOTXwFI_AKe5E4iAzMQXeHL_eUGyxNyD74UrMIWKWimctuduTcxGn__Zs61UPKAnQJugyYCx2FdAalSnmQLf-h0ZRYkirP_A3wINQpEK4L-p0U3wjjYXivW9iseKlQVr--snm1XyUQhaO56DJNRj4NKtkF1vDqR6kwlI5NIng6fKg_kz"
                 />
@@ -189,49 +190,49 @@ const AboutUs = () => {
         </section>
 
         {/* ── Stats Bento Grid ── */}
-        <section className="py-24 bg-[#10090c]">
+        <section className="py-24 bg-void">
           <div className="max-w-6xl mx-auto px-6">
             {/* Row 1: three stat cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-5 mb-5">
               {/* Wide stat */}
-              <div className="md:col-span-2 bg-[#0d0d11] border border-zinc-800/80 p-8 rounded-xl flex flex-col justify-between hover:border-primary/60 shadow-xl shadow-black/30 transition-colors">
+              <div className="md:col-span-2 bg-void border border-border-subtle/80 p-8 rounded-xl flex flex-col justify-between hover:border-primary/60 shadow-xl shadow-black/30 transition-colors">
                 <div>
                   <span className="material-icons text-primary mb-4 text-4xl">groups</span>
-                  <h4 className="text-5xl font-black tracking-tighter text-white">2M+</h4>
-                  <p className="text-zinc-500 font-medium">Verified Talent Profiles</p>
+                  <h4 className="text-5xl font-black tracking-tighter text-primary-text">2M+</h4>
+                  <p className="text-text-secondary font-medium">Verified Talent Profiles</p>
                 </div>
-                <p className="mt-8 text-sm text-zinc-400">
+                <p className="mt-8 text-sm text-text-secondary">
                   Spanning actors, dancers, and voice artists across 120+ countries.
                 </p>
               </div>
 
-              <div className="bg-[#0d0d11] border border-zinc-800/80 p-8 rounded-xl hover:border-primary/60 shadow-lg shadow-black/25 transition-colors">
+              <div className="bg-void border border-border-subtle/80 p-8 rounded-xl hover:border-primary/60 shadow-lg shadow-black/25 transition-colors">
                 <span className="material-icons text-primary mb-4 text-4xl">movie</span>
-                <h4 className="text-4xl font-black tracking-tighter text-white">50K+</h4>
-                <p className="text-zinc-500 font-medium">Productions</p>
+                <h4 className="text-4xl font-black tracking-tighter text-primary-text">50K+</h4>
+                <p className="text-text-secondary font-medium">Productions</p>
               </div>
 
-              <div className="bg-[#0d0d11] border border-zinc-800/80 p-8 rounded-xl hover:border-primary/60 shadow-lg shadow-black/25 transition-colors">
+              <div className="bg-void border border-border-subtle/80 p-8 rounded-xl hover:border-primary/60 shadow-lg shadow-black/25 transition-colors">
                 <span className="material-icons text-primary mb-4 text-4xl">handshake</span>
-                <h4 className="text-4xl font-black tracking-tighter text-white">85%</h4>
-                <p className="text-zinc-500 font-medium">Match Rate</p>
+                <h4 className="text-4xl font-black tracking-tighter text-primary-text">85%</h4>
+                <p className="text-text-secondary font-medium">Match Rate</p>
               </div>
             </div>
 
             {/* Row 2: Mission — full width on its OWN row */}
-            <div className="w-full bg-primary p-12 rounded-2xl flex flex-col md:flex-row items-center justify-between overflow-hidden relative group shadow-2xl shadow-red-900/30">
+            <div className="w-full bg-primary p-12 rounded-2xl flex flex-col md:flex-row items-center justify-between overflow-hidden relative group shadow-2xl shadow-primary/30">
               <div className="relative z-10 max-w-2xl text-left">
-                <h3 className="text-3xl font-black text-white mb-4">
+                <h3 className="text-3xl font-black text-primary-text mb-4">
                   Our Mission: Transparency &amp; Global Opportunity
                 </h3>
-                <p className="text-red-100 text-lg">
+                <p className="text-error text-lg">
                   To provide every artist on Earth, regardless of background, nationality, or
                   location, a fair stage to showcase their craft and secure their future in
                   the global spotlight.
                 </p>
               </div>
               <span
-                className="material-icons text-[10rem] absolute -right-10 -bottom-10 text-black/20 group-hover:scale-110 transition-transform duration-700"
+                className="material-icons text-[10rem] absolute -right-10 -bottom-10 text-primary-text/20 group-hover:scale-110 transition-transform duration-700"
                 style={{ fontVariationSettings: "'FILL' 1" }}
               >
                 stars
@@ -245,7 +246,7 @@ const AboutUs = () => {
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-20">
               <h2 className="text-sm font-bold tracking-[0.2em] text-primary uppercase mb-4">The Visionaries</h2>
-              <h3 className="text-5xl font-extrabold tracking-tight text-white">Meet the Team</h3>
+              <h3 className="text-5xl font-extrabold tracking-tight text-primary-text">Meet the Team</h3>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {team.map((person) => (
@@ -256,11 +257,11 @@ const AboutUs = () => {
                       alt={person.name}
                       src={person.img}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent opacity-60" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-text-secondary via-transparent opacity-60" />
                   </div>
-                  <h5 className="text-xl font-bold text-white">{person.name}</h5>
+                  <h5 className="text-xl font-bold text-primary-text">{person.name}</h5>
                   <p className="text-primary font-medium text-sm mb-2">{person.title}</p>
-                  <p className="text-zinc-500 text-sm">{person.blurb}</p>
+                  <p className="text-text-secondary text-sm">{person.blurb}</p>
                 </div>
               ))}
             </div>
@@ -269,76 +270,7 @@ const AboutUs = () => {
       </main>
 
       {/* ── Footer ── */}
-      <footer className="bg-background-dark text-gray-400 py-16 border-t border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-            <div className="col-span-1">
-              <div className="flex items-center gap-2 mb-6">
-                <img src="/TC Logo.png" alt="Logo" className="h-8 w-auto" />
-                <span className="font-display font-bold text-xl tracking-wide text-white">
-                  TALENT<span className="text-primary">CONNECT</span>
-                </span>
-              </div>
-              <p className="text-sm leading-relaxed mb-6">
-                Building the future of world cinema through transparency, technology, and pure
-                talent — across every film industry on the planet.
-              </p>
-              <div className="flex gap-4">
-                <a className="text-gray-400 hover:text-primary transition-colors" href="#" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
-                  <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-                    <path d="M17 2.5h-2.5A4.5 4.5 0 0 0 10 7v2H7.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5H10v7a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-7h2.1a.5.5 0 0 0 .5-.5l.4-3a.5.5 0 0 0-.5-.5H14V7a1 1 0 0 1 1-1H17a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5z" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </a>
-                <a className="text-gray-400 hover:text-primary transition-colors" href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-                  <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-                    <rect x="3" y="3" width="18" height="18" rx="5" strokeWidth="1.5"/>
-                    <circle cx="12" cy="12" r="4" strokeWidth="1.5"/>
-                    <circle cx="17" cy="7" r="1" fill="currentColor"/>
-                  </svg>
-                </a>
-                <a className="text-gray-400 hover:text-primary transition-colors" href="#" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
-                  <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-                    <path d="M22 5.92a8.38 8.38 0 0 1-2.36.65A4.13 4.13 0 0 0 21.4 4.1a8.19 8.19 0 0 1-2.6.99A4.11 4.11 0 0 0 12 8.09c0 .32.04.64.1.94A11.65 11.65 0 0 1 3 4.89a4.11 4.11 0 0 0 1.27 5.48A4.07 4.07 0 0 1 2.8 9.1v.05a4.11 4.11 0 0 0 3.3 4.03c-.2.05-.41.08-.62.08-.15 0-.3-.01-.45-.04a4.13 4.13 0 0 0 3.84 2.85A8.24 8.24 0 0 1 2 19.54a11.62 11.62 0 0 0 6.29 1.84c7.55 0 11.68-6.26 11.68-11.68 0-.18-.01-.36-.02-.54A8.18 8.18 0 0 0 22 5.92z" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </a>
-                <a className="text-gray-400 hover:text-primary transition-colors" href="#" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-                  <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-                    <rect x="2" y="2" width="20" height="20" rx="5" strokeWidth="1.5"/>
-                    <path d="M7 10v7M7 7v.01M12 10v7m0 0v-4a2 2 0 0 1 4 0v4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div>
-              <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">Explore</h4>
-              <ul className="space-y-3 text-sm">
-                <li><a className="hover:text-primary transition-colors" href="#">Find Talent</a></li>
-                <li><a className="hover:text-primary transition-colors" href="#">Find Work</a></li>
-                <li><a className="hover:text-primary transition-colors" href="#">Productions</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">Company</h4>
-              <ul className="space-y-3 text-sm">
-                <li><a className="hover:text-primary transition-colors" href="#">About Us</a></li>
-                <li><a className="hover:text-primary transition-colors" href="#">Careers</a></li>
-                <li><a className="hover:text-primary transition-colors" href="#">Press Kit</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">Legal &amp; Support</h4>
-              <ul className="space-y-3 text-sm">
-                <li><a className="hover:text-primary transition-colors" href="/terms-and-conditions">Terms of Service</a></li>
-                <li><a className="hover:text-primary transition-colors" href="/privacy-policy">Privacy Policy</a></li>
-                <li><a className="hover:text-primary transition-colors" href="/help-support">Contact Support</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-xs">
-            © 2026 TALENT<span className="text-primary">CONNECT</span> • Where World Cinema Talent Meets Opportunity
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

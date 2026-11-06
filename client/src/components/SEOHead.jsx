@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const SEOHead = ({ title = "TalentConnect — Where Global Talent Meets Opportunity", description = "Where Global Talent Meets Opportunity", image = "/TC Logo.png", url = "https://talentconnect.in" }) => {
+const SEOHead = ({ title = "Art-e-Techt Atelier — Where Creative Talent Meets Opportunity", description = "Where Creative Talent Meets Opportunity", image = "https://art-e-techt-95db8.web.app/arte-logo.svg", url = "https://art-e-techt-95db8.web.app/" }) => {
     useEffect(() => {
         // Update basic meta tags
         document.title = title;
@@ -38,6 +38,14 @@ const SEOHead = ({ title = "TalentConnect — Where Global Talent Meets Opportun
             document.head.appendChild(ogUrl);
         }
         ogUrl.setAttribute('content', url);
+
+        let canonical = document.querySelector('link[rel="canonical"]');
+        if (!canonical) {
+            canonical = document.createElement('link');
+            canonical.setAttribute('rel', 'canonical');
+            document.head.appendChild(canonical);
+        }
+        canonical.setAttribute('href', url);
         
         // Viewport meta
         let viewport = document.querySelector('meta[name="viewport"]');

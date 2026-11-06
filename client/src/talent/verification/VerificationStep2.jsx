@@ -34,10 +34,10 @@ const VerificationStep2 = ({ formData, updateFormData, onNext, onPrev, onSave, i
         }
     };
 
-    const inputClass = "w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-600 transition-all";
-    const plainInputClass = "w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-600 transition-all";
-    const labelClass = "text-sm font-semibold text-slate-600 dark:text-slate-300";
-    const sectionHeaderClass = "flex items-center gap-2 border-b border-slate-200 dark:border-slate-700 pb-2 text-slate-900 dark:text-white";
+    const inputClass = "w-full pl-10 pr-4 py-3 rounded-xl border border-border dark:border-border-subtle bg-surface dark:bg-void/50 focus:ring-2 focus:ring-gold focus:border-transparent outline-none text-text-primary dark:text-text-primary placeholder:text-text-secondary dark:placeholder:text-text-muted transition-all";
+    const plainInputClass = "w-full px-4 py-3 rounded-xl border border-border dark:border-border-subtle bg-surface dark:bg-void/50 focus:ring-2 focus:ring-gold focus:border-transparent outline-none text-text-primary dark:text-text-primary placeholder:text-text-secondary dark:placeholder:text-text-muted transition-all";
+    const labelClass = "text-sm font-semibold text-text-muted dark:text-text-primary";
+    const sectionHeaderClass = "flex items-center gap-2 border-b border-border dark:border-border-subtle pb-2 text-text-primary dark:text-primary-text";
 
     return (
         <div className="flex flex-col w-full max-w-[960px] px-0 md:px-6 space-y-8">
@@ -50,7 +50,7 @@ const VerificationStep2 = ({ formData, updateFormData, onNext, onPrev, onSave, i
                     </div>
                     <p className="text-primary text-2xl font-bold">66%</p>
                 </div>
-                <div className="rounded-full bg-slate-200 dark:bg-slate-800 h-3 overflow-hidden">
+                <div className="rounded-full bg-surface dark:bg-container h-3 overflow-hidden">
                     <div className="h-full rounded-full bg-primary transition-all duration-700 ease-out" style={{ width: '66%' }}></div>
                 </div>
                 <div className="flex items-center gap-2 text-primary/80">
@@ -59,7 +59,7 @@ const VerificationStep2 = ({ formData, updateFormData, onNext, onPrev, onSave, i
                 </div>
             </div>
 
-            <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-primary/10 rounded-3xl p-8 shadow-2xl space-y-10">
+            <div className="bg-surface dark:bg-void/50 border border-border dark:border-primary/10 rounded-3xl p-8 shadow-2xl space-y-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {/* Section 1: Professional Profiles */}
                     <section className="flex flex-col gap-5">
@@ -71,7 +71,7 @@ const VerificationStep2 = ({ formData, updateFormData, onNext, onPrev, onSave, i
                             <div className="flex flex-col gap-2">
                                 <label className={labelClass}>IMDb Profile Link</label>
                                 <div className="relative">
-                                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">link</span>
+                                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary text-lg">link</span>
                                     <input
                                         className={inputClass}
                                         placeholder="https://www.imdb.com/name/nm..."
@@ -82,9 +82,9 @@ const VerificationStep2 = ({ formData, updateFormData, onNext, onPrev, onSave, i
                                 </div>
                             </div>
                             <div className="flex flex-col gap-2">
-                                <label className={labelClass}>Wikipedia Page <span className="text-slate-400 font-normal">(Optional)</span></label>
+                                <label className={labelClass}>Wikipedia Page <span className="text-text-secondary font-normal">(Optional)</span></label>
                                 <div className="relative">
-                                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">description</span>
+                                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary text-lg">description</span>
                                     <input
                                         className={inputClass}
                                         placeholder="https://en.wikipedia.org/wiki/..."
@@ -107,7 +107,7 @@ const VerificationStep2 = ({ formData, updateFormData, onNext, onPrev, onSave, i
                             <div className="flex flex-col gap-2">
                                 <label className={labelClass}>Link to Showreel / Demo Reel</label>
                                 <div className="relative">
-                                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">play_circle</span>
+                                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary text-lg">play_circle</span>
                                     <input
                                         className={inputClass}
                                         placeholder="YouTube or Vimeo link"
@@ -120,7 +120,7 @@ const VerificationStep2 = ({ formData, updateFormData, onNext, onPrev, onSave, i
                             <div className="flex flex-col gap-2">
                                 <label className={labelClass}>Personal Website / Blog</label>
                                 <div className="relative">
-                                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">language</span>
+                                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary text-lg">language</span>
                                     <input
                                         className={inputClass}
                                         placeholder="www.yourname.com"
@@ -139,7 +139,7 @@ const VerificationStep2 = ({ formData, updateFormData, onNext, onPrev, onSave, i
                             <span className="material-symbols-outlined text-primary">badge</span>
                             <h2 className="text-xl font-bold">Industry Memberships</h2>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50 dark:bg-slate-800/30 p-6 rounded-xl border border-dashed border-slate-300 dark:border-slate-700">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-surface-lowest dark:bg-container/30 p-6 rounded-xl border border-dashed border-border dark:border-border-subtle">
                             <div className="flex flex-col gap-4">
                                 <div className="flex flex-col gap-2">
                                     <label className={labelClass}>Association Name</label>
@@ -168,31 +168,31 @@ const VerificationStep2 = ({ formData, updateFormData, onNext, onPrev, onSave, i
                             <div className="flex flex-col gap-2 h-full">
                                 <label className={labelClass}>Upload Membership Card</label>
                                 {!membershipCardPreview ? (
-                                    <label className="flex flex-col items-center justify-center flex-1 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-800/10 hover:bg-primary/5 hover:border-primary transition-all cursor-pointer group p-6">
+                                    <label className="flex flex-col items-center justify-center flex-1 border-2 border-dashed border-border dark:border-border-subtle rounded-xl bg-surface-lowest dark:bg-container/10 hover:bg-primary/5 hover:border-primary transition-all cursor-pointer group p-6">
                                         <input
                                             type="file"
                                             accept="image/jpeg,image/png,application/pdf"
                                             className="hidden"
                                             onChange={e => handleMembershipCard(e.target.files[0])}
                                         />
-                                        <span className="material-symbols-outlined text-4xl text-slate-400 group-hover:text-primary transition-colors">cloud_upload</span>
-                                        <p className="text-sm text-slate-500 mt-2 font-medium">Click to upload or drag &amp; drop</p>
-                                        <p className="text-xs text-slate-400 mt-1">JPG, PNG, PDF (Max 5MB)</p>
-                                        {membershipError && <p className="text-xs text-red-500 mt-2">{membershipError}</p>}
+                                        <span className="material-symbols-outlined text-4xl text-text-secondary group-hover:text-primary transition-colors">cloud_upload</span>
+                                        <p className="text-sm text-text-secondary mt-2 font-medium">Click to upload or drag &amp; drop</p>
+                                        <p className="text-xs text-text-secondary mt-1">JPG, PNG, PDF (Max 5MB)</p>
+                                        {membershipError && <p className="text-xs text-error mt-2">{membershipError}</p>}
                                     </label>
                                 ) : (
-                                    <div className="flex flex-col items-center gap-2 p-4 border border-green-500/30 rounded-xl bg-green-500/5">
+                                    <div className="flex flex-col items-center gap-2 p-4 border border-success/30 rounded-xl bg-success/5">
                                         {membershipCardPreview === 'pdf'
                                             ? <span className="material-symbols-outlined text-4xl text-primary">picture_as_pdf</span>
                                             : <img src={membershipCardPreview} alt="Card preview" className="max-h-28 rounded-lg object-contain" />
                                         }
-                                        <p className="text-xs text-green-600 dark:text-green-400 font-semibold flex items-center gap-1">
+                                        <p className="text-xs text-success dark:text-success font-semibold flex items-center gap-1">
                                             <span className="material-symbols-outlined !text-sm">check_circle</span>
                                             {formData.membershipCard?.name}
                                         </p>
                                         <button
                                             onClick={() => { setMembershipCardPreview(null); updateFormData({ membershipCard: null }); }}
-                                            className="text-xs text-red-500 hover:underline"
+                                            className="text-xs text-error hover:underline"
                                         >
                                             Remove
                                         </button>
@@ -204,7 +204,7 @@ const VerificationStep2 = ({ formData, updateFormData, onNext, onPrev, onSave, i
 
                     {/* Section 4: Awards & Recognition */}
                     <section className="flex flex-col gap-5 md:col-span-2">
-                        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-2 text-slate-900 dark:text-white">
+                        <div className="flex items-center justify-between border-b border-border dark:border-border-subtle pb-2 text-text-primary dark:text-primary-text">
                             <div className="flex items-center gap-2">
                                 <span className="material-symbols-outlined text-primary">emoji_events</span>
                                 <h2 className="text-xl font-bold">Awards &amp; Recognition</h2>
@@ -219,12 +219,12 @@ const VerificationStep2 = ({ formData, updateFormData, onNext, onPrev, onSave, i
                             </button>
                         </div>
                         <div className="flex flex-col gap-4">
-                            {formData.awards.map((award, idx) => (
-                                <div key={award.id} className="relative grid grid-cols-1 md:grid-cols-3 gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/20 group">
+                            {formData.awards.map((award) => (
+                                <div key={award.id} className="relative grid grid-cols-1 md:grid-cols-3 gap-4 p-4 rounded-xl border border-border dark:border-border-subtle bg-surface-lowest dark:bg-container/20 group">
                                     {formData.awards.length > 1 && (
                                         <button
                                             onClick={() => removeAward(award.id)}
-                                            className="absolute -top-2 -right-2 p-1 rounded-full bg-red-500 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
+                                            className="absolute -top-2 -right-2 p-1 rounded-full bg-primary text-primary-text opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary-hover"
                                             title="Remove award"
                                         >
                                             <span className="material-symbols-outlined !text-sm">close</span>
@@ -270,10 +270,10 @@ const VerificationStep2 = ({ formData, updateFormData, onNext, onPrev, onSave, i
             </div>
 
             {/* Footer Navigation */}
-            <div className="pt-4 border-t border-slate-200 dark:border-slate-700 flex justify-between items-center pb-8">
+            <div className="pt-4 border-t border-border dark:border-border-subtle flex justify-between items-center pb-8">
                 <button
                     onClick={onPrev}
-                    className="flex items-center gap-2 text-slate-500 font-bold hover:text-slate-900 dark:hover:text-slate-100 transition-colors active:scale-95"
+                    className="flex items-center gap-2 text-text-secondary font-bold hover:text-text-primary dark:hover:text-text-primary transition-colors active:scale-95"
                 >
                     <span className="material-symbols-outlined">arrow_back</span>
                     Back to Basic Info
@@ -282,7 +282,7 @@ const VerificationStep2 = ({ formData, updateFormData, onNext, onPrev, onSave, i
                     <button
                         onClick={onSave}
                         disabled={isSaving}
-                        className="hidden sm:flex items-center gap-2 px-6 py-3 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-100 font-bold rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors disabled:opacity-60"
+                        className="hidden sm:flex items-center gap-2 px-6 py-3 bg-surface-lowest dark:bg-container text-text-muted dark:text-text-primary font-bold rounded-xl hover:bg-surface dark:hover:bg-container transition-colors disabled:opacity-60"
                     >
                         {isSaving ? (
                             <>
@@ -293,7 +293,7 @@ const VerificationStep2 = ({ formData, updateFormData, onNext, onPrev, onSave, i
                     </button>
                     <button
                         onClick={onNext}
-                        className="flex items-center gap-2 px-8 py-3 bg-primary text-white font-black rounded-xl hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-primary/20"
+                        className="flex items-center gap-2 px-8 py-3 bg-primary text-primary-text font-black rounded-xl hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-primary/20"
                     >
                         Continue to Step 3
                         <span className="material-symbols-outlined">arrow_forward</span>

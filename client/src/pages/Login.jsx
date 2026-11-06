@@ -1,6 +1,7 @@
+import ArtLogo from '../components/common/ArtLogo';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { login, loginWithGoogle, getLinkedInAuthUrl, autoLinkedInLogin, requestPasswordReset, resendEmailVerification } from '../services/authService';
+import { login, loginWithGoogle, autoLinkedInLogin, requestPasswordReset, resendEmailVerification } from '../services/authService';
 import { getMyProfile } from '../services/profileService';
 import { useAuth } from '../context/AuthContext';
 
@@ -78,7 +79,7 @@ const Login = () => {
       const role = data.user.role;
       if (role === 'talent') navigate('/dashboard/talent');
       else if (role === 'director') navigate('/dashboard/director');
-      else if (role === 'admin') navigate('/dashboard/admin');
+      else if (role === 'producer') navigate('/dashboard/producer'); else if (role === 'admin') navigate('/dashboard/admin');
     } catch (err) {
       const nextAttempts = attempts + 1;
       setAttempts(nextAttempts);
@@ -146,17 +147,8 @@ const Login = () => {
     }
   };
 
-  const handleLinkedIn = () => {
-    try {
-      const url = getLinkedInAuthUrl();
-      window.location.href = url;
-    } catch (err) {
-      setError(err.message || 'LinkedIn is not configured.');
-    }
-  };
-
   return (
-    <div className="relative min-h-screen w-full flex flex-col overflow-x-hidden bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
+    <div className="relative min-h-screen w-full flex flex-col overflow-x-hidden bg-background-light dark:bg-background-dark text-text-primary dark:text-text-primary">
       {/* Background Image with Cinematic Blur */}
       <div className="fixed inset-0 z-0">
         <div
@@ -165,7 +157,7 @@ const Login = () => {
             backgroundImage: `url('https://lh3.googleusercontent.com/aida-public/AB6AXuCFzufIm0cD0bYjVER5F5rAoLqZdrz4jOQL0NfEOFj1iWoH9aq0G9b0LNuj0rmIhExI8K2lyktAgdm1H6M0_MxOOQNbTD5s6maYH93MNaB38pdiHF9vscZZ184qfVy7w78PWAXp7IWFjPuU7TPJf-Dl-7MGJtjfkez8v8IYuva3Q0ikEBX2FI_HC3S95TUNOGS8m1D4MddQws560xTarn1cE0hy0wGESaukS7q9iGbdImUtfxNRSBSIaQyXE4kHHMwmIDpoZ5Z-2gSb')`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(34,22,16,0.4)] to-[rgba(34,22,16,0.95)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[color-mix(in srgb, var(--color-primary) 40%, transparent)] to-[color-mix(in srgb, var(--color-primary) 95%, transparent)]" />
       </div>
 
       {/* Content Overlay */}
@@ -173,33 +165,33 @@ const Login = () => {
         {/* Top Navigation / Logo */}
         <header className="w-full px-6 py-6 lg:px-12 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src="/TC Logo.png" alt="Logo" className="h-10 w-auto" />
-            <h1 className="text-2xl font-black tracking-tighter text-white uppercase italic">
-              TalentConnect{' '}
+            <ArtLogo showWordmark={true} />
+            <h1 className="text-2xl font-black tracking-tighter text-primary-text uppercase italic">
+              Art-e-techt{' '}
             </h1>
           </div>
           <div className="hidden md:block">
-            <p className="text-slate-400 text-sm font-medium">
-              India's Leading Talent Platform
+            <p className="text-text-secondary text-sm font-medium">
+              Where Creative Talent Meets Opportunity
             </p>
           </div>
         </header>
 
         {/* Main Login Container */}
         <main className="flex-1 flex items-center justify-center px-4 py-12">
-          <div className="w-full max-w-[480px] bg-[rgba(45,30,22,0.6)] backdrop-blur-[12px] border border-primary/10 rounded-xl p-8 shadow-2xl">
+          <div className="w-full max-w-[480px] bg-[color-mix(in srgb, var(--color-primary) 60%, transparent)] backdrop-blur-[12px] border border-primary/10 rounded-xl p-8 shadow-2xl">
             <div className="mb-8 text-center">
-              <h2 className="text-3xl font-bold text-white mb-2">
+              <h2 className="text-3xl font-bold text-primary-text mb-2">
                 Welcome Back
               </h2>
-              <p className="text-slate-300">Sign in to your professional profile</p>
+              <p className="text-text-primary">Sign in to your professional profile</p>
             </div>
 
             {/* User Type Toggle */}
             <div className="mb-8">
               <div className="flex h-12 w-full items-center justify-center rounded-xl bg-background-dark/50 p-1 border border-primary/20">
                 <label
-                  className="flex cursor-pointer h-full grow items-center justify-center rounded-lg px-4 transition-all text-slate-400 text-sm font-semibold has-[:checked]:bg-primary has-[:checked]:text-white"
+                  className="flex cursor-pointer h-full grow items-center justify-center rounded-lg px-4 transition-all text-text-secondary text-sm font-semibold has-[:checked]:bg-primary has-[:checked]:text-primary-text"
                   htmlFor="artist"
                 >
                   <span>Artist / Actor</span>
@@ -213,7 +205,7 @@ const Login = () => {
                   />
                 </label>
                 <label
-                  className="flex cursor-pointer h-full grow items-center justify-center rounded-lg px-4 transition-all text-slate-400 text-sm font-semibold has-[:checked]:bg-primary has-[:checked]:text-white"
+                  className="flex cursor-pointer h-full grow items-center justify-center rounded-lg px-4 transition-all text-text-secondary text-sm font-semibold has-[:checked]:bg-primary has-[:checked]:text-primary-text"
                   htmlFor="director"
                 >
                   <span>Director / Studio</span>
@@ -232,15 +224,15 @@ const Login = () => {
             {/* Form */}
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-200 ml-1">
+                <label className="text-sm font-medium text-text-primary ml-1">
                   Email or Username
                 </label>
                 <div className="relative">
-                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">
+                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary text-xl">
                     person
                   </span>
                   <input
-                    className="w-full bg-background-dark/40 border border-slate-700 rounded-xl py-4 pl-12 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-slate-500"
+                    className="w-full bg-background-dark/40 border border-border-subtle rounded-xl py-4 pl-12 pr-4 text-primary-text focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all placeholder:text-text-secondary"
                     placeholder="name@example.com"
                     type="text"
                     value={email}
@@ -251,7 +243,7 @@ const Login = () => {
 
               <div className="space-y-2">
                 <div className="flex justify-between items-center px-1">
-                  <label className="text-sm font-medium text-slate-200">
+                  <label className="text-sm font-medium text-text-primary">
                     Password
                   </label>
                   <button
@@ -263,18 +255,18 @@ const Login = () => {
                   </button>
                 </div>
                 <div className="relative">
-                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">
+                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary text-xl">
                     lock
                   </span>
                   <input
-                    className="w-full bg-background-dark/40 border border-slate-700 rounded-xl py-4 pl-12 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-slate-500"
+                    className="w-full bg-background-dark/40 border border-border-subtle rounded-xl py-4 pl-12 pr-4 text-primary-text focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all placeholder:text-text-secondary"
                     placeholder="••••••••"
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <span
-                    className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 cursor-pointer hover:text-white transition-colors"
+                    className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary cursor-pointer hover:text-primary-text transition-colors"
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? 'visibility_off' : 'visibility'}
@@ -284,30 +276,30 @@ const Login = () => {
 
               <div className="flex items-center gap-2 px-1">
                 <input
-                  className="rounded border-slate-700 bg-background-dark/40 text-primary focus:ring-primary h-4 w-4 cursor-pointer"
+                  className="rounded border-border-subtle bg-background-dark/40 text-primary focus:ring-gold h-4 w-4 cursor-pointer"
                   id="remember"
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
                 />
-                <label className="text-sm text-slate-300 cursor-pointer" htmlFor="remember">
+                <label className="text-sm text-text-primary cursor-pointer" htmlFor="remember">
                   Keep me signed in
                 </label>
               </div>
 
               {error && (
-                <div className="bg-red-100 dark:bg-red-500/20 border border-red-500/50 text-red-600 dark:text-red-200 p-3 rounded-lg text-sm mb-4">
+                <div className="bg-error dark:bg-primary/20 border border-error/50 text-error dark:text-error p-3 rounded-lg text-sm mb-4">
                   {error}
                 </div>
               )}
               {info && (
-                <div className="bg-emerald-100 dark:bg-emerald-500/20 border border-emerald-500/50 text-emerald-700 dark:text-emerald-200 p-3 rounded-lg text-sm mb-4">
+                <div className="bg-success/10 dark:bg-success/20 border border-success/50 text-success dark:text-success p-3 rounded-lg text-sm mb-4">
                   {info}
                 </div>
               )}
 
               <button
-                className={`w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 transition-all transform active:scale-[0.98] flex items-center justify-center gap-2 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+                className={`w-full bg-primary hover:bg-primary/90 text-primary-text font-bold py-4 rounded-xl shadow-lg shadow-primary/20 transition-all transform active:scale-[0.98] flex items-center justify-center gap-2 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
                 type="submit"
                 disabled={loading || (lockUntil && Date.now() < lockUntil)}
               >
@@ -319,10 +311,10 @@ const Login = () => {
             {/* Divider */}
             <div className="relative my-8">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-slate-700" />
+                <div className="w-full border-t border-border-subtle" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="px-2 text-slate-500 bg-[rgba(45,30,22,0.6)]">
+                <span className="px-2 text-text-secondary bg-[color-mix(in srgb, var(--color-primary) 60%, transparent)]">
                   Or continue with
                 </span>
               </div>
@@ -331,7 +323,7 @@ const Login = () => {
             {/* Social Login */}
             <div className="grid grid-cols-2 gap-4">
               <button
-                className="flex items-center justify-center gap-2 bg-background-dark/40 border border-slate-700 hover:bg-background-dark/60 py-3 rounded-xl transition-colors disabled:opacity-50"
+                className="flex items-center justify-center gap-2 bg-background-dark/40 border border-border-subtle hover:bg-background-dark/60 py-3 rounded-xl transition-colors disabled:opacity-50"
                 type="button"
                 onClick={handleGoogle}
                 disabled={loading}
@@ -341,10 +333,10 @@ const Login = () => {
                   className="w-5 h-5"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGjOpggVjOADhZzBSaKSsyqNtc1WYN0so5RILSI6ztxIJVx6NX3Vl1JY_4r-zkNmXSlSCoBSm_QXRQvJuuBhZ_ZSCrbPXwRqkSNHNPBYS2lK9PUYUyt41E-a_lsBAA8G0j6sCOKqgXOV-UnvpriX2xe1peSmESb5dzKA1_G9iRY1nvfum6VO3CFmXZFD47aglEkfSLlE1e6pFtohdTIAmN7vfxHj8KRtk0ir1WCszAJTDRKnXMQwgIGJeG0Qp1eOZYPGrTzuGjGAEr"
                 />
-                <span className="text-sm font-medium text-white">Google</span>
+                <span className="text-sm font-medium text-primary-text">Google</span>
               </button>
               <button
-                className="flex items-center justify-center gap-2 bg-background-dark/40 border border-slate-700 hover:bg-background-dark/60 py-3 rounded-xl transition-colors disabled:opacity-50"
+                className="flex items-center justify-center gap-2 bg-background-dark/40 border border-border-subtle hover:bg-background-dark/60 py-3 rounded-xl transition-colors disabled:opacity-50"
                 type="button"
                 onClick={handleLinkedInAuto}
                 disabled={loading}
@@ -354,13 +346,13 @@ const Login = () => {
                   className="w-5 h-5"
                   src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
                 />
-                <span className="text-sm font-medium text-white">LinkedIn</span>
+                <span className="text-sm font-medium text-primary-text">LinkedIn</span>
               </button>
             </div>
 
             {/* Signup CTA */}
             <div className="mt-8 text-center">
-              <p className="text-slate-400">
+              <p className="text-text-secondary">
                 Don't have an account?{' '}
                 <Link
                   to={userType === 'actor' || userType === 'artist' ? "/register/actor" : "/register/director"}
@@ -369,7 +361,7 @@ const Login = () => {
                   Sign up for free
                 </Link>
               </p>
-              <p className="mt-2 text-xs text-slate-500">
+              <p className="mt-2 text-xs text-text-secondary">
                 Already signed up but not verified?{' '}
                 <button onClick={handleResendVerification} type="button" className="text-primary font-semibold hover:underline">
                   Resend verification email
@@ -381,10 +373,10 @@ const Login = () => {
 
         {/* Footer */}
         <footer className="w-full px-6 py-8 text-center">
-          <p className="text-slate-500 text-xs">
-            © 2026 TalentConnect. All Rights Reserved. Private &amp; Confidential.
+          <p className="text-text-secondary text-xs">
+            © 2026 Art-e-techt. All Rights Reserved. Private &amp; Confidential.
           </p>
-          <div className="mt-2 flex justify-center gap-4 text-xs text-slate-500">
+          <div className="mt-2 flex justify-center gap-4 text-xs text-text-secondary">
             <Link className="hover:text-primary transition-colors" to="#">
               Privacy Policy
             </Link>

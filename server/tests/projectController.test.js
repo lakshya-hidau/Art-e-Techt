@@ -9,7 +9,7 @@ vi.mock('../lib/firebaseAdmin.js', () => ({
 }));
 
 vi.mock('../lib/textBackup.js', () => ({
-  addWithBackup: vi.fn(),
+  addWithBackup: vi.fn().mockResolvedValue({ id: 'mock-doc-id' }),
   updateWithBackup: vi.fn().mockResolvedValue(),
   setWithBackup: vi.fn().mockResolvedValue(),
 }));
@@ -537,3 +537,4 @@ describe('Project Controller Tests', () => {
     });
   });
 });
+

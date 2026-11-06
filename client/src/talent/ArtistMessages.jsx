@@ -38,7 +38,7 @@ const ArtistMessages = () => {
                 const convRes = await getConversations();
                 setConversations(convRes.data);
                 setFilteredConvs(convRes.data);
-                
+
                 // If userId is provided in URL, find and select that conversation
                 if (userId) {
                     const targetConversation = convRes.data.find(conv => conv.otherUser._id === userId);
@@ -162,16 +162,16 @@ const ArtistMessages = () => {
         <DashboardLayout menuItems={TALENT_MENU} userRole="India • Artist" userData={userData} verificationStatus={verificationStatus}
             headerTitle="Artist Messages" headerSubtitle="Connect with industry professionals."
             searchPlaceholder="Search conversations...">
-            <div className="flex h-[calc(100vh-180px)] bg-white dark:bg-[#0f1115] rounded-[2rem] border border-slate-200 dark:border-white/5 overflow-hidden shadow-2xl">
+            <div className="flex h-[calc(100vh-180px)] bg-surface dark:bg-void rounded-[2rem] border border-border dark:border-subtle/5 overflow-hidden shadow-2xl">
                 {/* Conversation List */}
-                <aside className="w-80 flex-shrink-0 border-r border-slate-200 dark:border-white/5 flex flex-col">
-                    <div className="p-6 border-b border-slate-100 dark:border-white/5">
+                <aside className="w-80 flex-shrink-0 border-r border-border dark:border-subtle/5 flex flex-col">
+                    <div className="p-6 border-b border-border dark:border-subtle/5">
                         <div className="relative group">
-                            <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm group-focus-within:text-primary transition-colors">search</span>
+                            <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary text-sm group-focus-within:text-primary transition-colors">search</span>
                             <input
                                 value={searchQuery}
                                 onChange={e => setSearchQuery(e.target.value)}
-                                className="w-full bg-slate-100 dark:bg-white/5 border-none rounded-2xl pl-12 pr-6 py-3.5 text-[10px] font-black uppercase tracking-widest focus:ring-4 focus:ring-primary/10 placeholder:text-slate-500 text-slate-700 dark:text-white outline-none transition-all shadow-inner"
+                                className="w-full bg-surface-lowest dark:bg-surface/5 border-none rounded-2xl pl-12 pr-6 py-3.5 text-[10px] font-black uppercase tracking-widest focus:ring-4 focus:ring-gold/10 placeholder:text-text-secondary text-text-muted dark:text-primary-text outline-none transition-all shadow-inner"
                                 placeholder="Search people..."
                                 type="text"
                             />
@@ -180,7 +180,7 @@ const ArtistMessages = () => {
                     <div className="flex-1 overflow-y-auto">
                         <div className="p-4 space-y-2">
                             {filteredConvs.length === 0 ? (
-                                <p className="text-center text-[10px] font-black uppercase tracking-widest text-slate-500 mt-12 italic">
+                                <p className="text-center text-[10px] font-black uppercase tracking-widest text-text-secondary mt-12 italic">
                                     {searchQuery ? 'No results found.' : 'No conversations yet.'}
                                 </p>
                             ) : filteredConvs.map((conv) => (
@@ -188,24 +188,24 @@ const ArtistMessages = () => {
                                     onClick={() => handleSelectUser(conv.otherUser)}
                                     className={`flex items-center gap-4 p-5 rounded-3xl cursor-pointer transition-all duration-300 border ${
                                         selectedUser?._id === conv.otherUser._id
-                                            ? 'bg-primary text-white shadow-xl shadow-primary/20 scale-[1.02]'
-                                            : 'hover:bg-slate-50 dark:hover:bg-white/5 border-transparent'
+                                            ? 'bg-primary text-primary-text shadow-xl shadow-primary/20 scale-[1.02]'
+                                            : 'hover:bg-surface-lowest dark:hover:bg-surface/5 border-transparent'
                                     }`}>
                                     <div className="relative shrink-0">
-                                        <div className="size-14 rounded-full bg-cover bg-center border-2 border-white/10 shadow-lg"
+                                        <div className="size-14 rounded-full bg-cover bg-center border-2 border-subtle/10 shadow-lg"
                                             style={{ backgroundImage: `url('https://ui-avatars.com/api/?name=${conv.otherUser.email}')` }}/>
-                                        <div className="absolute bottom-0 right-0 size-3 bg-green-500 border-2 border-white dark:border-[#0f1115] rounded-full"/>
+                                        <div className="absolute bottom-0 right-0 size-3 bg-success border-2 border-subtle dark:border-void rounded-full"/>
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <div className="flex justify-between items-baseline mb-1">
-                                            <h3 className={`text-sm font-black truncate uppercase tracking-tight italic ${selectedUser?._id === conv.otherUser._id ? 'text-white' : 'dark:text-white'}`}>
+                                            <h3 className={`text-sm font-black truncate uppercase tracking-tight italic ${selectedUser?._id === conv.otherUser._id ? 'text-primary-text' : 'dark:text-primary-text'}`}>
                                                 {conv.otherUser.email.split('@')[0]}
                                             </h3>
-                                            <span className={`text-[9px] font-black uppercase tracking-widest ${selectedUser?._id === conv.otherUser._id ? 'text-white/80' : 'text-slate-500'}`}>
+                                            <span className={`text-[9px] font-black uppercase tracking-widest ${selectedUser?._id === conv.otherUser._id ? 'text-primary-text/80' : 'text-text-secondary'}`}>
                                                 {new Date(conv.lastMessage.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                             </span>
                                         </div>
-                                        <p className={`text-[10px] truncate font-bold italic tracking-tight ${selectedUser?._id === conv.otherUser._id ? 'text-white/70' : 'text-slate-500'}`}>
+                                        <p className={`text-[10px] truncate font-bold italic tracking-tight ${selectedUser?._id === conv.otherUser._id ? 'text-primary-text/70' : 'text-text-secondary'}`}>
                                             {conv.lastMessage.content}
                                         </p>
                                     </div>
@@ -216,20 +216,20 @@ const ArtistMessages = () => {
                 </aside>
 
                 {/* Chat Area */}
-                <div className="flex-1 flex flex-col bg-slate-50/30 dark:bg-black/20">
+                <div className="flex-1 flex flex-col bg-surface-lowest/30 dark:bg-void/20">
                     {selectedUser ? (
                         <>
-                            <header className="h-24 flex items-center justify-between px-10 border-b border-slate-200 dark:border-white/5 bg-white/80 dark:bg-[#0f1115]/80 backdrop-blur-xl">
+                            <header className="h-24 flex items-center justify-between px-10 border-b border-border dark:border-subtle/5 bg-surface/80 dark:bg-void/80 backdrop-blur-xl">
                                 <div className="flex items-center gap-5">
                                     <div className="size-14 rounded-full bg-cover bg-center border-2 border-primary/20 shadow-2xl"
                                         style={{ backgroundImage: `url('https://ui-avatars.com/api/?name=${selectedUser.email}')` }}/>
                                     <div>
                                         <div className="flex items-center gap-3">
-                                            <h2 className="text-xl font-black dark:text-white uppercase tracking-tighter italic">{selectedUser.email.split('@')[0]}</h2>
+                                            <h2 className="text-xl font-black dark:text-primary-text uppercase tracking-tighter italic">{selectedUser.email.split('@')[0]}</h2>
                                             <span className="px-3 py-1 bg-primary/10 text-primary text-[9px] font-black rounded-lg uppercase tracking-[0.2em] border border-primary/20">Industry Pro</span>
                                         </div>
-                                        <p className={`text-[10px] flex items-center gap-2 font-black uppercase tracking-widest mt-1.5 transition-all ${isTyping ? 'text-blue-400' : 'text-green-500'}`}>
-                                            <span className={`size-2 rounded-full ${isTyping ? 'bg-blue-400 animate-bounce' : 'bg-green-500 animate-pulse'}`}/>
+                                        <p className={`text-[10px] flex items-center gap-2 font-black uppercase tracking-widest mt-1.5 transition-all ${isTyping ? 'text-gold' : 'text-success'}`}>
+                                            <span className={`size-2 rounded-full ${isTyping ? 'bg-gold animate-bounce' : 'bg-success animate-pulse'}`}/>
                                             {isTyping ? 'Typing...' : 'Online Now'}
                                         </p>
                                     </div>
@@ -237,7 +237,7 @@ const ArtistMessages = () => {
                                 <div className="flex items-center gap-3">
                                     {[{ icon: 'phone', label: 'Call' }, { icon: 'video_call', label: 'Video' }].map(({ icon, label }) => (
                                         <button key={icon}
-                                            className="size-11 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-500 dark:text-white flex items-center justify-center hover:border-primary hover:text-primary transition-all"
+                                            className="size-11 rounded-xl bg-surface dark:bg-surface/5 border border-border dark:border-subtle/10 text-text-secondary dark:text-primary-text flex items-center justify-center hover:border-primary hover:text-primary transition-all"
                                             title={label}>
                                             <span className="material-symbols-outlined text-xl">{icon}</span>
                                         </button>
@@ -252,12 +252,12 @@ const ArtistMessages = () => {
                                         <div className="space-y-2">
                                             <div className={`${
                                                 msg.sender === profile?._id
-                                                    ? 'bg-primary text-white p-6 rounded-[2rem] rounded-br-none shadow-2xl shadow-primary/20 hover:-translate-y-1 transition-transform'
-                                                    : 'bg-white dark:bg-[#1a1c23] text-slate-800 dark:text-slate-200 p-6 rounded-[2rem] rounded-bl-none shadow-sm border border-slate-100 dark:border-white/5 hover:-translate-y-1 transition-transform'
+                                                    ? 'bg-primary text-primary-text p-6 rounded-[2rem] rounded-br-none shadow-2xl shadow-primary/20 hover:-translate-y-1 transition-transform'
+                                                    : 'bg-surface dark:bg-surface-low text-text-primary dark:text-text-primary p-6 rounded-[2rem] rounded-bl-none shadow-sm border border-border dark:border-subtle/5 hover:-translate-y-1 transition-transform'
                                             }`}>
                                                 <p className="text-sm font-bold leading-relaxed tracking-tight">{msg.content}</p>
                                             </div>
-                                            <span className={`text-[9px] text-slate-500 font-black uppercase tracking-[0.2em] ${msg.sender === profile?._id ? 'text-right block mr-4' : 'ml-4'}`}>
+                                            <span className={`text-[9px] text-text-secondary font-black uppercase tracking-[0.2em] ${msg.sender === profile?._id ? 'text-right block mr-4' : 'ml-4'}`}>
                                                 {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                             </span>
                                         </div>
@@ -266,23 +266,23 @@ const ArtistMessages = () => {
                                 <div ref={messagesEndRef}/>
                             </div>
 
-                            <form onSubmit={handleSendMessage} className="p-8 bg-white dark:bg-[#0f1115] border-t border-slate-200 dark:border-white/5">
+                            <form onSubmit={handleSendMessage} className="p-8 bg-surface dark:bg-void border-t border-border dark:border-subtle/5">
                                 <div className="max-w-4xl mx-auto flex items-center gap-5">
-                                    <button type="button" className="size-14 rounded-2xl bg-slate-100 dark:bg-white/5 text-slate-500 flex items-center justify-center hover:text-primary transition-all">
+                                    <button type="button" className="size-14 rounded-2xl bg-surface-lowest dark:bg-surface/5 text-text-secondary flex items-center justify-center hover:text-primary transition-all">
                                         <span className="material-symbols-outlined text-2xl">add</span>
                                     </button>
                                     <div className="flex-1 relative">
                                         <input
                                             value={newMessage}
                                             onChange={handleTyping}
-                                            className="w-full bg-slate-100 dark:bg-white/5 border-none rounded-[1.5rem] px-8 py-5 text-sm font-bold focus:ring-4 focus:ring-primary/10 placeholder:text-slate-500 outline-none transition-all shadow-inner dark:text-white italic"
+                                            className="w-full bg-surface-lowest dark:bg-surface/5 border-none rounded-[1.5rem] px-8 py-5 text-sm font-bold focus:ring-4 focus:ring-gold/10 placeholder:text-text-secondary outline-none transition-all shadow-inner dark:text-primary-text italic"
                                             placeholder="Compose message..."
                                             type="text"
                                             disabled={sending}
                                         />
                                     </div>
                                     <button type="submit" disabled={sending || !newMessage.trim()}
-                                        className="size-16 rounded-2xl bg-primary text-white flex items-center justify-center shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 transition-all group disabled:opacity-60 disabled:cursor-not-allowed">
+                                        className="size-16 rounded-2xl bg-primary text-primary-text flex items-center justify-center shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 transition-all group disabled:opacity-60 disabled:cursor-not-allowed">
                                         {sending ? (
                                             <span className="material-symbols-outlined text-2xl animate-spin">sync</span>
                                         ) : (
@@ -297,7 +297,7 @@ const ArtistMessages = () => {
                             <div className="size-24 rounded-full bg-primary/5 flex items-center justify-center border border-primary/10 animate-bounce">
                                 <span className="material-symbols-outlined text-primary text-5xl">forum</span>
                             </div>
-                            <p className="text-slate-500 uppercase tracking-[0.3em] font-black text-xs italic">Select a conversation to start chatting</p>
+                            <p className="text-text-secondary uppercase tracking-[0.3em] font-black text-xs italic">Select a conversation to start chatting</p>
                         </div>
                     )}
                 </div>
