@@ -117,8 +117,10 @@ jobs:
         VITE_SENTRY_DSN: ${{ vars.VITE_SENTRY_DSN }}
 
     - name: Deploy to Render (Production)
+      if: ${{ secrets.RENDER_DEPLOY_HOOK_PRODUCTION != '' }}
       run: |
         curl --fail --silent --show-error --request POST "${{ secrets.RENDER_DEPLOY_HOOK_PRODUCTION }}"
+      continue-on-error: true
 
     - name: Deploy to Firebase (Production)
       uses: FirebaseExtended/action-hosting-deploy@v0
