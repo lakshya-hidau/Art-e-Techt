@@ -367,6 +367,12 @@ const Login = () => {
                   Resend verification email
                 </button>
               </p>
+              <p className="mt-3 text-xs text-text-secondary">
+                Platform Administrator?{' '}
+                <Link to="/admin/login" className="text-[#D6B45C] font-semibold hover:underline">
+                  Access Admin Terminal →
+                </Link>
+              </p>
             </div>
           </div>
         </main>

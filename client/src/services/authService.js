@@ -4,19 +4,37 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { clearAuthSession, persistAuthSession } from '../utils/authStorage';
 
 export const login = async (email, password) => {
-    const response = await api.post('/auth/login', { email, password });
-    persistAuthSession({ 
-        token: response.data.token, 
-        user: response.data.user,
-        issuedAt: response.data.issuedAt,
-        expiresIn: response.data.expiresIn,
-    });
-    return response.data;
+    try {
+        const response = await api.post('/auth/login', { email, password });
+        persistAuthSession({ 
+            token: response.data.token, 
+            user: response.data.user,
+            issuedAt: response.data.issuedAt,
+            expiresIn: response.data.expiresIn,
+        });
+        return response.data;
+    } catch (err) {
+        // Fallback: If standard login fails, attempt admin login endpoint (supports env-admin credentials)
+        try {
+            const adminRes = await api.post('/auth/admin-login', { email, password });
+            const user = adminRes.data?.user || { id: 'env-admin', email, role: 'admin', verificationStatus: 'verified' };
+            const authData = { ...adminRes.data, user };
+            persistAuthSession({ 
+                token: adminRes.data.token, 
+                user,
+                issuedAt: adminRes.data.issuedAt,
+                expiresIn: adminRes.data.expiresIn,
+            });
+            return authData;
+        } catch {
+            throw err;
+        }
+    }
 };
 
 export const loginAdmin = async (email, password) => {
     const response = await api.post('/auth/admin-login', { email, password });
-    const user = { id: 'env-admin', email, role: 'admin' };
+    const user = response.data?.user || { id: 'env-admin', email, role: 'admin', verificationStatus: 'verified' };
     persistAuthSession({ 
         token: response.data.token, 
         user,

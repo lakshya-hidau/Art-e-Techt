@@ -20,6 +20,13 @@ vi.mock('../socket.js', () => ({
   broadcastProjectCreated: vi.fn().mockResolvedValue(),
 }));
 
+vi.mock('../lib/emailTemplates.js', () => ({
+  sendApplicationShortlistedEmail: vi.fn().mockResolvedValue(),
+  sendSelectedEmail: vi.fn().mockResolvedValue(),
+  sendApplicationRejectedEmail: vi.fn().mockResolvedValue(),
+  sendAuditionScheduledEmail: vi.fn().mockResolvedValue(),
+}));
+
 // ========== NOW import controller and dependencies ==========
 
 import {

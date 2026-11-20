@@ -2,8 +2,10 @@ import ArtLogo from '../components/common/ArtLogo';
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { loginAdmin } from '../services/authService';
+import { useAuth } from '../context/AuthContext';
 
 const AdminLogin = () => {
+    const { setSessionFromAuthResponse } = useAuth();
     const [formData, setFormData] = useState({
         adminId: '',
         password: ''
@@ -24,7 +26,10 @@ const AdminLogin = () => {
         setError('');
 
         try {
-            await loginAdmin(formData.adminId, formData.password);
+            const authData = await loginAdmin(formData.adminId, formData.password);
+            if (setSessionFromAuthResponse) {
+                setSessionFromAuthResponse(authData);
+            }
 
             console.log('Admin login successful');
             navigate('/dashboard/admin');

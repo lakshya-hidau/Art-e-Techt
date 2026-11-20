@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import TopNav from '../components/TopNav';
+import Footer from '../components/Footer';
 
 const Home = () => {
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState('All Disciplines');
 
   const disciplines = ['All Disciplines', 'Actors', 'Directors', 'Models', 'DOPs'];
@@ -23,86 +24,7 @@ const Home = () => {
         {/* ========================================================
              SECTION 01: ARCHITECTURAL HEADER & REGIONAL INDICATOR
              ======================================================== */}
-        <header className="fixed top-0 left-0 right-0 w-full z-50 bg-void/90 backdrop-blur-md border-b border-border">
-          <div className="h-20 w-full px-5 md:px-10 lg:px-16 flex items-center justify-between">
-            {/* Brand Logo / Emblem */}
-            <Link className="flex items-center gap-3 group" to="/">
-              <div className="w-8 h-8 bg-surface-low flex items-center justify-center border border-border group-hover:border-secondary transition-colors">
-                <span className="w-2.5 h-2.5 bg-secondary rotate-45 block"></span>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-display font-bold text-lg tracking-wider text-text-primary uppercase group-hover:text-secondary transition-colors">
-                  Art-e-techt
-                </span>
-                <span className="font-sans text-[9px] text-text-secondary uppercase tracking-[0.25em] -mt-1">
-                  Atelier • Archival Edition
-                </span>
-              </div>
-            </Link>
-
-            {/* Desktop Navigation */}
-            <nav aria-label="Main navigation" className="hidden xl:flex items-center gap-6 2xl:gap-10">
-              <Link className="text-xs uppercase tracking-[0.15em] text-text-secondary hover:text-secondary transition-colors" to="/">
-                Home
-              </Link>
-              <Link className="text-xs uppercase tracking-[0.15em] text-text-secondary hover:text-secondary transition-colors" to="/find-talent">
-                Find Talent
-              </Link>
-              <Link className="text-xs uppercase tracking-[0.15em] text-text-secondary hover:text-secondary transition-colors" to="/find-work">
-                Find Work
-              </Link>
-              <Link className="text-xs uppercase tracking-[0.15em] text-text-secondary hover:text-secondary transition-colors" to="/productions">
-                Productions
-              </Link>
-              <Link className="text-xs uppercase tracking-[0.15em] text-text-secondary hover:text-secondary transition-colors" to="/about-us">
-                About Us
-              </Link>
-            </nav>
-
-            {/* Sign-in action and mobile navigation */}
-            <div className="flex items-center gap-6">
-              <Link className="hidden sm:inline-block text-xs uppercase tracking-widest text-text-secondary hover:text-secondary transition-colors px-2 py-2" to="/loginPage">
-                Sign In
-              </Link>
-
-              {/* Mobile Menu Toggle Button */}
-              <button
-                aria-label="Toggle Navigation"
-                aria-expanded={mobileNavOpen}
-                aria-controls="mobileNav"
-                type="button"
-                className="xl:hidden p-2 text-text-primary border border-border hover:border-secondary transition-colors"
-                onClick={() => setMobileNavOpen(!mobileNavOpen)}
-              >
-                <span className="material-symbols-outlined text-[20px]">{mobileNavOpen ? 'close' : 'menu'}</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile Navigation Drawer */}
-          {mobileNavOpen && (
-            <div className="xl:hidden w-full bg-background border-t border-border px-5 py-4 space-y-3" id="mobileNav">
-              <Link className="block text-xs uppercase tracking-widest text-text-secondary hover:text-secondary py-1" to="/" onClick={() => setMobileNavOpen(false)}>
-                Home
-              </Link>
-              <Link className="block text-xs uppercase tracking-widest text-text-secondary hover:text-secondary py-1" to="/find-talent" onClick={() => setMobileNavOpen(false)}>
-                Find Talent
-              </Link>
-              <Link className="block text-xs uppercase tracking-widest text-text-secondary hover:text-secondary py-1" to="/find-work" onClick={() => setMobileNavOpen(false)}>
-                Find Work
-              </Link>
-              <Link className="block text-xs uppercase tracking-widest text-text-secondary hover:text-secondary py-1" to="/productions" onClick={() => setMobileNavOpen(false)}>
-                Productions
-              </Link>
-              <Link className="block text-xs uppercase tracking-widest text-text-secondary hover:text-secondary py-1" to="/about-us" onClick={() => setMobileNavOpen(false)}>
-                About Us
-              </Link>
-              <Link className="block text-xs uppercase tracking-widest text-secondary hover:text-primary-text py-2 border-t border-border" to="/loginPage" onClick={() => setMobileNavOpen(false)}>
-                Sign In
-              </Link>
-            </div>
-          )}
-        </header>
+        <TopNav />
 
         <main className="w-full pt-20">
           {/* ========================================================
@@ -1111,134 +1033,7 @@ const Home = () => {
         {/* ========================================================
              SECTION 11: BRUTALIST ARCHITECTURAL FOOTER
              ======================================================== */}
-        <footer className="w-full bg-void border-t border-border">
-          <div className="w-full px-5 md:px-10 lg:px-16 py-16">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 mb-16">
-              {/* Brand Info */}
-              <div className="lg:col-span-4 flex flex-col gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-surface-low flex items-center justify-center border border-border">
-                    <span className="w-2 h-2 bg-secondary rotate-45 block"></span>
-                  </div>
-                  <span className="font-display font-bold text-lg text-text-primary uppercase tracking-wider">
-                    Art-e-techt
-                  </span>
-                </div>
-                <p className="font-sans text-xs text-text-secondary leading-relaxed max-w-sm">
-                  A sanctuary uniting monolithic architectural precision and exceptional creative visionaries. Engineering digital spaces for uncompromised creative postures.
-                </p>
-                <div className="flex items-center gap-2 text-[10px] font-mono uppercase text-text-secondary">
-                  <span className="text-secondary font-semibold">Atelier System</span>
-                  <span>—</span>
-                  <span>Zero-Radius Specification</span>
-                </div>
-              </div>
-
-              {/* Col 01: Talent & Discovery */}
-              <div className="lg:col-span-2 flex flex-col gap-2">
-                <span className="font-mono text-xs uppercase tracking-widest text-secondary font-semibold mb-1">
-                  Explore
-                </span>
-                <nav className="flex flex-col space-y-1.5 text-xs text-text-secondary">
-                  <a className="hover:text-secondary transition-colors" href="#talent">
-                    Talent Roster
-                  </a>
-                  <a className="hover:text-secondary transition-colors" href="#projects">
-                    Creative Briefs
-                  </a>
-                  <a className="hover:text-secondary transition-colors" href="#productions">
-                    Production Houses
-                  </a>
-                  <a className="hover:text-secondary transition-colors" href="#talent">
-                    Regional Vaults
-                  </a>
-                  <a className="hover:text-secondary transition-colors" href="#about">
-                    Curated Monographs
-                  </a>
-                </nav>
-              </div>
-
-              {/* Col 02: Platform Ecosystem */}
-              <div className="lg:col-span-2 flex flex-col gap-2">
-                <span className="font-mono text-xs uppercase tracking-widest text-secondary font-semibold mb-1">
-                  Platform
-                </span>
-                <nav className="flex flex-col space-y-1.5 text-xs text-text-secondary">
-                  <a className="hover:text-secondary transition-colors" href="#how-it-works">
-                    How It Works
-                  </a>
-                  <a className="hover:text-secondary transition-colors" href="#about">
-                    Verified Credentials
-                  </a>
-                  <a className="hover:text-secondary transition-colors" href="#productions">
-                    Studio Direct Access
-                  </a>
-                  <a className="hover:text-secondary transition-colors" href="#projects">
-                    Enterprise Casting
-                  </a>
-                  <a className="hover:text-secondary transition-colors" href="#about">
-                    API &amp; Curation
-                  </a>
-                </nav>
-              </div>
-
-              {/* Col 03: Editorial & Atelier */}
-              <div className="lg:col-span-2 flex flex-col gap-2">
-                <span className="font-mono text-xs uppercase tracking-widest text-secondary font-semibold mb-1">
-                  Atelier
-                </span>
-                <nav className="flex flex-col space-y-1.5 text-xs text-text-secondary">
-                  <a className="hover:text-secondary transition-colors" href="#about">
-                    About Atelier
-                  </a>
-                  <a className="hover:text-secondary transition-colors" href="#about">
-                    The Manifesto
-                  </a>
-                  <a className="hover:text-secondary transition-colors" href="#productions">
-                    Press &amp; Releases
-                  </a>
-                  <a className="hover:text-secondary transition-colors" href="#productions">
-                    Archival Records
-                  </a>
-                  <a className="hover:text-secondary transition-colors" href="#about">
-                    Direct Contact
-                  </a>
-                </nav>
-              </div>
-
-              {/* Col 04: Legal & Code */}
-              <div className="lg:col-span-2 flex flex-col gap-2">
-                <span className="font-mono text-xs uppercase tracking-widest text-secondary font-semibold mb-1">
-                  Legal Code
-                </span>
-                <nav className="flex flex-col space-y-1.5 text-xs text-text-secondary">
-                  <a className="hover:text-secondary transition-colors" href="#about">
-                    Privacy Protocol
-                  </a>
-                  <a className="hover:text-secondary transition-colors" href="#about">
-                    Terms of Engagement
-                  </a>
-                  <a className="hover:text-secondary transition-colors" href="#about">
-                    Rights &amp; Licensing
-                  </a>
-                  <a className="hover:text-secondary transition-colors" href="#about">
-                    Provenance Seal
-                  </a>
-                </nav>
-              </div>
-            </div>
-
-            {/* Bottom Bar */}
-            <div className="pt-6 border-t border-border flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs font-mono text-text-secondary uppercase">
-              <p>© 2025 Art-e-techt Atelier. All rights reserved.</p>
-              <div className="flex items-center gap-3">
-                <span className="text-text-primary">Strict 0px Architecture</span>
-                <span className="text-secondary">•</span>
-                <span>Regional Hub: India (BOM / DEL / BLR)</span>
-              </div>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </div>
   );

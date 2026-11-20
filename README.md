@@ -90,31 +90,20 @@ Never commit `.env` files or service-account credentials.
 
 ### Firebase Hosting Deployment
 
-The React application deploys to the `art-e-techt-95db8` Hosting site in Firebase project `talentconnect-6e347`. The API and Socket.IO service remain on Render; Firebase Hosting only serves the built frontend.
+The React application deploys to Firebase Hosting in project `talentconnect-6e347` (`https://talentconnect-6e347.web.app/`). The API and Socket.IO service remain on Render; Firebase Hosting serves the built frontend.
 
-1. Install the Firebase CLI and authenticate with an account that can administer the Firebase project: `npm install --global firebase-tools` and `firebase login`.
-2. Set these GitHub Actions repository variables for production builds:
-   `VITE_API_URL`, `VITE_SOCKET_URL`, `VITE_STRIPE_PUBLISHABLE_KEY`,
-   `VITE_FIREBASE_API_KEY`, `VITE_FIREBASE_AUTH_DOMAIN`,
-   `VITE_FIREBASE_PROJECT_ID`, `VITE_FIREBASE_STORAGE_BUCKET`,
-   `VITE_FIREBASE_MESSAGING_SENDER_ID`, `VITE_FIREBASE_APP_ID`,
-   `VITE_FIREBASE_MEASUREMENT_ID`, `VITE_LINKEDIN_CLIENT_ID`,
-   `VITE_LINKEDIN_REDIRECT_URI`, and `VITE_SENTRY_DSN`.
-   Set `VITE_LINKEDIN_REDIRECT_URI` to
-   `https://art-e-techt-95db8.web.app/auth/linkedin/callback`.
-3. Add the Firebase service-account JSON as the GitHub Actions secret `FIREBASE_SERVICE_ACCOUNT_PRODUCTION`.
-4. In Google Cloud Console, set the OAuth consent-screen app name to `Art-e-Techt` and the support email to `learncode2025engineering@gmail.com`.
-5. Build and deploy from the repository root:
+1. Install the Firebase CLI and authenticate: `npm install --global firebase-tools` and `firebase login`.
+2. Build and deploy from the repository root:
    ```bash
    cd client
    npm ci
    npm run build
    cd ..
-   firebase deploy --only hosting:art-e-techt-95db8 --project talentconnect-6e347
+   firebase deploy --only hosting
    ```
-6. Verify the new site, authentication, API, Socket.IO, payments, and OAuth callback before retiring the old Hosting site. To retire it, use Firebase Console or `firebase hosting:sites:delete talentconnect-6e347 --project talentconnect-6e347` after confirming the new site is live.
-
-The deployed Render service must allow `https://art-e-techt-95db8.web.app` in `FRONTEND_URL` / `ALLOWED_ORIGINS`; add the same origin to Firebase Auth authorized domains and the LinkedIn OAuth callback configuration.
+3. The deployed Render service allows `https://talentconnect-6e347.web.app` in `FRONTEND_URL` / `ALLOWED_ORIGINS`.
+4. LinkedIn OAuth callback: `https://talentconnect-6e347.web.app/auth/linkedin/callback`.
+5. Production web app credentials are configured for `talentconnect-6e347` in `.env`.
 
 ---
 
@@ -126,7 +115,7 @@ The deployed Render service must allow `https://art-e-techt-95db8.web.app` in `F
 ---
 
 ## 👥 Meet the Architects
-**Lakshya Hidau** • **Vishal Jain** • **Shyamal Sheorey**
+**Lakshya Hidau** • **Shyamal Sheorey** • **Sparsh Sharma** 
 
 [![GitHub](https://img.shields.io/badge/Repository-Visit_Project-black?style=for-the-badge&logo=github)](https://github.com/lakshya-hidau/Art-e-Techt)
 

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const SEOHead = ({ title = "Art-e-Techt Atelier — Where Creative Talent Meets Opportunity", description = "Where Creative Talent Meets Opportunity", image = "https://art-e-techt-95db8.web.app/arte-logo.svg", url = "https://art-e-techt-95db8.web.app/" }) => {
+const SEOHead = ({ title = "Art-e-Techt Atelier — Where Creative Talent Meets Opportunity", description = "Where Creative Talent Meets Opportunity", image = "https://talentconnect-6e347.web.app/arte-logo.svg", url = "https://talentconnect-6e347.web.app/" }) => {
     useEffect(() => {
         // Update basic meta tags
         document.title = title;

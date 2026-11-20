@@ -859,6 +859,7 @@ export const adminLogin = async (req, res) => {
         token: adminSession.token,
         issuedAt: adminSession.issuedAt,
         expiresIn: adminSession.expiresIn,
+        user: adminSession.user,
     });
 };
 
