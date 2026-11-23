@@ -5,9 +5,9 @@ import { JWT_SECRET } from '../lib/jwtSecret.js';
 import axios from 'axios';
 import crypto from 'crypto';
 import { sendEmail } from '../lib/email.js';
+import { logger } from '../lib/logger.js';
 
 const FRONTEND_URL = (process.env.FRONTEND_URL || 'http://localhost:5173').replace(/\/$/, '');
-const FIREBASE_API_KEY = process.env.FIREBASE_API_KEY;
 
 const buildEnvAdminResponse = (email) => {
     const token = jwt.sign(
@@ -55,11 +55,12 @@ const matchesEnvAdminCredentials = (email, password) => {
 };
 
 const signInWithPassword = async (email, password) => {
-    if (!FIREBASE_API_KEY) {
-        console.warn('Missing FIREBASE_API_KEY in server environment');
+    const firebaseApiKey = process.env.FIREBASE_API_KEY;
+    if (!firebaseApiKey) {
+        throw new Error('Email/password authentication is not configured');
     }
 
-    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIREBASE_API_KEY || ''}`;
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${firebaseApiKey}`;
     const response = await axios.post(url, {
         email,
         password,
@@ -431,7 +432,7 @@ export const googleLogin = async (req, res) => {
             user: { id: uid, email, role: userData.role, verificationStatus: userData.verificationStatus },
         });
     } catch (err) {
-        console.error('Google login error:', err);
+        logger.warn({ err: err.message }, 'Google login failed');
         res.status(401).json({ message: 'Invalid Google token' });
     }
 };
@@ -449,10 +450,6 @@ export const linkedinLogin = async (req, res) => {
     }
 
     try {
-        console.log('[LinkedIn] Authorization code received');
-        console.log('[LinkedIn] Redirect URI:', redirectUri);
-        console.log('[LinkedIn] Client ID configured:', Boolean(process.env.LINKEDIN_CLIENT_ID));
-
         const tokenResp = await axios.post(
             'https://www.linkedin.com/oauth/v2/accessToken',
             new URLSearchParams({
@@ -467,7 +464,6 @@ export const linkedinLogin = async (req, res) => {
             }
         );
         const accessToken = tokenResp.data.access_token;
-        console.log('[LinkedIn] OAuth token exchange successful');
 
         let linkedinId;
         let fullName;
@@ -490,9 +486,8 @@ export const linkedinLogin = async (req, res) => {
                 profilePicture = data.picture || '';
             }
 
-            console.log('[LinkedIn] User info fetched from OIDC endpoint');
         } catch (userinfoErr) {
-            console.log('[LinkedIn] User info endpoint failed, falling back to legacy API path', userinfoErr?.response?.data || userinfoErr?.message);
+            logger.info({ err: userinfoErr?.message }, 'LinkedIn OIDC userinfo unavailable; using legacy API fallback');
 
             const profileResp = await axios.get(
                 'https://api.linkedin.com/v2/me?projection=(id,localizedFirstName,localizedLastName,profilePicture(displayImage~:playableStreams))',
@@ -844,12 +839,12 @@ export const adminLogin = async (req, res) => {
     }
 
     if (!matchesEnvAdminCredentials(email, password)) {
-        console.warn('[SECURITY] Failed admin login attempt from IP:', req.ip, 'at', new Date().toISOString());
+        logger.warn({ ip: req.ip }, 'Failed admin login attempt');
         await new Promise((resolve) => setTimeout(resolve, 200));
         return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    console.info('[SECURITY] Successful admin login from IP:', req.ip);
+    logger.info({ ip: req.ip }, 'Successful admin login');
 
     const adminSession = buildEnvAdminResponse(email);
 

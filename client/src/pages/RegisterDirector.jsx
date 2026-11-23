@@ -61,7 +61,7 @@ const RegisterDirector = () => {
     industryType: '',
     location: '',
     password: '',
-    role: formData.role || 'director', agreeTerms: false
+    role: 'director', agreeTerms: false
   });
   const [loading, setLoading] = useState(false);
   const [socialLoading, setSocialLoading] = useState({ google: false, linkedin: false });

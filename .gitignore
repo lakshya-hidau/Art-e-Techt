@@ -68,6 +68,13 @@ node_modules/
 # dataconnect generated files
 .dataconnect
 
+# Local Codex/agent instructions and generated showcase artifacts
+.agents/
+AGENTS.md
+art-e-techt-promo/
+brag-output/
+skills-lock.json
+
 .claude/
 AUTH_TROUBLESHOOTING_GUIDE.md
 CLAUDE.md

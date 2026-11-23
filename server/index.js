@@ -1,7 +1,3 @@
-import { registerSchema } from './lib/schemas.js';
-console.log('[DEBUG] Server Start - registerSchema allowed categories:', 
-  registerSchema.shape.talentCategory._def.innerType._def.values
-);
 import dns from 'dns';
 import http from 'http';
 
@@ -101,7 +97,10 @@ app.use(
             // Allow requests with no origin (like mobile apps or curl requests)
             if (!origin) return callback(null, true);
 
-            if (ALLOWED_ORIGINS.has(origin)) {
+            // Browser origins normally have no trailing slash; normalize
+            // defensively so deployment configuration is unambiguous.
+            const normalizedOrigin = origin.replace(/\/$/, '');
+            if (ALLOWED_ORIGINS.has(normalizedOrigin)) {
                 callback(null, true);
             } else {
                 logger.warn({ origin }, '[CORS] Blocked request from origin');

@@ -4,7 +4,9 @@ import tokenManager from '../utils/tokenManager.js';
 
 const API_URL = import.meta.env.VITE_API_URL || '/api';
 
-// Retry configuration
+// Only safe, idempotent reads are retried. Retrying sign-in and registration
+// requests makes failed authentication feel much slower and may duplicate a
+// write after an ambiguous network failure.
 const RETRY_CONFIG = {
     retries: 2,
     retryDelay: 1000,
@@ -71,15 +73,15 @@ api.interceptors.response.use(
             originalRequest._retry = 0;
         }
         
-        const shouldRetry = 
+        const isIdempotentRequest = ['get', 'head', 'options'].includes(originalRequest?.method?.toLowerCase());
+        const shouldRetry = isIdempotentRequest && (
             error.code === 'ECONNABORTED' || // Timeout
-            error.message?.includes('network') ||
-            (error.response && RETRY_CONFIG.retryStatusCodes.includes(error.response.status));
+            error.message?.toLowerCase().includes('network') ||
+            (error.response && RETRY_CONFIG.retryStatusCodes.includes(error.response.status))
+        );
         
         if (shouldRetry && originalRequest._retry < RETRY_CONFIG.retries) {
             originalRequest._retry += 1;
-            console.log(`[API] Retrying request (${originalRequest._retry}/${RETRY_CONFIG.retries})...`);
-            
             // Wait before retrying
             await new Promise(resolve => setTimeout(resolve, RETRY_CONFIG.retryDelay * originalRequest._retry));
             return api(originalRequest);
