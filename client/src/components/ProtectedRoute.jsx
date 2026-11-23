@@ -1,16 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
 import SkeletonLoader from './SkeletonLoader';
 import { useAuth } from '../context/AuthContext';
 
 const ProtectedRoute = ({ children, requiredRole, allowedRoles }) => {
-    const { user, loading, initialized, isAuthenticated, refreshUser } = useAuth();
-
-    useEffect(() => {
-        if (initialized && isAuthenticated && user?.role !== 'admin') {
-            refreshUser();
-        }
-    }, [initialized, isAuthenticated, user?.role, refreshUser]);
+    const { user, loading, initialized, isAuthenticated } = useAuth();
 
     if (loading || !initialized) {
         return <SkeletonLoader />;

@@ -209,6 +209,14 @@ app.use((req, res, next) => {
   next()
 })
 
+// Authenticated API responses must never be served from a browser cache.
+// A cached 304 response has no response body, which previously made the
+// client discard a valid Google session and redirect back to login.
+app.use('/api', (req, res, next) => {
+    res.set('Cache-Control', 'no-store');
+    next();
+});
+
 // Cache-Control for GET requests (exclude API)
 app.use((req, res, next) => {
     if (req.method === 'GET' && !req.path.startsWith('/api')) {

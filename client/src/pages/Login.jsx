@@ -139,7 +139,9 @@ const Login = () => {
       const role = userType === 'director' ? 'director' : 'talent';
       const data = await loginWithGoogle(role);
       setSessionFromAuthResponse(data);
-      await navigateAfterSocial(role, data.user);
+      // Firestore owns a user's role. A Google account that already exists
+      // must be routed using its stored role, not the role picker selection.
+      await navigateAfterSocial(data.user?.role || role, data.user);
     } catch (err) {
       setError(err.response?.data?.message || err.message || 'Google sign-in failed.');
     } finally {

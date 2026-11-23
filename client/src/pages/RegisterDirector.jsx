@@ -69,19 +69,19 @@ const RegisterDirector = () => {
   const [lockUntil, setLockUntil] = useState(null);
   const navigate = useNavigate();
 
-  const navigateAfterSocial = async () => {
+  const navigateAfterSocial = async (role = 'director') => {
     try {
       const res = await getMyProfile();
       const profile = res.data?.data || res.data || {};
       const required = ['fullName', 'mobile', 'location', 'companyName', 'industryType'];
       const missing = required.filter((field) => !profile?.[field]);
       if (missing.length) {
-        navigate('/onboarding/complete-profile', { state: { role: formData.role || 'director', missing } });
+        navigate('/onboarding/complete-profile', { state: { role, missing } });
       } else {
-        navigate(formData.role === 'producer' ? '/dashboard/producer' : '/dashboard/director');
+        navigate(role === 'producer' ? '/dashboard/producer' : '/dashboard/director');
       }
     } catch {
-      navigate(formData.role === 'producer' ? '/dashboard/producer' : '/dashboard/director');
+      navigate(role === 'producer' ? '/dashboard/producer' : '/dashboard/director');
     }
   };
 
@@ -163,7 +163,7 @@ const RegisterDirector = () => {
     try {
       const data = await loginWithGoogle('director');
       setSessionFromAuthResponse(data);
-      await navigateAfterSocial();
+      await navigateAfterSocial(data.user?.role || 'director');
     } catch (err) {
       setError(err.response?.data?.message || err.message || 'Google sign-in failed.');
     } finally {
