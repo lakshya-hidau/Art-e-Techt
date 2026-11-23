@@ -65,6 +65,14 @@ const PROFILE_ALLOWED_FIELDS = new Set([
     'portfolio'
 ]);
 
+const TALENT_ONLY_PROFILE_FIELDS = new Set([
+    'talentCategory', 'physicalMetrics', 'showreelUrl'
+]);
+
+const DIRECTOR_ONLY_PROFILE_FIELDS = new Set([
+    'companyName', 'industryType', 'previousProjects'
+]);
+
 const parseLimitAndCursor = (req, defaultLimit = 20, maxLimit = 100) => {
     const limitVal = Math.min(Math.max(1, parseInt(req.query.limit, 10) || defaultLimit), maxLimit);
     const cursor = typeof req.query.cursor === 'string' && req.query.cursor.length > 0 ? req.query.cursor : null;
@@ -148,6 +156,15 @@ export const updateProfile = async (req, res) => {
             if (!PROFILE_ALLOWED_FIELDS.has(key)) {
                 console.warn('[SECURITY] Rejected unknown profile field:', key, 'from user:', req.user.id);
                 continue;
+            }
+
+            if (
+                (TALENT_ONLY_PROFILE_FIELDS.has(key) && req.user.role !== 'talent') ||
+                (DIRECTOR_ONLY_PROFILE_FIELDS.has(key) && req.user.role !== 'director')
+            ) {
+                return res.status(403).json({
+                    message: `The ${key} field is not available for ${req.user.role} profiles`,
+                });
             }
 
             if (key === 'showreelUrl') {
@@ -344,7 +361,7 @@ export const getProfiles = async (req, res) => {
                 ...profile,
                 user: { id: profile.user, role: userData?.role }
             };
-        });
+        }).filter((profile) => profile.user.role === 'talent');
 
         const nextCursor = snapshot.docs.length === limitVal ? snapshot.docs[snapshot.docs.length - 1].id : null;
         res.status(200).json({ success: true, count: populatedProfiles.length, nextCursor, data: populatedProfiles });

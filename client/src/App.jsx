@@ -87,7 +87,7 @@ function App() {
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/loginPage" element={<Login />} />
+              <Route path="/loginPage" element={<Navigate to="/login" replace />} />
               <Route path="/register/actor" element={<RegisterActor />} />
               <Route path="/register/director" element={<RegisterDirector />} />
               <Route path="/auth/linkedin/callback" element={<LinkedInCallback />} />

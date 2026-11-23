@@ -62,19 +62,19 @@ const RegisterActor = () => {
 
     const navigate = useNavigate();
 
-    const navigateAfterSocial = async () => {
+    const navigateAfterSocial = async (role = 'talent') => {
         try {
             const res = await getMyProfile();
             const profile = res.data?.data || res.data || {};
             const required = ['fullName', 'mobile', 'location', 'talentCategory'];
             const missing = required.filter((field) => !profile?.[field]);
             if (missing.length) {
-                navigate('/onboarding/complete-profile', { state: { role: 'talent', missing } });
+                navigate('/onboarding/complete-profile', { state: { role, missing } });
             } else {
-                navigate('/dashboard/talent');
+                navigate(role === 'director' ? '/dashboard/director' : '/dashboard/talent');
             }
         } catch {
-            navigate('/dashboard/talent');
+            navigate(role === 'director' ? '/dashboard/director' : '/dashboard/talent');
         }
     };
 
@@ -149,7 +149,8 @@ const RegisterActor = () => {
         try {
             const data = await loginWithGoogle('talent');
             setSessionFromAuthResponse(data);
-            await navigateAfterSocial();
+            // Existing social accounts retain their server-side role.
+            await navigateAfterSocial(data.user?.role || 'talent');
         } catch (err) {
             setError(err.response?.data?.message || err.message || 'Google sign-in failed.');
         } finally {

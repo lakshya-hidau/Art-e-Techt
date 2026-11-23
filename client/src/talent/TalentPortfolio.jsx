@@ -23,6 +23,7 @@ const TalentPortfolio = () => {
     const [viewerProfile, setViewerProfile] = useState(null);
     const [applications, setApplications] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [profileError, setProfileError] = useState('');
     const [toast, setToast] = useState(null);
     const [editingBio, setEditingBio] = useState(false);
     const [bioText, setBioText] = useState('');
@@ -62,6 +63,10 @@ const TalentPortfolio = () => {
                 }
 
                 const p = profileRes.data;
+                if (id && p?.user?.role !== 'talent') {
+                    setProfileError('This link does not belong to a talent profile.');
+                    return;
+                }
                 setProfile(p);
                 setBioText(p.bio || '');
                 setCvUrl(p.cvUrl || '');
@@ -190,6 +195,15 @@ const TalentPortfolio = () => {
                     <span className="material-symbols-outlined animate-spin text-primary text-5xl">sync</span>
                     <p className="text-text-secondary font-bold uppercase tracking-widest text-xs">Developing Portfolio...</p>
                 </div>
+            </div>
+        </DashboardLayout>
+    );
+
+    if (profileError) return (
+        <DashboardLayout menuItems={menuItems} userData={navUserData} headerTitle="Profile unavailable">
+            <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 px-6 text-center">
+                <span className="material-symbols-outlined text-5xl text-text-secondary">person_off</span>
+                <p className="font-bold text-text-secondary">{profileError}</p>
             </div>
         </DashboardLayout>
     );
