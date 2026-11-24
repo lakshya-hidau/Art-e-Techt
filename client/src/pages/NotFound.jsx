@@ -14,7 +14,7 @@ const NotFound = () => {
                                 <path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path>
                             </svg>
                         </div>
-                        <h2 className="text-xl font-bold tracking-tight text-primary-text">TALENT<span className="text-primary">CONNECT</span></h2>
+                        <h2 className="text-xl font-bold tracking-tight text-primary-text">ART-E-TECHT <span className="text-primary">ATELIER</span></h2>
                     </div>
                     <button className="flex items-center justify-center rounded-lg bg-surface/5 hover:bg-surface/10 text-primary-text p-2 transition-colors border border-subtle/10">
                         <span className="material-symbols-outlined">menu</span>
@@ -107,7 +107,7 @@ const NotFound = () => {
                 {/* Footer */}
                 <footer className="px-6 py-8 md:px-10 lg:px-40 bg-background-dark/50 border-t border-subtle/5">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                        <p className="text-text-secondary text-sm">© 2026 TALENT<span className="text-primary">CONNECT</span>. All Rights Reserved.</p>
+                        <p className="text-text-secondary text-sm">© 2026 ART-E-TECHT ATELIER. All Rights Reserved.</p>
                         <div className="flex items-center gap-6">
                             <a className="text-text-secondary hover:text-primary-text transition-colors" href="#"><span className="material-symbols-outlined">public</span></a>
                             <a className="text-text-secondary hover:text-primary-text transition-colors" href="#"><span className="material-symbols-outlined">alternate_email</span></a>

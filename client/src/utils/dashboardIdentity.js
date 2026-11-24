@@ -20,7 +20,7 @@ export const buildDashboardIdentity = ({ user, profile, fallbackUserData } = {})
   } else if (role === 'talent') {
     roleTitle = `${profile?.talentCategory || user?.talentCategory || 'Artist'} • ${profile?.location || user?.location || 'India'}`;
   } else if (role === 'admin') {
-    roleTitle = `${user?.email || 'Administrator'} • Art-e-Techt`;
+    roleTitle = `${user?.email || 'Administrator'} • ART-E-TECHT ATELIER`;
   }
 
   const avatar = normalizeImage(

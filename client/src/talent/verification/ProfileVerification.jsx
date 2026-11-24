@@ -182,7 +182,7 @@ const ProfileVerification = ({ defaultValue = 0 }) => {
                             <div className="flex items-center">
                                 <ArtLogo className="h-10 w-auto" />
                             </div>
-                            <h2 className="text-text-primary dark:text-primary-text text-xl font-bold leading-tight tracking-tight uppercase italic">TALENT<span className="text-primary">CONNECT</span></h2>
+                            <h2 className="text-text-primary dark:text-primary-text text-xl font-bold leading-tight tracking-tight uppercase italic">ART-E-TECHT <span className="text-primary">ATELIER</span></h2>
                         </div>
                         <div className="flex items-center gap-4">
                             {/* Save status badge */}
@@ -230,7 +230,7 @@ const ProfileVerification = ({ defaultValue = 0 }) => {
 
                     {/* Footer Small */}
                     <footer className="py-10 text-center text-text-secondary text-sm">
-                        © 2026 Art-e-Techt. All Rights Reserved.
+                        © 2026 ART-E-TECHT ATELIER. All Rights Reserved.
                     </footer>
                 </div>
             </div>

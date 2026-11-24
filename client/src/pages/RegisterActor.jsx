@@ -178,7 +178,7 @@ const RegisterActor = () => {
                 <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/20 px-6 lg:px-40 py-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
                     <div className="flex items-center gap-3">
                         <ArtLogo showWordmark={true} />
-                        <h2 className="text-text-primary dark:text-primary-text text-xl font-bold leading-tight tracking-[-0.015em]">TALENT<span className="text-primary">CONNECT</span></h2>
+                        <h2 className="text-text-primary dark:text-primary-text text-xl font-bold leading-tight tracking-[-0.015em]">ART-E-TECHT <span className="text-primary">ATELIER</span></h2>
                     </div>
                     <div className="flex items-center gap-4">
                         <span className="text-sm text-text-secondary dark:text-text-secondary hidden sm:block">Already have an account?</span>
@@ -422,7 +422,7 @@ const RegisterActor = () => {
 
                 {/* Footer Small */}
                 <footer className="px-6 lg:px-40 py-6 border-t border-border dark:border-border-subtle flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-text-secondary dark:text-text-secondary">
-                    <p>© 2026 Art-e-techt. All Rights Reserved.</p>
+                    <p>© 2026 ART-E-TECHT ATELIER. All Rights Reserved.</p>
                     <div className="flex gap-6">
                         <Link className="hover:text-primary transition-colors" to="/support">Help Center</Link>
                         <Link className="hover:text-primary transition-colors" to="/artist-guidelines">Artist Guidelines</Link>

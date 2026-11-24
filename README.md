@@ -1,8 +1,8 @@
 This <p align="center">
-  <img src="client/public/arte-logo.svg" alt="Art-e-Techt logo" width="180">
+  <img src="client/public/art-e-techt-logo.png" alt="ART-E-TECHT ATELIER logo" width="180">
 </p>
 
-<h1 align="center">Art-e-Techt Atelier</h1>
+<h1 align="center">ART-E-TECHT ATELIER</h1>
 
 <p align="center">
   <b>The Enterprise-Grade Ecosystem Bridging Visionary Directors & Exceptional Talent.</b>
@@ -20,18 +20,18 @@ This <p align="center">
 ## 💎 The Vision
 
 > [!IMPORTANT]
-> **Art-e-Techt** is a creative talent marketplace connecting artists, directors, and production teams through discovery, portfolios, casting, and collaboration tools.
+> **ART-E-TECHT ATELIER** is a creative talent marketplace connecting artists, directors, and production teams through discovery, portfolios, casting, and collaboration tools.
 
 ---
 
 ## 🚀 The Ecosystem Flow
 
-Understand how **Art-e-Techt** connects creativity and opportunity.
+Understand how **ART-E-TECHT ATELIER** connects creativity and opportunity.
 
 ```mermaid
 sequenceDiagram
     participant D as 🎬 Director
-    participant S as ⚙️ Art-e-Techt Core
+    participant S as ⚙️ ART-E-TECHT ATELIER Core
     participant T as 🎨 Talent
     participant P as 💳 Stripe/Finance
 
@@ -121,5 +121,5 @@ The React application deploys to Firebase Hosting in project `talentconnect-6e34
 
 ---
 <p align="center">
-  <i>Art-e-Techt Atelier — where creative ideas become extraordinary creations.</i>
+  <i>ART-E-TECHT ATELIER — Where Creative Vision Meets Opportunity.</i>
 </p>

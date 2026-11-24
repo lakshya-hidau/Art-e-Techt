@@ -239,7 +239,7 @@ const Messages = () => {
                 )}
             </div>
             <footer className="py-8 px-8 border-t border-border dark:border-border-dark text-center">
-                <p className="text-[10px] text-text-secondary font-bold uppercase tracking-widest">© 2026 Art-e-Techt • Where Global Talent Meets Opportunity</p>
+                <p className="text-[10px] text-text-secondary font-bold uppercase tracking-widest">© 2026 ART-E-TECHT ATELIER • Where Creative Vision Meets Opportunity</p>
             </footer>
         </DashboardLayout>
     );

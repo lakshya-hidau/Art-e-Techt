@@ -168,13 +168,10 @@ const Login = () => {
         <header className="w-full px-6 py-6 lg:px-12 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <ArtLogo showWordmark={true} />
-            <h1 className="text-2xl font-black tracking-tighter text-primary-text uppercase italic">
-              Art-e-techt{' '}
-            </h1>
           </div>
           <div className="hidden md:block">
             <p className="text-text-secondary text-sm font-medium">
-              Where Creative Talent Meets Opportunity
+              Where Creative Vision Meets Opportunity
             </p>
           </div>
         </header>
@@ -382,7 +379,7 @@ const Login = () => {
         {/* Footer */}
         <footer className="w-full px-6 py-8 text-center">
           <p className="text-text-secondary text-xs">
-            © 2026 Art-e-techt. All Rights Reserved. Private &amp; Confidential.
+            © 2026 ART-E-TECHT ATELIER. All Rights Reserved. Private &amp; Confidential.
           </p>
           <div className="mt-2 flex justify-center gap-4 text-xs text-text-secondary">
             <Link className="hover:text-primary transition-colors" to="#">

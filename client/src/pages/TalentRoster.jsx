@@ -610,7 +610,7 @@ const TalentRoster = () => {
                     Require Bespoke Roster Assembly?
                   </h2>
                   <p className="font-sans text-sm text-text-secondary leading-relaxed">
-                    Submit your unannounced film treatment, couture runway brief, or episodic casting specifications. The Art-e-techt Atelier Concierge constructs non-disclosed, audition-ready slates within 48 hours.
+                    Submit your unannounced film treatment, couture runway brief, or episodic casting specifications. The ART-E-TECHT ATELIER Concierge constructs non-disclosed, audition-ready slates within 48 hours.
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 shrink-0">

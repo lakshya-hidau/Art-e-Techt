@@ -42,7 +42,7 @@ const LoginPage = () => {
           </div>
           <div className="hidden md:block">
             <p className="text-text-secondary text-sm font-medium">
-              India's Leading Talent Platform
+              Where Creative Vision Meets Opportunity
             </p>
           </div>
         </header>
@@ -221,7 +221,7 @@ const LoginPage = () => {
         {/* Footer */}
         <footer className="w-full px-6 py-8 text-center">
           <p className="text-text-secondary text-xs">
-            © 2026 Art-e-Techt. All Rights Reserved. Private &amp; Confidential.
+            © 2026 ART-E-TECHT ATELIER. All Rights Reserved. Private &amp; Confidential.
           </p>
           <div className="mt-2 flex justify-center gap-4 text-xs text-text-secondary">
             <Link className="hover:text-primary transition-colors" to="#">

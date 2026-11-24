@@ -269,7 +269,7 @@ const CommunityForum = () => {
                     <div>
                         <h4 className="font-bold text-lg mb-4">Forum Guidelines</h4>
                         <p className="text-sm text-text-secondary dark:text-text-secondary leading-relaxed">
-                            Art-e-Techt Forum is a professional space for industry growth. Be respectful, share constructive advice, and maintain artist privacy at all times.
+                            ART-E-TECHT ATELIER is a professional space for industry growth. Be respectful, share constructive advice, and maintain artist privacy at all times.
                         </p>
                     </div>
                     <div>
@@ -296,7 +296,7 @@ const CommunityForum = () => {
                     </div>
                 </div>
                 <div className="max-w-7xl mx-auto px-4 mt-12 pt-8 border-t border-border dark:border-border-dark flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="text-xs text-text-secondary">© 2026 Art-e-Techt. A Cinematic Experience.</p>
+                    <p className="text-xs text-text-secondary">© 2026 ART-E-TECHT ATELIER. A Cinematic Experience.</p>
                     <div className="flex gap-6">
                         <a className="text-xs text-text-secondary hover:text-primary" href="#">Support</a>
                         <a className="text-xs text-text-secondary hover:text-primary" href="#">Contact</a>

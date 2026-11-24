@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { getStoredAuth } from '../utils/authStorage';
+import ArtLogo from './common/ArtLogo';
 
 const TopNav = () => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -36,17 +37,7 @@ const TopNav = () => {
       <div className="h-20 w-full px-5 md:px-10 lg:px-16 flex items-center justify-between">
         {/* Brand Logo / Emblem */}
         <Link className="flex items-center gap-3 group" to="/">
-          <div className="w-8 h-8 bg-surface-low flex items-center justify-center border border-border group-hover:border-secondary transition-colors">
-            <span className="w-2.5 h-2.5 bg-secondary rotate-45 block"></span>
-          </div>
-          <div className="flex flex-col">
-            <span className="font-display font-bold text-lg tracking-wider text-text-primary uppercase group-hover:text-secondary transition-colors">
-              Art-e-techt
-            </span>
-            <span className="font-sans text-[9px] text-text-secondary uppercase tracking-[0.25em] -mt-1">
-              Atelier • Archival Edition
-            </span>
-          </div>
+          <ArtLogo className="h-12 sm:h-14" wordmarkClass="" />
         </Link>
 
         {/* Desktop Navigation */}

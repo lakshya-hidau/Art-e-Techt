@@ -113,7 +113,7 @@ const sendVerificationEmailForUser = async ({ userId, email }) => {
     const html = `
         <div style="font-family: Arial, sans-serif; line-height:1.6;">
             <h2>Confirm your email</h2>
-            <p>Thanks for signing up for Art-e-Techt. Please verify your email to activate your account.</p>
+            <p>Thanks for signing up for ART-E-TECHT ATELIER. Please verify your email to activate your account.</p>
             <p><a href="${verifyLink}" style="background:#111827;color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none;">Verify Email</a></p>
             <p>Or copy this link into your browser: <br/>${verifyLink}</p>
             <p>This link expires in 24 hours.</p>
@@ -122,7 +122,7 @@ const sendVerificationEmailForUser = async ({ userId, email }) => {
 
     await sendEmail({
         to: email,
-        subject: 'Verify your Art-e-Techt email',
+        subject: 'Verify your ART-E-TECHT ATELIER email',
         html,
     });
 
@@ -143,7 +143,7 @@ const sendResetPasswordEmail = async ({ userId, email }) => {
     const html = `
         <div style="font-family: Arial, sans-serif; line-height:1.6;">
             <h2>Reset your password</h2>
-            <p>We received a request to reset your Art-e-Techt password.</p>
+            <p>We received a request to reset your ART-E-TECHT ATELIER password.</p>
             <p><a href="${resetLink}" style="background:#111827;color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none;">Reset Password</a></p>
             <p>Or copy this link into your browser: <br/>${resetLink}</p>
             <p>This link expires in 1 hour. If you didn’t request this, you can safely ignore this email.</p>
@@ -152,7 +152,7 @@ const sendResetPasswordEmail = async ({ userId, email }) => {
 
     await sendEmail({
         to: email,
-        subject: 'Reset your Art-e-Techt password',
+        subject: 'Reset your ART-E-TECHT ATELIER password',
         html,
     });
 

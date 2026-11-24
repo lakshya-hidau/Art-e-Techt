@@ -41,6 +41,12 @@ const PublicDirectorProfile = () => {
                 }
                 setProfile(p);
 
+                // Showcase filmographies are historical credits, not casting calls.
+                if (p.accountType === 'public_showcase') {
+                    setProjects(p.showcaseProjects || p.projects || []);
+                    return;
+                }
+
                 // Fetch their posted projects
                 try {
                     const directorUserId = p.user?.id || p.user?._id || p.user || id;
@@ -81,6 +87,7 @@ const PublicDirectorProfile = () => {
 
     const skills = profile?.skills || [];
     const openProjects = projects.filter(p => p.status === 'open');
+    const isPublicShowcase = profile?.accountType === 'public_showcase';
 
     return (
         <div className="min-h-screen bg-background-light dark:bg-background-dark text-text-primary dark:text-text-primary">
@@ -107,7 +114,7 @@ const PublicDirectorProfile = () => {
                     {/* Cover banner */}
                     <div className="h-28 md:h-44 w-full overflow-hidden relative">
                         <img
-                            src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80&w=1200"
+                            src={profile?.bannerImage || 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80&w=1200'}
                             alt="Cover"
                             className="w-full h-full object-cover opacity-40"
                         />
@@ -122,7 +129,7 @@ const PublicDirectorProfile = () => {
                         <div className="flex-1 min-w-0">
                             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                                 <div>
-                                    <span className="inline-block px-2.5 py-0.5 bg-primary text-primary-text text-[9px] font-black tracking-widest uppercase rounded mb-2">Director</span>
+                                    <span className="inline-block px-2.5 py-0.5 bg-primary text-primary-text text-[9px] font-black tracking-widest uppercase rounded mb-2">{isPublicShowcase ? 'Public showcase • Read-only' : 'Director'}</span>
                                     <h1 className="text-2xl md:text-4xl font-black tracking-tighter">{profile?.fullName || 'Director'}</h1>
                                     <p className="text-primary font-bold text-sm md:text-base mt-1">
                                         {profile?.companyName || 'Production House'}
@@ -130,13 +137,13 @@ const PublicDirectorProfile = () => {
                                     </p>
                                 </div>
                                 {/* Message button */}
-                                <Link
+                                {!isPublicShowcase && <Link
                                     to={`/talent/messages/${profile?.user?.id || profile?.user?._id || profile?.user || id}`}
                                     className="flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-text text-xs font-black uppercase tracking-widest rounded-2xl hover:brightness-110 transition-all shadow-lg shadow-primary/30 shrink-0"
                                 >
                                     <span className="material-symbols-outlined text-base">chat</span>
                                     Message
-                                </Link>
+                                </Link>}
                             </div>
                         </div>
                     </div>
@@ -144,8 +151,8 @@ const PublicDirectorProfile = () => {
                     {/* Stats strip */}
                     <div className="border-t border-subtle/10 px-5 md:px-10 py-4 flex gap-8 overflow-x-auto no-scrollbar">
                         {[
-                            { label: 'Total Projects', value: projects.length },
-                            { label: 'Open Roles', value: openProjects.length },
+                            { label: isPublicShowcase ? 'Selected Credits' : 'Total Projects', value: projects.length },
+                            { label: isPublicShowcase ? 'Directory Profile' : 'Open Roles', value: isPublicShowcase ? 'Yes' : openProjects.length },
                             { label: 'Skills', value: skills.length },
                             { label: 'Experience', value: profile?.experienceYears ? `${profile.experienceYears}y` : '—' },
                         ].map(stat => (
@@ -192,7 +199,7 @@ const PublicDirectorProfile = () => {
                             <div className="bg-surface dark:bg-void border border-border dark:border-subtle/5 rounded-2xl p-5 md:p-6">
                                 <div className="flex items-center justify-between mb-5">
                                     <h2 className="text-base font-black uppercase tracking-tight dark:text-primary-text flex items-center gap-2">
-                                        <span className="size-1.5 bg-primary rounded-full" />Open Projects
+                                        <span className="size-1.5 bg-primary rounded-full" />{isPublicShowcase ? 'Selected Filmography' : 'Open Projects'}
                                         {openProjects.length > 0 && (
                                             <span className="px-2 py-0.5 bg-success/10 text-success text-[9px] font-black rounded-full">{openProjects.length} OPEN</span>
                                         )}
@@ -202,7 +209,7 @@ const PublicDirectorProfile = () => {
                                     {projects.map(project => {
                                         const pid = project._id || project.id;
                                         return (
-                                            <Link to={`/talent/project/${pid}`} key={pid} className="group">
+                                            <div key={pid || project.title} className="group">
                                                 <div className="bg-surface-lowest dark:bg-surface/5 border border-border dark:border-subtle/5 rounded-2xl overflow-hidden hover:border-primary/30 transition-all">
                                                     <div className="h-24 bg-container relative overflow-hidden">
                                                         <div className="absolute inset-0 bg-cover bg-center opacity-50 group-hover:scale-105 transition-transform duration-700"
@@ -211,7 +218,7 @@ const PublicDirectorProfile = () => {
                                                         <span className="absolute bottom-2 left-2 px-2 py-0.5 bg-primary text-primary-text text-[8px] font-bold rounded uppercase tracking-widest">
                                                             {project.category || 'Film'}
                                                         </span>
-                                                        {project.status === 'open' && (
+                                                            {project.status === 'open' && !isPublicShowcase && (
                                                             <span className="absolute top-2 right-2 px-2 py-0.5 bg-success/80 text-primary-text text-[8px] font-black rounded-full uppercase">Open</span>
                                                         )}
                                                     </div>
@@ -219,14 +226,18 @@ const PublicDirectorProfile = () => {
                                                         <h4 className="font-bold text-sm dark:text-primary-text group-hover:text-primary transition-colors line-clamp-1">{project.title}</h4>
                                                         <p className="text-[10px] text-text-secondary dark:text-text-secondary mt-0.5 truncate">{project.location || 'India'}</p>
                                                         <div className="flex items-center justify-between mt-2">
-                                                            <span className="text-[9px] font-black text-primary uppercase">Apply Now →</span>
-                                                            {project.deadline && (
-                                                                <span className="text-[9px] text-text-secondary">Due {new Date(project.deadline).toLocaleDateString()}</span>
+                                                            <span className="text-[9px] font-black text-primary uppercase">{isPublicShowcase ? 'Historical credit' : 'Apply Now →'}</span>
+                                                            {(project.date || project.deadline) && (
+                                                                <span className="text-[9px] text-text-secondary">
+                                                                    {isPublicShowcase
+                                                                        ? new Date(project.date).getUTCFullYear()
+                                                                        : `Due ${new Date(project.deadline).toLocaleDateString()}`}
+                                                                </span>
                                                             )}
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </Link>
+                                            </div>
                                         );
                                     })}
                                 </div>
@@ -283,7 +294,7 @@ const PublicDirectorProfile = () => {
                         </div>
 
                         {/* CTA */}
-                        <div className="bg-gradient-to-br from-primary to-primary-hover rounded-2xl p-5 text-primary-text text-center">
+                        {!isPublicShowcase && <div className="bg-gradient-to-br from-primary to-primary-hover rounded-2xl p-5 text-primary-text text-center">
                             <span className="material-symbols-outlined text-3xl mb-2">movie_creation</span>
                             <p className="text-sm font-black mb-1">{openProjects.length > 0 ? `${openProjects.length} Open Role${openProjects.length > 1 ? 's' : ''}` : 'No open roles'}</p>
                             <p className="text-[10px] opacity-75 mb-4">Direct message to express interest</p>
@@ -293,7 +304,7 @@ const PublicDirectorProfile = () => {
                             >
                                 Send Message
                             </Link>
-                        </div>
+                        </div>}
                     </div>
                 </div>
             </div>

@@ -21,7 +21,7 @@ const TermsAndConditions = () => {
               Terms &amp; Conditions
             </h1>
             <p className="text-lg text-text-secondary dark:text-text-secondary max-w-2xl mx-auto leading-relaxed">
-              By accessing and using Art-e-techt, you agree to the following terms. Please read them carefully
+              By accessing and using ART-E-TECHT ATELIER, you agree to the following terms. Please read them carefully
               before using our platform.
             </p>
           </div>
@@ -39,11 +39,11 @@ const TermsAndConditions = () => {
               </h2>
               <div className="space-y-4 text-text-muted dark:text-text-secondary leading-relaxed">
                 <p>
-                  By creating an account, accessing, or using Art-e-techt ("the Platform"), you agree to be bound by
+                  By creating an account, accessing, or using ART-E-TECHT ATELIER ("the Platform"), you agree to be bound by
                   these Terms and Conditions ("Terms"). If you do not agree to these Terms, you must not use the Platform.
                 </p>
                 <p>
-                  Art-e-techt is a digital platform that connects performing arts talent — including actors, models,
+                  ART-E-TECHT ATELIER is a digital platform that connects performing arts talent — including actors, models,
                   dancers, musicians, voice artists, cinematographers, editors, and other entertainment professionals —
                   with directors, production houses, and casting professionals across the global film and entertainment industry.
                 </p>
@@ -61,7 +61,7 @@ const TermsAndConditions = () => {
                 2. Eligibility &amp; Account Registration
               </h2>
               <div className="space-y-4 text-text-muted dark:text-text-secondary leading-relaxed">
-                <p>To use Art-e-techt, you must:</p>
+                <p>To use ART-E-TECHT ATELIER, you must:</p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>Be at least 18 years of age</li>
                   <li>Provide accurate, current, and complete registration information</li>
@@ -70,7 +70,7 @@ const TermsAndConditions = () => {
                   <li>Notify us immediately of any unauthorized use of your account</li>
                 </ul>
                 <p>
-                  You are responsible for all activities that occur under your account. Art-e-techt reserves the right
+                  You are responsible for all activities that occur under your account. ART-E-TECHT ATELIER reserves the right
                   to suspend or terminate accounts that provide false or misleading information.
                 </p>
               </div>
@@ -111,8 +111,8 @@ const TermsAndConditions = () => {
               <div className="space-y-4 text-text-muted dark:text-text-secondary leading-relaxed">
                 <h3 className="text-lg font-semibold text-text-primary dark:text-text-primary">Your Content</h3>
                 <p>
-                  You retain ownership of all content you upload to Art-e-techt, including photos, videos, portfolio
-                  media, profile information, and messages ("User Content"). By uploading content, you grant Art-e-techt
+                  You retain ownership of all content you upload to ART-E-TECHT ATELIER, including photos, videos, portfolio
+                  media, profile information, and messages ("User Content"). By uploading content, you grant ART-E-TECHT ATELIER
                   a non-exclusive, worldwide, royalty-free license to use, display, and distribute your User Content
                   solely for the purpose of operating and improving the Platform.
                 </p>
@@ -128,8 +128,8 @@ const TermsAndConditions = () => {
                 </ul>
                 <h3 className="text-lg font-semibold text-text-primary dark:text-text-primary mt-4">Platform Content</h3>
                 <p>
-                  All Art-e-techt branding, design elements, software, and platform features are the exclusive property
-                  of Art-e-techt and are protected by copyright, trademark, and other intellectual property laws.
+                  All ART-E-TECHT ATELIER branding, design elements, software, and platform features are the exclusive property
+                  of ART-E-TECHT ATELIER and are protected by copyright, trademark, and other intellectual property laws.
                 </p>
               </div>
             </div>
@@ -142,15 +142,15 @@ const TermsAndConditions = () => {
               </h2>
               <div className="space-y-4 text-text-muted dark:text-text-secondary leading-relaxed">
                 <p>
-                  Art-e-techt facilitates connections between talent and productions. The following terms govern project
+                  ART-E-TECHT ATELIER facilitates connections between talent and productions. The following terms govern project
                   and application interactions:
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
-                  <li><strong className="text-text-primary dark:text-text-primary">No Employment Relationship:</strong> Art-e-techt does not employ any talent and is not a party to any agreement between users. The Platform serves as a discovery and communication tool only.</li>
+                  <li><strong className="text-text-primary dark:text-text-primary">No Employment Relationship:</strong> ART-E-TECHT ATELIER does not employ any talent and is not a party to any agreement between users. The Platform serves as a discovery and communication tool only.</li>
                   <li><strong className="text-text-primary dark:text-text-primary">Project Responsibility:</strong> Directors are solely responsible for the accuracy of their project listings and for honoring commitments made to talent.</li>
-                  <li><strong className="text-text-primary dark:text-text-primary">Compensation:</strong> Any compensation arrangements are strictly between the talent and the production. Art-e-techt is not responsible for payment disputes.</li>
+                  <li><strong className="text-text-primary dark:text-text-primary">Compensation:</strong> Any compensation arrangements are strictly between the talent and the production. ART-E-TECHT ATELIER is not responsible for payment disputes.</li>
                   <li><strong className="text-text-primary dark:text-text-primary">Application Accuracy:</strong> Talent must ensure their applications and auditions represent their genuine abilities and availability.</li>
-                  <li><strong className="text-text-primary dark:text-text-primary">No Guarantee:</strong> Art-e-techt does not guarantee that applying to projects will result in casting, auditions, or employment.</li>
+                  <li><strong className="text-text-primary dark:text-text-primary">No Guarantee:</strong> ART-E-TECHT ATELIER does not guarantee that applying to projects will result in casting, auditions, or employment.</li>
                 </ul>
               </div>
             </div>
@@ -163,13 +163,13 @@ const TermsAndConditions = () => {
               </h2>
               <div className="space-y-4 text-text-muted dark:text-text-secondary leading-relaxed">
                 <p>
-                  Art-e-techt offers a verification process to help build trust within the community. Verification may
+                  ART-E-TECHT ATELIER offers a verification process to help build trust within the community. Verification may
                   include identity confirmation, professional membership validation, and video selfie verification.
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>Verification status is displayed on your profile to help directors assess credibility</li>
                   <li>Providing false verification documents is grounds for immediate account termination</li>
-                  <li>Art-e-techt verifies identity documents but does not guarantee the quality of work or professionalism of verified users</li>
+                  <li>ART-E-TECHT ATELIER verifies identity documents but does not guarantee the quality of work or professionalism of verified users</li>
                   <li>Verification status may be revoked if we discover fraudulent submissions</li>
                 </ul>
               </div>
@@ -214,8 +214,8 @@ const TermsAndConditions = () => {
                   <li>Certain data may be retained as described in our Privacy Policy</li>
                 </ul>
                 <p>
-                  Art-e-techt reserves the right to suspend or terminate your account at any time, with or without notice,
-                  for conduct that violates these Terms, is harmful to other users, or exposes Art-e-techt to legal liability.
+                  ART-E-TECHT ATELIER reserves the right to suspend or terminate your account at any time, with or without notice,
+                  for conduct that violates these Terms, is harmful to other users, or exposes ART-E-TECHT ATELIER to legal liability.
                 </p>
               </div>
             </div>
@@ -228,7 +228,7 @@ const TermsAndConditions = () => {
               </h2>
               <div className="space-y-4 text-text-muted dark:text-text-secondary leading-relaxed">
                 <p>
-                  Art-e-techt is provided "as is" and "as available" without warranties of any kind, either express or implied.
+                  ART-E-TECHT ATELIER is provided "as is" and "as available" without warranties of any kind, either express or implied.
                   We do not guarantee that:
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
@@ -238,7 +238,7 @@ const TermsAndConditions = () => {
                   <li>All information on the platform is accurate, complete, or current</li>
                 </ul>
                 <p>
-                  To the maximum extent permitted by law, Art-e-techt shall not be liable for any indirect, incidental, special,
+                  To the maximum extent permitted by law, ART-E-TECHT ATELIER shall not be liable for any indirect, incidental, special,
                   consequential, or punitive damages, including loss of profits, data, or business opportunities, arising from
                   your use of the platform.
                 </p>
@@ -253,7 +253,7 @@ const TermsAndConditions = () => {
               </h2>
               <div className="space-y-4 text-text-muted dark:text-text-secondary leading-relaxed">
                 <p>
-                  You agree to indemnify and hold harmless Art-e-techt, its officers, directors, employees, and agents from
+                  You agree to indemnify and hold harmless ART-E-TECHT ATELIER, its officers, directors, employees, and agents from
                   any claims, damages, losses, liabilities, and expenses (including legal fees) arising from your use of the
                   Platform, your User Content, your violation of these Terms, or your violation of any rights of a third party.
                 </p>
@@ -284,7 +284,7 @@ const TermsAndConditions = () => {
               </h2>
               <div className="space-y-4 text-text-muted dark:text-text-secondary leading-relaxed">
                 <p>
-                  Art-e-techt reserves the right to modify these Terms at any time. We will notify users of material changes
+                  ART-E-TECHT ATELIER reserves the right to modify these Terms at any time. We will notify users of material changes
                   via email or through a prominent notice on the Platform. Your continued use of the Platform after changes
                   are posted constitutes your acceptance of the updated Terms.
                 </p>
@@ -300,7 +300,7 @@ const TermsAndConditions = () => {
               <div className="space-y-2 text-sm">
                 <p className="flex items-center gap-2 text-text-muted dark:text-text-secondary">
                   <span className="material-icons text-primary text-sm">email</span>
-                  <a href="mailto:legal@talentconnect.io" className="text-primary hover:underline">Legal Team</a>
+                  <a href="mailto:legal@art-e-techt.com" className="text-primary hover:underline">Legal Team</a>
                 </p>
                 <p className="flex items-center gap-2 text-text-muted dark:text-text-secondary">
                   <span className="material-icons text-primary text-sm">support_agent</span>
@@ -308,7 +308,7 @@ const TermsAndConditions = () => {
                 </p>
                 <p className="flex items-center gap-2 text-text-muted dark:text-text-secondary">
                   <span className="material-icons text-primary text-sm">location_on</span>
-                  Art-e-techt Global HQ, Los Angeles, CA, USA
+                  ART-E-TECHT ATELIER, Los Angeles, CA, USA
                 </p>
               </div>
             </div>
@@ -324,7 +324,7 @@ const TermsAndConditions = () => {
               <div className="flex items-center gap-2 mb-6">
                 <ArtLogo showWordmark={true} />
                 <span className="font-display font-bold text-xl tracking-wide text-primary-text">
-                  TALENT<span className="text-primary">CONNECT</span>
+                  ART-E-TECHT <span className="text-primary">ATELIER</span>
                 </span>
               </div>
               <p className="text-sm leading-relaxed mb-6">
@@ -358,7 +358,7 @@ const TermsAndConditions = () => {
             </div>
           </div>
           <div className="border-t border-border-subtle mt-12 pt-8 text-center text-xs">
-            © 2026 TALENT<span className="text-primary">CONNECT</span> • Where Creative Talent Meets Opportunity
+            © 2026 ART-E-TECHT ATELIER • Where Creative Vision Meets Opportunity
           </div>
         </div>
       </footer>

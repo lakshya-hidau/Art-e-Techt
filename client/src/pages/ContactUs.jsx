@@ -14,7 +14,7 @@ const ContactUs = () => {
                                 <path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path>
                             </svg>
                         </div>
-                        <h2 className="text-text-primary dark:text-primary-text text-xl font-bold leading-tight tracking-tight">TALENT<span className="text-primary">CONNECT</span></h2>
+                        <h2 className="text-text-primary dark:text-primary-text text-xl font-bold leading-tight tracking-tight">ART-E-TECHT <span className="text-primary">ATELIER</span></h2>
                     </div>
                     <div className="hidden md:flex flex-1 justify-end gap-10 items-center">
                         <nav className="flex items-center gap-8">
@@ -98,7 +98,7 @@ const ContactUs = () => {
                                         </div>
                                         <div className="pt-4 border-t border-primary/10">
                                             <p className="text-sm font-bold text-text-primary dark:text-primary-text mb-1">Direct Email</p>
-                                            <p className="text-primary text-sm font-medium">support@Art-e-techt.in</p>
+                                            <p className="text-primary text-sm font-medium">support@art-e-techt.com</p>
                                         </div>
                                         <div className="pt-4 border-t border-primary/10">
                                             <p className="text-sm font-bold text-text-primary dark:text-primary-text mb-1">Helpline</p>
@@ -143,7 +143,7 @@ const ContactUs = () => {
                                     <path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path>
                                 </svg>
                             </div>
-                            <p className="text-sm text-text-muted dark:text-text-secondary">© 2026 TALENT<span className="text-primary">CONNECT</span>. All Rights Reserved.</p>
+                            <p className="text-sm text-text-muted dark:text-text-secondary">© 2026 ART-E-TECHT <span className="text-primary">ATELIER</span>. All Rights Reserved.</p>
                         </div>
                         <div className="flex gap-8">
                             <a className="text-xs text-text-secondary hover:text-primary" href="/privacy-policy">Privacy Policy</a>

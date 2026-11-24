@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import TopNav from '../components/TopNav';
 import Footer from '../components/Footer';
+import heroProductionWidescreenWebp from '../assets/hero-production-widescreen.webp';
+import heroProductionMobileWebp from '../assets/hero-production-mobile.webp';
+import manifestoCinematographyImage from '../assets/oficina-de-cinema-1153x768.jpeg';
 
 const Home = () => {
   const [activeFilter, setActiveFilter] = useState('All Disciplines');
@@ -28,25 +31,50 @@ const Home = () => {
 
         <main className="w-full pt-20">
           {/* ========================================================
-               SECTION 02: HERO SECTION WITH SPOTLIGHT
+               SECTION 02: HERO SECTION WITH SPOTLIGHT (FULL-WIDTH PRODUCTION BACKGROUND)
                ======================================================== */}
-          <section className="relative w-full min-h-[92vh] flex items-center bg-void border-b border-border overflow-hidden">
+          <section className="relative w-full min-h-[92vh] md:min-h-[94vh] flex items-center bg-void border-b border-border overflow-hidden">
+            {/* Full-Width Hero Background with Responsive Modern WebP Delivery */}
             <div className="absolute inset-0 z-0">
-              <img
-                alt="Cinematic wide shot of a creative film director in studio illuminated by a diagonal spotlight"
-                className="w-full h-full object-cover object-right md:object-center filter brightness-[0.70] contrast-[1.10]"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeMzKkj2qAcCsyySqUNYFxsmxmpmYhKOyMJlkqxYWGJUN7rc_NJTj0Gh75GrDdkk29LH45mB7K14FdpZeENBWm8GplOMXVQvXouPun-AvufI2fJkrftH8xprlDxSkyyn5QpVSZ8hvuImE2Dk1R_H_utGu-NLt28rHeuK-OUT3wdjxEYkfNOCqWy_BUwYPSElvM2aq5fJ7EZFMR7V6hbsDfF74GL8gX6jqKVmCLdayD"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-void via-void/85 to-transparent w-full lg:w-3/5"></div>
-              <div className="absolute inset-0 bg-gradient-to-t from-void via-transparent to-transparent"></div>
-              <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-void to-transparent"></div>
+              <picture>
+                <source
+                  media="(max-width: 768px)"
+                  srcSet={heroProductionMobileWebp}
+                  type="image/webp"
+                />
+                <source
+                  srcSet={heroProductionWidescreenWebp}
+                  type="image/webp"
+                />
+                <img
+                  src={heroProductionWidescreenWebp}
+                  alt="Cinematic production shoot with creative director capturing performer illuminated under warm golden studio spotlight"
+                  className="w-full h-full object-cover object-top md:object-[center_top] filter brightness-[1.03] contrast-[1.06]"
+                  loading="eager"
+                  fetchpriority="high"
+                />
+              </picture>
+
+              {/* Carefully Controlled Left-Side Gradient: Headlines remain 100% readable while Golden Spotlight & Performer stay completely clear & unshaded */}
+              <div className="hidden md:block absolute inset-y-0 left-0 w-full md:w-3/5 lg:w-[54%] xl:w-1/2 bg-gradient-to-r from-void via-void/80 via-35% to-transparent pointer-events-none z-[1]"></div>
+              
+              {/* Mobile-Optimized Atmospheric Gradient */}
+              <div className="md:hidden absolute inset-0 bg-gradient-to-b from-void/85 via-void/35 via-40% to-void/90 pointer-events-none z-[1]"></div>
+
+              {/* Gentle Top & Bottom Edge Blends */}
+              <div className="absolute top-0 inset-x-0 h-10 bg-gradient-to-b from-void/40 to-transparent pointer-events-none z-[1]"></div>
+              <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-void to-transparent pointer-events-none z-[1]"></div>
+
+              {/* Studio Spotlight Illuminating Aura (Subtle Tungsten Glow Enhancement) */}
+              <div className="absolute top-1/4 left-1/3 md:left-[45%] w-80 h-80 bg-secondary/15 rounded-full blur-[100px] pointer-events-none z-[1] mix-blend-screen"></div>
             </div>
 
+            {/* Hero Foreground Content */}
             <div className="relative z-10 w-full px-5 md:px-10 lg:px-16 py-16 flex flex-col justify-between min-h-[82vh]">
               <div className="max-w-2xl pt-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-background/90 border border-border backdrop-blur-md mb-6">
-                  <span className="w-1.5 h-1.5 bg-secondary"></span>
-                  <span className="font-sans text-[11px] text-secondary tracking-[0.25em] font-semibold uppercase">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-surface-low/95 border border-border backdrop-blur-md mb-6">
+                  <span className="w-1.5 h-1.5 bg-secondary animate-pulse"></span>
+                  <span className="font-mono text-[11px] text-secondary tracking-[0.25em] font-semibold uppercase">
                     DISCOVER • CREATE • COLLABORATE
                   </span>
                 </div>
@@ -62,14 +90,14 @@ const Home = () => {
 
                 <div className="flex flex-wrap items-center gap-6 mb-10">
                   <Link
-                    className="px-6 py-4 bg-secondary text-primary-text font-sans text-xs uppercase tracking-[0.2em] font-bold hover:bg-tertiary transition-all flex items-center gap-2 border border-secondary shadow-[0_0_24px_color-mix(in srgb, var(--color-secondary) 25%, transparent)]"
+                    className="px-6 py-4 bg-secondary text-primary-text font-sans text-xs uppercase tracking-[0.2em] font-bold hover:bg-tertiary transition-all flex items-center gap-2 border border-secondary shadow-[0_0_24px_color-mix(in srgb,var(--color-secondary)_25%,transparent)]"
                     to="/register/actor"
                   >
                     <span>I am an Artist</span>
                     <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
                   </Link>
                   <Link
-                    className="px-6 py-4 bg-transparent text-text-primary font-sans text-xs uppercase tracking-[0.2em] font-medium border border-border hover:border-secondary hover:text-secondary transition-all flex items-center gap-2"
+                    className="px-6 py-4 bg-void/80 backdrop-blur-sm text-text-primary font-sans text-xs uppercase tracking-[0.2em] font-medium border border-border hover:border-secondary hover:text-secondary transition-all flex items-center gap-2"
                     to="/register/director"
                   >
                     <span>I am a Director</span>
@@ -77,12 +105,13 @@ const Home = () => {
                   </Link>
                 </div>
 
-                <div className="inline-flex items-center gap-2 py-1 text-[11px] font-mono text-text-secondary tracking-wider uppercase border-l-2 border-secondary pl-3">
+                <div className="inline-flex items-center gap-2 py-1 text-[11px] font-mono text-text-secondary tracking-wider uppercase border-l-2 border-secondary pl-3 bg-void/60 backdrop-blur-sm">
                   <span className="text-secondary">GEO-LOCATED:</span>
                   <span>SHOWING OPPORTUNITIES IN INDIA • MUMBAI • DELHI • BENGALURU</span>
                 </div>
               </div>
 
+              {/* Bottom Scroll / Archive Indicator */}
               <div className="pt-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-t border-border/50 text-text-secondary">
                 <div className="flex items-center gap-3">
                   <span className="material-symbols-outlined text-secondary text-[18px] animate-bounce">arrow_downward</span>
@@ -774,7 +803,7 @@ const Home = () => {
                   <span className="w-1.5 h-1.5 bg-secondary"></span>
                 </div>
                 <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-text-primary">
-                  How Art-e-techt Works
+                  How ART-E-TECHT ATELIER Works
                 </h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
@@ -860,7 +889,7 @@ const Home = () => {
                   <img
                     alt="Atmospheric studio cinematography camera setup bathed in golden illumination"
                     className="w-full h-full object-cover filter contrast-[1.12]"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuALd_bRv0zh4ldCgCsPAons41tWml0571O4bnPrT9rTSJFp0Fng-LH48r_yS2OxW5h-cmwRiarRqZJfe8GQHZ0etRXpmYDhzvvBh-34tgGHVIjRexKasR2FyXbHNKAJcad6cwJ0XXtDtnBmXwNRY6jLGb4QHMW8tZDkgz4x9ybk6tYMORRusAtDCQWJjQTU0kFoDufrlwaoZpZZAwULuNZQbyraKGQGow4rfulT2PUL"
+                    src={manifestoCinematographyImage}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-void via-transparent to-transparent"></div>
                   <div className="absolute bottom-4 left-4 right-4 bg-background/95 border border-border p-3">
@@ -882,7 +911,7 @@ const Home = () => {
                     A Space Where Creativity Finds Its People.
                   </h2>
                   <p className="font-sans text-base text-text-secondary leading-relaxed mb-10">
-                    Art-e-techt was created to eliminate the artificial barriers between real creative talent and the visionaries who orchestrate landmark productions. By uniting actors, filmmakers, dancers, musicians, and cinematographers in a single disciplined atelier, we make high-caliber collaboration seamless, transparent, and direct.
+                    ART-E-TECHT ATELIER was created to eliminate the artificial barriers between real creative talent and the visionaries who orchestrate landmark productions. By uniting actors, filmmakers, dancers, musicians, and cinematographers in a single disciplined atelier, we make high-caliber collaboration seamless, transparent, and direct.
                   </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
@@ -1003,7 +1032,7 @@ const Home = () => {
                 Step Into the <span className="text-secondary italic font-serif font-normal">Spotlight.</span>
               </h2>
               <p className="font-sans text-base sm:text-lg text-text-primary/90 max-w-xl mb-10 leading-relaxed">
-                Your next creative opportunity begins with the right connection. Whether casting an ensemble or stepping onto the stage, build your legacy with Art-e-techt.
+                Your next creative opportunity begins with the right connection. Whether casting an ensemble or stepping onto the stage, build your legacy with ART-E-TECHT ATELIER.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">

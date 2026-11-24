@@ -64,6 +64,12 @@ node_modules/
 
 # dotenv environment variables file
 .env
+# Server environment secrets (Firebase admin key, API keys, etc.)
+server/.env
+# Client environment secrets (Firebase config, Stripe publishable key, etc.)
+client/.env
+# Seed credentials (generated passwords for demo users) – never commit
+seed_credentials.txt
 
 # dataconnect generated files
 .dataconnect
@@ -78,3 +84,5 @@ skills-lock.json
 .claude/
 AUTH_TROUBLESHOOTING_GUIDE.md
 CLAUDE.md
+# Ignore generated seed credentials
+seed_credentials.txt

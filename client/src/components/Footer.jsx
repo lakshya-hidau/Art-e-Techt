@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ArtLogo from './common/ArtLogo';
 
 const Footer = () => {
   return (
@@ -8,14 +9,9 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 mb-16">
           {/* Brand Info */}
           <div className="lg:col-span-4 flex flex-col gap-3">
-            <div className="flex items-center gap-3">
-              <div className="w-6 h-6 bg-surface-low flex items-center justify-center border border-border">
-                <span className="w-2 h-2 bg-secondary rotate-45 block"></span>
-              </div>
-              <span className="font-display font-bold text-lg text-text-primary uppercase tracking-wider">
-                Art-e-techt
-              </span>
-            </div>
+            <Link to="/" aria-label="ART-E-TECHT ATELIER home">
+              <ArtLogo className="h-14" />
+            </Link>
             <p className="font-sans text-xs text-text-secondary leading-relaxed max-w-sm">
               A sanctuary uniting monolithic architectural precision and exceptional creative visionaries. Engineering digital spaces for uncompromised creative postures.
             </p>
@@ -122,7 +118,7 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="pt-6 border-t border-border flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs font-mono text-text-secondary uppercase">
-          <p>© 2025 Art-e-techt Atelier. All rights reserved.</p>
+          <p>© 2026 ART-E-TECHT ATELIER. All rights reserved.</p>
           <div className="flex items-center gap-3">
             <span className="text-text-primary">Strict 0px Architecture</span>
             <span className="text-secondary">•</span>

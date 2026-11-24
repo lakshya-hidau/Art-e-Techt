@@ -11,7 +11,7 @@ const HelpSupport = () => {
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center gap-3">
                             <ArtLogo showWordmark={true} />
-                            <h1 className="text-xl font-bold tracking-tight text-text-primary dark:text-primary-text">TALENT<span className="text-primary">CONNECT</span></h1>
+                            <h1 className="text-xl font-bold tracking-tight text-text-primary dark:text-primary-text">ART-E-TECHT <span className="text-primary">ATELIER</span></h1>
                         </div>
                         <nav className="hidden md:flex items-center gap-8">
                             <Link className="text-sm font-medium hover:text-primary transition-colors" to="/dashboard/talent">Dashboard</Link>
@@ -110,11 +110,11 @@ const HelpSupport = () => {
                             </details>
                             <details className="group bg-surface dark:bg-surface-dark rounded-xl border border-border dark:border-border-dark overflow-hidden transition-all duration-300">
                                 <summary className="flex items-center justify-between p-5 cursor-pointer list-none">
-                                    <span className="font-semibold text-text-primary dark:text-text-primary">What are the benefits of Art-e-techt Pro?</span>
+                                    <span className="font-semibold text-text-primary dark:text-text-primary">What are the benefits of ART-E-TECHT ATELIER Pro?</span>
                                     <span className="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
                                 </summary>
                                 <div className="p-5 pt-0 text-text-muted dark:text-text-secondary text-sm leading-relaxed border-t border-border dark:border-border-dark/50">
-                                    Art-e-techt Pro users get priority audition slots, unlimited showreel uploads, a verified blue tick, and direct messaging access to verified casting directors across major Indian production hubs.
+                                    ART-E-TECHT ATELIER Pro users get priority audition slots, unlimited showreel uploads, a verified blue tick, and direct messaging access to verified casting directors across major Indian production hubs.
                                 </div>
                             </details>
                             <details className="group bg-surface dark:bg-surface-dark rounded-xl border border-border dark:border-border-dark overflow-hidden transition-all duration-300">
@@ -128,7 +128,7 @@ const HelpSupport = () => {
                             </details>
                             <details className="group bg-surface dark:bg-surface-dark rounded-xl border border-border dark:border-border-dark overflow-hidden transition-all duration-300">
                                 <summary className="flex items-center justify-between p-5 cursor-pointer list-none">
-                                    <span className="font-semibold text-text-primary dark:text-text-primary">Is my personal data secure on Art-e-techt?</span>
+                                    <span className="font-semibold text-text-primary dark:text-text-primary">Is my personal data secure on ART-E-TECHT ATELIER?</span>
                                     <span className="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
                                 </summary>
                                 <div className="p-5 pt-0 text-text-muted dark:text-text-secondary text-sm leading-relaxed border-t border-border dark:border-border-dark/50">
@@ -181,7 +181,7 @@ const HelpSupport = () => {
                         <div className="col-span-2 lg:col-span-2">
                             <div className="flex items-center gap-3 mb-6">
                                 <ArtLogo showWordmark={true} />
-                                <h1 className="text-lg font-bold tracking-tight text-text-primary dark:text-primary-text">TALENT<span className="text-primary">CONNECT</span></h1>
+                                <h1 className="text-lg font-bold tracking-tight text-text-primary dark:text-primary-text">ART-E-TECHT <span className="text-primary">ATELIER</span></h1>
                             </div>
                             <p className="text-sm text-text-secondary dark:text-text-secondary max-w-xs leading-relaxed mb-6">
                                 India's premier digital talent marketplace connecting aspiring actors with the country's leading casting directors and production houses.
@@ -221,7 +221,7 @@ const HelpSupport = () => {
                         </div>
                     </div>
                     <div className="pt-8 border-t border-border dark:border-border-dark flex flex-col md:flex-row justify-between items-center gap-4">
-                        <p className="text-xs text-text-secondary">© 2026 TALENT<span className="text-primary">CONNECT</span>. All rights reserved.</p>
+                        <p className="text-xs text-text-secondary">© 2026 ART-E-TECHT ATELIER. All rights reserved.</p>
                         <div className="flex items-center gap-6">
                             <span className="flex items-center gap-1 text-xs text-text-secondary"><span className="material-symbols-outlined text-sm">language</span> English (India)</span>
                             <span className="flex items-center gap-1 text-xs text-text-secondary font-medium">Made with <span className="material-symbols-outlined text-sm text-primary">favorite</span> for Indian Cinema</span>

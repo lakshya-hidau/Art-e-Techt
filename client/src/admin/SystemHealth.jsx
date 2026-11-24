@@ -98,7 +98,7 @@ const SystemHealth = () => {
             userRole="Ops Console"
             userData={userData}
             headerTitle="Mesh Diagnostics"
-            headerSubtitle="Real-time telemetry for Art-e-Techt infrastructure"
+            headerSubtitle="Real-time telemetry for ART-E-TECHT ATELIER infrastructure"
             headerActions={
                 <div className="flex gap-4">
                     <button className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-surface-lowest dark:bg-card-dark/5 text-text-secondary dark:text-text-secondary text-[10px] font-black uppercase tracking-widest hover:bg-surface dark:hover:bg-surface/10 transition-all">
@@ -282,7 +282,7 @@ const SystemHealth = () => {
                 </div>
 
                 <footer className="pt-24 pb-12 text-center border-t border-border dark:border-subtle/5 space-y-4">
-                    <p className="text-[11px] font-black text-text-secondary uppercase tracking-[0.5em]">Art-e-Techt Operations Control • Core Integrity: SECURE</p>
+                    <p className="text-[11px] font-black text-text-secondary uppercase tracking-[0.5em]">ART-E-TECHT ATELIER Operations Control • Core Integrity: SECURE</p>
                     <p className="text-[10px] font-bold text-text-secondary/40 uppercase tracking-widest">Global Shard: ap-south-1a-mumbai • Node Cluster: V4-OMEGA</p>
                 </footer>
             </div>

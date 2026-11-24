@@ -220,7 +220,7 @@ const TalentDiscovery = () => {
                                         <div className="flex justify-between items-start mb-2">
                                             <h4 className="font-extrabold text-lg md:text-xl text-text-primary dark:text-primary-text leading-tight uppercase tracking-tight italic truncate pr-2">{talent.fullName}</h4>
                                             <span className="text-[9px] font-black uppercase px-2 py-1 rounded-md tracking-wider text-primary bg-primary/10 flex-shrink-0">
-                                                Verified
+                                                {talent.accountType === 'public_showcase' ? 'Public showcase' : 'Verified'}
                                             </span>
                                         </div>
                                         <p className="text-[10px] text-text-secondary dark:text-text-secondary font-black uppercase tracking-widest mb-4 md:mb-6 italic truncate">{talent.talentCategory} • {talent.physicalMetrics?.height || 'N/A'}</p>
@@ -231,7 +231,11 @@ const TalentDiscovery = () => {
                                         </div>
                                         <div className="flex items-center justify-between text-[10px] font-black text-text-secondary uppercase tracking-widest border-t border-border dark:border-subtle/5 pt-4 md:pt-6">
                                             <span className="flex items-center gap-2 truncate"><span className="material-symbols-outlined text-sm text-primary">location_on</span>{talent.location}</span>
-                                            <button className="text-primary hover:underline flex-shrink-0">Shortlist</button>
+                                            {talent.accountType === 'public_showcase' ? (
+                                                <span className="text-text-secondary flex-shrink-0">Read-only</span>
+                                            ) : (
+                                                <button className="text-primary hover:underline flex-shrink-0">Shortlist</button>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

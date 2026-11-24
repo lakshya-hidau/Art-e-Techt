@@ -320,7 +320,7 @@ const AuditionRequests = () => {
                 )}
             </div>
             <footer className="mt-auto py-6 px-8 border-t border-border dark:border-border-dark text-center">
-                <p className="text-[10px] text-text-secondary font-bold uppercase tracking-widest">© 2026 Art-e-Techt • Casting Partner: Cinematic Solutions</p>
+                <p className="text-[10px] text-text-secondary font-bold uppercase tracking-widest">© 2026 ART-E-TECHT ATELIER • Casting Partner: Cinematic Solutions</p>
             </footer>
 
             {/* Schedule Audition Modal */}

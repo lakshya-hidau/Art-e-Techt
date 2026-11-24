@@ -70,7 +70,7 @@ const wrapEmail = ({ title, body, ctaLabel, ctaLink, footer }) => `
         </tr>
       </table>
       <div style="margin-top:12px;color:#6b5a63;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;">
-        © Art-e-techt • Secure access communications
+        © ART-E-TECHT ATELIER • Secure access communications
       </div>
     </td>
   </tr>
@@ -79,9 +79,9 @@ const wrapEmail = ({ title, body, ctaLabel, ctaLink, footer }) => `
 
 export const buildVerificationEmail = (verifyLink) =>
     wrapEmail({
-        title: 'Verify your email to activate Art-e-techt',
+        title: 'Verify your email to activate ART-E-TECHT ATELIER',
         body: `
-            <p>Thanks for joining Art-e-techt! Confirm your email to unlock audition invites, project applications, and messaging.</p>
+            <p>Thanks for joining ART-E-TECHT ATELIER! Confirm your email to unlock audition invites, project applications, and messaging.</p>
             <p style="margin-top:12px;">If the button doesn’t work, copy this link into your browser:<br/><span style="color:#ee2b3b;">${verifyLink}</span></p>
         `,
         ctaLabel: 'Verify Email',
@@ -91,7 +91,7 @@ export const buildVerificationEmail = (verifyLink) =>
 
 export const buildResetPasswordEmail = (resetLink) =>
     wrapEmail({
-        title: 'Reset your Art-e-techt password',
+        title: 'Reset your ART-E-TECHT ATELIER password',
         body: `
             <p>We received a request to reset your password.</p>
             <p>Click below to set a new one. If you didn’t make this request, you can safely ignore this email.</p>

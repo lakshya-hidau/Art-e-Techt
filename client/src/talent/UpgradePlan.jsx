@@ -123,7 +123,7 @@ const UpgradePlan = () => {
                         Invest in Your <span className="text-primary">Career</span>
                     </h2>
                     <p className="text-text-secondary font-medium max-w-xl mx-auto">
-                        Join thousands of artists who've landed their dream roles with Art-e-Techt premium access.
+                        Join artists building their careers with ART-E-TECHT ATELIER premium access.
                     </p>
 
                     {/* Billing Toggle */}

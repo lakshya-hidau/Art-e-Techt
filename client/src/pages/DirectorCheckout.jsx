@@ -211,7 +211,7 @@ const DirectorCheckout = () => {
 
                 {/* Simple Footer */}
                 <footer className="px-6 md:px-20 py-8 border-t border-border-dark bg-background-dark text-text-secondary flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="text-xs text-text-secondary">© 2026 Art-e-Techt. All rights reserved.</p>
+                    <p className="text-xs text-text-secondary">© 2026 ART-E-TECHT ATELIER. All rights reserved.</p>
                     <div className="flex gap-6 text-xs font-semibold">
                         <a className="hover:text-primary text-text-secondary" href="/privacy-policy">Privacy</a>
                         <a className="hover:text-primary text-text-secondary" href="/terms-and-conditions">Terms</a>

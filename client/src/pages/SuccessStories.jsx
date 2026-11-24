@@ -18,7 +18,7 @@ const SuccessStories = () => {
             <span className="text-error font-bold tracking-[0.2em] text-xs uppercase mb-4 block">Hall of Fame</span>
             <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6">Success Stories</h1>
             <p className="max-w-2xl mx-auto text-text-secondary text-lg">
-              Discover how rising stars transformed their dreams into reality through Art-e-techt.
+              Discover how rising stars transformed their dreams into reality through ART-E-TECHT ATELIER.
             </p>
           </div>
         </section>
@@ -39,7 +39,7 @@ const SuccessStories = () => {
                   <span className="text-text-primary text-sm font-medium">The Last Dynasty</span>
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                  "Art-e-techt bridged my small-town dreams to the streaming screen."
+                  "ART-E-TECHT ATELIER bridged my small-town dreams to the streaming screen."
                 </h2>
                 <div className="flex items-center justify-between">
                   <div>

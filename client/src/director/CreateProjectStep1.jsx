@@ -152,7 +152,7 @@ if (!file.type?.startsWith('image/')) {
                         <div className="space-y-8">
                             <div className="space-y-2">
                                 <h1 className="text-3xl font-bold">Tell us about your next masterpiece</h1>
-                                <p className="text-text-muted dark:text-text-secondary">Fill in the core details to start your scouting process with Art-e-Techt.</p>
+                                <p className="text-text-muted dark:text-text-secondary">Fill in the core details to start your scouting process with ART-E-TECHT ATELIER.</p>
                             </div>
 
                             <form onSubmit={handleSubmit} className="space-y-6">
@@ -345,7 +345,7 @@ if (!file.type?.startsWith('image/')) {
                 </aside>
 
                 <footer className="py-6 px-10 text-center text-text-secondary text-xs border-t border-border dark:border-primary/10 mt-auto">
-                    &copy; 2026 Art-e-Techt &bull; Where Global Talent Meets Opportunity
+                    &copy; 2026 ART-E-TECHT ATELIER &bull; Where Creative Vision Meets Opportunity
                 </footer>
             </div>
         </div>

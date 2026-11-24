@@ -1,0 +1,16 @@
+{
+  "name": "ART-E-TECHT ATELIER",
+  "short_name": "ART-E-TECHT",
+  "description": "Where Creative Vision Meets Opportunity.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#08090B",
+  "theme_color": "#08090B",
+  "icons": [
+    {
+      "src": "/art-e-techt-symbol.png",
+      "sizes": "280x271",
+      "type": "image/png"
+    }
+  ]
+}

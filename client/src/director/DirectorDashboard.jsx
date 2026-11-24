@@ -181,7 +181,7 @@ const DirectorDashboard = () => {
               { label: 'Preferred Genres', value: profile?.preferredGenres?.join(', ') || 'Drama, Thriller, Commercial' },
               { label: 'Current Availability', value: profile?.availability || 'Accepting new pitches' },
               { label: 'Production Contacts', value: profile?.contactEmail || 'Studio contact pending' },
-              { label: 'Representation', value: profile?.agentName || 'Art-e-Techt Studio' },
+              { label: 'Representation', value: profile?.agentName || 'ART-E-TECHT ATELIER' },
             ].map((item) => (
               <div key={item.label} className="bg-surface dark:bg-void rounded-2xl border border-border dark:border-subtle/10 p-4 flex flex-col justify-between shadow-sm">
                 <p className="text-[9px] uppercase tracking-[0.3em] text-text-secondary dark:text-text-secondary font-black">{item.label}</p>

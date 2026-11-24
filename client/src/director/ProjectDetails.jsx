@@ -104,7 +104,7 @@ const ProjectDetails = () => {
 
     const adminHeader = {
         name: profile?.fullName || 'Admin',
-        roleTitle: 'Administrator • Art-e-Techt',
+        roleTitle: 'Administrator • ART-E-TECHT ATELIER',
         avatar: profile?.profilePicture === 'no-photo.jpg'
             ? 'https://ui-avatars.com/api/?name=' + (profile?.fullName || 'Admin')
             : (profile?.profilePicture || "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80")
@@ -126,7 +126,7 @@ const ProjectDetails = () => {
         return (
             <DashboardLayout
                 menuItems={menuItems}
-                userRole={userRole === 'director' ? "India • Director" : userRole === 'admin' ? "Admin • Art-e-Techt" : "India • Talent"}
+                userRole={userRole === 'director' ? "India • Director" : userRole === 'admin' ? "Admin • ART-E-TECHT ATELIER" : "India • Talent"}
                 userData={headerUserData}
                 headerTitle="Project Details"
                 headerSubtitle="Loading details..."
@@ -144,7 +144,7 @@ const ProjectDetails = () => {
         return (
             <DashboardLayout
                 menuItems={menuItems}
-                userRole={userRole === 'director' ? "India • Director" : userRole === 'admin' ? "Admin • Art-e-Techt" : "India • Talent"}
+                userRole={userRole === 'director' ? "India • Director" : userRole === 'admin' ? "Admin • ART-E-TECHT ATELIER" : "India • Talent"}
                 userData={headerUserData}
                 headerTitle="Project Details"
                 headerSubtitle="Project Not Found"
@@ -267,7 +267,7 @@ const ProjectDetails = () => {
     return (
         <DashboardLayout
             menuItems={menuItems}
-            userRole={userRole === 'director' ? "India • Director" : userRole === 'admin' ? "Admin • Art-e-Techt" : "Talent • India"}
+            userRole={userRole === 'director' ? "India • Director" : userRole === 'admin' ? "Admin • ART-E-TECHT ATELIER" : "Talent • India"}
             userData={headerUserData}
             headerTitle="Project Details"
             headerSubtitle={userRole === 'director'
@@ -741,11 +741,10 @@ const ProjectDetails = () => {
                 </div>
             </div>
             <footer className="py-8 px-8 border-t border-border dark:border-border-dark text-center">
-                <p className="text-[10px] text-text-secondary font-bold uppercase tracking-widest">© 2026 Art-e-Techt • Where Global Talent Meets Opportunity</p>
+                <p className="text-[10px] text-text-secondary font-bold uppercase tracking-widest">© 2026 ART-E-TECHT ATELIER • Where Creative Vision Meets Opportunity</p>
             </footer>
         </DashboardLayout>
     );
 };
 
 export default ProjectDetails;
-

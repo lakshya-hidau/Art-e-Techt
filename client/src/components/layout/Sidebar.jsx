@@ -41,7 +41,7 @@ const Sidebar = ({
                 <div className="flex items-center gap-3 cursor-pointer">
                     <ArtLogo showWordmark={false} />
                     <div>
-                        <p className="text-xs font-black uppercase tracking-[0.25em] text-primary-text/90 leading-tight">ART-E-TECHT</p>
+                        <p className="text-xs font-black uppercase tracking-[0.25em] text-primary-text/90 leading-tight">ART-E-TECHT ATELIER</p>
                         <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold mt-0.5">{userRole || 'MEMBER'}</p>
                     </div>
                 </div>

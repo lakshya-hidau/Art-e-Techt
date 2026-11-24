@@ -145,7 +145,7 @@ const AboutUs = () => {
               <RollingHero />
             </h1>
             <p className="max-w-2xl text-xl text-text-primary font-light leading-relaxed mt-6">
-              Art-e-Techt is the premier digital gateway connecting the world's vast pool of performing
+              ART-E-TECHT ATELIER is the premier digital gateway connecting the world's vast pool of performing
               arts talent with the most ambitious productions across every film industry on the planet.
             </p>
           </div>
@@ -162,7 +162,7 @@ const AboutUs = () => {
                 </h3>
                 <p className="text-text-secondary text-lg mb-6 leading-relaxed">
                   Founded at the intersection of Hollywood ambition and world cinema creativity,
-                  Art-e-Techt began with a simple observation: the journey from a local theater
+                  ART-E-TECHT ATELIER began with a simple observation: the journey from a local theater
                   stage to a global streaming screen was fraught with gatekeepers and opacity —
                   everywhere in the world.
                 </p>

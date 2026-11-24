@@ -31,7 +31,6 @@ const AdminLogin = () => {
                 setSessionFromAuthResponse(authData);
             }
 
-            console.log('Admin login successful');
             navigate('/dashboard/admin');
         } catch (err) {
             setError(err.response?.data?.message || 'Authentication failed. Check your security clearance.');
@@ -48,7 +47,6 @@ const AdminLogin = () => {
                     <div className="flex items-center justify-between px-6 py-4 md:px-10 lg:px-20 border-b border-primary/10">
                         <div className="flex items-center gap-2">
                             <ArtLogo showWordmark={true} />
-                            <span className="text-xl font-extrabold tracking-tight text-primary-text">TALENT<span className="text-primary">CONNECT</span></span>
                         </div>
                         <div className="hidden md:flex items-center gap-6">
                             <a className="text-sm font-medium text-text-secondary hover:text-primary transition-colors flex items-center gap-1" href="#">
@@ -179,7 +177,7 @@ const AdminLogin = () => {
                             <a className="text-xs font-medium text-text-secondary hover:text-primary" href="#">Emergency Support</a>
                         </div>
                         <p className="text-text-secondary text-[10px] uppercase tracking-widest font-bold">
-                            © 2026 Art-e-techt Global Operations. Restricted Access.
+                            © 2026 ART-E-TECHT ATELIER. Restricted Access.
                         </p>
                     </div>
                 </div>

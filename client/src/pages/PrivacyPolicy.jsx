@@ -21,7 +21,7 @@ const PrivacyPolicy = () => {
               Privacy Policy
             </h1>
             <p className="text-lg text-text-secondary dark:text-text-secondary max-w-2xl mx-auto leading-relaxed">
-              Your privacy matters to us. This policy explains how Art-e-techt collects, uses, and protects
+              Your privacy matters to us. This policy explains how ART-E-TECHT ATELIER collects, uses, and protects
               your personal information across our global talent discovery platform.
             </p>
           </div>
@@ -38,7 +38,7 @@ const PrivacyPolicy = () => {
                 1. Information We Collect
               </h2>
               <div className="space-y-4 text-text-muted dark:text-text-secondary leading-relaxed">
-                <p>When you use Art-e-techt, we collect information to provide and improve our services:</p>
+                <p>When you use ART-E-TECHT ATELIER, we collect information to provide and improve our services:</p>
                 <h3 className="text-lg font-semibold text-text-primary dark:text-text-primary mt-4">Account &amp; Profile Information</h3>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>Name, email address, phone number, and location</li>
@@ -89,7 +89,7 @@ const PrivacyPolicy = () => {
                   <li><strong className="text-text-primary dark:text-text-primary">With Talent:</strong> Directors who post projects have their public profile and company information visible to applicants</li>
                   <li><strong className="text-text-primary dark:text-text-primary">Service Providers:</strong> Trusted third-party services that help us operate the platform (cloud storage, payment processing, analytics)</li>
                   <li><strong className="text-text-primary dark:text-text-primary">Legal Requirements:</strong> When required by law, regulation, or legal process</li>
-                  <li><strong className="text-text-primary dark:text-text-primary">Safety:</strong> To protect the rights, property, or safety of Art-e-techt, our users, or the public</li>
+                  <li><strong className="text-text-primary dark:text-text-primary">Safety:</strong> To protect the rights, property, or safety of ART-E-TECHT ATELIER, our users, or the public</li>
                 </ul>
                 <p className="mt-4 bg-primary/5 dark:bg-primary/10 p-4 rounded-xl border border-primary/20">
                   <strong className="text-text-primary dark:text-text-primary">We never sell your personal data to third parties.</strong> Your information is used solely to facilitate talent discovery and professional connections within the entertainment industry.
@@ -132,7 +132,7 @@ const PrivacyPolicy = () => {
                 </ul>
                 <p>
                   To exercise any of these rights, contact us at{' '}
-                  <a href="mailto:privacy@talentconnect.io" className="text-primary hover:underline">Privacy Team</a>.
+                  <a href="mailto:privacy@art-e-techt.com" className="text-primary hover:underline">Privacy Team</a>.
                 </p>
               </div>
             </div>
@@ -164,7 +164,7 @@ const PrivacyPolicy = () => {
               </h2>
               <div className="space-y-4 text-text-muted dark:text-text-secondary leading-relaxed">
                 <p>
-                  Art-e-techt uses cookies and similar technologies to enhance your experience:
+                  ART-E-TECHT ATELIER uses cookies and similar technologies to enhance your experience:
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li><strong className="text-text-primary dark:text-text-primary">Essential Cookies:</strong> Required for authentication, security, and core platform functionality</li>
@@ -185,10 +185,10 @@ const PrivacyPolicy = () => {
               </h2>
               <div className="space-y-4 text-text-muted dark:text-text-secondary leading-relaxed">
                 <p>
-                  Art-e-techt is intended for users aged 18 and above. We do not knowingly collect personal information
+                  ART-E-TECHT ATELIER is intended for users aged 18 and above. We do not knowingly collect personal information
                   from minors under 18. If you are a parent or guardian and believe your child has provided us with personal
                   data, please contact us immediately at{' '}
-                  <a href="mailto:safety@talentconnect.io" className="text-primary hover:underline">Safety Team</a>{' '}
+                  <a href="mailto:safety@art-e-techt.com" className="text-primary hover:underline">Safety Team</a>{' '}
                   so we can take appropriate action.
                 </p>
               </div>
@@ -202,7 +202,7 @@ const PrivacyPolicy = () => {
               </h2>
               <div className="space-y-4 text-text-muted dark:text-text-secondary leading-relaxed">
                 <p>
-                  Art-e-techt operates globally, connecting talent across film industries worldwide. Your information may
+                  ART-E-TECHT ATELIER operates globally, connecting talent across film industries worldwide. Your information may
                   be transferred to and processed in countries other than your own. We ensure that such transfers comply with
                   applicable data protection laws and that your data remains protected regardless of where it is processed.
                 </p>
@@ -233,11 +233,11 @@ const PrivacyPolicy = () => {
               <div className="space-y-2 text-sm">
                 <p className="flex items-center gap-2 text-text-muted dark:text-text-secondary">
                   <span className="material-icons text-primary text-sm">email</span>
-                  <a href="mailto:privacy@talentconnect.io" className="text-primary hover:underline">Privacy Team</a>
+                  <a href="mailto:privacy@art-e-techt.com" className="text-primary hover:underline">Privacy Team</a>
                 </p>
                 <p className="flex items-center gap-2 text-text-muted dark:text-text-secondary">
                   <span className="material-icons text-primary text-sm">location_on</span>
-                  Art-e-techt Global HQ, Los Angeles, CA, USA
+                  ART-E-TECHT ATELIER, Los Angeles, CA, USA
                 </p>
               </div>
             </div>
@@ -253,7 +253,7 @@ const PrivacyPolicy = () => {
               <div className="flex items-center gap-2 mb-6">
                 <ArtLogo showWordmark={true} />
                 <span className="font-display font-bold text-xl tracking-wide text-primary-text">
-                  TALENT<span className="text-primary">CONNECT</span>
+                  ART-E-TECHT <span className="text-primary">ATELIER</span>
                 </span>
               </div>
               <p className="text-sm leading-relaxed mb-6">
@@ -287,7 +287,7 @@ const PrivacyPolicy = () => {
             </div>
           </div>
           <div className="border-t border-border-subtle mt-12 pt-8 text-center text-xs">
-            © 2026 TALENT<span className="text-primary">CONNECT</span> • Where Creative Talent Meets Opportunity
+            © 2026 ART-E-TECHT ATELIER • Where Creative Vision Meets Opportunity
           </div>
         </div>
       </footer>

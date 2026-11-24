@@ -74,7 +74,7 @@ const MobileBottomNav = ({ menuItems }) => {
                             </div>
                             <div>
                                 <h2 className="text-sm font-black tracking-tighter text-text-primary dark:text-primary-text uppercase italic">
-                                    Art-e-Techt
+                                    ART-E-TECHT ATELIER
                                 </h2>
                                 <p className="text-[9px] uppercase tracking-[0.25em] text-primary font-black leading-none mt-0.5">All Sections</p>
                             </div>

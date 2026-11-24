@@ -175,7 +175,7 @@ const Shortlists = () => {
                 )}
             </div>
             <footer className="mt-auto py-6 px-8 border-t border-border dark:border-border-dark text-center">
-                <p className="text-xs text-text-secondary font-medium">© 2026 Art-e-Techt. All rights reserved. Casting Partner: Cinematic Solutions.</p>
+                <p className="text-xs text-text-secondary font-medium">© 2026 ART-E-TECHT ATELIER. All rights reserved. Casting Partner: Cinematic Solutions.</p>
             </footer>
         </DashboardLayout>
     );

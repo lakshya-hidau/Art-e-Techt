@@ -150,7 +150,7 @@ const ArtistDashboard = () => {
                             <div className="max-w-2xl">
                                 <h2 className="text-2xl md:text-3xl font-black uppercase italic tracking-tight mb-3 text-text-primary dark:text-primary-text">Get Verified to Start Your Career</h2>
                                 <p className="text-text-secondary dark:text-text-secondary text-sm md:text-base leading-relaxed font-medium">
-                                    Welcome to Art-e-Techt! To maintain the highest quality of professionals on our platform,
+                                    Welcome to ART-E-TECHT ATELIER! To maintain the highest quality of professionals on our platform,
                                     we require all artists to undergo a quick verification process. Once verified, you'll gain
                                     full access to project discovery, direct messaging with directors, and audition invites.
                                 </p>

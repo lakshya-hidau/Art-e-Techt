@@ -119,7 +119,6 @@ export const getMyProfile = async (req, res) => {
         const profileData = profileSnapshot.docs[0].data();
         const profileId = profileSnapshot.docs[0].id;
 
-        // Populate user data
         const userDoc = await db.collection('users').doc(profileData.user).get();
         const userData = userDoc.exists ? userDoc.data() : {};
         
@@ -242,16 +241,23 @@ export const getProfileById = async (req, res) => {
         }
         const profileData = profileDoc.data();
 
-        // Populate user data
-        const userDoc = await db.collection('users').doc(profileData.user).get();
-        const userData = userDoc.exists ? userDoc.data() : {};
+        // Public showcase records deliberately have no Firebase Auth account or user
+        // document. They are directory entries, not profiles operated by the person.
+        const isPublicShowcase = profileData.accountType === 'public_showcase';
+        const userDoc = isPublicShowcase
+            ? null
+            : await db.collection('users').doc(profileData.user).get();
+        const userData = userDoc?.exists ? userDoc.data() : {};
 
         res.status(200).json({ 
             success: true, 
             data: { 
                 id: profileDoc.id, 
                 ...profileData, 
-                user: { id: userDoc.id, role: userData.role } 
+                user: {
+                    id: isPublicShowcase ? profileDoc.id : userDoc.id,
+                    role: isPublicShowcase ? profileData.role : userData.role,
+                }
             } 
         });
     } catch (err) {
@@ -359,7 +365,10 @@ export const getProfiles = async (req, res) => {
             const userData = userMap.get(profile.user) || {};
             return {
                 ...profile,
-                user: { id: profile.user, role: userData?.role }
+                user: {
+                    id: profile.accountType === 'public_showcase' ? profile.id : profile.user,
+                    role: profile.accountType === 'public_showcase' ? profile.role : userData?.role,
+                }
             };
         }).filter((profile) => profile.user.role === 'talent');
 
@@ -396,7 +405,7 @@ export const exportMyData = async (req, res) => {
         const exportData = {
             exportedAt: new Date().toISOString(),
             requestedBy: userId,
-            note: 'This is all personal data Art-e-Techt currently holds about you, provided for GDPR and DPDP compliance.',
+            note: 'This is all personal data ART-E-TECHT ATELIER currently holds about you, provided for GDPR and DPDP compliance.',
             account: userDoc.exists ? {
                 email: userDoc.data().email,
                 role: userDoc.data().role,

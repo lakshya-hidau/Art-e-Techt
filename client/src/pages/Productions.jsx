@@ -62,7 +62,7 @@ const Productions = () => {
             The Powerhouses of <span className="text-primary">Cinema</span>
           </h1>
           <p className="text-text-secondary text-lg max-w-2xl font-medium">
-            Discover the elite production houses and visionary directors shaping the future of entertainment through Art-e-techt.
+            Discover the elite production houses and visionary directors shaping the future of entertainment through ART-E-TECHT ATELIER.
           </p>
         </header>
 
@@ -212,7 +212,7 @@ const Productions = () => {
               <div className="flex items-center gap-2 mb-6">
                 <ArtLogo showWordmark={true} />
                 <span className="font-display font-bold text-xl tracking-wide text-primary-text">
-                  TALENT<span className="text-primary">CONNECT</span>
+                  ART-E-TECHT <span className="text-primary">ATELIER</span>
                 </span>
               </div>
               <p className="text-sm leading-relaxed mb-6">
@@ -265,14 +265,14 @@ const Productions = () => {
             <div>
               <h4 className="text-primary-text font-bold mb-6 uppercase tracking-wider text-sm">Contact</h4>
               <ul className="space-y-3 text-sm">
-                <li className="flex items-center gap-2"><span className="material-icons text-xs">email</span> support@Art-e-techt.io</li>
+                <li className="flex items-center gap-2"><span className="material-icons text-xs">email</span> support@art-e-techt.com</li>
                 <li className="flex items-center gap-2"><span className="material-icons text-xs">phone</span> +1 (800) TALENT-1</li>
                 <li className="flex items-center gap-2"><span className="material-icons text-xs">place</span> Global HQ · Los Angeles, CA</li>
               </ul>
             </div>
           </div>
           <div className="border-t border-border-subtle mt-12 pt-8 text-center text-xs">
-            © 2026 TALENT<span className="text-primary">CONNECT</span> • Where Creative Talent Meets Opportunity | Privacy Policy | Terms of Service
+            © 2026 ART-E-TECHT ATELIER • Where Creative Vision Meets Opportunity | Privacy Policy | Terms of Service
           </div>
         </div>
       </footer>
