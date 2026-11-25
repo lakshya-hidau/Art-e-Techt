@@ -7,7 +7,7 @@ let io;
 
 export const init = (httpServer) => {
     const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',').map((origin) => origin.trim()).filter(Boolean) || [
-        'http://localhost:5173',
+        'http://localhost:5173','http://127.0.0.1:5173',
         'https://talentconnect-6e347.web.app',
         'https://talentconnect-6e347.firebaseapp.com',
     ];

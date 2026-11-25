@@ -41,7 +41,7 @@ graph TD
 **Level 0 DFD — Context Diagram**
 ```mermaid
 graph LR
-    T[Talent] --> TC[TALENT CONNECT]
+    T[Talent] --> TC[ART-E-TECHT]
     D[Director] --> TC
     A[Admin] --> TC
     

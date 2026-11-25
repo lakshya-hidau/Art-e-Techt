@@ -255,6 +255,31 @@ export const verifyUser = async (req, res) => {
     }
 };
 
+// @desc    Update account authorization without changing professional verification
+// @route   PUT /api/admin/users/:id/authorization
+// @access  Private (Admin)
+export const updateAccountAuthorization = async (req, res) => {
+    try {
+        const userDoc = await db.collection('users').doc(req.params.id).get();
+        if (!userDoc.exists) return res.status(404).json({ message: 'User not found' });
+
+        const accountAuthorized = req.body.authorized;
+        const accountStatus = accountAuthorized ? 'authorized' : 'active';
+        await updateWithBackup('users', req.params.id, {
+            accountAuthorized,
+            accountStatus,
+            updatedAt: new Date().toISOString(),
+        });
+
+        const updated = { id: userDoc.id, ...userDoc.data(), accountAuthorized, accountStatus };
+        const { broadcastAdminEvent } = await import('../socket.js');
+        broadcastAdminEvent({ type: 'accountAuthorizationUpdate', user: updated });
+        res.status(200).json({ success: true, data: updated });
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
 // @desc    Get all projects with director info
 // @route   GET /api/admin/projects
 // @access  Private (Admin)

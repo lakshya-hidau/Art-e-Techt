@@ -308,6 +308,8 @@ export const register = async (req, res) => {
             email,
             role: role || 'talent',
             isVerified: false,
+            accountAuthorized: false,
+            accountStatus: 'active',
             verificationStatus: 'none', // mark pending only after user submits verification
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),

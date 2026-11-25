@@ -1,7 +1,7 @@
 import DashboardLayout from '../components/layout/DashboardLayout';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useState, useEffect, useMemo } from 'react';
-import { getAdminUsers, verifyUser, updateUserRole, deleteUser, getAdminStats } from '../services/adminService';
+import { getAdminUsers, updateAccountAuthorization, updateUserRole, deleteUser, getAdminStats } from '../services/adminService';
 import socket from '../services/socket';
 import ArtLogo from '../components/common/ArtLogo';
 
@@ -63,7 +63,7 @@ const UserDetail = () => {
 
     const handleAdminEvent = (event) => {
       console.log('Admin event received:', event);
-      if (event.type === 'newUser' || event.type === 'verificationUpdate') {
+      if (event.type === 'newUser' || event.type === 'verificationUpdate' || event.type === 'accountAuthorizationUpdate') {
         fetchData();
       }
     };
@@ -80,16 +80,17 @@ const UserDetail = () => {
       const matchesSearch = (user.profile?.fullName || user.email || '').toLowerCase().includes(filter.search.toLowerCase());
       const matchesRole = filter.role === 'all' || user.role === filter.role;
       const matchesStatus = filter.status === 'all' || 
-                           (filter.status === 'verified' && user.isVerified) || 
-                           (filter.status === 'unverified' && !user.isVerified);
+                           (filter.status === 'verified' && user.accountAuthorized) || 
+                           (filter.status === 'unverified' && !user.accountAuthorized);
       return matchesSearch && matchesRole && matchesStatus;
     });
   }, [users, filter]);
 
-  const handleVerify = async (userId, status) => {
+  const handleAuthorization = async (userId, authorized) => {
     try {
-      await verifyUser(userId, status);
-      fetchData();
+      const result = await updateAccountAuthorization(userId, authorized);
+      setUsers((current) => current.map((user) => user._id === userId ? { ...user, ...result.data } : user));
+      setSelectedUser((current) => current?._id === userId ? { ...current, ...result.data } : current);
     } catch (err) {
       alert('Action failed: ' + (err.response?.data?.message || err.message));
     }
@@ -239,8 +240,8 @@ const UserDetail = () => {
                            </div>
                         </td>
                         <td className="px-8 py-6">
-                          <span className={`px-2.5 py-1 text-[9px] font-black rounded-lg border uppercase tracking-widest ${user.isVerified ? 'bg-success/10 text-success border-success/20' : 'bg-high-surface/10 text-text-secondary border-border/20'}`}>
-                            {user.isVerified ? 'Authorized' : 'Pending'}
+                          <span className={`px-2.5 py-1 text-[9px] font-black rounded-lg border uppercase tracking-widest ${user.accountAuthorized ? 'bg-success/10 text-success border-success/20' : 'bg-high-surface/10 text-text-secondary border-border/20'}`}>
+                            {user.accountAuthorized ? 'Authorized' : 'Pending'}
                           </span>
                         </td>
                         <td className="px-8 py-6 text-[10px] font-black text-text-secondary uppercase tracking-widest">
@@ -287,7 +288,7 @@ const UserDetail = () => {
                        <div className="relative w-40 h-40 rounded-[2.5rem] overflow-hidden border-8 border-subtle dark:border-surface-dark shadow-2xl p-1 bg-surface dark:bg-surface-dark transition-transform duration-700 group-hover:-rotate-3">
                           <img className="w-full h-full object-cover rounded-[2rem]" src={selectedUser?.profile?.profilePicture && selectedUser?.profile?.profilePicture !== 'no-photo.jpg' ? selectedUser?.profile?.profilePicture : `https://ui-avatars.com/api/?name=${selectedUser?.profile?.fullName || selectedUser?.email || 'User'}&background=random`} alt="" />
                        </div>
-                       {selectedUser?.isVerified && (
+                       {selectedUser?.accountAuthorized && (
                           <div className="absolute -bottom-3 -right-3 size-12 bg-success rounded-2xl border-4 border-subtle dark:border-background-dark flex items-center justify-center text-primary-text shadow-xl">
                              <span className="material-symbols-outlined text-xl font-black">verified</span>
                           </div>
@@ -314,8 +315,8 @@ const UserDetail = () => {
                           </div>
                           <div>
                              <p className="text-[10px] font-black text-text-secondary uppercase tracking-widest mb-1">Status Integrity</p>
-                             <p className={`text-sm font-black uppercase tracking-tight ${selectedUser?.isVerified ? 'text-success' : 'text-warning'}`}>
-                                {selectedUser?.isVerified ? 'Authorized' : 'Awaiting Review'}
+                             <p className={`text-sm font-black uppercase tracking-tight ${selectedUser?.accountAuthorized ? 'text-success' : 'text-warning'}`}>
+                                {selectedUser?.accountAuthorized ? 'Authorized' : 'Awaiting Review'}
                              </p>
                           </div>
                        </div>
@@ -365,11 +366,11 @@ const UserDetail = () => {
                  
                  <div className="space-y-6">
                     <button 
-                      onClick={() => handleVerify(selectedUser._id, { verificationStatus: selectedUser?.isVerified ? 'rejected' : 'verified' })}
-                      className={`w-full py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 ${selectedUser?.isVerified ? 'bg-warning/10 text-warning border border-warning/20' : 'bg-success text-primary-text shadow-xl shadow-success/20 hover:scale-105'}`}
+                      onClick={() => handleAuthorization(selectedUser._id, !selectedUser?.accountAuthorized)}
+                      className={`w-full py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 ${selectedUser?.accountAuthorized ? 'bg-warning/10 text-warning border border-warning/20' : 'bg-success text-primary-text shadow-xl shadow-success/20 hover:scale-105'}`}
                     >
-                       <span className="material-symbols-outlined text-lg">{selectedUser?.isVerified ? 'lock_open' : 'verified_user'}</span>
-                       {selectedUser?.isVerified ? 'Revoke Auth' : 'Authorize Node'}
+                       <span className="material-symbols-outlined text-lg">{selectedUser?.accountAuthorized ? 'lock_open' : 'verified_user'}</span>
+                       {selectedUser?.accountAuthorized ? 'Revoke Auth' : 'Authorize Node'}
                     </button>
 
                     <div className="p-1 bg-surface-lowest dark:bg-card-dark/5 rounded-2xl border border-border dark:border-subtle/10">

@@ -157,12 +157,14 @@ const MyProjects = () => {
                         {/* Projects Grid */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
                             {filteredProjects.map((project) => {
-                                const daysUntilDue = Math.ceil((new Date(project.deadline) - new Date()) / (1000 * 60 * 60 * 24));
+                                const deadlineDate = project.deadline ? new Date(project.deadline) : null;
+                                const hasValidDeadline = deadlineDate && !Number.isNaN(deadlineDate.getTime());
+                                const daysUntilDue = hasValidDeadline ? Math.ceil((deadlineDate - new Date()) / (1000 * 60 * 60 * 24)) : null;
                                 const projectId = project._id || project.id;
                                 return (
                                 <div key={projectId} className="bg-surface dark:bg-card-dark border border-border dark:border-subtle/5 rounded-xl overflow-hidden group hover:border-primary/50 transition-all flex flex-col shadow-sm">
                                     <div className="relative h-40 md:h-48 w-full overflow-hidden shrink-0">
-                                        <div className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1485090916755-2bc2fdf84c62?auto=format&fit=crop&q=80')" }}></div>
+                                        <div className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: `url(${project.projectImage || 'https://images.unsplash.com/photo-1485090916755-2bc2fdf84c62?auto=format&fit=crop&q=80'})` }}></div>
                                         <div className="absolute top-3 md:top-4 left-3 md:left-4 z-10">
                                             <span className={`text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider ${project.status === 'open' ? 'bg-primary text-primary-text' : 'bg-high-surface text-primary-text'}`}>
                                                 {project.status === 'open' ? 'In Production' : project.status}
@@ -183,8 +185,8 @@ const MyProjects = () => {
                                                     <span className="material-symbols-outlined text-sm">people</span>
                                                 </div>
                                             </div>
-                                            <span className={`font-bold text-xs ${daysUntilDue < 0 ? 'text-error' : 'text-text-secondary'}`}>
-                                                {daysUntilDue < 0 ? 'Closed' : `Due in ${daysUntilDue} days`}
+                                            <span className={`font-bold text-xs ${daysUntilDue !== null && daysUntilDue < 0 ? 'text-error' : 'text-text-secondary'}`}>
+                                                {daysUntilDue === null ? 'No deadline' : daysUntilDue < 0 ? 'Closed' : `Due in ${daysUntilDue} days`}
                                             </span>
                                         </div>
                                         <div className="mt-auto pt-3 md:pt-4 flex flex-col sm:flex-row gap-2 md:gap-3">

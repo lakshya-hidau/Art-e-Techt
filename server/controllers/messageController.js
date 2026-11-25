@@ -16,6 +16,27 @@ export const sendMessage = async (req, res) => {
             return res.status(404).json({ message: 'Receiver not found' });
         }
 
+        // Messaging is limited to an existing application relationship. Directors
+        // may initiate only with shortlisted/selected/auditioning talent; talent may
+        // reply to the director of one of their own applications.
+        if (req.user.role === 'director') {
+            const candidateApps = await db.collection('applications').where('talent', '==', receiverId).get();
+            const permitted = (await Promise.all(candidateApps.docs.map(async (doc) => {
+                const app = doc.data();
+                if (!['shortlisted', 'selected', 'auditioning'].includes(app.status)) return false;
+                const projectDoc = await db.collection('projects').doc(app.project).get();
+                return projectDoc.exists && projectDoc.data().director === req.user.id;
+            }))).some(Boolean);
+            if (!permitted) return res.status(403).json({ message: 'Messaging is available after a candidate is shortlisted.' });
+        } else if (req.user.role === 'talent' && receiverDoc.data().role === 'director') {
+            const ownApps = await db.collection('applications').where('talent', '==', req.user.id).get();
+            const permitted = (await Promise.all(ownApps.docs.map(async (doc) => {
+                const projectDoc = await db.collection('projects').doc(doc.data().project).get();
+                return projectDoc.exists && projectDoc.data().director === receiverId;
+            }))).some(Boolean);
+            if (!permitted) return res.status(403).json({ message: 'You can message only directors for projects you applied to.' });
+        }
+
         const messageData = {
             sender: req.user.id,
             receiver: receiverId,
@@ -132,12 +153,8 @@ export const getConversations = async (req, res) => {
             const userData = userMap.get(uid);
             if (!userData) return null;
             const profileData = userData.profile ? profileMap.get(userData.profile) || null : null;
-            return {
-                id: uid,
-                email: userData.email,
-                profile: profileData,
-                lastMessage: latestByUser.get(uid),
-            };
+            const otherUser = { id: uid, _id: uid, email: userData.email, profile: profileData };
+            return { id: uid, otherUser, ...otherUser, lastMessage: latestByUser.get(uid) };
         }).filter(Boolean);
 
         res.status(200).json({ success: true, count: conversations.length, data: conversations });

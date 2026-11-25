@@ -115,6 +115,19 @@ const RegisterActor = () => {
             navigate('/talent/verify');
         } catch (err) {
             console.error('Registration full error:', err);
+            const serverMessage = err.response?.data?.message || err.message || '';
+            // A dropped success response can leave a real account behind.  Try the
+            // supplied credentials once before telling the user that it is a duplicate.
+            if (/already exists|already registered|email.*exists/i.test(serverMessage)) {
+                try {
+                    const data = await login(formData.email, formData.password);
+                    setSessionFromAuthResponse(data);
+                    navigate('/talent/verify');
+                    return;
+                } catch {
+                    // Existing account with a different password: show the normal recovery message below.
+                }
+            }
             // Better error handling with more specific messages
             if (err.response?.data?.errors) {
                 const fieldErrors = err.response.data.errors;

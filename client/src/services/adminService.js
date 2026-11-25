@@ -25,6 +25,11 @@ export const verifyUser = async (userId, data) => {
     return response.data;
 };
 
+export const updateAccountAuthorization = async (userId, authorized) => {
+    const response = await api.put(`/admin/users/${userId}/authorization`, { authorized });
+    return response.data;
+};
+
 export const updateProjectStatus = async (projectId, status) => {
     const response = await api.put(`/admin/projects/${projectId}/status`, { status });
     return response.data;

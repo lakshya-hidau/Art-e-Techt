@@ -4,6 +4,7 @@ import {
     getUsers,
     getPendingVerifications,
     verifyUser,
+    updateAccountAuthorization,
     getAdminProjects,
     getAdminProjectDetails,
     updateProjectStatus,
@@ -15,7 +16,7 @@ import {
 } from '../controllers/adminController.js';
 import { protect, authorize } from '../middleware/authMiddleware.js';
 import { validate } from '../middleware/validate.js';
-import { adminVerifySchema, updateUserRoleSchema, updateProjectStatusSchema } from '../lib/schemas.js';
+import { adminVerifySchema, updateAccountAuthorizationSchema, updateUserRoleSchema, updateProjectStatusSchema } from '../lib/schemas.js';
 
 const router = express.Router();
 
@@ -27,6 +28,7 @@ router.get('/stats', getStats);
 router.get('/search', searchGlobal);
 router.get('/users', getUsers);
 router.put('/users/:id/role', validate(updateUserRoleSchema), updateUserRole);
+router.put('/users/:id/authorization', validate(updateAccountAuthorizationSchema), updateAccountAuthorization);
 router.delete('/users/:id', deleteUser);
 router.get('/verifications', getPendingVerifications);
 router.put('/verify/:id', validate(adminVerifySchema), verifyUser);

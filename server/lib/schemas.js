@@ -41,6 +41,37 @@ const privacySettingsSchema = z.object({
   allowDirectMessages: z.boolean().optional(),
 }).strict();
 
+const physicalMetricsSchema = z.object({
+  height: z.string().max(30).optional(),
+  weight: z.string().max(30).optional(),
+  eyeColor: z.string().max(50).optional(),
+  hairColor: z.string().max(50).optional(),
+  build: z.string().max(50).optional(),
+  skinTone: z.string().max(50).optional(),
+  waist: z.string().max(30).optional(),
+  chest: z.string().max(30).optional(),
+}).strict();
+
+const verificationStateSchema = z.object({
+  imdbUrl: z.union([z.string().url(), z.literal('')]).optional(),
+  wikipediaUrl: z.union([z.string().url(), z.literal('')]).optional(),
+  showreelUrl: z.union([z.string().url(), z.literal('')]).optional(),
+  websiteUrl: z.union([z.string().url(), z.literal('')]).optional(),
+  membershipId: z.string().max(100).optional(),
+  associationName: z.string().max(100).optional(),
+}).strict();
+
+const filmographySchema = z.object({
+  id: z.string().max(100).optional(),
+  projectName: z.string().min(1).max(200),
+  roleName: z.string().max(200).optional(),
+  projectType: z.string().max(100).optional(),
+  releaseYear: z.coerce.number().int().min(1888).max(2100).optional(),
+  productionHouse: z.string().max(200).optional(),
+  description: z.string().max(1000).optional(),
+  projectUrl: z.union([z.string().url(), z.literal('')]).optional(),
+}).strict();
+
 export const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(1),
@@ -76,13 +107,11 @@ export const updateProfileSchema = z
     skills: z.array(z.string()).optional(),
     experienceYears: z.coerce.number().min(0).max(60).optional(),
     talentCategory: z.enum(TALENT_CATEGORIES).optional(),
-    physicalMetrics: z.object({
-      height: z.string().optional(),
-      weight: z.string().optional(),
-      eyeColor: z.string().optional(),
-      hairColor: z.string().optional(),
-    }).strict().optional(),
+    physicalMetrics: physicalMetricsSchema.optional(),
+    verificationState: verificationStateSchema.optional(),
+    filmography: z.array(filmographySchema).max(100).optional(),
     showreelUrl: z.union([z.string().url(), z.literal('')]).optional(),
+    cvUrl: z.union([z.string().url(), z.literal('')]).optional(),
     socialLinks: socialLinksSchema.optional(),
     privacySettings: privacySettingsSchema.optional(),
     companyName: z.string().max(100).optional(),
@@ -130,6 +159,10 @@ export const adminVerifySchema = z.object({
   (data) => data.verificationStatus !== undefined || data.status !== undefined,
   { message: 'Either verificationStatus or status must be provided' }
 );
+
+export const updateAccountAuthorizationSchema = z.object({
+  authorized: z.boolean(),
+}).strict();
 
 export const sendMessageSchema = z.object({
   receiverId: z.string().min(1),

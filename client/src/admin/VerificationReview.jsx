@@ -134,6 +134,15 @@ const VerificationReview = () => {
 
     const profile = selectedUser?.profile;
     const vState = profile?.verificationState || {};
+    const idDocument = vState.idFile || null;
+    const membershipDocument = vState.membershipCard || null;
+    const videoSelfie = vState.videoSelfie || null;
+    const idDocumentUrl = idDocument?.secure_url || idDocument?.url || vState.idFileUrl;
+    const membershipDocumentUrl = membershipDocument?.secure_url || membershipDocument?.url || vState.membershipCardUrl;
+    const videoSelfieUrl = videoSelfie?.secure_url || videoSelfie?.url || vState.videoSelfieUrl;
+    const renderDocumentPreview = (url, metadata, alt) => metadata?.format === 'pdf' || /\.pdf(?:$|[?#])/i.test(url || '')
+        ? <object data={url} type="application/pdf" className="w-full h-full" aria-label={alt}><a className="text-primary" href={url} target="_blank" rel="noreferrer">Open PDF</a></object>
+        : <img src={url} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={alt} />;
 
     return (
         <DashboardLayout
@@ -269,17 +278,17 @@ const VerificationReview = () => {
                                         <div className="pt-4 space-y-8">
                                             <h5 className="text-[10px] font-black text-text-secondary uppercase tracking-widest">Submitted Assets</h5>
                                             <div className="space-y-8">
-                                                {vState.idFileUrl && (
+                                                {idDocumentUrl && (
                                                     <div className="space-y-4">
                                                         <div className="flex items-center justify-between px-2">
                                                             <span className="text-[10px] font-black uppercase tracking-widest flex items-center gap-3 dark:text-primary-text text-text-muted dark:text-text-primary">
                                                                 <span className="material-symbols-outlined text-sm text-primary">badge</span>
                                                                 ID Document ({vState.idType})
                                                             </span>
-                                                            <a href={vState.idFileUrl} target="_blank" rel="noreferrer" className="text-primary hover:underline text-[9px] font-black uppercase tracking-widest">Full Shard</a>
+                                                            <a href={idDocumentUrl} target="_blank" rel="noreferrer" className="text-primary hover:underline text-[9px] font-black uppercase tracking-widest">Open document</a>
                                                         </div>
                                                         <div className="rounded-[2.5rem] overflow-hidden border border-border dark:border-subtle/5 bg-surface-lowest dark:bg-card-dark/2 aspect-video group/preview relative">
-                                                            <img src={vState.idFileUrl} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Identity ID" />
+                                                            {renderDocumentPreview(idDocumentUrl, idDocument, 'Identity ID')}
                                                             <div className="absolute inset-0 bg-void/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                                                 <span className="material-symbols-outlined text-primary-text text-3xl">zoom_in</span>
                                                             </div>
@@ -287,17 +296,17 @@ const VerificationReview = () => {
                                                     </div>
                                                 )}
                                                 
-                                                {vState.videoSelfieUrl && (
+                                                {videoSelfieUrl && (
                                                     <div className="space-y-4">
                                                         <div className="flex items-center justify-between px-2">
                                                             <span className="text-[10px] font-black uppercase tracking-widest flex items-center gap-3 dark:text-primary-text text-text-muted dark:text-text-primary">
                                                                 <span className="material-symbols-outlined text-sm text-primary">videocam</span>
                                                                 Biometric Verification Video
                                                             </span>
-                                                            <a href={vState.videoSelfieUrl} target="_blank" rel="noreferrer" className="text-primary hover:underline text-[9px] font-black uppercase tracking-widest">Full Shard</a>
+                                                            <a href={videoSelfieUrl} target="_blank" rel="noreferrer" className="text-primary hover:underline text-[9px] font-black uppercase tracking-widest">Open video</a>
                                                         </div>
                                                         <div className="rounded-[2.5rem] overflow-hidden border border-border dark:border-subtle/5 bg-void aspect-video relative group/video">
-                                                            <video controls className="w-full h-full object-contain" src={vState.videoSelfieUrl}></video>
+                                                            <video controls className="w-full h-full object-contain" src={videoSelfieUrl}></video>
                                                             <div className="absolute top-4 right-4 size-10 rounded-full bg-void/40 backdrop-blur-xl border border-subtle/10 flex items-center justify-center text-primary animate-pulse">
                                                                 <span className="material-symbols-outlined text-xl">security</span>
                                                             </div>
@@ -305,17 +314,17 @@ const VerificationReview = () => {
                                                     </div>
                                                 )}
 
-                                                {vState.membershipCardUrl && (
+                                                {membershipDocumentUrl && (
                                                     <div className="space-y-4">
                                                         <div className="flex items-center justify-between px-2">
                                                             <span className="text-[10px] font-black uppercase tracking-widest flex items-center gap-3 dark:text-primary-text text-text-muted dark:text-text-primary">
                                                                 <span className="material-symbols-outlined text-sm text-primary">contact_emergency</span>
                                                                 Association Membership
                                                             </span>
-                                                            <a href={vState.membershipCardUrl} target="_blank" rel="noreferrer" className="text-primary hover:underline text-[9px] font-black uppercase tracking-widest">Full Shard</a>
+                                                            <a href={membershipDocumentUrl} target="_blank" rel="noreferrer" className="text-primary hover:underline text-[9px] font-black uppercase tracking-widest">Open document</a>
                                                         </div>
                                                         <div className="rounded-[2.5rem] overflow-hidden border border-border dark:border-subtle/5 bg-surface-lowest dark:bg-card-dark/2 aspect-video group/preview relative">
-                                                            <img src={vState.membershipCardUrl} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Membership Card" />
+                                                            {renderDocumentPreview(membershipDocumentUrl, membershipDocument, 'Membership Card')}
                                                             <div className="absolute inset-0 bg-void/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                                                 <span className="material-symbols-outlined text-primary-text text-3xl">zoom_in</span>
                                                             </div>

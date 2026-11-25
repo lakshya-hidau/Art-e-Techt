@@ -63,7 +63,12 @@ const AuditionInvites = () => {
     const spotlight = invites.find(i => i.status === 'auditioning');
 
     const handleAccept = (inv) => {
-        navigate(`/talent/audition/${inv.project?._id || inv.project}`);
+        const projectId = typeof inv.project === 'object' ? (inv.project.id || inv.project._id) : inv.project;
+        if (!projectId) {
+            setToast({ message: 'This audition is missing its project details.', type: 'error' });
+            return;
+        }
+        navigate(`/talent/audition/${projectId}`);
     };
 
     useEffect(() => {
@@ -83,7 +88,7 @@ const AuditionInvites = () => {
     const handleDecline = async (invId) => {
         setDecliningId(invId);
         await new Promise(r => setTimeout(r, 800));
-        setInvites(prev => prev.filter(i => i._id !== invId));
+        setInvites(prev => prev.filter(i => (i.id || i._id) !== invId));
         setToast({ message: 'Invite declined.', type: 'success' });
         setDecliningId(null);
     };

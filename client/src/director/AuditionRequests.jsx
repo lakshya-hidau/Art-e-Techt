@@ -39,7 +39,7 @@ const AuditionRequests = () => {
     const handleStatusUpdate = async (appId, newStatus) => {
         try {
             await updateApplicationStatus(appId, newStatus);
-            setApplications(applications.filter(app => app._id !== appId)); // Remove from view
+            setApplications(applications.filter(app => app.id !== appId)); // Remove from view
             alert(`Talent has been ${newStatus}.`);
         } catch (err) {
             console.error('Error updating status:', err);
@@ -49,7 +49,7 @@ const AuditionRequests = () => {
 
     const handleScheduleAudition = async () => {
         try {
-            await scheduleAudition(selectedApplication._id, scheduleForm);
+            await scheduleAudition(selectedApplication.id, scheduleForm);
             setShowScheduleModal(false);
             setSelectedApplication(null);
             setScheduleForm({ auditionDate: '', auditionLocation: '', auditionNotes: '' });
@@ -146,7 +146,7 @@ const AuditionRequests = () => {
                                             const overall = ((screenPresence + emotionalRange + dialogueDelivery) / 30).toFixed(1);
 
                                             return (
-                                                <div key={app._id} className="bg-surface dark:bg-card-dark rounded-2xl overflow-hidden border border-border dark:border-subtle/5 shadow-xl flex flex-col">
+                                                <div key={app.id} className="bg-surface dark:bg-card-dark rounded-2xl overflow-hidden border border-border dark:border-subtle/5 shadow-xl flex flex-col">
                                                     <div className="p-4 md:p-6 border-b border-border dark:border-subtle/5 flex items-center justify-between gap-4">
                                                         <div className="flex items-center gap-3 md:gap-4">
                                                             <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl overflow-hidden border border-border dark:border-subtle/5 shrink-0">
@@ -235,10 +235,10 @@ const AuditionRequests = () => {
                                                             >
                                                                 Schedule Audition
                                                             </button>
-                                                            <button onClick={() => handleStatusUpdate(app._id, 'selected')} className="w-full bg-primary py-2 md:py-3 rounded-xl font-bold text-primary-text text-[10px] md:text-xs uppercase tracking-widest shadow-lg shadow-primary/20 hover:brightness-110 active:scale-[0.98] transition-all">
+                                                            <button onClick={() => handleStatusUpdate(app.id, 'selected')} className="w-full bg-primary py-2 md:py-3 rounded-xl font-bold text-primary-text text-[10px] md:text-xs uppercase tracking-widest shadow-lg shadow-primary/20 hover:brightness-110 active:scale-[0.98] transition-all">
                                                                 Cast {profile?.fullName?.split(' ')[0]}
                                                             </button>
-                                                            <button onClick={() => handleStatusUpdate(app._id, 'rejected')} className="w-full border-2 border-error/20 text-error hover:bg-primary hover:text-primary-text py-2 md:py-3 rounded-xl font-bold text-[10px] md:text-xs uppercase tracking-widest active:scale-[0.98] transition-all">
+                                                            <button onClick={() => handleStatusUpdate(app.id, 'rejected')} className="w-full border-2 border-error/20 text-error hover:bg-primary hover:text-primary-text py-2 md:py-3 rounded-xl font-bold text-[10px] md:text-xs uppercase tracking-widest active:scale-[0.98] transition-all">
                                                                 Reject
                                                             </button>
                                                         </div>
@@ -257,7 +257,7 @@ const AuditionRequests = () => {
                                             {/* Mobile Card Layout */}
                                             <div className="block md:hidden p-4 space-y-4">
                                                 {applicants.map((app) => (
-                                                    <div key={app._id} className="bg-surface-lowest dark:bg-surface/5 rounded-xl p-4 space-y-3">
+                                                    <div key={app.id} className="bg-surface-lowest dark:bg-surface/5 rounded-xl p-4 space-y-3">
                                                         <h4 className="font-bold text-sm dark:text-primary-text">{app.talent?.profile?.fullName || 'Talent'}</h4>
                                                         <div className="space-y-2 text-xs">
                                                             <div className="flex justify-between">
@@ -283,22 +283,22 @@ const AuditionRequests = () => {
                                                         <tr className="bg-surface-lowest dark:bg-surface/5 text-[10px] font-bold uppercase tracking-widest text-text-secondary dark:text-text-secondary">
                                                             <th className="px-6 py-4">Attribute</th>
                                                             {applicants.map(app => (
-                                                                <th key={app._id} className="px-6 py-4 dark:text-primary-text">{app.talent?.profile?.fullName || 'Talent'}</th>
+                                                                <th key={app.id} className="px-6 py-4 dark:text-primary-text">{app.talent?.profile?.fullName || 'Talent'}</th>
                                                             ))}
                                                         </tr>
                                                     </thead>
                                                     <tbody className="text-xs divide-y divide-border dark:divide-white/5">
                                                         <tr>
                                                             <td className="px-6 py-4 font-bold text-text-secondary dark:text-text-secondary uppercase tracking-tighter">Location</td>
-                                                            {applicants.map(app => <td key={app._id} className="px-6 py-4 dark:text-primary-text">{app.talent?.profile?.location || 'N/A'}</td>)}
+                                                            {applicants.map(app => <td key={app.id} className="px-6 py-4 dark:text-primary-text">{app.talent?.profile?.location || 'N/A'}</td>)}
                                                         </tr>
                                                         <tr>
                                                             <td className="px-6 py-4 font-bold text-text-secondary dark:text-text-secondary uppercase tracking-tighter">Top Skills</td>
-                                                            {applicants.map(app => <td key={app._id} className="px-6 py-4 dark:text-primary-text">{app.talent?.profile?.skills?.slice(0, 2).join(', ') || 'N/A'}</td>)}
+                                                            {applicants.map(app => <td key={app.id} className="px-6 py-4 dark:text-primary-text">{app.talent?.profile?.skills?.slice(0, 2).join(', ') || 'N/A'}</td>)}
                                                         </tr>
                                                         <tr>
                                                             <td className="px-6 py-4 font-bold text-text-secondary dark:text-text-secondary uppercase tracking-tighter">Physical Metrics</td>
-                                                            {applicants.map(app => <td key={app._id} className="px-6 py-4 dark:text-primary-text">{app.talent?.profile?.physicalMetrics?.height ? app.talent.profile.physicalMetrics.height + " height" : 'N/A'}</td>)}
+                                                            {applicants.map(app => <td key={app.id} className="px-6 py-4 dark:text-primary-text">{app.talent?.profile?.physicalMetrics?.height ? app.talent.profile.physicalMetrics.height + " height" : 'N/A'}</td>)}
                                                         </tr>
                                                     </tbody>
                                                 </table>

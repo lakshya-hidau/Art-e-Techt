@@ -129,16 +129,6 @@ export const uploadMedia = async (mediaFile, type, metadata = {}) => {
     });
   }
   
-  // Debug: Log all form data entries
-  console.log('[uploadMedia] Final FormData entries:');
-  for (const [key, value] of data.entries()) {
-    if (value instanceof File) {
-      console.log(`  ${key}: File(${value.name}, ${value.type}, ${value.size})`);
-    } else {
-      console.log(`  ${key}: ${value}`);
-    }
-  }
-  
   // Add metadata for portfolio items
   if (metadata.title) {
     data.append('title', metadata.title);

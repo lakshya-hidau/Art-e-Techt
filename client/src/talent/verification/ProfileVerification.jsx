@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import VerificationIntro from './VerificationIntro';
 import VerificationStep1 from './VerificationStep1';
@@ -15,6 +15,7 @@ const ProfileVerification = ({ defaultValue = 0 }) => {
     const [isAnimating, setIsAnimating] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
     const [savedAt, setSavedAt] = useState(null);
+    const uploadedFiles = useRef(new Set());
     const navigate = useNavigate();
 
     // Centralized form data for all steps
@@ -53,21 +54,23 @@ const ProfileVerification = ({ defaultValue = 0 }) => {
         setIsSaving(true);
         try {
             // 1. Upload Files if present
-            if (formData.idFile && formData.idFile instanceof File) {
+            if (formData.idFile && formData.idFile instanceof File && !uploadedFiles.current.has('idFile')) {
                 const idData = new FormData();
                 idData.append('media', formData.idFile);
                 idData.append('type', 'idFile');
                 idData.append('idType', formData.idType);
                 await uploadMedia(idData);
+                uploadedFiles.current.add('idFile');
             }
 
-            if (formData.membershipCard && formData.membershipCard instanceof File) {
+            if (formData.membershipCard && formData.membershipCard instanceof File && !uploadedFiles.current.has('membershipCard')) {
                 const memData = new FormData();
                 memData.append('media', formData.membershipCard);
                 memData.append('type', 'membershipCard');
                 memData.append('membershipId', formData.membershipId);
                 memData.append('associationName', formData.associationName);
                 await uploadMedia(memData);
+                uploadedFiles.current.add('membershipCard');
             }
 
             // 2. Update Profile Links and Awards
@@ -84,9 +87,11 @@ const ProfileVerification = ({ defaultValue = 0 }) => {
             await updateProfile(profileUpdate);
 
             setSavedAt(new Date().toLocaleTimeString());
+            return true;
         } catch (err) {
             console.error('Save failed:', err);
             alert('Failed to save progress. Please try again.');
+            return false;
         } finally {
             setIsSaving(false);
         }
@@ -96,7 +101,7 @@ const ProfileVerification = ({ defaultValue = 0 }) => {
         setIsSaving(true);
         try {
             // Upload Video Selfie
-            if (formData.videoBlob) {
+            if (formData.videoBlob && !uploadedFiles.current.has('videoSelfie')) {
                 const videoData = new FormData();
                 // Ensure proper MIME type for video/webm blob
                 let blob = formData.videoBlob;
@@ -124,12 +129,14 @@ const ProfileVerification = ({ defaultValue = 0 }) => {
                     }
                 };
                 await uploadWithRetry();
+                uploadedFiles.current.add('videoSelfie');
             } else {
                 throw new Error('Please record a short video selfie before submitting.');
             }
 
             // Final sync
-            await handleSave();
+            const saved = await handleSave();
+            if (!saved) throw new Error('Verification details could not be saved. Please retry.');
 
             // Mark user as submitted for verification (pending review)
             await submitForVerification();

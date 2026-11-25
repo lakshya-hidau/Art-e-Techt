@@ -1,5 +1,5 @@
 ================================================================================
-                    TALENTCONNECT - ULTIMATE API TESTING GUIDE
+                    ART-E-TECHT - ULTIMATE API TESTING GUIDE
 ================================================================================
 This guide contains every active endpoint in the project with full URLs, 
 descriptions, and step-by-step instructions for Postman.

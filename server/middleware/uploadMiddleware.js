@@ -4,7 +4,7 @@ import { cloudinary } from '../config/cloudinary.js';
 
 const ALLOWED_MIME_TYPES = new Set([
   'image/jpeg', 'image/png', 'image/webp', 'image/gif',
-  'video/mp4', 'video/quicktime', 'video/webm', 'video/x-msvideo'
+  'video/mp4', 'video/quicktime', 'video/webm', 'video/x-msvideo', 'application/pdf'
 ]);
 
 const MAX_FILE_SIZE = 150 * 1024 * 1024; // 150MB
@@ -36,10 +36,6 @@ export const verifyAndUpload = async (req, res, next) => {
       return res.status(400).json({ message: 'Image files must be under 10MB' });
     }
 
-    // Log what fields we received for debugging
-    console.log('[Upload] Received fields:', JSON.stringify(req.body));
-    console.log('[Upload] File mimetype:', req.file.mimetype);
-
     const uploadResult = await new Promise((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream(
         { folder: 'talentconnect', resource_type: 'auto', transformation: [{ quality: 'auto', fetch_format: 'auto' }] },
@@ -50,6 +46,8 @@ export const verifyAndUpload = async (req, res, next) => {
 
     req.file.path = uploadResult.secure_url;
     req.file.cloudinaryId = uploadResult.public_id;
+    req.file.resourceType = uploadResult.resource_type;
+    req.file.format = uploadResult.format;
     return next();
   } catch (err) {
     console.error('Upload verification error:', err);

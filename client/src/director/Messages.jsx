@@ -29,7 +29,7 @@ const Messages = () => {
 
                 // Socket connection
                 socket.connect();
-                socket.emit('join', userProfile._id);
+                socket.emit('join', userProfile.user?.id || userProfile._id);
 
                 const convRes = await getConversations();
                 setConversations(convRes.data);

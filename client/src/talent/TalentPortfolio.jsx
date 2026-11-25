@@ -43,6 +43,11 @@ const TalentPortfolio = () => {
     const [cvUrl, setCvUrl] = useState('');
     const [savingCv, setSavingCv] = useState(false);
     const [mediaFilter, setMediaFilter] = useState('all'); // all | image | video
+    const [showCreditForm, setShowCreditForm] = useState(false);
+    const [creditDraft, setCreditDraft] = useState({ projectName: '', roleName: '', projectType: '', releaseYear: '', productionHouse: '', description: '', projectUrl: '' });
+    const [savingCredit, setSavingCredit] = useState(false);
+    const [skillDraft, setSkillDraft] = useState('');
+    const [savingSkills, setSavingSkills] = useState(false);
 
     const profileUserIdRaw = profile?.user?.id || profile?.user?._id || profile?.id || '';
     const profileUserId = profileUserIdRaw ? profileUserIdRaw.toString() : '';
@@ -71,13 +76,13 @@ const TalentPortfolio = () => {
                 setBioText(p.bio || '');
                 setCvUrl(p.cvUrl || '');
                 setAttrs({
-                    height: p.physicalAttributes?.height || '',
-                    eyeColor: p.physicalAttributes?.eyeColor || '',
-                    skinTone: p.physicalAttributes?.skinTone || '',
-                    hairColor: p.physicalAttributes?.hairColor || '',
-                    build: p.physicalAttributes?.build || '',
-                    waist: p.physicalAttributes?.waist || '',
-                    chest: p.physicalAttributes?.chest || '',
+                    height: p.physicalMetrics?.height || '',
+                    eyeColor: p.physicalMetrics?.eyeColor || '',
+                    skinTone: p.physicalMetrics?.skinTone || '',
+                    hairColor: p.physicalMetrics?.hairColor || '',
+                    build: p.physicalMetrics?.build || '',
+                    waist: p.physicalMetrics?.waist || '',
+                    chest: p.physicalMetrics?.chest || '',
                 });
 
                 // Only fetch applications if it's the user's own profile (to show credits they've earned)
@@ -118,7 +123,7 @@ const TalentPortfolio = () => {
     const handleSaveAttrs = async () => {
         setSavingAttrs(true);
         try {
-            const res = await updateProfile({ physicalAttributes: attrs });
+            const res = await updateProfile({ physicalMetrics: attrs });
             setProfile(res.data);
             setEditingAttrs(false);
             showToast('Attributes saved!');
@@ -134,8 +139,8 @@ const TalentPortfolio = () => {
         try {
             const fd = new FormData();
             fd.append('media', file);
-            const res = await uploadMedia(fd);
-        setProfile(prev => ({ ...prev, portfolio: [...(prev.portfolio || []), res.data] }));
+            const res = await uploadMedia(fd, 'portfolio');
+            setProfile(res.data);
         showToast('Media added to portfolio!');
         } catch { showToast('Upload failed. Try again.', 'error'); }
         finally { setUploadingMedia(false); }
@@ -164,6 +169,53 @@ const TalentPortfolio = () => {
         }
     };
 
+    const handleSaveCredit = async (event) => {
+        event.preventDefault();
+        if (!creditDraft.projectName.trim()) return showToast('Project name is required.', 'error');
+        setSavingCredit(true);
+        try {
+            const credit = { ...creditDraft, id: crypto.randomUUID(), releaseYear: creditDraft.releaseYear ? Number(creditDraft.releaseYear) : undefined };
+            const res = await updateProfile({ filmography: [...(profile?.filmography || []), credit] });
+            setProfile(res.data);
+            setCreditDraft({ projectName: '', roleName: '', projectType: '', releaseYear: '', productionHouse: '', description: '', projectUrl: '' });
+            setShowCreditForm(false);
+            showToast('Filmography credit added.');
+        } catch { showToast('Unable to save filmography credit.', 'error'); }
+        finally { setSavingCredit(false); }
+    };
+
+    const saveSkills = async (nextSkills) => {
+        setSavingSkills(true);
+        try {
+            const res = await updateProfile({ skills: nextSkills });
+            setProfile(res.data);
+            return true;
+        } catch {
+            showToast('Unable to update skills.', 'error');
+            return false;
+        } finally { setSavingSkills(false); }
+    };
+
+    const handleAddSkill = async (event) => {
+        event.preventDefault();
+        const skill = skillDraft.trim().replace(/\s+/g, ' ');
+        if (!skill) return;
+        const existing = profile?.skills || [];
+        if (existing.some((value) => value.toLocaleLowerCase() === skill.toLocaleLowerCase())) {
+            showToast('That skill is already listed.', 'error');
+            return;
+        }
+        if (await saveSkills([...existing, skill])) {
+            setSkillDraft('');
+            showToast('Skill added.');
+        }
+    };
+
+    const handleRemoveSkill = async (skill) => {
+        const nextSkills = (profile?.skills || []).filter((value) => value !== skill);
+        if (await saveSkills(nextSkills)) showToast('Skill removed.');
+    };
+
     const menuItems = viewerProfile?.user?.role === 'admin' ? ADMIN_MENU :
                         viewerProfile?.user?.role === 'director' ? DIRECTOR_MENU :
                         TALENT_MENU;
@@ -176,7 +228,7 @@ const TalentPortfolio = () => {
             : 'https://ui-avatars.com/api/?name=' + (viewerProfile?.fullName || 'User'),
     };
 
-    const filmCredits = applications
+    const applicationCredits = applications
         .filter(a => ['shortlisted', 'selected'].includes(a.status))
         .map(a => ({
             id: a._id,
@@ -187,6 +239,10 @@ const TalentPortfolio = () => {
             type: a.project?.category || 'Feature Film',
             status: a.status,
         }));
+    const filmCredits = [...(profile?.filmography || []).map((credit) => ({
+        id: credit.id, title: credit.projectName, role: credit.roleName || '—',
+        year: credit.releaseYear || '—', status: 'completed',
+    })), ...applicationCredits];
 
     if (loading) return (
         <DashboardLayout menuItems={menuItems} userData={navUserData} headerTitle="Portfolio View">
@@ -319,6 +375,17 @@ const TalentPortfolio = () => {
                         </div>
                     </section>
 
+                    <section className="space-y-4">
+                        <div><h3 className="text-xl md:text-2xl font-bold tracking-tight text-text-primary dark:text-primary-text">Skills</h3><p className="text-sm text-text-secondary">{profile?.skills?.length || 0} saved skill{(profile?.skills?.length || 0) === 1 ? '' : 's'}</p></div>
+                        <div className="bg-surface dark:bg-void/50 p-4 rounded-lg border border-border dark:border-border-subtle space-y-3">
+                            <div className="flex flex-wrap gap-2">
+                                {(profile?.skills || []).map((skill) => <span key={skill} className="inline-flex items-center gap-1 rounded-full bg-primary/10 text-primary px-3 py-1 text-sm font-semibold">{skill}{isOwnProfile && <button type="button" disabled={savingSkills} onClick={() => handleRemoveSkill(skill)} aria-label={`Remove ${skill}`} className="leading-none hover:text-error">×</button>}</span>)}
+                                {(profile?.skills || []).length === 0 && <span className="text-sm text-text-secondary">No skills listed yet.</span>}
+                            </div>
+                            {isOwnProfile && <form onSubmit={handleAddSkill} className="flex gap-2"><input value={skillDraft} onChange={(event) => setSkillDraft(event.target.value)} maxLength="100" placeholder="Add a skill (for example, Voice Acting)" className="min-w-0 flex-1 bg-container border border-border-subtle rounded px-3 py-2 text-sm" /><button disabled={savingSkills || !skillDraft.trim()} className="bg-primary text-primary-text px-4 py-2 rounded font-bold text-sm disabled:opacity-50">{savingSkills ? 'Saving…' : 'Add skill'}</button></form>}
+                        </div>
+                    </section>
+
                     {/* Bio & Attributes Asymmetric Layout */}
                     <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
                         <div className="lg:col-span-7 space-y-4 md:space-y-6">
@@ -408,10 +475,10 @@ const TalentPortfolio = () => {
                             ) : (
                                 <div className="grid grid-cols-2 gap-3 md:gap-4">
                                     {[
-                                        { label: 'Height', value: profile?.physicalAttributes?.height || attrs.height || '-' },
-                                        { label: 'Eyes', value: profile?.physicalAttributes?.eyeColor || attrs.eyeColor || '-' },
-                                        { label: 'Hair', value: profile?.physicalAttributes?.hairColor || attrs.hairColor || '-' },
-                                        { label: 'Build', value: profile?.physicalAttributes?.build || attrs.build || '-' }
+                                        { label: 'Height', value: profile?.physicalMetrics?.height || attrs.height || '-' },
+                                        { label: 'Eyes', value: profile?.physicalMetrics?.eyeColor || attrs.eyeColor || '-' },
+                                        { label: 'Hair', value: profile?.physicalMetrics?.hairColor || attrs.hairColor || '-' },
+                                        { label: 'Build', value: profile?.physicalMetrics?.build || attrs.build || '-' }
                                     ].map(({ label, value }) => (
                                         <div key={label} className="bg-surface dark:bg-void/50 p-3 md:p-4 rounded-lg border border-border dark:border-border-subtle shadow-sm">
                                             <span className="text-text-secondary dark:text-text-secondary text-[10px] font-bold uppercase block mb-1">{label}</span>
@@ -444,11 +511,15 @@ const TalentPortfolio = () => {
                                 .filter(item => mediaFilter === 'all' || item.type === mediaFilter)
                                 .map((item, idx) => (
                                 <div key={idx} className={`group relative rounded-lg overflow-hidden border border-border dark:border-border-subtle bg-surface dark:bg-void shadow-sm ${idx % 3 === 2 ? 'md:col-span-2 aspect-video' : 'aspect-[3/4]'}`}>
-                                    <img
-                                        alt={`Media ${idx + 1}`}
-                                        className={`w-full h-full object-cover transition-all duration-500 ${idx % 3 === 2 ? 'brightness-75 dark:brightness-50 group-hover:brightness-100 dark:group-hover:brightness-75' : 'grayscale group-hover:grayscale-0'}`}
-                                        src={item.url || item}
-                                    />
+                                    {item.type === 'video' ? (
+                                        <video className="w-full h-full object-cover" src={item.url || item} controls preload="metadata" />
+                                    ) : (
+                                        <img
+                                            alt={`Media ${idx + 1}`}
+                                            className={`w-full h-full object-cover transition-all duration-500 ${idx % 3 === 2 ? 'brightness-75 dark:brightness-50 group-hover:brightness-100 dark:group-hover:brightness-75' : 'grayscale group-hover:grayscale-0'}`}
+                                            src={item.url || item}
+                                        />
+                                    )}
                                     {idx % 3 === 2 ? (
                                         <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 md:p-6">
                                             <div className="w-12 h-12 md:w-16 md:h-16 bg-primary-hover rounded-full flex items-center justify-center mb-2 md:mb-4 group-hover:scale-110 transition-transform">
@@ -509,11 +580,18 @@ const TalentPortfolio = () => {
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                             <h3 className="text-xl md:text-2xl font-bold tracking-tight text-text-primary dark:text-primary-text">Filmography</h3>
                             {isOwnProfile && (
-                            <button className="bg-primary/5 hover:bg-primary/10 text-primary px-3 md:px-4 py-2 rounded font-bold text-sm flex items-center justify-center gap-2 border border-primary/20 transition-all self-start sm:self-center">
+                            <button onClick={() => setShowCreditForm(true)} className="bg-primary/5 hover:bg-primary/10 text-primary px-3 md:px-4 py-2 rounded font-bold text-sm flex items-center justify-center gap-2 border border-primary/20 transition-all self-start sm:self-center">
                                 <span className="material-symbols-outlined text-sm">add</span> Add New Credit
                             </button>
                             )}
                         </div>
+                        {showCreditForm && (
+                            <form onSubmit={handleSaveCredit} className="grid grid-cols-1 md:grid-cols-2 gap-3 bg-void/50 p-4 rounded-lg border border-border-subtle">
+                                {[["projectName", "Project / Production Name", true], ["roleName", "Role / Character"], ["projectType", "Project Type"], ["releaseYear", "Release Year"], ["productionHouse", "Production House"], ["projectUrl", "Project URL"]].map(([key, label, required]) => <input key={key} required={required} type={key === 'releaseYear' ? 'number' : key === 'projectUrl' ? 'url' : 'text'} value={creditDraft[key]} onChange={(e) => setCreditDraft((prev) => ({ ...prev, [key]: e.target.value }))} placeholder={label} className="bg-container border border-border-subtle rounded px-3 py-2 text-sm" />)}
+                                <textarea value={creditDraft.description} onChange={(e) => setCreditDraft((prev) => ({ ...prev, description: e.target.value }))} placeholder="Description" className="md:col-span-2 bg-container border border-border-subtle rounded px-3 py-2 text-sm" />
+                                <div className="md:col-span-2 flex gap-3"><button disabled={savingCredit} className="bg-primary text-primary-text px-4 py-2 rounded font-bold">{savingCredit ? 'Saving…' : 'Save Credit'}</button><button type="button" onClick={() => setShowCreditForm(false)} className="px-4 py-2">Cancel</button></div>
+                            </form>
+                        )}
                         <div className="overflow-x-auto border border-border dark:border-border-subtle rounded-xl bg-surface dark:bg-void/30 backdrop-blur-sm shadow-sm">
                             <table className="w-full text-left text-sm md:text-base">
                                 <thead>

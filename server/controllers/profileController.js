@@ -60,13 +60,13 @@ const sanitizePortfolioItems = (portfolio) => {
 
 const PROFILE_ALLOWED_FIELDS = new Set([
     'fullName', 'bio', 'location', 'mobile', 'skills', 'experienceYears',
-    'talentCategory', 'physicalMetrics', 'showreelUrl', 'socialLinks',
+    'talentCategory', 'physicalMetrics', 'showreelUrl', 'cvUrl', 'socialLinks',
     'privacySettings', 'companyName', 'industryType', 'previousProjects',
-    'portfolio'
+    'portfolio', 'verificationState', 'filmography'
 ]);
 
 const TALENT_ONLY_PROFILE_FIELDS = new Set([
-    'talentCategory', 'physicalMetrics', 'showreelUrl'
+    'talentCategory', 'physicalMetrics', 'showreelUrl', 'cvUrl', 'verificationState', 'filmography'
 ]);
 
 const DIRECTOR_ONLY_PROFILE_FIELDS = new Set([
@@ -166,12 +166,12 @@ export const updateProfile = async (req, res) => {
                 });
             }
 
-            if (key === 'showreelUrl') {
+            if (key === 'showreelUrl' || key === 'cvUrl') {
                 if (!isSafeUrlOrEmpty(value)) {
-                    console.warn('[SECURITY] Rejected unsafe showreelUrl for user:', req.user.id);
+                    console.warn('[SECURITY] Rejected unsafe profile URL for user:', req.user.id);
                     continue;
                 }
-                updateData.showreelUrl = value;
+                updateData[key] = value;
                 continue;
             }
 
@@ -200,6 +200,14 @@ export const updateProfile = async (req, res) => {
                 } else {
                     console.warn('[SECURITY] Rejected unsafe portfolio items for user:', req.user.id);
                 }
+                continue;
+            }
+
+            if (key === 'verificationState') {
+                // Preserve upload metadata written by the upload route while allowing
+                // the talent to save only the editable credential fields.
+                const existing = profileSnapshot.empty ? {} : (profileSnapshot.docs[0].data().verificationState || {});
+                updateData.verificationState = { ...existing, ...value };
                 continue;
             }
 
@@ -483,21 +491,20 @@ export const uploadMedia = async (req, res) => {
         const profileId = profileSnapshot.docs[0].id;
         const profileData = profileSnapshot.docs[0].data();
 
-        // File is uploaded to Cloudinary via multer storage middleware
+        // File is uploaded to Cloudinary by verifyAndUpload.
         const fileUrl = req.file.path;
-        
-        // Debug: Log all received fields
-        console.log('[Upload Media] req.body:', JSON.stringify(req.body));
-        console.log('[Upload Media] req.file:', { 
-            originalname: req.file.originalname, 
-            mimetype: req.file.mimetype,
-            size: req.file.size 
-        });
+        const mediaMetadata = {
+            url: fileUrl,
+            secure_url: fileUrl,
+            public_id: req.file.cloudinaryId,
+            resource_type: req.file.resourceType || (req.file.mimetype.startsWith('video/') ? 'video' : 'image'),
+            format: req.file.format || req.file.mimetype.split('/')[1],
+            originalName: req.file.originalname,
+            size: req.file.size,
+        };
         
         const { type, title, description, idType, membershipId, associationName } = req.body;
         const validTypes = ['profilePicture', 'portfolio', 'idFile', 'membershipCard', 'videoSelfie'];
-        
-        console.log('[Upload Media] Extracted type:', type, '| validTypes:', validTypes);
         
         if (!type || !validTypes.includes(type)) {
             return res.status(400).json({ message: 'Invalid or missing upload type.', received: type });
@@ -522,21 +529,25 @@ export const uploadMedia = async (req, res) => {
                 type: req.file.mimetype.startsWith('video') ? 'video' : 'image',
                 url: fileUrl,
                 title: title || 'Untitled',
-                description: description || ''
+                description: description || '',
+                ...mediaMetadata,
             });
             updateData.portfolio = portfolio;
         } else if (['idFile', 'membershipCard', 'videoSelfie'].includes(type)) {
             const vs = profileData.verificationState || {};
             
             if (type === 'idFile') {
-                vs.idFileUrl = fileUrl;
+                vs.idFile = mediaMetadata;
+                vs.idFileUrl = fileUrl; // backwards compatible
                 vs.idType = idType;
             } else if (type === 'membershipCard') {
-                vs.membershipCardUrl = fileUrl;
+                vs.membershipCard = mediaMetadata;
+                vs.membershipCardUrl = fileUrl; // backwards compatible
                 vs.membershipId = membershipId;
                 vs.associationName = associationName;
             } else if (type === 'videoSelfie') {
-                vs.videoSelfieUrl = fileUrl;
+                vs.videoSelfie = mediaMetadata;
+                vs.videoSelfieUrl = fileUrl; // backwards compatible
             }
             updateData.verificationState = vs;
         }
@@ -544,7 +555,7 @@ export const uploadMedia = async (req, res) => {
         if (Object.keys(updateData).length > 0) {
             await updateWithBackup('profiles', profileId, updateData);
         }
-        res.status(200).json({ success: true, data: { ...profileData, ...updateData } });
+        res.status(200).json({ success: true, data: { ...profileData, ...updateData }, media: mediaMetadata });
     } catch (err) {
         console.error('Upload Error:', {
             message: err?.message,

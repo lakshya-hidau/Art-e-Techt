@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import DashboardLayout from '../components/layout/DashboardLayout';
 import { getMyProfile } from '../services/profileService';
 import { getDirectorApplications, updateApplicationStatus } from '../services/projectService';
 import { DIRECTOR_MENU } from '../constants/navigation';
 
 const Shortlists = () => {
+    const navigate = useNavigate();
     const [profile, setProfile] = useState(null);
     const [applications, setApplications] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -33,7 +34,7 @@ const Shortlists = () => {
         try {
             await updateApplicationStatus(appId, newStatus);
             setApplications(applications.map(app =>
-                app._id === appId ? { ...app, status: newStatus } : app
+                app.id === appId ? { ...app, status: newStatus } : app
             ));
         } catch (err) {
             console.error('Error updating status:', err);
@@ -58,6 +59,12 @@ const Shortlists = () => {
         }
         return true;
     });
+    const projectGroups = filteredApplications.reduce((groups, application) => {
+        const projectId = application.project?.id || application.project?._id || application.project || 'unknown';
+        if (!groups[projectId]) groups[projectId] = { project: application.project || {}, applications: [] };
+        groups[projectId].applications.push(application);
+        return groups;
+    }, {});
 
     return (
         <DashboardLayout
@@ -104,15 +111,23 @@ const Shortlists = () => {
                                 <p className="text-text-secondary text-sm font-medium">When talent applies to your projects, they will appear here.</p>
                             </div>
                         ) : (
-                            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                                {filteredApplications.map((app) => {
+                            <div className="space-y-8">
+                                {Object.entries(projectGroups).map(([projectId, group]) => {
+                                    const shortlistedForProject = group.applications.filter((app) => app.status === 'shortlisted').length;
+                                    return <section key={projectId} className="space-y-4">
+                                        <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border dark:border-subtle/10 pb-3">
+                                            <div><h4 className="text-xl font-black text-text-primary dark:text-primary-text">{group.project?.title || 'Untitled project'}</h4><p className="text-sm text-text-secondary">{group.project?.category || 'Project'} · {group.applications.length} applicant{group.applications.length === 1 ? '' : 's'} · {shortlistedForProject} shortlisted</p></div>
+                                            <Link to={`/director/project/${projectId}`} className="text-sm font-bold text-primary">View project</Link>
+                                        </header>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                                {group.applications.map((app) => {
                                     const talentProfile = app.talent?.profile;
                                     const isShortlisted = app.status === 'shortlisted';
                                     const isApplied = app.status === 'applied';
                                     const isRejected = app.status === 'rejected';
 
                                     return (
-                                        <div key={app._id} className={`group bg-surface dark:bg-card-dark border ${isShortlisted ? 'border-primary/50' : 'border-border dark:border-subtle/5'} rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all flex flex-col ${isRejected ? 'opacity-70 grayscale-[0.5]' : ''}`}>
+                                        <div key={app.id} className={`group bg-surface dark:bg-card-dark border ${isShortlisted ? 'border-primary/50' : 'border-border dark:border-subtle/5'} rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all flex flex-col ${isRejected ? 'opacity-70 grayscale-[0.5]' : ''}`}>
                                             <div className="relative h-72">
                                                 <div
                                                     className="absolute inset-0 bg-cover bg-center transition-transform group-hover:scale-105"
@@ -141,14 +156,14 @@ const Shortlists = () => {
                                                 <div className="grid grid-cols-2 gap-3 mt-auto">
                                                     {isApplied && (
                                                         <>
-                                                            <button onClick={() => handleStatusUpdate(app._id, 'shortlisted')} className="w-full py-2 bg-primary text-primary-text rounded-xl text-xs font-bold hover:brightness-110 transition-all">Shortlist</button>
-                                                            <button onClick={() => handleStatusUpdate(app._id, 'rejected')} className="w-full py-2 bg-surface-lowest dark:bg-surface/5 border border-border dark:border-subtle/10 rounded-xl text-xs font-bold hover:bg-primary/10 hover:text-error hover:border-error/20 transition-all">Reject</button>
+                                                            <button onClick={() => handleStatusUpdate(app.id, 'shortlisted')} className="w-full py-2 bg-primary text-primary-text rounded-xl text-xs font-bold hover:brightness-110 transition-all">Shortlist</button>
+                                                            <button onClick={() => handleStatusUpdate(app.id, 'rejected')} className="w-full py-2 bg-surface-lowest dark:bg-surface/5 border border-border dark:border-subtle/10 rounded-xl text-xs font-bold hover:bg-primary/10 hover:text-error hover:border-error/20 transition-all">Reject</button>
                                                         </>
                                                     )}
                                                     {isShortlisted && (
                                                         <>
-                                                            <button className="w-full py-2 bg-surface-lowest dark:bg-surface/5 border border-primary text-primary rounded-xl text-xs font-bold transition-all hover:bg-primary/10">Message</button>
-                                                            <button onClick={() => handleStatusUpdate(app._id, 'rejected')} className="w-full py-2 bg-surface-lowest dark:bg-surface/5 border border-border dark:border-subtle/10 rounded-xl text-xs font-bold hover:bg-primary/10 hover:text-error hover:border-error/20 transition-all">Reject</button>
+                                                            <button onClick={() => navigate(`/director/messages/${app.talent?.id}`)} disabled={!app.talent?.id} className="w-full py-2 bg-surface-lowest dark:bg-surface/5 border border-primary text-primary rounded-xl text-xs font-bold transition-all hover:bg-primary/10 disabled:opacity-50">Message</button>
+                                                            <button onClick={() => handleStatusUpdate(app.id, 'rejected')} className="w-full py-2 bg-surface-lowest dark:bg-surface/5 border border-border dark:border-subtle/10 rounded-xl text-xs font-bold hover:bg-primary/10 hover:text-error hover:border-error/20 transition-all">Reject</button>
                                                         </>
                                                     )}
                                                     <Link to={`/talent/${app.talent?.profile?.id || app.talent?.id}`} className="w-full py-2 bg-surface-lowest dark:bg-surface/5 border border-border dark:border-subtle/10 rounded-xl text-xs font-bold col-span-2 transition-all flex items-center justify-center">View Full Profile</Link>
@@ -156,6 +171,9 @@ const Shortlists = () => {
                                             </div>
                                         </div>
                                     )
+                                })}
+                                        </div>
+                                    </section>;
                                 })}
 
                                 {/* Invite Collaborators Placeholder */}

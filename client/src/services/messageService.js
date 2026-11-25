@@ -1,7 +1,8 @@
 import api from './api';
 
 export const sendMessage = async (messageData) => {
-  const response = await api.post('/messages', messageData);
+  const { receiver, receiverId, content } = messageData;
+  const response = await api.post('/messages', { receiverId: receiverId || receiver, content });
   return response.data;
 };
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import DashboardLayout from '../components/layout/DashboardLayout';
 import { TALENT_MENU } from '../constants/navigation';
 import { useNotifications } from '../context/NotificationContext';
@@ -18,7 +18,7 @@ const Toast = ({ message, type, onDone }) => {
 
 const AuditionDetails = () => {
     const navigate = useNavigate();
-    const location = useLocation();
+    const { id: projectId } = useParams();
     const [profile, setProfile] = useState(null);
     const { user: authUser } = useNotifications();
     const [project, setProject] = useState(null);
@@ -27,7 +27,6 @@ const AuditionDetails = () => {
     const [confirmed, setConfirmed] = useState(false);
     const [toast, setToast] = useState(null);
 
-    const projectId = location.state?.projectId;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -72,12 +71,13 @@ const AuditionDetails = () => {
         </DashboardLayout>
     );
 
-    const title = project?.title || 'The Last Dynasty';
-    const director = project?.director?.email?.split('@')[0] || 'Siddharth Roy';
-    const category = project?.category || 'Feature Film';
-    const location_ = project?.location || 'Studio 41, Mumbai';
-    const deadline = project?.deadline ? new Date(project.deadline).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : 'October 25, 2025';
-    const budget = project?.budget || 'Confidential';
+    const title = project?.title || 'Project unavailable';
+    const director = project?.director?.email?.split('@')[0] || 'Director';
+    const category = project?.category || 'Not specified';
+    const location_ = project?.location || 'Not specified';
+    const parsedDeadline = project?.deadline ? new Date(project.deadline) : null;
+    const deadline = parsedDeadline && !Number.isNaN(parsedDeadline.getTime()) ? parsedDeadline.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Not specified';
+    const budget = project?.budget || 'Not specified';
 
     return (
         <DashboardLayout menuItems={TALENT_MENU} userRole="India • Artist" userData={userData}
