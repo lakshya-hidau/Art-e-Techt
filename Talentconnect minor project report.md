@@ -1,4 +1,4 @@
-# TalentConnect — A Multi-Role Talent Marketplace Platform for the Global Entertainment Industry
+# ART-E-TECHT — A Multi-Role Talent Marketplace Platform for the Global Entertainment Industry
 
 **A Minor Project Report**
 
@@ -27,7 +27,7 @@ Faculty of Engineering
 
 ## Report Approval
 
-The project work **"TalentConnect — A Multi-Role Talent Marketplace Platform for the Global Entertainment Industry"** is hereby approved as a creditable study of an engineering subject carried out and presented in a manner satisfactory to warrant its acceptance as a prerequisite for the Degree for which it has been submitted.
+The project work **"ART-E-TECHT — A Multi-Role Talent Marketplace Platform for the Global Entertainment Industry"** is hereby approved as a creditable study of an engineering subject carried out and presented in a manner satisfactory to warrant its acceptance as a prerequisite for the Degree for which it has been submitted.
 
 It is to be understood that by this approval the undersigned do not endorse or approve any statement made, opinion expressed, or conclusion drawn therein; but approve the Project Report only for the purpose for which it has been submitted.
 
@@ -45,7 +45,7 @@ Affiliation:
 
 ## Declaration
 
-I/We hereby declare that the project entitled **"TalentConnect — A Multi-Role Talent Marketplace Platform for the Global Entertainment Industry"** submitted in partial fulfillment for the award of the degree of Bachelor of Technology in Computer Science & Engineering, completed under the supervision of **[Name, Designation and Department of the Guide]**, Faculty of Engineering, Medi-Caps University Indore, is an authentic work.
+I/We hereby declare that the project entitled **"ART-E-TECHT — A Multi-Role Talent Marketplace Platform for the Global Entertainment Industry"** submitted in partial fulfillment for the award of the degree of Bachelor of Technology in Computer Science & Engineering, completed under the supervision of **[Name, Designation and Department of the Guide]**, Faculty of Engineering, Medi-Caps University Indore, is an authentic work.
 
 Further, I/we declare that the content of this Project work, in full or in parts, have neither been taken from any other source nor have been submitted to any other Institute or University for the award of any degree or diploma.
 
@@ -55,7 +55,7 @@ Further, I/we declare that the content of this Project work, in full or in parts
 
 ## Certificate
 
-I/We, **[Name of the Guide]** certify that the project entitled **"TalentConnect — A Multi-Role Talent Marketplace Platform for the Global Entertainment Industry"** submitted in partial fulfillment for the award of the degree of Bachelor of Technology by **[Name of the Student]** is the record carried out by him/them under my/our guidance and that the work has not formed the basis of award of any other degree elsewhere.
+I/We, **[Name of the Guide]** certify that the project entitled **"ART-E-TECHT — A Multi-Role Talent Marketplace Platform for the Global Entertainment Industry"** submitted in partial fulfillment for the award of the degree of Bachelor of Technology by **[Name of the Student]** is the record carried out by him/them under my/our guidance and that the work has not formed the basis of award of any other degree elsewhere.
 
 ________________________________
 [Name of Internal Guide]
@@ -79,7 +79,7 @@ Medi-Caps University, Indore
 
 I would like to express my deepest gratitude to the Honorable Chancellor, **Shri R C Mittal**, who has provided every facility to successfully carry out this project, and my profound indebtedness to **Prof. (Dr.) D. K. Patnaik**, Vice Chancellor, Medi-Caps University, whose unfailing support and enthusiasm has always boosted my morale. I also thank **Prof. (Dr.) Pramod S. Nair**, Dean, Faculty of Engineering, Medi-Caps University, for giving me the opportunity to work on this project. I would also like to thank my Head of the Department **Dr. Ratnesh Litoriya** for his continuous encouragement for the betterment of the project.
 
-I am sincerely thankful to my project guide **[Name of Guide]** for providing invaluable technical guidance, consistent mentorship, and constructive feedback throughout the development of this project. Their expertise in software engineering, web application security, and modern cloud architectures has been instrumental in shaping the design and implementation of TalentConnect.
+I am sincerely thankful to my project guide **[Name of Guide]** for providing invaluable technical guidance, consistent mentorship, and constructive feedback throughout the development of this project. Their expertise in software engineering, web application security, and modern cloud architectures has been instrumental in shaping the design and implementation of ART-E-TECHT.
 
 I also extend gratitude to all faculty members of the Department of Computer Science & Engineering for their continuous academic support, and to my peers for their encouragement and collaborative spirit during the project period.
 
@@ -95,7 +95,7 @@ Medi-Caps University, Indore
 
 ## Abstract
 
-TalentConnect is a full-stack web application designed to digitize and streamline the talent casting process in the Global entertainment industry. The platform connects performing arts professionals — actors, models, musicians, dancers, and content creators — with directors and production houses who need to cast and manage creative projects. The Global entertainment sector, which encompasses cinema, television, web series, music, theatre, and digital content, currently relies on fragmented, word-of-mouth discovery mechanisms that create barriers for emerging talent and inefficiencies for casting teams.
+ART-E-TECHT is a full-stack web application designed to digitize and streamline the talent casting process in the Global entertainment industry. The platform connects performing arts professionals — actors, models, musicians, dancers, and content creators — with directors and production houses who need to cast and manage creative projects. The Global entertainment sector, which encompasses cinema, television, web series, music, theatre, and digital content, currently relies on fragmented, word-of-mouth discovery mechanisms that create barriers for emerging talent and inefficiencies for casting teams.
 
 The system is implemented using a modern cloud-native technology stack: React 19 with Vite on the frontend, Express.js 5 on the backend, Google Cloud Firestore as the primary database, and optional MongoDB as a secondary backup. The platform implements role-based access control for three distinct user types — talent, directors, and administrators — each with a tailored feature set and permission boundary.
 
@@ -175,49 +175,18 @@ The project additionally implements a complete CI/CD pipeline via GitHub Actions
 
 ---
 
-## List of Figures
+## LIST OF FIGURES
 
-| Figure No. | Title | Page No. |
-|-----------|-------|---------|
-| Fig 1.1 | Casting Process — Before and After TalentConnect | |
-| Fig 3.1 | High-Level Three-Tier System Architecture | |
-| Fig 3.2 | System Topology Diagram | |
-| Fig 3.3 | Authentication Architecture — Four Login Methods | |
-| Fig 3.4 | Data Flow Diagram — Level 0 (Context Diagram) | |
-| Fig 3.5 | Data Flow Diagram — Level 1 (Authentication Flow) | |
-| Fig 3.6 | Data Flow Diagram — Level 1 (Casting Pipeline Flow) | |
-| Fig 3.7 | Data Flow Diagram — Level 1 (Payment Flow) | |
-| Fig 3.8 | Activity Diagram — Talent Registration and Verification | |
-| Fig 3.9 | Activity Diagram — Project Creation and Application Pipeline | |
-| Fig 3.10 | Activity Diagram — Admin Verification Review | |
-| Fig 3.11 | Entity Relationship Diagram | |
-| Fig 3.12 | Sequence Diagram — User Registration | |
-| Fig 3.13 | Sequence Diagram — Stripe Subscription Payment | |
-| Fig 3.14 | Sequence Diagram — Real-Time Messaging | |
-| Fig 3.15 | Frontend Module Folder Structure | |
-| Fig 3.16 | Backend Controller-Route Dependency Map | |
-| Fig 3.17 | Express Middleware Pipeline | |
-| Fig 4.1 | GitHub Actions CI/CD Pipeline Stages | |
-| Fig 4.2 | Vitest Test Results — 26/26 Passing | |
-| Fig 4.3 | Graceful Shutdown Signal Flow | |
-| Fig 5.1 | Home Page | |
-| Fig 5.2 | Talent Registration Form | |
-| Fig 5.3 | Talent Dashboard with Metric Cards | |
-| Fig 5.4 | Portfolio Upload Interface | |
-| Fig 5.5 | Verification Wizard — Step 1 (Government ID) | |
-| Fig 5.6 | Verification Wizard — Step 2 (Membership) | |
-| Fig 5.7 | Verification Wizard — Step 3 (Video Selfie) | |
-| Fig 5.8 | Project Discovery with Filters | |
-| Fig 5.9 | Director Dashboard | |
-| Fig 5.10 | Create Project — Step 1 | |
-| Fig 5.11 | Project Details with Application Pipeline | |
-| Fig 5.12 | Talent Discovery with Filter Sidebar | |
-| Fig 5.13 | Admin Dashboard | |
-| Fig 5.14 | Admin Verification Review Queue | |
-| Fig 5.15 | Real-Time Messaging Interface | |
-| Fig 5.16 | System Health Monitor | |
-| Fig 5.17 | Firestore — Users Collection | |
-| Fig 5.18 | Firestore — Applications Collection | |
+| S.No. | Figure No. | Figure Name | Page No. |
+|:-----:|:----------:|-------------|:--------:|
+| 1 | Figure 3.1 | High-Level System Architecture | [UPDATE AFTER FINAL PAGINATION] |
+| 2 | Figure 3.2 | DFD Level 0 – Context Diagram | [UPDATE AFTER FINAL PAGINATION] |
+| 3 | Figure 3.3 | Talent-to-Project Workflow | [UPDATE AFTER FINAL PAGINATION] |
+| 4 | Figure 3.4 | Logical Entity Relationship Model | [UPDATE AFTER FINAL PAGINATION] |
+| 5 | Figure 3.5 | Registration and Verification Sequence | [UPDATE AFTER FINAL PAGINATION] |
+| 6 | Figure 5.1 | Talent Module | [UPDATE AFTER FINAL PAGINATION] |
+| 7 | Figure 5.2 | Director Module | [UPDATE AFTER FINAL PAGINATION] |
+| 8 | Figure 5.3 | Admin Verification Module | [UPDATE AFTER FINAL PAGINATION] |
 
 ---
 
@@ -325,7 +294,7 @@ The project additionally implements a complete CI/CD pipeline via GitHub Actions
 
 The Global entertainment industry is one of the largest creative economies in the world, encompassing cinema, television, web series, digital content creation, music, theatre, and advertising. Despite this scale, the process by which performing arts talent is discovered, evaluated, and cast into projects remains largely informal, fragmented, and inaccessible to many emerging professionals. Talent discovery primarily occurs through personal networks, talent agencies with selective representation, or ad-hoc WhatsApp group announcements. Casting directors and production teams, in turn, lack a reliable digital channel to discover, verify, and evaluate talent at scale before committing to auditions.
 
-TalentConnect is a full-stack web application developed to address this systemic gap. It serves as a centralized digital platform connecting performing arts professionals — actors, artists, models, musicians, dancers, and content creators — with directors and production houses who need to cast and manage creative projects. The platform is designed around three primary user roles: talent, who build verified portfolios and apply to casting calls; directors, who post projects, search talent, and manage the casting pipeline; and administrators, who oversee platform integrity, verify user identities, and monitor system health.
+ART-E-TECHT is a full-stack web application developed to address this systemic gap. It serves as a centralized digital platform connecting performing arts professionals — actors, artists, models, musicians, dancers, and content creators — with directors and production houses who need to cast and manage creative projects. The platform is designed around three primary user roles: talent, who build verified portfolios and apply to casting calls; directors, who post projects, search talent, and manage the casting pipeline; and administrators, who oversee platform integrity, verify user identities, and monitor system health.
 
 The application was built using a modern, cloud-native technology stack and developed iteratively across three revisions. Each revision introduced measurable improvements in security hardening, performance optimization, and feature completeness. The resulting system implements production-grade engineering practices including comprehensive input validation, role-based access control, real-time communication, automated testing, and a complete CI/CD deployment pipeline.
 
@@ -350,7 +319,7 @@ The gap analysis confirms that no existing platform combines verified talent pro
 
 **1.2.2 Technical Background**
 
-Research on marketplace platform architecture identifies several requirements that directly informed this project's design. Liu et al. [1] highlight that identity verification is a prerequisite for trust in two-sided digital marketplaces, particularly those involving professional engagements. This insight directly motivated the three-step KYC verification workflow in TalentConnect.
+Research on marketplace platform architecture identifies several requirements that directly informed this project's design. Liu et al. [1] highlight that identity verification is a prerequisite for trust in two-sided digital marketplaces, particularly those involving professional engagements. This insight directly motivated the three-step KYC verification workflow in ART-E-TECHT.
 
 The OWASP Top 10 Web Application Security Risks [2] provided the primary framework for security design decisions, including server-side input validation via Zod schemas, magic-byte file verification, timing-safe authentication, and rate limiting strategies. Each of the final system's security controls can be mapped to a specific OWASP category.
 
@@ -400,7 +369,7 @@ The iterative development methodology — with three revisions each assessed aga
 
 **Social Significance**
 
-The platform addresses genuine inequity in access to the Global entertainment industry. Without agency representation or personal networks, emerging talent has no reliable channel to be discovered by production teams. TalentConnect provides a free, accessible portfolio and discovery channel for all registered talent, lowering the barrier to professional opportunity.
+The platform addresses genuine inequity in access to the Global entertainment industry. Without agency representation or personal networks, emerging talent has no reliable channel to be discovered by production teams. ART-E-TECHT provides a free, accessible portfolio and discovery channel for all registered talent, lowering the barrier to professional opportunity.
 
 **Technical Significance**
 
@@ -461,7 +430,7 @@ The remainder of this report is organized as follows:
 
 ### 2.1 User Characteristics
 
-TalentConnect serves three primary user roles, each with distinct usage patterns, technical literacy assumptions, and device preferences.
+ART-E-TECHT serves three primary user roles, each with distinct usage patterns, technical literacy assumptions, and device preferences.
 
 **Talent Users (Actors, Models, Musicians, Dancers, Content Creators)**
 Talent users range from early-career artists with limited digital literacy to experienced professionals comfortable with complex web applications. The majority access the platform via mobile devices on 4G networks in tier-2 and tier-3 Global cities. Interfaces must be intuitive, upload workflows must handle unreliable connectivity gracefully, and status feedback must be unambiguous. Expected session frequency is three to five times per week, with peaks during active audition seasons.
@@ -622,7 +591,7 @@ The following specific performance engineering decisions were made during design
 
 ### 3.1 System Architecture
 
-TalentConnect follows a three-tier web application architecture:
+ART-E-TECHT follows a three-tier web application architecture:
 
 - **Presentation Tier**: React 19 Single Page Application served via Firebase Hosting CDN
 - **Application Tier**: Express.js 5 REST API with Socket.io, deployed on Render
@@ -659,6 +628,8 @@ Firestore  MongoDB    Redis    Cloudinary   Stripe
                                 Firebase Auth  SMTP
                                 (identity)    (Nodemailer)
 ```
+
+**Figure 3.1 – High-Level System Architecture**
 
 **Table 3.1 — Complete Technology Stack**
 
@@ -714,8 +685,8 @@ The platform implements four distinct authentication methods, all converging to 
 ```
                     ┌──────────────────────────┐
     Talent ─────────►                          ├──────► Casting Calls
-    Director ───────►    T A L E N T           ├──────► Applications
-    Admin ──────────►    C O N N E C T         ├──────► Notifications
+    Director ───────►       A R T - E -          ├──────► Applications
+    Admin ──────────►       T E C H T            ├──────► Notifications
                     │                          ├──────► Email Alerts
                     └──────────────────────────┘
                                 │
@@ -724,6 +695,8 @@ The platform implements four distinct authentication methods, all converging to 
     Firebase Auth          Cloudinary              Stripe
     (identity)             (media)                 (payments)
 ```
+
+**Figure 3.2 – DFD Level 0 – Context Diagram**
 
 **Level 1 DFD — Authentication and Registration Flow**
 
@@ -886,6 +859,8 @@ Director reviews applications → Changes status:
 [End]
 ```
 
+**Figure 3.3 – Talent-to-Project Workflow**
+
 ### 3.5 Entity Relationship Diagram
 
 ```
@@ -1023,6 +998,8 @@ USERS ──(1:N)──► WORKSHOP_BOOKINGS
 WORKSHOPS ──(1:N)──► WORKSHOP_BOOKINGS
 ```
 
+**Figure 3.4 – Logical Entity Relationship Model**
+
 ### 3.6 Sequence Diagrams
 
 **Sequence Diagram — User Registration**
@@ -1046,6 +1023,8 @@ User     Frontend    Backend       Firebase Auth   Firestore    SMTP Email
  │           │─AuthContext.setSession()     │           │             │
  │◄─Dashboard│            │               │             │             │
 ```
+
+**Figure 3.5 – Registration and Verification Sequence**
 
 **Sequence Diagram — Stripe Subscription Payment**
 
@@ -1615,8 +1594,8 @@ GitHub Actions runs the following pipeline on every push and every pull request:
 **Step 1 — Clone repository and install dependencies**
 
 ```bash
-git clone https://github.com/[username]/talentconnect.git
-cd talentconnect
+git clone https://github.com/[username]/art-e-techt.git
+cd art-e-techt
 cd server && npm install
 cd ../client && npm install
 ```
@@ -1855,7 +1834,17 @@ The director dashboard centers on project management. Project cards display a ba
 
 The admin panel uses a visually distinct dark-sidebar design to prevent confusion with user-facing dashboards. The verification review queue shows pending submissions with document thumbnails, a completion percentage bar, and approve/reject action buttons. The user management view provides a data-dense table with role color badges, verification status pills, plan labels, and last-active timestamps. The system health page displays a status grid with green/amber/red connectivity indicators and response time in milliseconds for each external service.
 
-*[Insert screenshots at this location — see list of figures for the complete list of required screenshots]*
+*[INSERT ACTUAL APPLICATION SCREENSHOT: Talent Module — Talent Dashboard / Portfolio / Project Discovery]*
+
+**Figure 5.1 – Talent Module**
+
+*[INSERT ACTUAL APPLICATION SCREENSHOT: Director Module — Director Dashboard / Project Management / Talent Discovery]*
+
+**Figure 5.2 – Director Module**
+
+*[INSERT ACTUAL APPLICATION SCREENSHOT: Admin Verification Module — Admin Verification Review Queue]*
+
+**Figure 5.3 – Admin Verification Module**
 
 ### 5.4 Security Analysis and Risk Reduction
 
@@ -1924,7 +1913,7 @@ MongoDB is connected optionally. Every Firestore write is followed by a best-eff
 
 ## Summary and Conclusions
 
-TalentConnect was developed as a full-stack, production-grade web application addressing the absence of a centralized digital platform for talent casting in the Global entertainment industry. The system was designed, implemented, and iteratively hardened across three formal development revisions, with each revision measured against a risk matrix and technical readiness scorecard.
+ART-E-TECHT was developed as a full-stack, production-grade web application addressing the absence of a centralized digital platform for talent casting in the Global entertainment industry. The system was designed, implemented, and iteratively hardened across three formal development revisions, with each revision measured against a risk matrix and technical readiness scorecard.
 
 The development journey is summarized in the following comparison:
 
@@ -2168,7 +2157,7 @@ Deploying the Express server to a Render region geographically closer to the pri
 ## Appendix D — Codebase Structure
 
 ```
-talentconnect/
+art-e-techt/
 ├── client/
 │   └── src/
 │       ├── App.jsx                    — All ~60 route definitions
